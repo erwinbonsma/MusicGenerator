@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA21A1B92438A752004DD190 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1B82438A752004DD190 /* main.cpp */; };
 		AA21A1C12438A837004DD190 /* ChannelTune.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1BF2438A837004DD190 /* ChannelTune.cpp */; };
+		AA21A1C4243917C8004DD190 /* wav.c in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C2243917C8004DD190 /* wav.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		AA21A1B82438A752004DD190 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AA21A1BF2438A837004DD190 /* ChannelTune.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChannelTune.cpp; sourceTree = "<group>"; };
 		AA21A1C02438A837004DD190 /* ChannelTune.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelTune.h; sourceTree = "<group>"; };
+		AA21A1C2243917C8004DD190 /* wav.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wav.c; sourceTree = "<group>"; };
+		AA21A1C3243917C8004DD190 /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 		AA21A1B72438A752004DD190 /* MusicGB */ = {
 			isa = PBXGroup;
 			children = (
+				AA21A1C2243917C8004DD190 /* wav.c */,
+				AA21A1C3243917C8004DD190 /* wav.h */,
 				AA21A1B82438A752004DD190 /* main.cpp */,
 				AA21A1BF2438A837004DD190 /* ChannelTune.cpp */,
 				AA21A1C02438A837004DD190 /* ChannelTune.h */,
@@ -124,6 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
 				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
 				AA21A1C12438A837004DD190 /* ChannelTune.cpp in Sources */,
 			);

@@ -82,6 +82,7 @@ void TuneGenerator::startNote() {
     _volumeStart = _note->vol << VOLUME_SHIFT;
     _volumeEnd = _volumeStart;
 
+    _sampleIndex = 0;
     _waveTable = &triangleWave;
     _waveIndex = 0;
     _maxWaveIndex = (_waveTable->numSamples << WAVETABLE_SHIFT);
@@ -92,14 +93,14 @@ void TuneGenerator::startNote() {
     _indexDeltaEnd = _indexDeltaStart;
 }
 
-int TuneGenerator::addSamples(int* buf, int maxSamples) {
-    int* bufP = buf;
-    int* maxBufP = bufP + maxSamples;
+int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
+    Sample* bufP = buf;
+    Sample* maxBufP = bufP + maxSamples;
 
     while (bufP < maxBufP) {
         // Add samples until end of note or buffer is full
         int numSamples = std::min(_samplesPerNote - _sampleIndex, (int)(maxBufP - bufP));
-        int* maxBufP2 = bufP + numSamples;
+        Sample* maxBufP2 = bufP + numSamples;
 
         while (bufP < maxBufP2) {
             int volume = _volumeStart; // TODO: LERP
@@ -111,7 +112,7 @@ int TuneGenerator::addSamples(int* buf, int maxSamples) {
             }
 
             sample *= volume;
-            *bufP++ = sample >> (VOLUME_SHIFT + 3);
+            *bufP++ = (char)(sample >> (VOLUME_SHIFT + 3));
         }
         _sampleIndex += numSamples;
 

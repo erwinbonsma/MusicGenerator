@@ -14,6 +14,8 @@
 constexpr int sampleRate = 22050;
 constexpr int samplesPerTick = 90 * (sampleRate / 11025);
 
+typedef unsigned char Sample;
+
 constexpr int numNotes = 12;
 enum class Note {
     A, As, B, C, Cs, D, Ds, E, F, Fs, G, Gs
@@ -76,7 +78,7 @@ public:
     void setTuneSpec(const TuneSpec* tuneSpec);
 
     // Returns the number of samples added
-    int addSamples(int* buf, int maxSamples);
+    int addSamples(Sample* buf, int maxSamples);
 };
 
 #endif /* ChannelTune_h */
