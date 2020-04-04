@@ -75,6 +75,7 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
 
     _samplesPerNote = _tuneSpec->noteDuration * samplesPerTick;
 
+    _waveTable = nullptr;
     startNote();
 }
 
@@ -82,9 +83,13 @@ void TuneGenerator::startNote() {
     _volumeStart = _note->vol << VOLUME_SHIFT;
     _volumeEnd = _volumeStart;
 
+    const WaveTable* prevWaveTable = _waveTable;
+
     _sampleIndex = 0;
     _waveTable = &triangleWave;
-    _waveIndex = 0;
+    if (_waveTable != prevWaveTable) {
+        _waveIndex = 0;
+    }
     _maxWaveIndex = (_waveTable->numSamples << WAVETABLE_SHIFT);
 
     int period = notePeriod[(int)_note->note] << (PERIOD_SHIFT - _note->oct);
