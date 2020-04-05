@@ -11,7 +11,8 @@
 #include "ChannelTune.h"
 #include "wav.h"
 
-const TuneSpec testTune = TuneSpec {
+// One octave in C-Major. TRIANGLE waves.
+const TuneSpec testTune1 = TuneSpec {
     .noteDuration = 8,
     .loopStart = 8,
     .loopEnd = 8,
@@ -27,15 +28,30 @@ const TuneSpec testTune = TuneSpec {
     }
 };
 
+// Each of the different instruments.
+const TuneSpec testTune2 = TuneSpec {
+    .noteDuration = 16,
+    .loopStart = 6,
+    .loopEnd = 6,
+    .notes = new NoteSpec[6] {
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE }
+   }
+};
 
-int main(int argc, const char * argv[]) {
+
+void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
 
-    tuneGen.setTuneSpec(&testTune);
+    tuneGen.setTuneSpec(&tune);
     Sample buf[512];
     Sample* buffers[1] = { buf };
     int samplesAdded;
-    WavFile* wavFile = wav_open("test.wav", "w");
+    WavFile* wavFile = wav_open(filename, "w");
     wav_set_format(wavFile, WAV_FORMAT_PCM);
     wav_set_num_channels(wavFile, 1);
     wav_set_sample_rate(wavFile, sampleRate);
@@ -47,6 +63,11 @@ int main(int argc, const char * argv[]) {
     } while (samplesAdded == 512);
 
     wav_close(wavFile);
+}
+
+int main(int argc, const char * argv[]) {
+    makeWav("test1.wav", testTune1);
+    makeWav("test2.wav", testTune2);
 
     return 0;
 }
