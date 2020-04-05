@@ -13,7 +13,20 @@
 
 constexpr int WAVETABLE_SHIFT = 5;
 constexpr int PERIOD_SHIFT = 6;
-constexpr int VOLUME_SHIFT = 5;
+
+// Volume can span three bytes. This way, it will not overflow when multiplied with the wave table,
+// yet it has the highest resolution for volume-slide and fade effects.
+constexpr int VOLUME_SHIFT = 21;
+
+// The volume from the note spec uses up three bits. Note, even though the maximum value is eight,
+// it fits in three bits as one is subtracted after applying the volume shift. So:
+// vol = 8 => [111] [111....111]
+// vol = 6 => [101] [111....111]
+// vol = 1 => [000] [111....111]
+//              ^         ^
+//              |         +--- VOLUME_SHIFT ones
+//              +------------- VOLUME_BITs
+// Note: Zero volume should not be used for normal notes. Use SILENCE instead (TODO).
 constexpr int VOLUME_BITS = 3;
 
 // Notes:
@@ -241,9 +254,6 @@ const NoteSpec* TuneGenerator::nextNote() const {
 }
 
 void TuneGenerator::startNote() {
-    _volumeStart = _note->vol << VOLUME_SHIFT;
-    _volumeEnd = _volumeStart;
-
     _sampleIndex = 0;
 
     const WaveTable* prevWaveTable = _waveTable;
@@ -276,22 +286,45 @@ void TuneGenerator::startNote() {
 
     int period = notePeriod[(int)_note->note] << (PERIOD_SHIFT - _note->oct);
 
-    _indexDeltaStart = (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / period;
-    _indexDeltaEnd = _indexDeltaStart;
+    _indexDelta = (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / period;
+    _indexDeltaDelta = 0;
+
+    _volume = (_note->vol << VOLUME_SHIFT) - 1;
+    _volumeDelta = 0;
+
+    switch (_note->fx) {
+        case Effect::FADE_IN:
+            _volumeDelta = _volume / _samplesPerNote;
+            _volume = 0;
+            break;
+        case Effect::FADE_OUT:
+            _volumeDelta = -(_volume / _samplesPerNote);
+            break;
+        case Effect::SLIDE:
+            if (nxtNote != nullptr) {
+                int nxtVol = (nxtNote->vol << VOLUME_SHIFT) - 1;
+                _volumeDelta = (nxtVol - _volume) / _samplesPerNote;
+            }
+            break;
+
+        case Effect::DROP: // TODO
+        case Effect::VIBRATO: // TODO
+        case Effect::NONE:
+            break;
+    }
 }
 
 void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int volume = _volumeStart; // TODO: LERP
-
         int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
-        _waveIndex += _indexDeltaStart;
+        _waveIndex += _indexDelta;
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
         }
 
-        sample *= volume;
+        sample *= _volume;
+        _volume += _volumeDelta;
         *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + VOLUME_BITS)));
     }
 }

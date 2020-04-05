@@ -65,8 +65,8 @@ class TuneGenerator {
 // Current note
     const NoteSpec* _note;
     const WaveTable* _waveTable;
-    int _volumeStart, _volumeEnd;
-    int _indexDeltaStart, _indexDeltaEnd;
+    int _volume, _volumeDelta;
+    int _indexDelta, _indexDeltaDelta;
     int _sampleIndex, _endMainIndex;
     int _waveIndex, _maxWaveIndex;
     int _blendSample, _blendDelta;

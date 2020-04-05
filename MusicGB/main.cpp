@@ -60,6 +60,20 @@ const TuneSpec testTune3 = TuneSpec {
     }
 };
 
+// Volume effects
+const TuneSpec testTune4 = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 6,
+    .loopEnd = 6,
+    .notes = new NoteSpec[6] {
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT }
+    }
+};
 
 void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
@@ -86,6 +100,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test1.wav", testTune1);
     makeWav("test2.wav", testTune2);
     makeWav("test3.wav", testTune3);
+    makeWav("test4.wav", testTune4);
 
     return 0;
 }
