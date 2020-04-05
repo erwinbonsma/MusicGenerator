@@ -224,6 +224,20 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
     startNote();
 }
 
+const NoteSpec* TuneGenerator::nextNote() const {
+    const NoteSpec* nextNote = _note + 1;
+
+    if (nextNote == _lastNote) {
+        if (_resumeNote < _lastNote) {
+            nextNote = _resumeNote;
+        } else {
+            nextNote = nullptr;
+        }
+    }
+
+    return nextNote;
+}
+
 void TuneGenerator::startNote() {
     _volumeStart = _note->vol << VOLUME_SHIFT;
     _volumeEnd = _volumeStart;
@@ -250,10 +264,51 @@ void TuneGenerator::startNote() {
     }
     _maxWaveIndex = (_waveTable->numSamples << WAVETABLE_SHIFT);
 
+    const NoteSpec* nxtNote = nextNote();
+    if (nxtNote == nullptr || nxtNote->wav != _note->wav) {
+        // Ramp down note to avoid transition artifacts
+        _endMainIndex = _samplesPerNote - _note->vol;
+    } else {
+        _endMainIndex = _samplesPerNote;
+    }
+
     int period = notePeriod[(int)_note->note] << (PERIOD_SHIFT - _note->oct);
 
     _indexDeltaStart = (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / period;
     _indexDeltaEnd = _indexDeltaStart;
+}
+
+void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        int volume = _volumeStart; // TODO: LERP
+
+        int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        _waveIndex += _indexDeltaStart;
+        if (_waveIndex >= _maxWaveIndex) {
+            _waveIndex -= _maxWaveIndex;
+        }
+
+        sample *= volume;
+        *curP++ = (char)(sample >> (VOLUME_SHIFT + 3));
+    }
+}
+
+void TuneGenerator::addRampDownSamples(Sample* &curP, Sample* endP) {
+    int volume = _volumeEnd >> (_sampleIndex - _endMainIndex + 1);
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        _waveIndex += _indexDeltaEnd;
+        if (_waveIndex >= _maxWaveIndex) {
+            _waveIndex -= _maxWaveIndex;
+        }
+
+        sample *= volume;
+        *curP++ = (char)(sample >> (VOLUME_SHIFT + 3));
+
+        volume >>= 1;
+    }
 }
 
 int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
@@ -261,34 +316,21 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
     Sample* maxBufP = bufP + maxSamples;
 
     while (bufP < maxBufP) {
-        // Add samples until end of note or buffer is full
-        int numSamples = std::min(_samplesPerNote - _sampleIndex, (int)(maxBufP - bufP));
-        Sample* maxBufP2 = bufP + numSamples;
-
-        while (bufP < maxBufP2) {
-            int volume = _volumeStart; // TODO: LERP
-
-            int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
-            _waveIndex += _indexDeltaStart;
-            if (_waveIndex >= _maxWaveIndex) {
-                _waveIndex -= _maxWaveIndex;
-            }
-
-            sample *= volume;
-            *bufP++ = (char)(sample >> (VOLUME_SHIFT + 3));
+        if (_sampleIndex < _endMainIndex) {
+            // Add main samples until end of main phase or buffer is full
+            int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
+            addMainSamples(bufP, bufP + numSamples);
+        } else {
+            // Add ramp-down samples until end of note or buffer is full
+            int numSamples = std::min(_samplesPerNote - _sampleIndex, (int)(maxBufP - bufP));
+            addRampDownSamples(bufP, bufP + numSamples);
         }
-        _sampleIndex += numSamples;
 
         if (_sampleIndex == _samplesPerNote) {
-            // Go to the next note
-            _note++;
-            if (_note == _lastNote) {
-                if (_resumeNote < _lastNote) {
-                    _note = _resumeNote;
-                } else {
-                    // End of tune
-                    break;
-                }
+            _note = nextNote();
+            if (_note == nullptr) {
+                // End of tune
+                break;
             }
 
             startNote();

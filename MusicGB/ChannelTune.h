@@ -69,10 +69,14 @@ class TuneGenerator {
     const WaveTable* _waveTable;
     int _volumeStart, _volumeEnd;
     int _indexDeltaStart, _indexDeltaEnd;
-    int _sampleIndex, _maxSampleIndex;
+    int _sampleIndex, _endMainIndex;
     int _waveIndex, _maxWaveIndex;
 
     void startNote();
+    const NoteSpec* nextNote() const;
+
+    void addMainSamples(Sample* &curP, Sample* endP);
+    void addRampDownSamples(Sample* &curP, Sample* endP);
 
 public:
     void setTuneSpec(const TuneSpec* tuneSpec);
