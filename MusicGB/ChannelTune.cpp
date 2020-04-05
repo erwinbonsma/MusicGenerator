@@ -9,10 +9,12 @@
 #include "ChannelTune.h"
 
 #include <algorithm>
+#include <iostream>
 
 constexpr int WAVETABLE_SHIFT = 5;
 constexpr int PERIOD_SHIFT = 6;
 constexpr int VOLUME_SHIFT = 5;
+constexpr int VOLUME_BITS = 3;
 
 // Notes:
 // - The size of wave tables varies to match the wave form to avoid rounding-artifacts and to
@@ -215,8 +217,6 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
     _tuneSpec = tuneSpec;
 
     _note = _tuneSpec->notes;
-    _lastNote = _note + _tuneSpec->loopEnd;
-    _resumeNote = _note + _tuneSpec->loopStart;
 
     _samplesPerNote = _tuneSpec->noteDuration * samplesPerTick;
 
@@ -226,10 +226,12 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
 
 const NoteSpec* TuneGenerator::nextNote() const {
     const NoteSpec* nextNote = _note + 1;
+    const NoteSpec* lastNote = _tuneSpec->notes + _tuneSpec->loopEnd;
 
-    if (nextNote == _lastNote) {
-        if (_resumeNote < _lastNote) {
-            nextNote = _resumeNote;
+    if (nextNote == lastNote) {
+        const NoteSpec* resumeNote = _tuneSpec->notes + _tuneSpec->loopStart;
+        if (resumeNote < lastNote) {
+            nextNote = resumeNote;
         } else {
             nextNote = nullptr;
         }
@@ -266,7 +268,7 @@ void TuneGenerator::startNote() {
 
     const NoteSpec* nxtNote = nextNote();
     if (nxtNote == nullptr || nxtNote->wav != _note->wav) {
-        // Ramp down note to avoid transition artifacts
+        // Blend note to avoid transition artifacts
         _endMainIndex = _samplesPerNote - _note->vol;
     } else {
         _endMainIndex = _samplesPerNote;
@@ -290,24 +292,29 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
         }
 
         sample *= volume;
-        *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + 3)));
+        *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + VOLUME_BITS)));
     }
 }
 
-void TuneGenerator::addRampDownSamples(Sample* &curP, Sample* endP) {
-    int volume = _volumeEnd >> (_sampleIndex - _endMainIndex + 1);
+void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
+    if (_sampleIndex == _endMainIndex) {
+        int finalSample = 0;
+        const NoteSpec* nxtNote = nextNote();
+        if (
+            nxtNote != nullptr && (
+                nxtNote->wav == WaveForm::SQUARE || nxtNote->wav == WaveForm::PULSE
+            )
+        ) {
+            // Exception. These waves do not start at zero.
+            finalSample = 127 << (VOLUME_SHIFT + VOLUME_BITS);
+        }
+        _blendDelta = (finalSample - _blendSample) / (_samplesPerNote - _endMainIndex + 1);
+    }
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
-        _waveIndex += _indexDeltaEnd;
-        if (_waveIndex >= _maxWaveIndex) {
-            _waveIndex -= _maxWaveIndex;
-        }
+        _blendSample += _blendDelta;
 
-        sample *= volume;
-        *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + 3)));
-
-        volume >>= 1;
+        *curP++ = (char)(128 + (_blendSample >> (VOLUME_SHIFT + VOLUME_BITS)));
     }
 }
 
@@ -320,13 +327,20 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
             // Add main samples until end of main phase or buffer is full
             int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
             addMainSamples(bufP, bufP + numSamples);
+            if (_sampleIndex == _endMainIndex) {
+                _blendSample = (*(bufP - 1) - 128) << (VOLUME_SHIFT + VOLUME_BITS);
+            }
         } else {
             // Add ramp-down samples until end of note or buffer is full
             int numSamples = std::min(_samplesPerNote - _sampleIndex, (int)(maxBufP - bufP));
-            addRampDownSamples(bufP, bufP + numSamples);
+            addBlendSamples(bufP, bufP + numSamples);
         }
 
         if (_sampleIndex == _samplesPerNote) {
+            if (_note == nullptr) {
+                // End of tune
+                break;
+            }
             _note = nextNote();
             if (_note == nullptr) {
                 // End of tune

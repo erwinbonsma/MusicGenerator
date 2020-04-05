@@ -61,22 +61,21 @@ struct WaveTable {
 class TuneGenerator {
     const TuneSpec* _tuneSpec;
     int _samplesPerNote;
-    const NoteSpec* _note;
-    const NoteSpec* _lastNote;
-    const NoteSpec* _resumeNote;
 
 // Current note
+    const NoteSpec* _note;
     const WaveTable* _waveTable;
     int _volumeStart, _volumeEnd;
     int _indexDeltaStart, _indexDeltaEnd;
     int _sampleIndex, _endMainIndex;
     int _waveIndex, _maxWaveIndex;
+    int _blendSample, _blendDelta;
 
     void startNote();
     const NoteSpec* nextNote() const;
 
     void addMainSamples(Sample* &curP, Sample* endP);
-    void addRampDownSamples(Sample* &curP, Sample* endP);
+    void addBlendSamples(Sample* &curP, Sample* endP);
 
 public:
     void setTuneSpec(const TuneSpec* tuneSpec);
