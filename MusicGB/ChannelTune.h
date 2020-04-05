@@ -55,7 +55,7 @@ struct TuneSpec {
 
 struct WaveTable {
     const int numSamples;
-    const int* samples;
+    const signed char* samples;
 };
 
 class TuneGenerator {
