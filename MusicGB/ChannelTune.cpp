@@ -231,14 +231,13 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
     _tuneSpec = tuneSpec;
 
     _note = _tuneSpec->notes;
-
-    _samplesPerNote = _tuneSpec->noteDuration * SAMPLES_PER_TICK;
+    setSamplesPerNote();
 
     _waveTable = nullptr;
     startNote();
 }
 
-const NoteSpec* TuneGenerator::nextNote() const {
+const NoteSpec* TuneGenerator::peekNextNote() const {
     const NoteSpec* nextNote = _note + 1;
     const NoteSpec* lastNote = _tuneSpec->notes + _tuneSpec->loopEnd;
 
@@ -254,7 +253,28 @@ const NoteSpec* TuneGenerator::nextNote() const {
     return nextNote;
 }
 
+void TuneGenerator::moveToNextNote() {
+    if (_arpeggioNote != nullptr) {
+        const NoteSpec* endArpNote = _tuneSpec->notes + 3 + (_arpeggioNote - _tuneSpec->notes) % 4;
+        if (_note == endArpNote) {
+            // Exit Arpeggio mode
+            _note = _arpeggioNote;
+            _arpeggioNote = nullptr;
+            setSamplesPerNote();
+        }
+    }
+
+    _note = peekNextNote();
+}
+
 void TuneGenerator::startNote() {
+    if (_note->fx == Effect::ARPEGGIO && _arpeggioNote == nullptr) {
+        // Enter Arpeggio mode
+        _arpeggioNote = _note;
+        _note = _tuneSpec->notes + ((_note - _tuneSpec->notes) % 4);
+        _samplesPerNote >>= 2;
+    }
+
     _sampleIndex = 0;
 
     const WaveTable* prevWaveTable = _waveTable;
@@ -277,7 +297,7 @@ void TuneGenerator::startNote() {
     }
     _maxWaveIndex = (_waveTable->numSamples << WAVETABLE_SHIFT);
 
-    const NoteSpec* nxtNote = nextNote();
+    const NoteSpec* nxtNote = peekNextNote();
     if (nxtNote == nullptr || nxtNote->wav != _note->wav) {
         // Blend note to avoid transition artifacts
         _endMainIndex = _samplesPerNote - _note->vol;
@@ -315,6 +335,9 @@ void TuneGenerator::startNote() {
                 _indexDeltaDelta = (nxtIndexDelta - _indexDelta) / _samplesPerNote;
             }
             break;
+        case Effect::ARPEGGIO:
+            // Ignore (as we are already playing note at Arpeggio speed when we reach this point)
+            break;
 
         case Effect::DROP: // TODO
         case Effect::VIBRATO: // TODO
@@ -342,7 +365,7 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
     if (_sampleIndex == _endMainIndex) {
         int finalSample = 0;
-        const NoteSpec* nxtNote = nextNote();
+        const NoteSpec* nxtNote = peekNextNote();
         if (
             nxtNote != nullptr && (
                 nxtNote->wav == WaveForm::SQUARE || nxtNote->wav == WaveForm::PULSE
@@ -353,6 +376,7 @@ void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
         }
         _blendDelta = (finalSample - _blendSample) / (_samplesPerNote - _endMainIndex + 1);
     }
+
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
         _blendSample += _blendDelta;
@@ -384,7 +408,7 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
                 // End of tune
                 break;
             }
-            _note = nextNote();
+            moveToNextNote();
             if (_note == nullptr) {
                 // End of tune
                 break;

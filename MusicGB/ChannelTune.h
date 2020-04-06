@@ -39,7 +39,8 @@ enum class Effect {
     VIBRATO,
     DROP,
     FADE_IN,
-    FADE_OUT
+    FADE_OUT,
+    ARPEGGIO
 };
 
 struct NoteSpec {
@@ -74,8 +75,16 @@ class TuneGenerator {
     int _waveIndex, _maxWaveIndex;
     int _blendSample, _blendDelta;
 
+// Arpeggio effect
+    const NoteSpec* _arpeggioNote;
+
+    void inline setSamplesPerNote() {
+        _samplesPerNote = _tuneSpec->noteDuration * SAMPLES_PER_TICK;
+    }
+
     void startNote();
-    const NoteSpec* nextNote() const;
+    const NoteSpec* peekNextNote() const;
+    void moveToNextNote();
 
     void addMainSamples(Sample* &curP, Sample* endP);
     void addBlendSamples(Sample* &curP, Sample* endP);

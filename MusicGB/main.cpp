@@ -111,6 +111,23 @@ const TuneSpec testTune5b = TuneSpec {
     }
 };
 
+// Arpeggio test
+const TuneSpec testTune6 = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 8,
+    .loopEnd = 8,
+    .notes = new NoteSpec[8] {
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
+    }
+};
+
 void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
 
@@ -139,6 +156,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test4.wav", testTune4);
     makeWav("test5a.wav", testTune5a);
     makeWav("test5b.wav", testTune5b);
+    makeWav("test6.wav", testTune6);
 
     return 0;
 }
