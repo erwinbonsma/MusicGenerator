@@ -138,6 +138,20 @@ const TuneSpec testTune6 = TuneSpec {
     }
 };
 
+// Drop test
+const TuneSpec testTune7 = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 4,
+    .loopEnd = 4,
+    .notes = new NoteSpec[4] {
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP }
+    }
+};
+
+
 void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
 
@@ -167,6 +181,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test5a.wav", testTune5a);
     makeWav("test5b.wav", testTune5b);
     makeWav("test6.wav", testTune6);
+    makeWav("test7.wav", testTune7);
 
     return 0;
 }

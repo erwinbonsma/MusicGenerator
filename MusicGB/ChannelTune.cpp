@@ -354,7 +354,11 @@ void TuneGenerator::startNote() {
             // Ignore (as we are already playing note at Arpeggio speed when we reach this point)
             break;
 
-        case Effect::DROP: // TODO
+        case Effect::DROP: {
+                int nxtIndexDelta = _indexDelta >> 1;
+                _indexDeltaDelta = (nxtIndexDelta - _indexDelta) / _samplesPerNote;
+            }
+            break;
         case Effect::VIBRATO: // TODO
         case Effect::NONE:
             break;
