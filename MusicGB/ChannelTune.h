@@ -40,7 +40,8 @@ enum class Effect {
     DROP,
     FADE_IN,
     FADE_OUT,
-    ARPEGGIO
+    ARPEGGIO,
+    ARPEGGIO_FAST
 };
 
 struct NoteSpec {
@@ -81,6 +82,12 @@ class TuneGenerator {
     void inline setSamplesPerNote() {
         _samplesPerNote = _tuneSpec->noteDuration * SAMPLES_PER_TICK;
     }
+
+    int inline arpeggioFactor(const NoteSpec* note) const {
+        // Assumes effect is ARPEGGIO or ARPEGGIO_FAST
+        return (note->fx == Effect::ARPEGGIO_FAST ? 3 : 2) - (_tuneSpec->noteDuration <= 8 ? 1 : 0);
+    }
+    bool isLastArpeggioNote() const;
 
     void startNote();
     const NoteSpec* peekNextNote() const;

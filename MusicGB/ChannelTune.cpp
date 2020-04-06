@@ -237,9 +237,22 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
     startNote();
 }
 
+bool TuneGenerator::isLastArpeggioNote() const {
+    // Assumes we are in Arpeggio mode (i.e. _arpeggioNote is not null)
+    int numNotes = 1 << arpeggioFactor(_arpeggioNote);
+    const NoteSpec* lastArpNote =
+        _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % numNotes + numNotes - 1;
+
+    return _note == lastArpNote;
+}
+
 const NoteSpec* TuneGenerator::peekNextNote() const {
     const NoteSpec* nextNote = _note + 1;
     const NoteSpec* lastNote = _tuneSpec->notes + _tuneSpec->loopEnd;
+
+    if (_arpeggioNote != nullptr && isLastArpeggioNote()) {
+        nextNote = _arpeggioNote + 1;
+    }
 
     if (nextNote == lastNote) {
         const NoteSpec* resumeNote = _tuneSpec->notes + _tuneSpec->loopStart;
@@ -254,25 +267,26 @@ const NoteSpec* TuneGenerator::peekNextNote() const {
 }
 
 void TuneGenerator::moveToNextNote() {
-    if (_arpeggioNote != nullptr) {
-        const NoteSpec* endArpNote = _tuneSpec->notes + 3 + (_arpeggioNote - _tuneSpec->notes) % 4;
-        if (_note == endArpNote) {
-            // Exit Arpeggio mode
-            _note = _arpeggioNote;
-            _arpeggioNote = nullptr;
-            setSamplesPerNote();
-        }
+    if (_arpeggioNote != nullptr && isLastArpeggioNote()) {
+        // Exit Arpeggio mode
+        _note = _arpeggioNote;
+        _arpeggioNote = nullptr;
+        setSamplesPerNote();
     }
 
     _note = peekNextNote();
 }
 
 void TuneGenerator::startNote() {
-    if (_note->fx == Effect::ARPEGGIO && _arpeggioNote == nullptr) {
+    if (
+        (_note->fx == Effect::ARPEGGIO || _note->fx == Effect::ARPEGGIO_FAST) &&
+        _arpeggioNote == nullptr
+    ) {
         // Enter Arpeggio mode
         _arpeggioNote = _note;
-        _note = _tuneSpec->notes + ((_note - _tuneSpec->notes) % 4);
-        _samplesPerNote >>= 2;
+        int factor = arpeggioFactor(_arpeggioNote);
+        _note -= (_note - _tuneSpec->notes) % (1 << factor);
+        _samplesPerNote >>= factor;
     }
 
     _sampleIndex = 0;
@@ -336,6 +350,7 @@ void TuneGenerator::startNote() {
             }
             break;
         case Effect::ARPEGGIO:
+        case Effect::ARPEGGIO_FAST:
             // Ignore (as we are already playing note at Arpeggio speed when we reach this point)
             break;
 
