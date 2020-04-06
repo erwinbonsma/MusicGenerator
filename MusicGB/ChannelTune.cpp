@@ -11,7 +11,8 @@
 #include <algorithm>
 #include <iostream>
 
-constexpr int WAVETABLE_SHIFT = 5;
+constexpr int WAVETABLE_SHIFT = 15;
+
 constexpr int PERIOD_SHIFT = 6;
 
 // Volume can span three bytes. This way, it will not overflow when multiplied with the wave table,
@@ -231,7 +232,7 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
 
     _note = _tuneSpec->notes;
 
-    _samplesPerNote = _tuneSpec->noteDuration * samplesPerTick;
+    _samplesPerNote = _tuneSpec->noteDuration * SAMPLES_PER_TICK;
 
     _waveTable = nullptr;
     startNote();
@@ -286,7 +287,9 @@ void TuneGenerator::startNote() {
 
     int period = notePeriod[(int)_note->note] << (PERIOD_SHIFT - _note->oct);
 
-    _indexDelta = (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / period;
+    _indexDelta = (
+        (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / period
+    ) >> SAMPLERATE_SHIFT;
     _indexDeltaDelta = 0;
 
     _volume = (_note->vol << VOLUME_SHIFT) - 1;
@@ -304,6 +307,12 @@ void TuneGenerator::startNote() {
             if (nxtNote != nullptr) {
                 int nxtVol = (nxtNote->vol << VOLUME_SHIFT) - 1;
                 _volumeDelta = (nxtVol - _volume) / _samplesPerNote;
+
+                int nxtPeriod = notePeriod[(int)nxtNote->note] << (PERIOD_SHIFT - nxtNote->oct);
+                int nxtIndexDelta = (
+                    (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / nxtPeriod
+                ) >> SAMPLERATE_SHIFT;
+                _indexDeltaDelta = (nxtIndexDelta - _indexDelta) / _samplesPerNote;
             }
             break;
 
@@ -322,6 +331,7 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
         }
+        _indexDelta += _indexDeltaDelta;
 
         sample *= _volume;
         _volume += _volumeDelta;

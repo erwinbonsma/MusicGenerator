@@ -11,8 +11,11 @@
 
 #include <stdio.h>
 
-constexpr int sampleRate = 22050;
-constexpr int samplesPerTick = 90 * (sampleRate / 11025);
+constexpr int SAMPLERATE = 22050;
+// Should be updated when changing SAMPLERATE as follows:
+// 44100 -> 0, 22050 -> 1, 11025 -> 2
+constexpr int SAMPLERATE_SHIFT = 1;
+constexpr int SAMPLES_PER_TICK = 90 * (SAMPLERATE / 11025);
 
 typedef unsigned char Sample;
 

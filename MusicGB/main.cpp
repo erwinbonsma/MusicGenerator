@@ -75,6 +75,42 @@ const TuneSpec testTune4 = TuneSpec {
     }
 };
 
+// Frequency slide - small
+const TuneSpec testTune5a = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 7,
+    .loopEnd = 7,
+    .notes = new NoteSpec[7] {
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
+    }
+};
+
+// Frequency slide - big
+const TuneSpec testTune5b = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 11,
+    .loopEnd = 11,
+    .notes = new NoteSpec[11] {
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::G, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT }
+    }
+};
+
 void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
 
@@ -85,7 +121,7 @@ void makeWav(const char* filename, const TuneSpec& tune) {
     WavFile* wavFile = wav_open(filename, "w");
     wav_set_format(wavFile, WAV_FORMAT_PCM);
     wav_set_num_channels(wavFile, 1);
-    wav_set_sample_rate(wavFile, sampleRate);
+    wav_set_sample_rate(wavFile, SAMPLERATE);
     wav_set_sample_size(wavFile, 1);
 
     do {
@@ -101,6 +137,8 @@ int main(int argc, const char * argv[]) {
     makeWav("test2.wav", testTune2);
     makeWav("test3.wav", testTune3);
     makeWav("test4.wav", testTune4);
+    makeWav("test5a.wav", testTune5a);
+    makeWav("test5b.wav", testTune5b);
 
     return 0;
 }
