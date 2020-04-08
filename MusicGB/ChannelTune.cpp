@@ -19,6 +19,12 @@ constexpr int PERIOD_SHIFT = 6;
 // yet it has the highest resolution for volume-slide and fade effects.
 constexpr int VOLUME_SHIFT = 21;
 
+// Controls the amount of frequency change.
+constexpr int VIBRATO_MAGNITUDE_SHIFT = 7;
+
+// The amount of wave periods spanned by a single period of the Vibrato effect.
+constexpr int VIBRATO_META_PERIOD = 24;
+
 // The volume from the note spec uses up three bits. Note, even though the maximum value is eight,
 // it fits in three bits as one is subtracted after applying the volume shift. So:
 // vol = 8 => [111] [111....111]
@@ -237,6 +243,15 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
     startNote();
 }
 
+bool TuneGenerator::isFirstArpeggioNote() const {
+    // Assumes we are in Arpeggio mode (i.e. _arpeggioNote is not null)
+    int numNotes = 1 << arpeggioFactor(_arpeggioNote);
+    const NoteSpec* firstArpNote =
+        _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % numNotes;
+
+    return _note == firstArpNote;
+}
+
 bool TuneGenerator::isLastArpeggioNote() const {
     // Assumes we are in Arpeggio mode (i.e. _arpeggioNote is not null)
     int numNotes = 1 << arpeggioFactor(_arpeggioNote);
@@ -244,6 +259,23 @@ bool TuneGenerator::isLastArpeggioNote() const {
         _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % numNotes + numNotes - 1;
 
     return _note == lastArpNote;
+}
+
+const NoteSpec* TuneGenerator::peekPrevNote() const {
+    if (_note == _tuneSpec->notes) {
+        return nullptr;
+    }
+
+    if (_arpeggioNote != nullptr && isFirstArpeggioNote()) {
+        if (_arpeggioNote == _tuneSpec->notes) {
+            return nullptr;
+        } else {
+            return _arpeggioNote - 1;
+        }
+    } else {
+        return _note - 1;
+    }
+
 }
 
 const NoteSpec* TuneGenerator::peekNextNote() const {
@@ -359,7 +391,16 @@ void TuneGenerator::startNote() {
                 _indexDeltaDelta = (nxtIndexDelta - _indexDelta) / _samplesPerNote;
             }
             break;
-        case Effect::VIBRATO: // TODO
+        case Effect::VIBRATO: {
+            const NoteSpec* prevNote = peekPrevNote();
+            if (prevNote == nullptr || prevNote->fx != Effect::VIBRATO) {
+                _vibratoDelta = 0;
+                // Note: The order of operations matters to avoid overflows during calculation
+                _vibratoDeltaDelta = _indexDelta / (
+                    VIBRATO_META_PERIOD * (_maxWaveIndex / _indexDelta)
+                );
+            }
+        }
         case Effect::NONE:
             break;
     }
@@ -377,6 +418,31 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 
         sample *= _volume;
         _volume += _volumeDelta;
+        *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + VOLUME_BITS)));
+    }
+}
+
+// Separate method for Vibrato effect for efficiency. This goes both ways. The calculations here
+// are Vibrato-specific, and when Vibrato is applied, there are no changes of volume or other
+// frequency shifts.
+void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        _waveIndex += _indexDelta;
+        _waveIndex += _vibratoDelta >> VIBRATO_MAGNITUDE_SHIFT;
+        if (_waveIndex >= _maxWaveIndex) {
+            _waveIndex -= _maxWaveIndex;
+        } else if (_waveIndex < 0) {
+            _waveIndex += _maxWaveIndex;
+        }
+
+        _vibratoDelta += _vibratoDeltaDelta;
+        if (abs(_vibratoDelta) > _indexDelta) {
+            _vibratoDeltaDelta = -_vibratoDeltaDelta;
+        }
+
+        sample *= _volume;
         *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + VOLUME_BITS)));
     }
 }
@@ -412,7 +478,11 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
         if (_sampleIndex < _endMainIndex) {
             // Add main samples until end of main phase or buffer is full
             int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
-            addMainSamples(bufP, bufP + numSamples);
+            if (_note->fx == Effect::VIBRATO) {
+                addMainSamplesVibrato(bufP, bufP + numSamples);
+            } else {
+                addMainSamples(bufP, bufP + numSamples);
+            }
             if (_sampleIndex == _endMainIndex) {
                 _blendSample = (*(bufP - 1) - 128) << (VOLUME_SHIFT + VOLUME_BITS);
             }

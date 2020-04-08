@@ -72,6 +72,7 @@ class TuneGenerator {
     const WaveTable* _waveTable;
     int _volume, _volumeDelta;
     int _indexDelta, _indexDeltaDelta;
+    int _vibratoDelta, _vibratoDeltaDelta;
     int _sampleIndex, _endMainIndex;
     int _waveIndex, _maxWaveIndex;
     int _blendSample, _blendDelta;
@@ -87,13 +88,17 @@ class TuneGenerator {
         // Assumes effect is ARPEGGIO or ARPEGGIO_FAST
         return (note->fx == Effect::ARPEGGIO_FAST ? 3 : 2) - (_tuneSpec->noteDuration <= 8 ? 1 : 0);
     }
+    bool isFirstArpeggioNote() const;
     bool isLastArpeggioNote() const;
 
     void startNote();
+
+    const NoteSpec* peekPrevNote() const;
     const NoteSpec* peekNextNote() const;
     void moveToNextNote();
 
     void addMainSamples(Sample* &curP, Sample* endP);
+    void addMainSamplesVibrato(Sample* &curP, Sample* endP);
     void addBlendSamples(Sample* &curP, Sample* endP);
 
 public:

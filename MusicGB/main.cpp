@@ -151,6 +151,32 @@ const TuneSpec testTune7 = TuneSpec {
     }
 };
 
+// Vibrato test
+const TuneSpec testTune8 = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 16,
+    .loopEnd = 16,
+    .notes = new NoteSpec[16] {
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::Gs, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::Ds, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+    }
+};
+
+
 
 void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
@@ -182,6 +208,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test5b.wav", testTune5b);
     makeWav("test6.wav", testTune6);
     makeWav("test7.wav", testTune7);
+    makeWav("test8.wav", testTune8);
 
     return 0;
 }
