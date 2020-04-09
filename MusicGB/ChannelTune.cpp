@@ -226,15 +226,6 @@ const int notePeriod[numNotes] = {
     802, 757, 714, 674, 636, 601, 567, 535, 505, 477, 450, 425
 };
 
-const TuneSpec* _tuneSpec;
-int _samplesPerNote;
-int _noteIndex;
-
-// Current note
-int _volumeStart, _volumeEnd;
-int _periodStart, _periodEnd;
-int _sampleIndex;
-
 void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
     _tuneSpec = tuneSpec;
 
