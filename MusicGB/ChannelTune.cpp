@@ -331,6 +331,10 @@ void TuneGenerator::startNote() {
             _waveTable = &pulseWave; break;
         case WaveForm::ORGAN:
             _waveTable = &organWave; break;
+        case WaveForm::NONE:
+            _waveTable = nullptr;
+            _endMainIndex = _samplesPerNote;
+            return;
     }
     if (_waveTable != prevWaveTable) {
         _waveIndex = 0;
@@ -437,6 +441,13 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
     }
 }
 
+void TuneGenerator::addMainSamplesSilence(Sample* &curP, Sample* endP) {
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        *curP++ = (char)128;
+    }
+}
+
 // Separate method for Vibrato effect for efficiency. This goes both ways. The calculations here
 // are Vibrato-specific, and when Vibrato is applied, there are no changes of volume or other
 // frequency shifts.
@@ -493,7 +504,9 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
         if (_sampleIndex < _endMainIndex) {
             // Add main samples until end of main phase or buffer is full
             int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
-            if (_note->fx == Effect::VIBRATO) {
+            if (!_waveTable) {
+                addMainSamplesSilence(bufP, bufP + numSamples);
+            } else if (_note->fx == Effect::VIBRATO) {
                 addMainSamplesVibrato(bufP, bufP + numSamples);
             } else {
                 addMainSamples(bufP, bufP + numSamples);

@@ -31,7 +31,8 @@ enum class WaveForm {
     SQUARE,
     PULSE,
     ORGAN,
-    NOISE
+    NOISE,
+    NONE
 };
 
 enum class Effect {
@@ -51,6 +52,10 @@ struct NoteSpec {
     int vol; // [1..8]
     WaveForm wav;
     Effect fx;
+};
+
+const NoteSpec SILENCE = NoteSpec {
+    .note = Note::A, .oct = 4, .vol = 0, .wav = WaveForm::NONE, .fx = Effect::NONE
 };
 
 struct TuneSpec {
@@ -98,6 +103,7 @@ class TuneGenerator {
     void moveToNextNote();
 
     void addMainSamples(Sample* &curP, Sample* endP);
+    void addMainSamplesSilence(Sample* &curP, Sample* endP);
     void addMainSamplesVibrato(Sample* &curP, Sample* endP);
     void addBlendSamples(Sample* &curP, Sample* endP);
 

@@ -195,6 +195,28 @@ const TuneSpec testTune9 = TuneSpec {
     }
 };
 
+// Silence test
+const TuneSpec testTune10 = TuneSpec {
+    .noteDuration = 16,
+    .loopStart = 13,
+    .loopEnd = 13,
+    .notes = new NoteSpec[13] {
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
+    }
+};
+
 
 void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
@@ -228,6 +250,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test7.wav", testTune7);
     makeWav("test8.wav", testTune8);
     makeWav("test9.wav", testTune9);
+    makeWav("test10.wav", testTune10);
 
     return 0;
 }
