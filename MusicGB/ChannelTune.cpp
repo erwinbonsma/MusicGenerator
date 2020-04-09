@@ -13,6 +13,8 @@
 
 constexpr int WAVETABLE_SHIFT = 15;
 
+constexpr int NUM_RAND_BITS = 31; // Update based on RAND_MAX
+
 constexpr int PERIOD_SHIFT = 6;
 
 // Volume can span three bytes. This way, it will not overflow when multiplied with the wave table,
@@ -326,6 +328,7 @@ void TuneGenerator::startNote() {
     const WaveTable* prevWaveTable = _waveTable;
     switch (_note->wav) {
         case WaveForm::TRIANGLE:
+        case WaveForm::NOISE:
             _waveTable = &triangleWave; break;
         case WaveForm::TILTED_SAW:
             _waveTable = &tiltedSawWave; break;
@@ -357,6 +360,16 @@ void TuneGenerator::startNote() {
         (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / period
     ) >> SAMPLERATE_SHIFT;
     _indexDeltaDelta = 0;
+
+    _noiseShift = 0;
+    if (_note->wav == WaveForm::NOISE) {
+        _noiseShift = NUM_RAND_BITS - 2;
+        int v = _indexDelta;
+        while (v) {
+            _noiseShift--;
+            v >>= 1;
+        }
+    }
 
     _volume = (_note->vol << VOLUME_SHIFT) - 1;
     _volumeDelta = 0;
@@ -411,6 +424,17 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
     while (curP < endP) {
         int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
         _waveIndex += _indexDelta;
+        if (_noiseShift) {
+            int rnd = rand();
+            if (rnd & 1) {
+                _waveIndex += rnd >> _noiseShift;
+            } else {
+                _waveIndex -= rnd >> _noiseShift;
+                if (_waveIndex < 0) {
+                    _waveIndex += _maxWaveIndex;
+                }
+            }
+        }
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
         }

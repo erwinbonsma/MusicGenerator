@@ -30,7 +30,8 @@ enum class WaveForm {
     SAW,
     SQUARE,
     PULSE,
-    ORGAN
+    ORGAN,
+    NOISE
 };
 
 enum class Effect {
@@ -76,8 +77,7 @@ class TuneGenerator {
     int _sampleIndex, _endMainIndex;
     int _waveIndex, _maxWaveIndex;
     int _blendSample, _blendDelta;
-
-// Arpeggio effect
+    int _noiseShift;
     const NoteSpec* _arpeggioNote;
 
     void inline setSamplesPerNote() {

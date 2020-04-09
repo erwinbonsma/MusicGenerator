@@ -176,6 +176,24 @@ const TuneSpec testTune8 = TuneSpec {
     }
 };
 
+// Noise test
+const TuneSpec testTune9 = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 10,
+    .loopEnd = 10,
+    .notes = new NoteSpec[10] {
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+    }
+};
 
 
 void makeWav(const char* filename, const TuneSpec& tune) {
@@ -209,6 +227,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test6.wav", testTune6);
     makeWav("test7.wav", testTune7);
     makeWav("test8.wav", testTune8);
+    makeWav("test9.wav", testTune9);
 
     return 0;
 }
