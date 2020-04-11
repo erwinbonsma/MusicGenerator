@@ -379,16 +379,22 @@ void TuneGenerator::startNote() {
         case Effect::FADE_OUT:
             _volumeDelta = -(_volume / _samplesPerNote);
             break;
-        case Effect::SLIDE:
-            if (nxtNote != nullptr) {
-                int nxtVol = (nxtNote->vol << VOLUME_SHIFT) - 1;
-                _volumeDelta = (nxtVol - _volume) / _samplesPerNote;
+        case Effect::SLIDE: {
+                const NoteSpec* prvNote = peekPrevNote();
+                if (prvNote != nullptr) {
+                    // Slide from previous volume to own
+                    int prvVolume = (prvNote->vol << VOLUME_SHIFT) - 1;
+                    _volumeDelta = (_volume - prvVolume) / _samplesPerNote;
+                    _volume = prvVolume;
 
-                int nxtPeriod = notePeriod[(int)nxtNote->note] << (PERIOD_SHIFT - nxtNote->oct);
-                int nxtIndexDelta = (
-                    (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / nxtPeriod
-                ) >> SAMPLERATE_SHIFT;
-                _indexDeltaDelta = (nxtIndexDelta - _indexDelta) / _samplesPerNote;
+                    // Slide from previous frequency to own
+                    int prvPeriod = notePeriod[(int)prvNote->note] << (PERIOD_SHIFT - prvNote->oct);
+                    int prvIndexDelta = (
+                        (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / prvPeriod
+                    ) >> SAMPLERATE_SHIFT;
+                    _indexDeltaDelta = (_indexDelta - prvIndexDelta) / _samplesPerNote;
+                    _indexDelta = prvIndexDelta;
+                }
             }
             break;
         case Effect::ARPEGGIO:
