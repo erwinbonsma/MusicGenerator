@@ -1,12 +1,12 @@
 //
-//  ChannelTune.cpp
+//  TuneGenerator.cpp
 //  MusicGB
 //
 //  Created by Erwin on 04/04/2020.
 //  Copyright © 2020 Erwin. All rights reserved.
 //
 
-#include "ChannelTune.h"
+#include "TuneGenerator.h"
 
 #include <algorithm>
 #include <iostream>
@@ -230,6 +230,7 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
     _tuneSpec = tuneSpec;
 
     _note = _tuneSpec->notes;
+    _arpeggioNote = nullptr;
     setSamplesPerNote();
 
     _waveTable = nullptr;
@@ -344,7 +345,7 @@ void TuneGenerator::startNote() {
     const NoteSpec* nxtNote = peekNextNote();
     if (nxtNote == nullptr || nxtNote->wav != _note->wav) {
         // Blend note to avoid transition artifacts
-        _endMainIndex = _samplesPerNote - _note->vol;
+        _endMainIndex = _samplesPerNote - _note->vol * 2;
     } else {
         _endMainIndex = _samplesPerNote;
     }
@@ -474,7 +475,7 @@ void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
 }
 
 void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
-    if (_sampleIndex == _endMainIndex) {
+    if (_sampleIndex == _endMainIndex && _note) {
         int finalSample = 0;
         const NoteSpec* nxtNote = peekNextNote();
         if (

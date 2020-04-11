@@ -8,7 +8,8 @@
 
 #include <iostream>
 
-#include "ChannelTune.h"
+#include "TuneGenerator.h"
+#include "PatternGenerator.h"
 #include "wav.h"
 
 // One octave in C-Major. TRIANGLE waves.
@@ -217,12 +218,147 @@ const TuneSpec testTune10 = TuneSpec {
     }
 };
 
+const TuneSpec sfx16 = TuneSpec {
+    .noteDuration = 16,
+    .loopStart = 32,
+    .loopEnd = 32,
+    .notes = new NoteSpec[32] {
+        NoteSpec { .note=Note::C,  .oct=4, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=3, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=4, .vol=4, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::Ds, .oct=4, .vol=1, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        SILENCE,
+
+        NoteSpec { .note=Note::C,  .oct=4, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=3, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=4, .vol=4, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::Ds, .oct=4, .vol=1, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        SILENCE,
+
+        NoteSpec { .note=Note::C,  .oct=4, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=3, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=4, .vol=4, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=4, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+
+        NoteSpec { .note=Note::C,  .oct=4, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=4, .vol=5, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::Ds, .oct=4, .vol=1, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        SILENCE
+    }
+};
+
+const TuneSpec sfx24 = TuneSpec {
+    .noteDuration = 16,
+    .loopStart = 32,
+    .loopEnd = 32,
+    .notes = new NoteSpec[32] {
+        NoteSpec { .note=Note::G,  .oct=4, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=3, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+
+        NoteSpec { .note=Note::G,  .oct=4, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Gs, .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+
+        NoteSpec { .note=Note::G,  .oct=4, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=3, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+
+        NoteSpec { .note=Note::G,  .oct=4, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=1, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds, .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C,  .oct=5, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Gs, .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G,  .oct=4, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE }
+    }
+};
+
+const TuneSpec sfx26 = TuneSpec {
+    .noteDuration = 16,
+    .loopStart = 32,
+    .loopEnd = 32,
+    .notes = new NoteSpec[32] {
+        NoteSpec { .note=Note::C,  .oct=3, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=4, .vol=5, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+
+        NoteSpec { .note=Note::C,  .oct=3, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=4, .vol=5, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        NoteSpec { .note=Note::C,  .oct=2, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+
+        NoteSpec { .note=Note::C,  .oct=3, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=4, .vol=5, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+
+        NoteSpec { .note=Note::C,  .oct=3, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        SILENCE,
+        NoteSpec { .note=Note::C,  .oct=4, .vol=5, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=5, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
+        NoteSpec { .note=Note::C,  .oct=3, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
+        NoteSpec { .note=Note::C,  .oct=2, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP }
+    }
+};
+
+const PatternSpec pattern12 = PatternSpec {
+    .numTunes = 3,
+    .tunes = new const TuneSpec* [3] { &sfx16, &sfx24, &sfx26 }
+};
+
+constexpr int BUFSIZE = 512;
 
 void makeWav(const char* filename, const TuneSpec& tune) {
     TuneGenerator tuneGen;
 
     tuneGen.setTuneSpec(&tune);
-    Sample buf[512];
+    Sample buf[BUFSIZE];
     Sample* buffers[1] = { buf };
     int samplesAdded;
     WavFile* wavFile = wav_open(filename, "w");
@@ -232,14 +368,36 @@ void makeWav(const char* filename, const TuneSpec& tune) {
     wav_set_sample_size(wavFile, 1);
 
     do {
-        samplesAdded = tuneGen.addSamples(buf, 512);
+        samplesAdded = tuneGen.addSamples(buf, BUFSIZE);
         wav_write(wavFile, (const void* const*)buffers, samplesAdded);
-    } while (samplesAdded == 512);
+    } while (samplesAdded == BUFSIZE);
+
+    wav_close(wavFile);
+}
+
+void makeWav(const char* filename, const PatternSpec& pattern) {
+    PatternGenerator patternGen;
+
+    patternGen.setPatternSpec(&pattern);
+    Sample buf[BUFSIZE * MAX_TUNES];
+    Sample* buffers[4] = { buf, buf + BUFSIZE, buf + BUFSIZE * 2, buf + BUFSIZE * 3 };
+    int samplesAdded;
+    WavFile* wavFile = wav_open(filename, "w");
+    wav_set_format(wavFile, WAV_FORMAT_PCM);
+    wav_set_num_channels(wavFile, pattern.numTunes);
+    wav_set_sample_rate(wavFile, SAMPLERATE);
+    wav_set_sample_size(wavFile, 1);
+
+    do {
+        samplesAdded = patternGen.addSamples(buffers, BUFSIZE);
+        wav_write(wavFile, (const void* const*)buffers, samplesAdded);
+    } while (samplesAdded == BUFSIZE);
 
     wav_close(wavFile);
 }
 
 int main(int argc, const char * argv[]) {
+    /*
     makeWav("test1.wav", testTune1);
     makeWav("test2.wav", testTune2);
     makeWav("test3.wav", testTune3);
@@ -251,6 +409,13 @@ int main(int argc, const char * argv[]) {
     makeWav("test8.wav", testTune8);
     makeWav("test9.wav", testTune9);
     makeWav("test10.wav", testTune10);
+    */
+
+    makeWav("sfx16.wav", sfx16);
+    makeWav("sfx24.wav", sfx24);
+    makeWav("sfx26.wav", sfx26);
+
+    makeWav("pat12.wav", pattern12);
 
     return 0;
 }

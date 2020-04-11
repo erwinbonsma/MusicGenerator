@@ -1,13 +1,13 @@
 //
-//  ChannelTune.h
+//  TuneGenerator.h
 //  MusicGB
 //
 //  Created by Erwin on 04/04/2020.
 //  Copyright © 2020 Erwin. All rights reserved.
 //
 
-#ifndef ChannelTune_h
-#define ChannelTune_h
+#ifndef TuneGenerator_h
+#define TuneGenerator_h
 
 #include <stdio.h>
 
@@ -114,4 +114,4 @@ public:
     int addSamples(Sample* buf, int maxSamples);
 };
 
-#endif /* ChannelTune_h */
+#endif /* TuneGenerator_h */
