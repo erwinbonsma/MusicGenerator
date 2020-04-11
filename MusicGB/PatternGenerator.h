@@ -9,7 +9,6 @@
 #ifndef PatternGenerator_h
 #define PatternGenerator_h
 
-#include <stdio.h>
 #include "TuneGenerator.h"
 
 struct PatternSpec {

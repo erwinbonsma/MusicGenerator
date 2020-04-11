@@ -10,6 +10,8 @@
 
 #include "TuneGenerator.h"
 #include "PatternGenerator.h"
+#include "SongGenerator.h"
+#include "BumbleBotsMusic.cpp"
 #include "wav.h"
 
 // One octave in C-Major. TRIANGLE waves.
@@ -217,7 +219,7 @@ const TuneSpec testTune10 = TuneSpec {
         NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
     }
 };
-
+/*
 const TuneSpec sfx16 = TuneSpec {
     .noteDuration = 16,
     .loopStart = 32,
@@ -346,12 +348,7 @@ const TuneSpec sfx26 = TuneSpec {
         NoteSpec { .note=Note::C,  .oct=2, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP }
     }
 };
-
-const PatternSpec pattern12 = PatternSpec {
-    .numTunes = 3,
-    .tunes = new const TuneSpec* [3] { &sfx16, &sfx24, &sfx26 }
-};
-
+*/
 constexpr int BUFSIZE = 512;
 
 void makeWav(const char* filename, const TuneSpec& tune) {
@@ -396,6 +393,27 @@ void makeWav(const char* filename, const PatternSpec& pattern) {
     wav_close(wavFile);
 }
 
+void makeWav(const char* filename, const SongSpec& song) {
+    SongGenerator songGenerator;
+
+    songGenerator.setSongSpec(&song);
+    Sample buf[BUFSIZE * MAX_TUNES];
+    Sample* buffers[4] = { buf, buf + BUFSIZE, buf + BUFSIZE * 2, buf + BUFSIZE * 3 };
+    int samplesAdded;
+    WavFile* wavFile = wav_open(filename, "w");
+    wav_set_format(wavFile, WAV_FORMAT_PCM);
+    wav_set_num_channels(wavFile, 4);
+    wav_set_sample_rate(wavFile, SAMPLERATE);
+    wav_set_sample_size(wavFile, 1);
+
+    do {
+        samplesAdded = songGenerator.addSamples(buffers, BUFSIZE);
+        wav_write(wavFile, (const void* const*)buffers, samplesAdded);
+    } while (samplesAdded == BUFSIZE);
+
+    wav_close(wavFile);
+}
+
 int main(int argc, const char * argv[]) {
     /*
     makeWav("test1.wav", testTune1);
@@ -409,13 +427,13 @@ int main(int argc, const char * argv[]) {
     makeWav("test8.wav", testTune8);
     makeWav("test9.wav", testTune9);
     makeWav("test10.wav", testTune10);
-    */
 
     makeWav("sfx16.wav", sfx16);
     makeWav("sfx24.wav", sfx24);
     makeWav("sfx26.wav", sfx26);
+    */
 
-    makeWav("pat12.wav", pattern12);
+    makeWav("bb-track1.wav", bumbleBotsSong);
 
     return 0;
 }

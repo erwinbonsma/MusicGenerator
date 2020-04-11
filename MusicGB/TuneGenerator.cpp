@@ -330,6 +330,7 @@ void TuneGenerator::startNote() {
             _waveTable = &squareWave; break;
         case WaveForm::PULSE:
             _waveTable = &pulseWave; break;
+        case WaveForm::PHASER: // Unsupported. Use ORGAN instead
         case WaveForm::ORGAN:
             _waveTable = &organWave; break;
         case WaveForm::NONE:

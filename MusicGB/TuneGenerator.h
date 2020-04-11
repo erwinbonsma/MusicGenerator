@@ -9,8 +9,6 @@
 #ifndef TuneGenerator_h
 #define TuneGenerator_h
 
-#include <stdio.h>
-
 constexpr int SAMPLERATE = 22050;
 // Should be updated when changing SAMPLERATE as follows:
 // 44100 -> 0, 22050 -> 1, 11025 -> 2
@@ -32,6 +30,7 @@ enum class WaveForm {
     PULSE,
     ORGAN,
     NOISE,
+    PHASER,
     NONE
 };
 
