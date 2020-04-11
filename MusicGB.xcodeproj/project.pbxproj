@@ -13,6 +13,7 @@
 		AA21A1C72441A7EA004DD190 /* PatternGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C52441A7EA004DD190 /* PatternGenerator.cpp */; };
 		AA21A1CC24420AC0004DD190 /* SongGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1CA24420AC0004DD190 /* SongGenerator.cpp */; };
 		AA21A1CE244232A5004DD190 /* BumbleBotsMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */; };
+		AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D124424970004DD190 /* WavGeneration.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		AA21A1CB24420AC0004DD190 /* SongGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SongGenerator.h; sourceTree = "<group>"; };
 		AA21A1CD24420FA9004DD190 /* BumbleBotsMusic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BumbleBotsMusic.h; sourceTree = "<group>"; };
 		AA21A1CF24423E1C004DD190 /* BumbleBotsMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "BumbleBotsMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA21A1D124424970004DD190 /* WavGeneration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavGeneration.cpp; sourceTree = "<group>"; };
+		AA21A1D224424970004DD190 /* WavGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavGeneration.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */,
 				AA21A1CF24423E1C004DD190 /* BumbleBotsMusic-Generated.cpp */,
 				AA21A1CD24420FA9004DD190 /* BumbleBotsMusic.h */,
+				AA21A1D124424970004DD190 /* WavGeneration.cpp */,
+				AA21A1D224424970004DD190 /* WavGeneration.h */,
 			);
 			path = MusicGB;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
 				AA21A1C72441A7EA004DD190 /* PatternGenerator.cpp in Sources */,
 				AA21A1C12438A837004DD190 /* TuneGenerator.cpp in Sources */,
+				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
