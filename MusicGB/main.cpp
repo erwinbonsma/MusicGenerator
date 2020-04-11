@@ -11,7 +11,7 @@
 #include "TuneGenerator.h"
 #include "PatternGenerator.h"
 #include "SongGenerator.h"
-#include "BumbleBotsMusic.cpp"
+#include "BumbleBotsMusic.h"
 #include "wav.h"
 
 // One octave in C-Major. TRIANGLE waves.

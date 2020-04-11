@@ -9,7 +9,7 @@
 #ifndef BumbleBotsMusic_h
 #define BumbleBotsMusic_h
 
-class SongSpec;
+#include "SongGenerator.h"
 
 extern const SongSpec bumbleBotsSong;
 
