@@ -1,15 +1,18 @@
 //
-//  TuneGenerator.h
+//  MusicGeneration.h
 //  MusicGB
 //
 //  Created by Erwin on 04/04/2020.
 //  Copyright © 2020 Erwin. All rights reserved.
 //
 
-#ifndef TuneGenerator_h
-#define TuneGenerator_h
+#ifndef MusicGeneration_h
+#define MusicGeneration_h
 
 #include <stdint.h>
+
+//--------------------------------------------------------------------------------------------------
+// Tune Generation
 
 constexpr uint16_t SAMPLERATE = 22050;
 
@@ -120,6 +123,61 @@ public:
     // right moment.
     //
     // Returns the number of samples added. It can less than the maximum when the tune ends.
+    int addSamples(Sample* buf, int maxSamples);
+};
+
+//--------------------------------------------------------------------------------------------------
+// Pattern Generation
+
+struct PatternSpec {
+    uint8_t numTunes;
+    const TuneSpec** tunes;
+};
+
+constexpr int MAX_TUNES_IN_PATTERN = 4;
+
+class PatternGenerator {
+    const PatternSpec* _patternSpec;
+    TuneGenerator _tuneGens[MAX_TUNES_IN_PATTERN];
+
+public:
+    void setPatternSpec(const PatternSpec* patternSpec);
+
+    // Adds samples for the pattern to the given buffer. Note, it does not overwrite existing values
+    // in the buffer, but adds to the existing value so that multiple generators can contribute to
+    // the same buffer. This relies on an overarching orchestrator to clear the buffer values at
+    // right moment.
+    //
+    // Returns the number of samples added. It can less than the maximum when the pattern ends.
+    int addSamples(Sample* buf, int maxSamples);
+};
+
+//--------------------------------------------------------------------------------------------------
+// Song Generation
+
+struct SongSpec {
+    uint8_t loopStart, numPatterns;
+    const PatternSpec** patterns;
+};
+
+class SongGenerator {
+    const SongSpec* _songSpec;
+    PatternGenerator _patternGenerator;
+    const PatternSpec** _pattern;
+    bool _loop;
+
+    void startPattern();
+    void moveToNextPattern();
+
+public:
+    void setSongSpec(const SongSpec* songSpec, bool loop);
+
+    // Adds samples for the tune to the given buffer. Note, it does not overwrite existing values
+    // in the buffer, but adds to the existing value so that multiple generators can contribute to
+    // the same buffer. This relies on an overarching orchestrator to clear the buffer values at
+    // right moment.
+    //
+    // Returns the number of samples added. It can less than the maximum when the song ends.
     int addSamples(Sample* buf, int maxSamples);
 };
 

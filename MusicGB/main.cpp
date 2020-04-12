@@ -8,9 +8,7 @@
 
 #include <iostream>
 
-#include "TuneGenerator.h"
-#include "PatternGenerator.h"
-#include "SongGenerator.h"
+#include "MusicGeneration.h"
 
 #include "WavGeneration.h"
 

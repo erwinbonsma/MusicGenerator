@@ -1,15 +1,15 @@
 //
-//  TuneGenerator.cpp
+//  MusicGeneration.cpp
 //  MusicGB
 //
 //  Created by Erwin on 04/04/2020.
 //  Copyright © 2020 Erwin. All rights reserved.
 //
 
-#include "TuneGenerator.h"
+#include "MusicGeneration.h"
 
 #include <algorithm>
-#include <iostream>
+#include <cstdlib>
 
 constexpr uint8_t WAVETABLE_SHIFT = 15;
 
@@ -544,4 +544,72 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
     }
 
     return (int)(bufP - buf);
+}
+
+//--------------------------------------------------------------------------------------------------
+// Pattern Generation
+
+void PatternGenerator::setPatternSpec(const PatternSpec* patternSpec) {
+    _patternSpec = patternSpec;
+    for (int i = 0; i < _patternSpec->numTunes; i++) {
+        _tuneGens[i].setTuneSpec(_patternSpec->tunes[i]);
+    }
+}
+
+int PatternGenerator::addSamples(Sample* buf, int maxSamples) {
+    // The first tune detemines the length of the pattern. It should therefore not loop.
+    int numSamples = _tuneGens[0].addSamples(buf, maxSamples);
+
+    for (int i = 1; i < _patternSpec->numTunes; i++) {
+        _tuneGens[i].addSamples(buf, numSamples);
+    }
+
+    return numSamples;
+}
+
+//--------------------------------------------------------------------------------------------------
+// Song Generation
+
+void SongGenerator::startPattern() {
+    _patternGenerator.setPatternSpec(*_pattern);
+}
+
+void SongGenerator::moveToNextPattern() {
+    _pattern++;
+    if (_pattern == _songSpec->patterns + _songSpec->numPatterns) {
+        if (_loop && _songSpec->loopStart < _songSpec->numPatterns) {
+            _pattern = _songSpec->patterns + _songSpec->loopStart;
+        } else {
+            _pattern = nullptr;
+        }
+    }
+}
+
+void SongGenerator::setSongSpec(const SongSpec* songSpec, bool loop) {
+    _songSpec = songSpec;
+    _pattern = _songSpec->patterns;
+    _loop = loop;
+    startPattern();
+}
+
+int SongGenerator::addSamples(Sample* buf, int maxSamples) {
+    int totalAdded = 0;
+
+    do {
+        totalAdded += _patternGenerator.addSamples(buf, maxSamples - totalAdded);
+        if (totalAdded < maxSamples) {
+            if (_pattern == nullptr) {
+                // We're done
+                return totalAdded;
+            }
+            moveToNextPattern();
+            if (_pattern == nullptr) {
+                // We're done
+                return totalAdded;
+            }
+            startPattern();
+        }
+    } while (totalAdded < maxSamples);
+
+    return totalAdded;
 }
