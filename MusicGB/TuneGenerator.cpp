@@ -17,26 +17,26 @@ constexpr int NUM_RAND_BITS = 31; // Update based on RAND_MAX
 
 constexpr int PERIOD_SHIFT = 6;
 
-// Volume can span three bytes. This way, it will not overflow when multiplied with the wave table,
-// yet it has the highest resolution for volume-slide and fade effects.
-constexpr int VOLUME_SHIFT = 21;
-
 // Controls the amount of frequency change.
 constexpr int VIBRATO_MAGNITUDE_SHIFT = 7;
 
 // The amount of wave periods spanned by a single period of the Vibrato effect.
 constexpr int VIBRATO_META_PERIOD = 24;
 
-// The volume from the note spec uses up three bits. Note, even though the maximum value is eight,
-// it fits in three bits as one is subtracted after applying the volume shift. So:
-// vol = 8 => [111] [111....111]
-// vol = 6 => [101] [111....111]
-// vol = 1 => [000] [111....111]
-//              ^         ^
-//              |         +--- VOLUME_SHIFT ones
-//              +------------- VOLUME_BITs
-// Note: Zero volume should not be used for normal notes. Use SILENCE instead (TODO).
-constexpr int VOLUME_BITS = 3;
+// The volume from the note spec uses up to four bits, as the maximum value is eight. Note, this
+// maximum should be a power of two to ensure that at maximum volume each output value in the valid
+// range (i.e. [-128..127]) can actually be realized (so that the available resolution is fully
+// utilized).
+constexpr int VOLUME_BITS = 4;
+
+// Shift such that shifted volume fits in two bytes without overwriting the sign bit. This way the
+// most-significant byte can be safely cast to (signed) int8_t value.
+constexpr int VOLUME_SHIFT = 16 - VOLUME_BITS - 1;
+
+// Number of bits to shift amplified sample so that it is in range [-128..127] again.
+///  Inputs: - sample with range [-128..127]
+//           - volume with range [   0.. 64] (the range of the most-significant byte)
+constexpr int POST_AMP_SHIFT = 6;
 
 // Notes:
 // - The size of wave tables varies to match the wave form to avoid rounding-artifacts and to
@@ -368,7 +368,7 @@ void TuneGenerator::startNote() {
         }
     }
 
-    _volume = (_note->vol << VOLUME_SHIFT) - 1;
+    _volume = _note->vol << VOLUME_SHIFT;
     _volumeDelta = 0;
 
     switch (_note->fx) {
@@ -423,9 +423,10 @@ void TuneGenerator::startNote() {
 }
 
 void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
+    int16_t amplifiedSample = 0;
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
         _waveIndex += _indexDelta;
         if (_noiseShift) {
             int rnd = rand();
@@ -443,10 +444,11 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
         }
         _indexDelta += _indexDeltaDelta;
 
-        sample *= _volume;
+        amplifiedSample = sample * (int8_t)(_volume >> 8);
         _volume += _volumeDelta;
-        *curP++ += (Sample)(sample >> (VOLUME_SHIFT + VOLUME_BITS));
+        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
+    _blendSample = amplifiedSample;
 }
 
 void TuneGenerator::addMainSamplesSilence(Sample* &curP, Sample* endP) {
@@ -458,9 +460,10 @@ void TuneGenerator::addMainSamplesSilence(Sample* &curP, Sample* endP) {
 // are Vibrato-specific, and when Vibrato is applied, there are no changes of volume or other
 // frequency shifts.
 void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
+    int16_t amplifiedSample = 0;
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
         _waveIndex += _indexDelta;
         _waveIndex += _vibratoDelta >> VIBRATO_MAGNITUDE_SHIFT;
         if (_waveIndex >= _maxWaveIndex) {
@@ -474,9 +477,10 @@ void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
             _vibratoDeltaDelta = -_vibratoDeltaDelta;
         }
 
-        sample *= _volume;
-        *curP++ += (Sample)(sample >> (VOLUME_SHIFT + VOLUME_BITS));
+        amplifiedSample = sample * (int8_t)(_volume >> 8);
+        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
+    _blendSample = amplifiedSample;
 }
 
 void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
@@ -489,7 +493,8 @@ void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
             )
         ) {
             // Exception. These waves do not start at zero.
-            finalSample = 127 << (VOLUME_SHIFT + VOLUME_BITS);
+            int16_t nxtVol = nxtNote->vol << VOLUME_SHIFT;
+            finalSample = 127 * (int8_t)(nxtVol >> 8);
         }
         _blendDelta = (finalSample - _blendSample) / (_samplesPerNote - _endMainIndex + 1);
     }
@@ -498,7 +503,7 @@ void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
     while (curP < endP) {
         _blendSample += _blendDelta;
 
-        *curP++ += (Sample)(_blendSample >> (VOLUME_SHIFT + VOLUME_BITS));
+        *curP++ += _blendSample >> POST_AMP_SHIFT;
     }
 }
 
@@ -516,9 +521,6 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
                 addMainSamplesVibrato(bufP, bufP + numSamples);
             } else {
                 addMainSamples(bufP, bufP + numSamples);
-            }
-            if (_sampleIndex == _endMainIndex) {
-                _blendSample = *(bufP - 1) << (VOLUME_SHIFT + VOLUME_BITS);
             }
         } else {
             // Add ramp-down samples until end of note or buffer is full

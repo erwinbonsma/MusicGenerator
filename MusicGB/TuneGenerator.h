@@ -50,7 +50,7 @@ enum class Effect : int8_t {
 struct NoteSpec {
     Note note;
     uint8_t oct; // [2..6]
-    uint8_t vol; // [1..8]
+    uint8_t vol; // [0..8]
     WaveForm wav;
     Effect fx;
 };
@@ -79,11 +79,11 @@ class TuneGenerator {
     const WaveTable* _waveTable;
     const NoteSpec* _arpeggioNote;
     uint16_t _sampleIndex, _endMainIndex;
+    int16_t _volume, _volumeDelta;
+    int16_t _blendSample, _blendDelta;
     int32_t _waveIndex, _maxWaveIndex;
-    int _volume, _volumeDelta;
     int _indexDelta, _indexDeltaDelta;
     int _vibratoDelta, _vibratoDeltaDelta;
-    int _blendSample, _blendDelta;
     int _noiseShift;
 
     void inline setSamplesPerNote() {
