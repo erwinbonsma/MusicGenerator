@@ -16,11 +16,11 @@ struct PatternSpec {
     const TuneSpec** tunes;
 };
 
-constexpr int MAX_TUNES = 4;
+constexpr int MAX_TUNES_IN_PATTERN = 4;
 
 class PatternGenerator {
     const PatternSpec* _patternSpec;
-    TuneGenerator _tuneGens[MAX_TUNES];
+    TuneGenerator _tuneGens[MAX_TUNES_IN_PATTERN];
 
 public:
     void setPatternSpec(const PatternSpec* patternSpec);

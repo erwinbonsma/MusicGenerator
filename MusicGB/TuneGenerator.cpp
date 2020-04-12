@@ -11,32 +11,32 @@
 #include <algorithm>
 #include <iostream>
 
-constexpr int WAVETABLE_SHIFT = 15;
+constexpr uint8_t WAVETABLE_SHIFT = 15;
 
-constexpr int NUM_RAND_BITS = 31; // Update based on RAND_MAX
+constexpr uint8_t NUM_RAND_BITS = 31; // Update based on RAND_MAX
 
-constexpr int PERIOD_SHIFT = 6;
+constexpr uint8_t PERIOD_SHIFT = 6;
 
 // Controls the amount of frequency change.
-constexpr int VIBRATO_MAGNITUDE_SHIFT = 7;
+constexpr uint8_t VIBRATO_MAGNITUDE_SHIFT = 7;
 
 // The amount of wave periods spanned by a single period of the Vibrato effect.
-constexpr int VIBRATO_META_PERIOD = 24;
+constexpr uint8_t VIBRATO_META_PERIOD = 24;
 
 // The volume from the note spec uses up to four bits, as the maximum value is eight. Note, this
 // maximum should be a power of two to ensure that at maximum volume each output value in the valid
 // range (i.e. [-128..127]) can actually be realized (so that the available resolution is fully
 // utilized).
-constexpr int VOLUME_BITS = 4;
+constexpr uint8_t VOLUME_BITS = 4;
 
 // Shift such that shifted volume fits in two bytes without overwriting the sign bit. This way the
 // most-significant byte can be safely cast to (signed) int8_t value.
-constexpr int VOLUME_SHIFT = 16 - VOLUME_BITS - 1;
+constexpr uint8_t VOLUME_SHIFT = 16 - VOLUME_BITS - 1;
 
 // Number of bits to shift amplified sample so that it is in range [-128..127] again.
 ///  Inputs: - sample with range [-128..127]
 //           - volume with range [   0.. 64] (the range of the most-significant byte)
-constexpr int POST_AMP_SHIFT = 6;
+constexpr uint8_t POST_AMP_SHIFT = 6;
 
 // Notes:
 // - The size of wave tables varies to match the wave form to avoid rounding-artifacts and to
@@ -222,7 +222,7 @@ const WaveTable organWave = WaveTable {
 };
 
 // Periods in samples for Octave = 0 and Sample rate = 44100
-const int notePeriod[numNotes] = {
+const int16_t notePeriod[numNotes] = {
     802, 757, 714, 674, 636, 601, 567, 535, 505, 477, 450, 425
 };
 
