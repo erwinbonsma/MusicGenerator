@@ -45,7 +45,7 @@ constexpr int VOLUME_BITS = 3;
 //   up after a change of instrument.
 const WaveTable triangleWave = WaveTable {
     .numSamples = 510,
-    .samples = new signed char[510] {
+    .samples = new int8_t[510] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
           32,   33,   34,   35,   36,   37,   38,   39,   40,   41,   42,   43,   44,   45,   46,   47,
@@ -85,7 +85,7 @@ const WaveTable triangleWave = WaveTable {
 
 const WaveTable tiltedSawWave = WaveTable {
     .numSamples = 298,
-    .samples = new signed char[298] {
+    .samples = new int8_t[298] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
           32,   33,   34,   35,   36,   37,   38,   39,   40,   41,   42,   43,   44,   45,   46,   47,
@@ -112,7 +112,7 @@ const WaveTable tiltedSawWave = WaveTable {
 
 const WaveTable sawWave = WaveTable {
     .numSamples = 256,
-    .samples = new signed char[256] {
+    .samples = new int8_t[256] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
           32,   33,   34,   35,   36,   37,   38,   39,   40,   41,   42,   43,   44,   45,   46,   47,
@@ -135,21 +135,21 @@ const WaveTable sawWave = WaveTable {
 
 const WaveTable squareWave = WaveTable {
     .numSamples = 2,
-    .samples = new signed char[2] {
+    .samples = new int8_t[2] {
         127, -128
     }
 };
 
 const WaveTable pulseWave = WaveTable {
     .numSamples = 3,
-    .samples = new signed char[3] {
+    .samples = new int8_t[3] {
         127, -128, -128,
     }
 };
 
 const WaveTable organWave = WaveTable {
     .numSamples = 1020,
-    .samples = new signed char[1020] {
+    .samples = new int8_t[1020] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
           32,   33,   34,   35,   36,   37,   38,   39,   40,   41,   42,   43,   44,   45,   46,   47,

@@ -12,7 +12,7 @@
 #include "PatternGenerator.h"
 
 struct SongSpec {
-    int numPatterns;
+    uint8_t numPatterns;
     const PatternSpec** patterns;
 };
 

@@ -12,7 +12,7 @@
 #include "TuneGenerator.h"
 
 struct PatternSpec {
-    int numTunes;
+    uint8_t numTunes;
     const TuneSpec** tunes;
 };
 

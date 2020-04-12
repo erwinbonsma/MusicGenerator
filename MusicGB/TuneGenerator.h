@@ -24,7 +24,7 @@ enum class Note {
     A, As, B, C, Cs, D, Ds, E, F, Fs, G, Gs
 };
 
-enum class WaveForm {
+enum class WaveForm : int8_t {
     TRIANGLE,
     TILTED_SAW,
     SAW,
@@ -36,7 +36,7 @@ enum class WaveForm {
     NONE
 };
 
-enum class Effect {
+enum class Effect : int8_t {
     NONE,
     SLIDE,
     VIBRATO,
@@ -49,8 +49,8 @@ enum class Effect {
 
 struct NoteSpec {
     Note note;
-    int oct; // [2..6]
-    int vol; // [1..8]
+    uint8_t oct; // [2..6]
+    uint8_t vol; // [1..8]
     WaveForm wav;
     Effect fx;
 };
@@ -60,14 +60,14 @@ const NoteSpec SILENCE = NoteSpec {
 };
 
 struct TuneSpec {
-    int noteDuration;        // in "ticks". [1..64]
-    int loopStart, loopEnd;
+    uint8_t noteDuration;        // in "ticks". [1..64]
+    uint8_t loopStart, loopEnd;
     const NoteSpec* notes;
 };
 
 struct WaveTable {
-    const int numSamples;
-    const signed char* samples;
+    const uint16_t numSamples;
+    const int8_t* samples;
 };
 
 class TuneGenerator {
