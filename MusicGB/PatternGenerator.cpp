@@ -15,16 +15,12 @@ void PatternGenerator::setPatternSpec(const PatternSpec* patternSpec) {
     }
 }
 
-int PatternGenerator::addSamples(Sample** buf, int maxSamples) {
-    int numSamples = maxSamples;
+int PatternGenerator::addSamples(Sample* buf, int maxSamples) {
+    // The first tune detemines the length of the pattern. It should therefore not loop.
+    int numSamples = _tuneGens[0].addSamples(buf, maxSamples);
 
-    for (int i = 0; i < _patternSpec->numTunes; i++) {
-        numSamples = _tuneGens[i].addSamples(buf[i], numSamples);
-    }
-    for (int i = _patternSpec->numTunes; i < MAX_TUNES; i++) {
-        for (int j = 0; j < numSamples; j++) {
-            buf[i][j] = 128;
-        }
+    for (int i = 1; i < _patternSpec->numTunes; i++) {
+        _tuneGens[i].addSamples(buf, numSamples);
     }
 
     return numSamples;

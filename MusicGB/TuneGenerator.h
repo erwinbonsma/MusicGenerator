@@ -9,13 +9,15 @@
 #ifndef TuneGenerator_h
 #define TuneGenerator_h
 
+#include <stdint.h>
+
 constexpr int SAMPLERATE = 22050;
 // Should be updated when changing SAMPLERATE as follows:
 // 44100 -> 0, 22050 -> 1, 11025 -> 2
 constexpr int SAMPLERATE_SHIFT = 1;
 constexpr int SAMPLES_PER_TICK = 90 * (SAMPLERATE / 11025);
 
-typedef unsigned char Sample;
+typedef int16_t Sample;
 
 constexpr int numNotes = 12;
 enum class Note {
@@ -109,7 +111,12 @@ class TuneGenerator {
 public:
     void setTuneSpec(const TuneSpec* tuneSpec);
 
-    // Returns the number of samples added
+    // Adds samples for the tune to the given buffer. Note, it does not overwrite existing values
+    // in the buffer, but adds to the existing value so that multiple generators can contribute to
+    // the same buffer. This relies on an overarching orchestrator to clear the buffer values at
+    // right moment.
+    //
+    // Returns the number of samples added. It can less than the maximum when the tune ends.
     int addSamples(Sample* buf, int maxSamples);
 };
 

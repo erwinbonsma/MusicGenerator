@@ -15,6 +15,6 @@
 
 void makeWav(const char* filename, const TuneSpec& tune);
 void makeWav(const char* filename, const PatternSpec& pattern);
-void makeWav(const char* filename, const SongSpec& song, bool singleTrack);
+void makeWav(const char* filename, const SongSpec& song);
 
 #endif /* WavGeneration_h */

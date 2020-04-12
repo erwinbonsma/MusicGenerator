@@ -27,7 +27,7 @@ void SongGenerator::setSongSpec(const SongSpec* songSpec) {
     startPattern();
 }
 
-int SongGenerator::addSamples(Sample** buf, int maxSamples) {
+int SongGenerator::addSamples(Sample* buf, int maxSamples) {
     int totalAdded = 0;
 
     do {

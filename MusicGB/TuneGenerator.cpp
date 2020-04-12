@@ -445,15 +445,13 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 
         sample *= _volume;
         _volume += _volumeDelta;
-        *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + VOLUME_BITS)));
+        *curP++ += (Sample)(sample >> (VOLUME_SHIFT + VOLUME_BITS));
     }
 }
 
 void TuneGenerator::addMainSamplesSilence(Sample* &curP, Sample* endP) {
     _sampleIndex += endP - curP; // Update beforehand
-    while (curP < endP) {
-        *curP++ = (char)128;
-    }
+    curP = endP;
 }
 
 // Separate method for Vibrato effect for efficiency. This goes both ways. The calculations here
@@ -477,7 +475,7 @@ void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
         }
 
         sample *= _volume;
-        *curP++ = (char)(128 + (sample >> (VOLUME_SHIFT + VOLUME_BITS)));
+        *curP++ += (Sample)(sample >> (VOLUME_SHIFT + VOLUME_BITS));
     }
 }
 
@@ -500,7 +498,7 @@ void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
     while (curP < endP) {
         _blendSample += _blendDelta;
 
-        *curP++ = (char)(128 + (_blendSample >> (VOLUME_SHIFT + VOLUME_BITS)));
+        *curP++ += (Sample)(_blendSample >> (VOLUME_SHIFT + VOLUME_BITS));
     }
 }
 
@@ -520,7 +518,7 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
                 addMainSamples(bufP, bufP + numSamples);
             }
             if (_sampleIndex == _endMainIndex) {
-                _blendSample = (*(bufP - 1) - 128) << (VOLUME_SHIFT + VOLUME_BITS);
+                _blendSample = *(bufP - 1) << (VOLUME_SHIFT + VOLUME_BITS);
             }
         } else {
             // Add ramp-down samples until end of note or buffer is full

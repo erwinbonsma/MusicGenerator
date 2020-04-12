@@ -353,7 +353,6 @@ const TuneSpec sfx26 = TuneSpec {
 */
 
 int main(int argc, const char * argv[]) {
-    /*
     makeWav("test1.wav", testTune1);
     makeWav("test2.wav", testTune2);
     makeWav("test3.wav", testTune3);
@@ -366,13 +365,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test9.wav", testTune9);
     makeWav("test10.wav", testTune10);
 
-    makeWav("sfx16.wav", sfx16);
-    makeWav("sfx24.wav", sfx24);
-    makeWav("sfx26.wav", sfx26);
-    */
-
-    makeWav("bb-track1a.wav", bumbleBotsSong, false);
-    makeWav("bb-track1b.wav", bumbleBotsSong, true);
+    makeWav("bb-track1.wav", bumbleBotsSong);
 
     return 0;
 }
