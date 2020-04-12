@@ -72,19 +72,19 @@ struct WaveTable {
 
 class TuneGenerator {
     const TuneSpec* _tuneSpec;
-    int _samplesPerNote;
+    uint16_t _samplesPerNote;
 
 // Current note
     const NoteSpec* _note;
     const WaveTable* _waveTable;
+    const NoteSpec* _arpeggioNote;
+    uint16_t _sampleIndex, _endMainIndex;
+    int32_t _waveIndex, _maxWaveIndex;
     int _volume, _volumeDelta;
     int _indexDelta, _indexDeltaDelta;
     int _vibratoDelta, _vibratoDeltaDelta;
-    int _sampleIndex, _endMainIndex;
-    int _waveIndex, _maxWaveIndex;
     int _blendSample, _blendDelta;
     int _noiseShift;
-    const NoteSpec* _arpeggioNote;
 
     void inline setSamplesPerNote() {
         _samplesPerNote = _tuneSpec->noteDuration * SAMPLES_PER_TICK;
