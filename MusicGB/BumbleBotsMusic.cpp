@@ -11,6 +11,7 @@
 #import "BumbleBotsMusic-Generated.cpp"
 
 const SongSpec bumbleBotsSong = SongSpec {
+    .loopStart = 9,
     .numPatterns = 25,
     .patterns = new const PatternSpec* [25] {
         &pattern0, &pattern1, &pattern2, &pattern3, &pattern4,

@@ -274,7 +274,7 @@ const NoteSpec* TuneGenerator::peekPrevNote() const {
 
 const NoteSpec* TuneGenerator::peekNextNote() const {
     const NoteSpec* nextNote = _note + 1;
-    const NoteSpec* lastNote = _tuneSpec->notes + _tuneSpec->loopEnd;
+    const NoteSpec* lastNote = _tuneSpec->notes + _tuneSpec->numNotes;
 
     if (_arpeggioNote != nullptr && isLastArpeggioNote()) {
         nextNote = _arpeggioNote + 1;

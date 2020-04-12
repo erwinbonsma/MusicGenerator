@@ -12,7 +12,7 @@
 #include "PatternGenerator.h"
 
 struct SongSpec {
-    uint8_t numPatterns;
+    uint8_t loopStart, numPatterns;
     const PatternSpec** patterns;
 };
 
@@ -20,12 +20,13 @@ class SongGenerator {
     const SongSpec* _songSpec;
     PatternGenerator _patternGenerator;
     const PatternSpec** _pattern;
+    bool _loop;
 
     void startPattern();
     void moveToNextPattern();
 
 public:
-    void setSongSpec(const SongSpec* songSpec);
+    void setSongSpec(const SongSpec* songSpec, bool loop);
 
     // Adds samples for the tune to the given buffer. Note, it does not overwrite existing values
     // in the buffer, but adds to the existing value so that multiple generators can contribute to

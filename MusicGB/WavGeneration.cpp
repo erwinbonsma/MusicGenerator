@@ -78,7 +78,7 @@ void makeWav(const char* filename, const PatternSpec& pattern) {
 void makeWav(const char* filename, const SongSpec& song) {
     SongGenerator songGenerator;
 
-    songGenerator.setSongSpec(&song);
+    songGenerator.setSongSpec(&song, false);
     Sample buf[BUFSIZE];
     Sample* buffers[1] = { buf };
 

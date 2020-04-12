@@ -64,7 +64,7 @@ const NoteSpec SILENCE = NoteSpec {
 
 struct TuneSpec {
     uint8_t noteDuration;        // in "ticks". [1..64]
-    uint8_t loopStart, loopEnd;
+    uint8_t loopStart, numNotes;
     const NoteSpec* notes;
 };
 

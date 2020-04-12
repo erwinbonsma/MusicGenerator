@@ -17,13 +17,18 @@ void SongGenerator::startPattern() {
 void SongGenerator::moveToNextPattern() {
     _pattern++;
     if (_pattern == _songSpec->patterns + _songSpec->numPatterns) {
-        _pattern = nullptr;
+        if (_loop && _songSpec->loopStart < _songSpec->numPatterns) {
+            _pattern = _songSpec->patterns + _songSpec->loopStart;
+        } else {
+            _pattern = nullptr;
+        }
     }
 }
 
-void SongGenerator::setSongSpec(const SongSpec* songSpec) {
+void SongGenerator::setSongSpec(const SongSpec* songSpec, bool loop) {
     _songSpec = songSpec;
     _pattern = _songSpec->patterns;
+    _loop = loop;
     startPattern();
 }
 

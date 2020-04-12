@@ -20,7 +20,7 @@
 const TuneSpec testTune1 = TuneSpec {
     .noteDuration = 8,
     .loopStart = 8,
-    .loopEnd = 8,
+    .numNotes = 8,
     .notes = new NoteSpec[8] {
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
@@ -37,7 +37,7 @@ const TuneSpec testTune1 = TuneSpec {
 const TuneSpec testTune2 = TuneSpec {
     .noteDuration = 16,
     .loopStart = 6,
-    .loopEnd = 6,
+    .numNotes = 6,
     .notes = new NoteSpec[6] {
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
@@ -52,7 +52,7 @@ const TuneSpec testTune2 = TuneSpec {
 const TuneSpec testTune3 = TuneSpec {
     .noteDuration = 13,
     .loopStart = 8,
-    .loopEnd = 8,
+    .numNotes = 8,
     .notes = new NoteSpec[8] {
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::A, .oct=4, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
@@ -69,7 +69,7 @@ const TuneSpec testTune3 = TuneSpec {
 const TuneSpec testTune4 = TuneSpec {
     .noteDuration = 32,
     .loopStart = 6,
-    .loopEnd = 6,
+    .numNotes = 6,
     .notes = new NoteSpec[6] {
         NoteSpec { .note=Note::A, .oct=4, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
         NoteSpec { .note=Note::A, .oct=4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
@@ -84,7 +84,7 @@ const TuneSpec testTune4 = TuneSpec {
 const TuneSpec testTune5a = TuneSpec {
     .noteDuration = 32,
     .loopStart = 7,
-    .loopEnd = 7,
+    .numNotes = 7,
     .notes = new NoteSpec[7] {
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
         NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
@@ -100,7 +100,7 @@ const TuneSpec testTune5a = TuneSpec {
 const TuneSpec testTune5b = TuneSpec {
     .noteDuration = 32,
     .loopStart = 11,
-    .loopEnd = 11,
+    .numNotes = 11,
     .notes = new NoteSpec[11] {
         NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
         NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
@@ -120,7 +120,7 @@ const TuneSpec testTune5b = TuneSpec {
 const TuneSpec testTune6 = TuneSpec {
     .noteDuration = 32,
     .loopStart = 16,
-    .loopEnd = 16,
+    .numNotes = 16,
     .notes = new NoteSpec[16] {
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::B, .oct=4, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
@@ -147,7 +147,7 @@ const TuneSpec testTune6 = TuneSpec {
 const TuneSpec testTune7 = TuneSpec {
     .noteDuration = 32,
     .loopStart = 4,
-    .loopEnd = 4,
+    .numNotes = 4,
     .notes = new NoteSpec[4] {
         NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
         NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::DROP },
@@ -160,7 +160,7 @@ const TuneSpec testTune7 = TuneSpec {
 const TuneSpec testTune8 = TuneSpec {
     .noteDuration = 32,
     .loopStart = 16,
-    .loopEnd = 16,
+    .numNotes = 16,
     .notes = new NoteSpec[16] {
         NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::G, .oct=5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
@@ -185,7 +185,7 @@ const TuneSpec testTune8 = TuneSpec {
 const TuneSpec testTune9 = TuneSpec {
     .noteDuration = 32,
     .loopStart = 10,
-    .loopEnd = 10,
+    .numNotes = 10,
     .notes = new NoteSpec[10] {
         NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
         NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
@@ -204,7 +204,7 @@ const TuneSpec testTune9 = TuneSpec {
 const TuneSpec testTune10 = TuneSpec {
     .noteDuration = 16,
     .loopStart = 13,
-    .loopEnd = 13,
+    .numNotes = 13,
     .notes = new NoteSpec[13] {
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         SILENCE,
