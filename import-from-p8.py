@@ -34,6 +34,9 @@ def output_note(notespec):
     noderank = numval(notespec, 0, 2)
     note = notes[(noderank + 3) % 12]
     octave = 2 + int((noderank + 3) / 12)
+    if octave > 6:
+        octave = 6
+        print("// WARNING: Adjusted octave so that it is in range")
     wave = waves[numval(notespec, 2, 1)]
     effect = effects[numval(notespec, 4, 1)]
     print("%sNoteSpec { .note=Note::%s, .oct=%d, .vol=%d, .wav=WaveForm::%s, .fx=Effect::%s }," %
