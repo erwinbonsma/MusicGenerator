@@ -37,7 +37,7 @@ def output_note(notespec):
     wave = waves[numval(notespec, 2, 1)]
     effect = effects[numval(notespec, 4, 1)]
     print("%sNoteSpec { .note=Note::%s, .oct=%d, .vol=%d, .wav=WaveForm::%s, .fx=Effect::%s }," %
-        (tab, note, octave, volume, wave, effect)
+        (tab, note, octave, volume + 1, wave, effect)
     )
 
 def output_sfx(line, sfx_id):
