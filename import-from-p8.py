@@ -29,15 +29,15 @@ def output_note(notespec):
     #print("notespec =", notespec)
     volume = numval(notespec, 3, 1)
     if volume == 0:
-        print("%s%sSILENCE," % (tab, tab))
+        print("%sSILENCE," % (tab))
         return
     noderank = numval(notespec, 0, 2)
     note = notes[(noderank + 3) % 12]
     octave = 2 + int((noderank + 3) / 12)
     wave = waves[numval(notespec, 2, 1)]
     effect = effects[numval(notespec, 4, 1)]
-    print("%s%sNoteSpec { .note=Note::%s, .oct=%d, .vol=%d, .wav=WaveForm::%s, .fx=Effect::%s }," %
-        (tab, tab, note, octave, volume, wave, effect)
+    print("%sNoteSpec { .note=Note::%s, .oct=%d, .vol=%d, .wav=WaveForm::%s, .fx=Effect::%s }," %
+        (tab, note, octave, volume, wave, effect)
     )
 
 def output_sfx(line, sfx_id):
@@ -50,14 +50,16 @@ def output_sfx(line, sfx_id):
         loop_start = loop_end
     if loop_end != loop_start:
         looping_sfx.add(sfx_id)
-    print("const TuneSpec sfx%d = TuneSpec {" % (sfx_id))
-    print("%s.noteDuration = %d, .loopStart = %d, .loopEnd = %d," %
-        (tab, speed, loop_start, loop_end)
-    )
-    print("%s.notes = new NoteSpec[%d] {" % (tab, num_notes))
+
+    print("const NoteSpec sfx%dNotes[%d] = {" % (sfx_id, num_notes))
     for i in range(num_notes):
         output_note(line[8+i*5:13+i*5])
-    print("%s}" % (tab))
+    print("};")
+
+    print("const TuneSpec sfx%d = TuneSpec {" % (sfx_id))
+    print("%s.noteDuration = %d, .loopStart = %d, .numNotes = %d, .notes = sfx%dNotes" %
+        (tab, speed, loop_start, loop_end, sfx_id)
+    )
     print("};")
 
 def output_pattern(line, pattern_idx):
@@ -67,11 +69,13 @@ def output_pattern(line, pattern_idx):
     sfx_ids = [id for id in [numval(line, 3+i*2, 2) for i in range(4)] if id < 64]
     if len([id for id in sfx_ids if not id in looping_sfx]) == 0:
         print("// WARNING: All sound effects in pattern loop!")
-    print("const PatternSpec pattern%d = PatternSpec {" % (pattern_idx))
-    print("%s.numTunes = %d," % (tab, num_tunes))
-    print("%s.tunes = new const TuneSpec* [%d] { %s }" %
-        (tab, num_tunes, ", ".join(["&sfx%d" % (id) for id in sfx_ids]))
+
+    print("const TuneSpec* pattern%dTunes[%d] = { %s };" %
+        (pattern_idx, num_tunes, ", ".join(["&sfx%d" % (id) for id in sfx_ids]))
     )
+
+    print("const PatternSpec pattern%d = PatternSpec {" % (pattern_idx))
+    print("%s.numTunes = %d, .tunes = pattern%dTunes" % (tab, num_tunes, pattern_idx))
     print("};")
 
 def process_file(filename):
