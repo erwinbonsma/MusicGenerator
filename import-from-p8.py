@@ -69,6 +69,8 @@ def output_pattern(line, pattern_idx):
     sfx_ids = [id for id in [numval(line, 3+i*2, 2) for i in range(4)] if id < 64]
     if len([id for id in sfx_ids if not id in looping_sfx]) == 0:
         print("// WARNING: All sound effects in pattern loop!")
+    elif sfx_ids[0] in looping_sfx:
+        print("// WARNING: First sound effect in pattern loops")
 
     print("const TuneSpec* pattern%dTunes[%d] = { %s };" %
         (pattern_idx, num_tunes, ", ".join(["&sfx%d" % (id) for id in sfx_ids]))
