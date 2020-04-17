@@ -321,13 +321,13 @@ void TuneGenerator::startNote() {
     switch (_note->wav) {
         case WaveForm::TRIANGLE:
         case WaveForm::NOISE:
+        case WaveForm::NOISE2:
             _waveTable = &triangleWave; break;
         case WaveForm::TILTED_SAW:
             _waveTable = &tiltedSawWave; break;
         case WaveForm::SAW:
             _waveTable = &sawWave; break;
         case WaveForm::SQUARE:
-        case WaveForm::NOISE2:
             _waveTable = &squareWave; break;
         case WaveForm::PULSE:
             _waveTable = &pulseWave; break;
@@ -367,6 +367,10 @@ void TuneGenerator::startNote() {
             _noiseShift--;
             v >>= 1;
         }
+    }
+    if (_note->wav == WaveForm::NOISE2) {
+        _maxWaveIndex >>= 2;
+        _indexDeltaMul = 1;
     }
 
     _volume = _note->vol << VOLUME_SHIFT;
@@ -456,12 +460,21 @@ void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
     int16_t amplifiedSample = 0;
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int8_t sample = _waveTable->samples[_noiseLfsr & 1];
-        _waveIndex += _indexDelta;
+        int8_t sample = _waveTable->samples[(_waveIndex + _waveIndexOffset) >> WAVETABLE_SHIFT];
+        _waveIndex += (_indexDelta * _indexDeltaMul);
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
-            bool bit = (_noiseLfsr ^ (_noiseLfsr >> 1)) & 1;
-            _noiseLfsr = (_noiseLfsr >> 1) ^ (bit << 14);
+            _indexDeltaMul = 0;
+            bool bit;
+            do {
+                ++_indexDeltaMul;
+                bit = (_noiseLfsr ^ (_noiseLfsr >> 1)) & 1;
+                _noiseLfsr = (_noiseLfsr >> 1) ^ (bit << 14);
+            } while (bit);
+            _waveIndexOffset += _maxWaveIndex;
+            if (_waveIndexOffset == (_maxWaveIndex << 2)) {
+                _waveIndexOffset = 0;
+            }
         }
         _indexDelta += _indexDeltaDelta;
 

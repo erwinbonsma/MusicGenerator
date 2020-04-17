@@ -247,6 +247,20 @@ const TuneSpec testTune11b = TuneSpec {
         NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
     }
 };
+const TuneSpec testTune11c = TuneSpec {
+    .noteDuration = 8,
+    .loopStart = 7,
+    .numNotes = 7,
+    .notes = new NoteSpec[7] {
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+        NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+        NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+    }
+};
 
 int main(int argc, const char * argv[]) {
     /*
@@ -266,6 +280,7 @@ int main(int argc, const char * argv[]) {
     */
     makeWav("test11a.wav", testTune11a);
     makeWav("test11b.wav", testTune11b);
+    makeWav("test11c.wav", testTune11c);
 
     return 0;
 }

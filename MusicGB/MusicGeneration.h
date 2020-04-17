@@ -92,6 +92,8 @@ class TuneGenerator {
     int16_t _volume, _volumeDelta;
     int16_t _blendSample, _blendDelta;
     int16_t _noiseLfsr = 1;
+    int32_t _waveIndexOffset;
+    uint8_t _indexDeltaMul;
     uint8_t _noiseShift;
 
     void inline setSamplesPerNote() {
