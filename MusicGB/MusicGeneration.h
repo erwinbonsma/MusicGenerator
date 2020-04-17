@@ -38,7 +38,6 @@ enum class WaveForm : int8_t {
     PULSE,
     ORGAN,
     NOISE,
-    NOISE2,
     PHASER,
     NONE
 };
@@ -86,15 +85,13 @@ class TuneGenerator {
     const WaveTable* _waveTable;
     const NoteSpec* _arpeggioNote;
     int32_t _waveIndex, _maxWaveIndex;
+    int32_t _indexNoiseDelta, _maxWaveIndexOrig; // Used for NOISE
     int32_t _indexDelta, _indexDeltaDelta;
     int32_t _vibratoDelta, _vibratoDeltaDelta;
     int16_t _sampleIndex, _endMainIndex;
     int16_t _volume, _volumeDelta;
     int16_t _blendSample, _blendDelta;
     int16_t _noiseLfsr = 1;
-    int32_t _waveIndexOffset;
-    uint8_t _indexDeltaMul;
-    uint8_t _noiseShift;
 
     void inline setSamplesPerNote() {
         _samplesPerNote = (_tuneSpec->noteDuration * SAMPLES_PER_TICK) << (2 - SAMPLERATE_SHIFT);

@@ -13,8 +13,6 @@
 
 constexpr uint8_t WAVETABLE_SHIFT = 15;
 
-constexpr uint8_t NUM_RAND_BITS = 31; // Update based on RAND_MAX
-
 constexpr uint8_t PERIOD_SHIFT = 6;
 
 // Controls the amount of frequency change.
@@ -321,7 +319,6 @@ void TuneGenerator::startNote() {
     switch (_note->wav) {
         case WaveForm::TRIANGLE:
         case WaveForm::NOISE:
-        case WaveForm::NOISE2:
             _waveTable = &triangleWave; break;
         case WaveForm::TILTED_SAW:
             _waveTable = &tiltedSawWave; break;
@@ -359,18 +356,10 @@ void TuneGenerator::startNote() {
     ) >> SAMPLERATE_SHIFT;
     _indexDeltaDelta = 0;
 
-    _noiseShift = 0;
+    _indexNoiseDelta = 0;
     if (_note->wav == WaveForm::NOISE) {
-        _noiseShift = NUM_RAND_BITS - 2;
-        int v = _indexDelta;
-        while (v) {
-            _noiseShift--;
-            v >>= 1;
-        }
-    }
-    if (_note->wav == WaveForm::NOISE2) {
+        _maxWaveIndexOrig = _maxWaveIndex;
         _maxWaveIndex >>= 2;
-        _indexDeltaMul = 1;
     }
 
     _volume = _note->vol << VOLUME_SHIFT;
@@ -433,47 +422,28 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
     while (curP < endP) {
         int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
         _waveIndex += _indexDelta;
-        if (_noiseShift) {
-            int rnd = rand();
-            if (rnd & 1) {
-                _waveIndex += rnd >> _noiseShift;
-            } else {
-                _waveIndex -= rnd >> _noiseShift;
-                if (_waveIndex < 0) {
-                    _waveIndex += _maxWaveIndex;
+        _waveIndex += _indexNoiseDelta;
+        if (_waveIndex >= _maxWaveIndex) {
+            if (_note->wav == WaveForm::NOISE) {
+                // Determine new frequency multiplier
+                _indexNoiseDelta = 0;
+                while (1) {
+                    bool bit = (_noiseLfsr ^ (_noiseLfsr >> 1)) & 1;
+                    _noiseLfsr = (_noiseLfsr >> 1) ^ (bit << 14);
+                    if (bit) {
+                        break;
+                    }
+                    _indexNoiseDelta += _indexDelta;
+                };
+                // Update max wave index to end of the waveform quadrant we just entered
+                if (_maxWaveIndex == _maxWaveIndexOrig) {
+                    _waveIndex -= _maxWaveIndex;
+                    _maxWaveIndex = 0;
+                } else {
+                    _maxWaveIndex += (_maxWaveIndexOrig >> 2);
                 }
-            }
-        }
-        if (_waveIndex >= _maxWaveIndex) {
-            _waveIndex -= _maxWaveIndex;
-        }
-        _indexDelta += _indexDeltaDelta;
-
-        amplifiedSample = sample * (int8_t)(_volume >> 8);
-        _volume += _volumeDelta;
-        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
-    }
-    _blendSample = amplifiedSample;
-}
-
-void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
-    int16_t amplifiedSample = 0;
-    _sampleIndex += endP - curP; // Update beforehand
-    while (curP < endP) {
-        int8_t sample = _waveTable->samples[(_waveIndex + _waveIndexOffset) >> WAVETABLE_SHIFT];
-        _waveIndex += (_indexDelta * _indexDeltaMul);
-        if (_waveIndex >= _maxWaveIndex) {
-            _waveIndex -= _maxWaveIndex;
-            _indexDeltaMul = 0;
-            bool bit;
-            do {
-                ++_indexDeltaMul;
-                bit = (_noiseLfsr ^ (_noiseLfsr >> 1)) & 1;
-                _noiseLfsr = (_noiseLfsr >> 1) ^ (bit << 14);
-            } while (bit);
-            _waveIndexOffset += _maxWaveIndex;
-            if (_waveIndexOffset == (_maxWaveIndex << 2)) {
-                _waveIndexOffset = 0;
+            } else {
+                _waveIndex -= _maxWaveIndex;
             }
         }
         _indexDelta += _indexDeltaDelta;
@@ -551,8 +521,6 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
             int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
             if (!_waveTable) {
                 addMainSamplesSilence(bufP, bufP + numSamples);
-            } else if (_note->wav == WaveForm::NOISE2 ) {
-                addMainSamplesNoise(bufP, bufP + numSamples);
             } else if (_note->fx == Effect::VIBRATO) {
                 addMainSamplesVibrato(bufP, bufP + numSamples);
             } else {
