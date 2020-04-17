@@ -38,6 +38,7 @@ enum class WaveForm : int8_t {
     PULSE,
     ORGAN,
     NOISE,
+    NOISE2,
     PHASER,
     NONE
 };
@@ -90,6 +91,7 @@ class TuneGenerator {
     int16_t _sampleIndex, _endMainIndex;
     int16_t _volume, _volumeDelta;
     int16_t _blendSample, _blendDelta;
+    int16_t _noiseLfsr = 1;
     uint8_t _noiseShift;
 
     void inline setSamplesPerNote() {
@@ -110,6 +112,7 @@ class TuneGenerator {
     void moveToNextNote();
 
     void addMainSamples(Sample* &curP, Sample* endP);
+    void addMainSamplesNoise(Sample* &curP, Sample* endP);
     void addMainSamplesSilence(Sample* &curP, Sample* endP);
     void addMainSamplesVibrato(Sample* &curP, Sample* endP);
     void addBlendSamples(Sample* &curP, Sample* endP);

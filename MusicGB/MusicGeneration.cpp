@@ -327,6 +327,7 @@ void TuneGenerator::startNote() {
         case WaveForm::SAW:
             _waveTable = &sawWave; break;
         case WaveForm::SQUARE:
+        case WaveForm::NOISE2:
             _waveTable = &squareWave; break;
         case WaveForm::PULSE:
             _waveTable = &pulseWave; break;
@@ -451,6 +452,26 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
     _blendSample = amplifiedSample;
 }
 
+void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
+    int16_t amplifiedSample = 0;
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        int8_t sample = _waveTable->samples[_noiseLfsr & 1];
+        _waveIndex += _indexDelta;
+        if (_waveIndex >= _maxWaveIndex) {
+            _waveIndex -= _maxWaveIndex;
+            bool bit = (_noiseLfsr ^ (_noiseLfsr >> 1)) & 1;
+            _noiseLfsr = (_noiseLfsr >> 1) ^ (bit << 14);
+        }
+        _indexDelta += _indexDeltaDelta;
+
+        amplifiedSample = sample * (int8_t)(_volume >> 8);
+        _volume += _volumeDelta;
+        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
+    }
+    _blendSample = amplifiedSample;
+}
+
 void TuneGenerator::addMainSamplesSilence(Sample* &curP, Sample* endP) {
     _sampleIndex += endP - curP; // Update beforehand
     curP = endP;
@@ -517,6 +538,8 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
             int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
             if (!_waveTable) {
                 addMainSamplesSilence(bufP, bufP + numSamples);
+            } else if (_note->wav == WaveForm::NOISE2 ) {
+                addMainSamplesNoise(bufP, bufP + numSamples);
             } else if (_note->fx == Effect::VIBRATO) {
                 addMainSamplesVibrato(bufP, bufP + numSamples);
             } else {

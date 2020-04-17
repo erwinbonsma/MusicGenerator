@@ -220,7 +220,36 @@ const TuneSpec testTune10 = TuneSpec {
     }
 };
 
+// Noise test
+const TuneSpec testTune11a = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 6,
+    .numNotes = 6,
+    .notes = new NoteSpec[6] {
+        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    }
+};
+const TuneSpec testTune11b = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 6,
+    .numNotes = 6,
+    .notes = new NoteSpec[6] {
+        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::NOISE2, .fx=Effect::NONE },
+    }
+};
+
 int main(int argc, const char * argv[]) {
+    /*
     makeWav("test1.wav", testTune1);
     makeWav("test2.wav", testTune2);
     makeWav("test3.wav", testTune3);
@@ -234,6 +263,9 @@ int main(int argc, const char * argv[]) {
     makeWav("test10.wav", testTune10);
 
     makeWav("bb-track1.wav", bumbleBotsSong);
+    */
+    makeWav("test11a.wav", testTune11a);
+    makeWav("test11b.wav", testTune11b);
 
     return 0;
 }
