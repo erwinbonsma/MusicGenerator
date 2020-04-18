@@ -214,11 +214,6 @@ class MusicHandler {
 public:
     MusicHandler();
 
-    int bufferSize() { return (int)(_endP - _buffer); }
-    int headIndex() { return (int)(_headP - _buffer); }
-    int readIndex() { return (int)(_readP - _buffer); }
-    int zeroIndex() { return (int)(_zeroP ? _zeroP - _buffer : -1); }
-
     void play(const TuneSpec* tuneSpec);
     void play(const SongSpec* songSpec, bool loop);
 
