@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-#include "MusicGeneration.h"
+#include "Music.h"
 
 #include "WavGeneration.h"
 

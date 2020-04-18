@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AA21A1B92438A752004DD190 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1B82438A752004DD190 /* main.cpp */; };
-		AA21A1C12438A837004DD190 /* MusicGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1BF2438A837004DD190 /* MusicGeneration.cpp */; };
+		AA21A1C12438A837004DD190 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1BF2438A837004DD190 /* Music.cpp */; };
 		AA21A1C4243917C8004DD190 /* wav.c in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C2243917C8004DD190 /* wav.c */; };
 		AA21A1CE244232A5004DD190 /* BumbleBotsMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */; };
 		AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D124424970004DD190 /* WavGeneration.cpp */; };
@@ -29,8 +29,8 @@
 /* Begin PBXFileReference section */
 		AA21A1B52438A752004DD190 /* MusicGB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MusicGB; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA21A1B82438A752004DD190 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		AA21A1BF2438A837004DD190 /* MusicGeneration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MusicGeneration.cpp; sourceTree = "<group>"; };
-		AA21A1C02438A837004DD190 /* MusicGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicGeneration.h; sourceTree = "<group>"; };
+		AA21A1BF2438A837004DD190 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
+		AA21A1C02438A837004DD190 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
 		AA21A1C2243917C8004DD190 /* wav.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wav.c; sourceTree = "<group>"; };
 		AA21A1C3243917C8004DD190 /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
 		AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BumbleBotsMusic.cpp; sourceTree = "<group>"; };
@@ -73,8 +73,8 @@
 				AA21A1C2243917C8004DD190 /* wav.c */,
 				AA21A1C3243917C8004DD190 /* wav.h */,
 				AA21A1B82438A752004DD190 /* main.cpp */,
-				AA21A1BF2438A837004DD190 /* MusicGeneration.cpp */,
-				AA21A1C02438A837004DD190 /* MusicGeneration.h */,
+				AA21A1BF2438A837004DD190 /* Music.cpp */,
+				AA21A1C02438A837004DD190 /* Music.h */,
 				AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */,
 				AA21A1CF24423E1C004DD190 /* BumbleBotsMusic-Generated.cpp */,
 				AA21A1CD24420FA9004DD190 /* BumbleBotsMusic.h */,
@@ -144,7 +144,7 @@
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
 				AA21A1CE244232A5004DD190 /* BumbleBotsMusic.cpp in Sources */,
 				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
-				AA21A1C12438A837004DD190 /* MusicGeneration.cpp in Sources */,
+				AA21A1C12438A837004DD190 /* Music.cpp in Sources */,
 				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +242,10 @@
 		AA21A1BD2438A752004DD190 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"STANDALONE=1",
+					"DEBUG=1",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -250,6 +254,7 @@
 		AA21A1BE2438A752004DD190 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = "STANDALONE=1";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

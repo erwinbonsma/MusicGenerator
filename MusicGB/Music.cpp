@@ -1,15 +1,19 @@
 //
-//  MusicGeneration.cpp
+//  Music.cpp
 //  MusicGB
 //
 //  Created by Erwin on 04/04/2020.
 //  Copyright © 2020 Erwin. All rights reserved.
 //
 
-#include "MusicGeneration.h"
+#include "Music.h"
 
-#include <algorithm>
-#include <cstdlib>
+#ifdef STANDALONE
+  #include <cstdlib>
+  #define min(x,y) ((x)<(y)?(x):(y))
+#else
+  namespace Gamebuino_Meta {
+#endif
 
 constexpr uint8_t WAVETABLE_SHIFT = 15;
 
@@ -572,7 +576,7 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
     while (bufP < maxBufP) {
         if (_sampleIndex < _endMainIndex) {
             // Add main samples until end of main phase or buffer is full
-            int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
+            int numSamples = min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
             if (!_waveTable) {
                 addMainSamplesSilence(bufP, bufP + numSamples);
             } else if (_note->wav == WaveForm::NOISE) {
@@ -584,7 +588,7 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
             }
         } else {
             // Add ramp-down samples until end of note or buffer is full
-            int numSamples = std::min(_samplesPerNote - _sampleIndex, (int)(maxBufP - bufP));
+            int numSamples = min(_samplesPerNote - _sampleIndex, (int)(maxBufP - bufP));
             addBlendSamples(bufP, bufP + numSamples);
         }
 
@@ -673,3 +677,79 @@ int SongGenerator::addSamples(Sample* buf, int maxSamples) {
 
     return totalAdded;
 }
+
+//--------------------------------------------------------------------------------------------------
+// Music Handler
+
+inline void addZeros(int16_t* buf, int num) {
+    // Note: implementation assumes that num > 0
+    int16_t* endP = buf + num;
+    do {
+        *buf = 0;
+    } while (++buf != endP);
+}
+
+MusicHandler::MusicHandler() {
+    _readP = _buffer;
+    _headP = _buffer;
+    _zeroP = nullptr;
+    _endP = _buffer + SOUND_MUSIC_BUFFERSIZE;
+}
+
+void MusicHandler::play(const TuneSpec* tuneSpec) {
+    _tuneGenerator.setTuneSpec(tuneSpec);
+    _zeroP = nullptr;
+}
+
+void MusicHandler::play(const SongSpec* songSpec, bool loop) {
+    _songGenerator.setSongSpec(songSpec, loop);
+    _zeroP = nullptr;
+}
+
+void MusicHandler::update() {
+    int16_t* targetHeadP = _readP; // Copy as its continuously changing
+
+    while (_headP != targetHeadP) {
+        // The maximum number of samples that can be added without wrapping
+        int maxSamples = (int)((_headP < targetHeadP) ? targetHeadP - _headP : _endP - _headP);
+        bool addedZeros = false;
+
+        if (!_tuneGenerator.isDone()) {
+            addZeros(_headP, maxSamples);
+            addedZeros = true;
+            _tuneGenerator.addSamples(_headP, maxSamples);
+        }
+        if (!_songGenerator.isDone()) {
+            if (!addedZeros) {
+                addZeros(_headP, maxSamples);
+                addedZeros = true;
+            }
+            _songGenerator.addSamples(_headP, maxSamples);
+        }
+        if (!addedZeros) {
+            if (_zeroP == nullptr) {
+                _zeroP = _headP;
+            } else if (_zeroP == _headP) {
+                // Buffer contains only zeroes. No need to set any.
+                addedZeros = true;
+                _zeroP += maxSamples; // Move it headP
+            } else if (_zeroP > _headP) {
+                // Stop once buffer contains only zeroes
+                maxSamples = min(maxSamples, (int)(_zeroP - _headP));
+            }
+            if (!addedZeros) {
+                addZeros(_headP, maxSamples);
+            }
+        }
+        _headP += maxSamples;
+
+        if (_headP == _endP) {
+            // Reached end of cyclic buffer. Continue at the beginning.
+            _headP = _buffer;
+        }
+    }
+}
+
+#ifndef STANDALONE
+  } // Namespace
+#endif

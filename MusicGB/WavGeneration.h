@@ -9,7 +9,7 @@
 #ifndef WavGeneration_h
 #define WavGeneration_h
 
-#include "MusicGeneration.h"
+#include "Music.h"
 
 void makeWav(const char* filename, const TuneSpec& tune);
 void makeWav(const char* filename, const PatternSpec& pattern);
