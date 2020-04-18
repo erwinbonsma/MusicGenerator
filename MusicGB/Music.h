@@ -13,19 +13,32 @@
 
 #ifdef STANDALONE
   #define SOUND_MUSIC_BUFFERSIZE 1024
+  #define OPTIMIZE_ATTRIBUTE
 #else
   #include "../../config/config.h"
+  #define OPTIMIZE_ATTRIBUTE __attribute__((optimize("-O3")))
   namespace Gamebuino_Meta {
 #endif
 
 //--------------------------------------------------------------------------------------------------
 // Tune Generation
 
-constexpr uint16_t SAMPLERATE = 11025;
+#ifdef STANDALONE
+  constexpr uint16_t SAMPLERATE = 11025;
 
-// Should be updated when changing SAMPLERATE as follows:
-// 44100 -> 2, 22050 -> 1, 11025 -> 0
-constexpr uint8_t SAMPLERATE_SHIFT = 0;
+  // Should be updated when changing SAMPLERATE as follows:
+  // 44100 -> 2, 22050 -> 1, 11025 -> 0
+  constexpr uint8_t SAMPLERATE_SHIFT = 0;
+#else
+  constexpr uint16_t SAMPLERATE = SOUND_FREQ;
+  #if SOUND_FREQ==44100
+    constexpr uint8_t SAMPLERATE_SHIFT = 2;
+  #elif SOUND_FREQ==22050
+    constexpr uint8_t SAMPLERATE_SHIFT = 1;
+  #else
+    constexpr uint8_t SAMPLERATE_SHIFT = 0;
+  #endif
+#endif
 
 // Number of samples when sample rate is 11025 Hz
 constexpr uint8_t SAMPLES_PER_TICK = 90;
@@ -69,7 +82,7 @@ struct NoteSpec {
 };
 
 const NoteSpec SILENCE = NoteSpec {
-    .note = Note::A, .oct = 4, .vol = 0, .wav = WaveForm::NONE, .fx = Effect::NONE
+    .note = Note::C, .oct = 4, .vol = 0, .wav = WaveForm::NONE, .fx = Effect::NONE
 };
 
 struct TuneSpec {
@@ -118,11 +131,11 @@ class TuneGenerator {
     const NoteSpec* peekNextNote() const;
     void moveToNextNote();
 
-    void addMainSamples(Sample* &curP, Sample* endP);
-    void addMainSamplesNoise(Sample* &curP, Sample* endP);
-    void addMainSamplesSilence(Sample* &curP, Sample* endP);
-    void addMainSamplesVibrato(Sample* &curP, Sample* endP);
-    void addBlendSamples(Sample* &curP, Sample* endP);
+    void addMainSamples(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
+    void addMainSamplesNoise(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
+    void addMainSamplesSilence(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
+    void addMainSamplesVibrato(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
+    void addBlendSamples(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
 
 public:
     void setTuneSpec(const TuneSpec* tuneSpec);
@@ -220,6 +233,7 @@ public:
 
     bool isTunePlaying() { return !_tuneGenerator.isDone(); }
     bool isSongPlaying() { return !_songGenerator.isDone(); }
+    bool isPlaying() { return !(_tuneGenerator.isDone() && _songGenerator.isDone()); }
 
     void stopTune() { _tuneGenerator.stop(); }
     void stopSong() { _songGenerator.stop(); }
