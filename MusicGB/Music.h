@@ -21,11 +21,11 @@
 //--------------------------------------------------------------------------------------------------
 // Tune Generation
 
-constexpr uint16_t SAMPLERATE = 22050;
+constexpr uint16_t SAMPLERATE = 11025;
 
 // Should be updated when changing SAMPLERATE as follows:
-// 44100 -> 0, 22050 -> 1, 11025 -> 2
-constexpr uint8_t SAMPLERATE_SHIFT = 1;
+// 44100 -> 2, 22050 -> 1, 11025 -> 0
+constexpr uint8_t SAMPLERATE_SHIFT = 0;
 
 // Number of samples when sample rate is 11025 Hz
 constexpr uint8_t SAMPLES_PER_TICK = 90;
@@ -34,7 +34,7 @@ typedef int16_t Sample;
 
 constexpr int numNotes = 12;
 enum class Note {
-    A, As, B, C, Cs, D, Ds, E, F, Fs, G, Gs
+    C, Cs, D, Ds, E, F, Fs, G, Gs, A, As, B
 };
 
 enum class WaveForm : int8_t {
@@ -80,6 +80,7 @@ struct TuneSpec {
 
 struct WaveTable {
     const uint16_t numSamples;
+    const uint8_t shift;
     const int8_t* samples;
 };
 
@@ -96,12 +97,12 @@ class TuneGenerator {
     int32_t _indexDelta, _indexDeltaDelta;
     int32_t _vibratoDelta, _vibratoDeltaDelta;
     int16_t _sampleIndex, _endMainIndex;
-    int16_t _volume, _volumeDelta;
+    int32_t _volume, _volumeDelta;
     int16_t _blendSample, _blendDelta;
     int16_t _noiseLfsr = 1;
 
     void inline setSamplesPerNote() {
-        _samplesPerNote = (_tuneSpec->noteDuration * SAMPLES_PER_TICK) << (2 - SAMPLERATE_SHIFT);
+        _samplesPerNote = (_tuneSpec->noteDuration * SAMPLES_PER_TICK) << SAMPLERATE_SHIFT;
     }
 
     int inline arpeggioFactor(const NoteSpec* note) const {

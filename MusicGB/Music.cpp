@@ -14,10 +14,19 @@
 #else
   namespace Gamebuino_Meta {
 #endif
+#ifdef UNDEFINED
+  }
+#endif
 
-constexpr uint8_t WAVETABLE_SHIFT = 15;
+// Periods in samples for Octave = 0 and Sample rate = 11025, and shifted SPEC_PERIOD_SHIFT bits
+// (for maximum accuracy).
+const int16_t notePeriod[numNotes] = {
+    21576, 20365, 19222, 18143, 17125, 16164, 15256, 14400, 13592, 12829, 12109, 11429
+};
+constexpr uint8_t SPEC_PERIOD_SHIFT = 5;
 
-constexpr uint8_t PERIOD_SHIFT = 6;
+constexpr uint8_t MAX_OCTAVE = 7;
+constexpr uint8_t PERIOD_SHIFT = MAX_OCTAVE + SPEC_PERIOD_SHIFT;
 
 // Controls the amount of frequency change.
 constexpr uint8_t VIBRATO_MAGNITUDE_SHIFT = 7;
@@ -31,9 +40,9 @@ constexpr uint8_t VIBRATO_META_PERIOD = 24;
 // utilized).
 constexpr uint8_t VOLUME_BITS = 4;
 
-// Shift such that shifted volume fits in two bytes without overwriting the sign bit. This way the
+// Shift such that shifted volume fits in four bytes without overwriting the sign bit. This way the
 // most-significant byte can be safely cast to (signed) int8_t value.
-constexpr uint8_t VOLUME_SHIFT = 16 - VOLUME_BITS - 1;
+constexpr uint8_t VOLUME_SHIFT = 32 - VOLUME_BITS - 1;
 
 // Number of bits to shift amplified sample so that it is in range [-128..127] again.
 ///  Inputs: - sample with range [-128..127]
@@ -47,6 +56,7 @@ constexpr uint8_t POST_AMP_SHIFT = 6;
 //   up after a change of instrument.
 const WaveTable triangleWave = WaveTable {
     .numSamples = 510,
+    .shift = 6 + 15,
     .samples = new int8_t[510] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
@@ -87,6 +97,7 @@ const WaveTable triangleWave = WaveTable {
 
 const WaveTable tiltedSawWave = WaveTable {
     .numSamples = 298,
+    .shift = 6 + 15,
     .samples = new int8_t[298] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
@@ -114,6 +125,7 @@ const WaveTable tiltedSawWave = WaveTable {
 
 const WaveTable sawWave = WaveTable {
     .numSamples = 256,
+    .shift = 6 + 15,
     .samples = new int8_t[256] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
@@ -137,6 +149,7 @@ const WaveTable sawWave = WaveTable {
 
 const WaveTable squareWave = WaveTable {
     .numSamples = 2,
+    .shift = 13 + 15,
     .samples = new int8_t[2] {
         127, -128
     }
@@ -144,6 +157,7 @@ const WaveTable squareWave = WaveTable {
 
 const WaveTable pulseWave = WaveTable {
     .numSamples = 3,
+    .shift = 13 + 15,
     .samples = new int8_t[3] {
         127, -128, -128,
     }
@@ -151,6 +165,7 @@ const WaveTable pulseWave = WaveTable {
 
 const WaveTable organWave = WaveTable {
     .numSamples = 1020,
+    .shift = 5 + 15,
     .samples = new int8_t[1020] {
            0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,
           16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
@@ -226,6 +241,7 @@ const WaveTable organWave = WaveTable {
 // Triangle wave with Pelgrin noise added on top.
 const WaveTable noiseWave = WaveTable {
     .numSamples = 510,
+    .shift = 6 + 15,
     .samples = new int8_t[510] {
            4,    8,   11,   13,   16,   18,   19,   20,   22,   24,   27,   29,   31,   33,   37,   38,
           40,   40,   41,   42,   43,   43,   43,   44,   45,   44,   43,   43,   43,   42,   43,   42,
@@ -260,11 +276,6 @@ const WaveTable noiseWave = WaveTable {
          -22,  -21,  -20,  -19,  -17,  -14,  -13,  -10,   -7,   -5,   -2,   -1,    0,    3,    6,    9,
           12,   11,   11,   11,   11,   11,   12,   12,   13,   11,   10,    8,    7,    7,    6,    6
     }
-};
-
-// Periods in samples for Octave = 0 and Sample rate = 44100
-const int16_t notePeriod[numNotes] = {
-    802, 757, 714, 674, 636, 601, 567, 535, 505, 477, 450, 425
 };
 
 void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec) {
@@ -383,7 +394,7 @@ void TuneGenerator::startNote() {
     if (_waveTable != prevWaveTable) {
         _waveIndex = 0;
     }
-    _maxWaveIndex = (_waveTable->numSamples << WAVETABLE_SHIFT);
+    _maxWaveIndex = _waveTable->numSamples << _waveTable->shift;
 
     const NoteSpec* nxtNote = peekNextNote();
     if (nxtNote == nullptr || nxtNote->wav != _note->wav) {
@@ -393,11 +404,11 @@ void TuneGenerator::startNote() {
         _endMainIndex = _samplesPerNote;
     }
 
-    int period = notePeriod[(int)_note->note] << (PERIOD_SHIFT - _note->oct);
+    int period = ((int)notePeriod[(int)_note->note]) << (MAX_OCTAVE - _note->oct);
 
     _indexDelta = (
-        (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / period
-    ) >> SAMPLERATE_SHIFT;
+        (_waveTable->numSamples << _waveTable->shift) / period
+    ) << (PERIOD_SHIFT - SAMPLERATE_SHIFT);
     _indexDeltaDelta = 0;
 
     _indexNoiseDelta = 0;
@@ -421,15 +432,15 @@ void TuneGenerator::startNote() {
                 const NoteSpec* prvNote = peekPrevNote();
                 if (prvNote != nullptr) {
                     // Slide from previous volume to own
-                    int prvVolume = (prvNote->vol << VOLUME_SHIFT) - 1;
+                    int prvVolume = (prvNote->vol << VOLUME_SHIFT);
                     _volumeDelta = (_volume - prvVolume) / _samplesPerNote;
                     _volume = prvVolume;
 
                     // Slide from previous frequency to own
-                    int prvPeriod = notePeriod[(int)prvNote->note] << (PERIOD_SHIFT - prvNote->oct);
+                    int prvPeriod = notePeriod[(int)prvNote->note] << (MAX_OCTAVE - prvNote->oct);
                     int prvIndexDelta = (
-                        (_waveTable->numSamples << (WAVETABLE_SHIFT + PERIOD_SHIFT)) / prvPeriod
-                    ) >> SAMPLERATE_SHIFT;
+                        (_waveTable->numSamples << _waveTable->shift) / prvPeriod
+                    ) << (PERIOD_SHIFT - SAMPLERATE_SHIFT);
                     _indexDeltaDelta = (_indexDelta - prvIndexDelta) / _samplesPerNote;
                     _indexDelta = prvIndexDelta;
                 }
@@ -462,16 +473,20 @@ void TuneGenerator::startNote() {
 
 void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
     int16_t amplifiedSample = 0;
+    int shift = _waveTable->shift;
+    const int8_t* samples = _waveTable->samples;
+
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        int8_t sample = samples[_waveIndex >> shift];
         _waveIndex += _indexDelta;
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
         }
         _indexDelta += _indexDeltaDelta;
 
-        amplifiedSample = sample * (int8_t)(_volume >> 8);
+        amplifiedSample = sample * (int8_t)(_volume >> 24);
+        //printf("idx=%d %d\n", _waveIndex >> shift, amplifiedSample >> POST_AMP_SHIFT);
         _volume += _volumeDelta;
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
@@ -480,9 +495,12 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 
 void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
     int16_t amplifiedSample = 0;
+    int shift = _waveTable->shift;
+    const int8_t* samples = _waveTable->samples;
+
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        int8_t sample = samples[_waveIndex >> shift];
         _waveIndex += _indexDelta;
         _waveIndex += _indexNoiseDelta;
         if (_waveIndex >= _maxWaveIndex) {
@@ -506,7 +524,7 @@ void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
         }
         _indexDelta += _indexDeltaDelta;
 
-        amplifiedSample = sample * (int8_t)(_volume >> 8);
+        amplifiedSample = sample * (int8_t)(_volume >> 24);
         _volume += _volumeDelta;
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
@@ -523,9 +541,12 @@ void TuneGenerator::addMainSamplesSilence(Sample* &curP, Sample* endP) {
 // frequency shifts.
 void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
     int16_t amplifiedSample = 0;
+    int shift = _waveTable->shift;
+    const int8_t* samples = _waveTable->samples;
+
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        int8_t sample = samples[_waveIndex >> shift];
         _waveIndex += _indexDelta;
         _waveIndex += _vibratoDelta >> VIBRATO_MAGNITUDE_SHIFT;
         if (_waveIndex >= _maxWaveIndex) {
@@ -539,7 +560,7 @@ void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
             _vibratoDeltaDelta = -_vibratoDeltaDelta;
         }
 
-        amplifiedSample = sample * (int8_t)(_volume >> 8);
+        amplifiedSample = sample * (int8_t)(_volume >> 24);
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
     _blendSample = amplifiedSample;
@@ -556,7 +577,7 @@ void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
         ) {
             // Exception. These waves do not start at zero.
             int16_t nxtVol = nxtNote->vol << VOLUME_SHIFT;
-            finalSample = 127 * (int8_t)(nxtVol >> 8);
+            finalSample = 127 * (int8_t)(nxtVol >> 24);
         }
         _blendDelta = (finalSample - _blendSample) / (_samplesPerNote - _endMainIndex + 1);
     }

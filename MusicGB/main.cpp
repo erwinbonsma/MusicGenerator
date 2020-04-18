@@ -20,14 +20,29 @@ const TuneSpec testTune1 = TuneSpec {
     .loopStart = 8,
     .numNotes = 8,
     .notes = new NoteSpec[8] {
-        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C, .oct=5, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    }
+};
+
+const TuneSpec testTune1b = TuneSpec {
+    .noteDuration = 8,
+    .loopStart = 7,
+    .numNotes = 7,
+    .notes = new NoteSpec[8] {
+        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::B, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::E, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::F, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     }
 };
 
@@ -84,13 +99,13 @@ const TuneSpec testTune5a = TuneSpec {
     .loopStart = 7,
     .numNotes = 7,
     .notes = new NoteSpec[7] {
-        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
-        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
-        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
         NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
-        NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE }
+        NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE }
     }
 };
 
@@ -100,17 +115,17 @@ const TuneSpec testTune5b = TuneSpec {
     .loopStart = 11,
     .numNotes = 11,
     .notes = new NoteSpec[11] {
-        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
+        NoteSpec { .note=Note::A, .oct=1, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
-        NoteSpec { .note=Note::G, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
-        NoteSpec { .note=Note::A, .oct=6, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::A, .oct=5, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
         NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
-        NoteSpec { .note=Note::A, .oct=3, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT }
+        NoteSpec { .note=Note::A, .oct=2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::SLIDE },
+        NoteSpec { .note=Note::A, .oct=1, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT }
     }
 };
 
@@ -120,24 +135,24 @@ const TuneSpec testTune6 = TuneSpec {
     .loopStart = 16,
     .numNotes = 16,
     .notes = new NoteSpec[16] {
-        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        NoteSpec { .note=Note::B, .oct=4, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        NoteSpec { .note=Note::C, .oct=4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
-        NoteSpec { .note=Note::D, .oct=4, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-
-        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
-        NoteSpec { .note=Note::D, .oct=4, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D, .oct=4, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::E, .oct=4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
         NoteSpec { .note=Note::F, .oct=4, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
 
-        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::F, .oct=4, .vol=7, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::G, .oct=4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO },
+        NoteSpec { .note=Note::A, .oct=4, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+
         NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO_FAST },
-        NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO_FAST },
+        NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO_FAST },
         NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO_FAST },
-        NoteSpec { .note=Note::A, .oct=5, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO_FAST },
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::ARPEGGIO_FAST },
+        NoteSpec { .note=Note::C, .oct=5, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
     }
 };
 
@@ -204,10 +219,6 @@ const TuneSpec testTune10 = TuneSpec {
     .loopStart = 13,
     .numNotes = 13,
     .notes = new NoteSpec[13] {
-        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        SILENCE,
-        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
-        SILENCE,
         NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         SILENCE,
         NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
@@ -216,13 +227,17 @@ const TuneSpec testTune10 = TuneSpec {
         SILENCE,
         NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
         SILENCE,
-        NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
+        NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        SILENCE,
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE }
     }
 };
 
 // Noise test
 const TuneSpec testTune11a = TuneSpec {
-    .noteDuration = 32,
+    .noteDuration = 8,
     .loopStart = 6,
     .numNotes = 6,
     .notes = new NoteSpec[6] {
@@ -239,19 +254,19 @@ const TuneSpec testTune11b = TuneSpec {
     .loopStart = 7,
     .numNotes = 7,
     .notes = new NoteSpec[7] {
-        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
-        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
         NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
         NoteSpec { .note=Note::D, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
         NoteSpec { .note=Note::E, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
         NoteSpec { .note=Note::F, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
         NoteSpec { .note=Note::G, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+        NoteSpec { .note=Note::B, .oct=4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
     }
 };
 
 int main(int argc, const char * argv[]) {
-    /*
     makeWav("test1.wav", testTune1);
+    makeWav("test1b.wav", testTune1b);
     makeWav("test2.wav", testTune2);
     makeWav("test3.wav", testTune3);
     makeWav("test4.wav", testTune4);
@@ -262,7 +277,7 @@ int main(int argc, const char * argv[]) {
     makeWav("test8.wav", testTune8);
     makeWav("test9.wav", testTune9);
     makeWav("test10.wav", testTune10);
-    */
+
     makeWav("test11a.wav", testTune11a);
     makeWav("test11b.wav", testTune11b);
 

@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 
 tab = "    "
-notes = ["A", "As", "B", "C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs"]
+notes = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B"]
 waves = ["TRIANGLE", "TILTED_SAW", "SAW", "SQUARE", "PULSE", "ORGAN", "NOISE", "PHASER"]
 effects = ["NONE", "SLIDE", "VIBRATO", "DROP", "FADE_IN", "FADE_OUT", "ARPEGGIO", "ARPEGGIO_FAST"]
 
@@ -32,10 +32,10 @@ def output_note(notespec):
         print("%sSILENCE," % (tab))
         return
     noderank = numval(notespec, 0, 2)
-    note = notes[(noderank + 3) % 12]
-    octave = 2 + int((noderank + 3) / 12)
-    if octave > 6:
-        octave = 6
+    note = notes[noderank % 12]
+    octave = 2 + int(noderank / 12)
+    if octave > 7:
+        octave = 7
         print("// WARNING: Adjusted octave so that it is in range")
     wave = waves[numval(notespec, 2, 1)]
     effect = effects[numval(notespec, 4, 1)]
