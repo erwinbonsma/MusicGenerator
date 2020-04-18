@@ -684,7 +684,7 @@ int SongGenerator::addSamples(Sample* buf, int maxSamples) {
     int totalAdded = 0;
 
     do {
-        totalAdded += _patternGenerator.addSamples(buf, maxSamples - totalAdded);
+        totalAdded += _patternGenerator.addSamples(buf + totalAdded, maxSamples - totalAdded);
         if (totalAdded < maxSamples) {
             if (_pattern == nullptr) {
                 // We're done
@@ -715,7 +715,7 @@ inline void addZeros(int16_t* buf, int num) {
 
 MusicHandler::MusicHandler() {
     _readP = _buffer;
-    _headP = _buffer;
+    _headP = _readP + 1;
     _zeroP = nullptr;
     _endP = _buffer + SOUND_MUSIC_BUFFERSIZE;
 }

@@ -284,5 +284,9 @@ int main(int argc, const char * argv[]) {
     makeWav("sfx26.wav", sfx26);
     makeWav("bb-track1.wav", bumbleBotsSong);
 
+    MusicHandler musicHandler;
+    musicHandler.play(&bumbleBotsSong, false);
+    makeWav("bb-track1b.wav", musicHandler);
+
     return 0;
 }
