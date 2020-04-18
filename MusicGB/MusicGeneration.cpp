@@ -219,6 +219,45 @@ const WaveTable organWave = WaveTable {
     }
 };
 
+// Triangle wave with Pelgrin noise added on top.
+const WaveTable noiseWave = WaveTable {
+    .numSamples = 510,
+    .samples = new int8_t[510] {
+           4,    8,   11,   13,   16,   18,   19,   20,   22,   24,   27,   29,   31,   33,   37,   38,
+          40,   40,   41,   42,   43,   43,   43,   44,   45,   44,   43,   43,   43,   42,   43,   42,
+          41,   44,   47,   49,   52,   54,   54,   57,   59,   62,   64,   67,   68,   73,   76,   80,
+          85,   84,   84,   83,   83,   83,   83,   83,   84,   84,   85,   87,   89,   89,   89,   89,
+          90,   90,   91,   90,   90,   90,   91,   91,   90,   90,   90,   92,   94,   93,   94,   94,
+          95,   93,   90,   90,   89,   87,   86,   83,   81,   81,   83,   81,   80,   80,   79,   80,
+          81,   82,   82,   83,   85,   85,   85,   85,   86,   84,   83,   82,   82,   81,   80,   80,
+          79,   79,   79,   82,   83,   84,   84,   85,   85,   85,   85,   85,   85,   87,   88,   88,
+          88,   90,   90,   93,   96,   95,   95,   95,   97,   98,   98,   98,   98,   98,   98,   99,
+         100,  101,  103,  106,  108,  108,  108,  110,  110,  112,  114,  116,  118,  119,  120,  121,
+         123,  122,  122,  121,  120,  119,  120,  118,  117,  119,  122,  122,  123,  125,  127,
+         126,  123,  121,  118,  115,  116,  115,  115,  115,  110,  106,  101,   97,   94,   91,   88,
+          86,   85,   83,   80,   77,   76,   73,   71,   68,   67,   65,   62,   60,   57,   54,   51,
+          47,   49,   49,   50,   51,   50,   49,   48,   48,   46,   44,   40,   37,   36,   35,   32,
+          29,   29,   29,   30,   31,   29,   28,   28,   26,   24,   23,   23,   23,   21,   19,   18,
+          16,   16,   16,   14,   12,   11,    9,    9,    7,    7,    7,    6,    7,    5,    4,    2,
+           0,   -1,   -3,   -3,   -4,   -6,   -6,   -9,  -12,  -10,   -9,  -11,  -12,  -11,  -12,  -10,
+          -9,  -11,  -13,  -17,  -20,  -20,  -21,  -23,  -24,  -28,  -32,  -34,  -37,  -38,  -38,  -40,
+         -41,  -44,  -48,  -49,  -51,  -55,  -58,  -63,  -66,  -69,  -72,  -76,  -79,  -81,  -84,  -87,
+         -90,  -88,  -85,  -83,  -82,  -83,  -82,  -84,  -84,  -82,  -80,  -79,  -78,  -77,  -76,  -75,
+         -73,  -72,  -71,  -70,  -69,  -70,  -71,  -70,  -70,  -69,  -67,  -65,  -63,  -63,  -63,  -61,
+         -59,  -61,  -63,  -63,  -64,  -64,  -64,  -63,  -63,  -65,  -67,  -67,  -67,  -67,  -69,  -67,
+         -67,  -68,  -69,  -70,  -71,  -72,  -74,  -73,  -73,  -76,  -79,  -80,  -82,  -83,  -85,  -86,
+         -87,  -88,  -88,  -89,  -89,  -90,  -89,  -89,  -89,  -92,  -94,  -96,  -98,  -98,  -99, -100,
+        -101, -102, -103, -104, -106, -109, -111, -113, -116, -117, -119, -120, -123, -123, -123, -125,
+        -128, -126, -123, -122, -121, -119, -116, -114, -112, -113, -114, -115, -116, -116, -116, -115,
+        -113, -114, -114, -115, -115, -116, -117, -116, -115, -117, -118, -121, -123, -123, -124,
+        -125, -122, -120, -116, -113, -109, -105, -101,  -98,  -97,  -96,  -93,  -91,  -88,  -86,  -83,
+         -79,  -78,  -76,  -73,  -71,  -69,  -67,  -63,  -60,  -57,  -55,  -52,  -49,  -47,  -45,  -43,
+         -39,  -39,  -39,  -39,  -40,  -38,  -37,  -36,  -35,  -33,  -32,  -31,  -30,  -28,  -25,  -24,
+         -22,  -21,  -20,  -19,  -17,  -14,  -13,  -10,   -7,   -5,   -2,   -1,    0,    3,    6,    9,
+          12,   11,   11,   11,   11,   11,   12,   12,   13,   11,   10,    8,    7,    7,    6,    6
+    }
+};
+
 // Periods in samples for Octave = 0 and Sample rate = 44100
 const int16_t notePeriod[numNotes] = {
     802, 757, 714, 674, 636, 601, 567, 535, 505, 477, 450, 425
@@ -318,8 +357,9 @@ void TuneGenerator::startNote() {
     const WaveTable* prevWaveTable = _waveTable;
     switch (_note->wav) {
         case WaveForm::TRIANGLE:
-        case WaveForm::NOISE:
             _waveTable = &triangleWave; break;
+        case WaveForm::NOISE:
+            _waveTable = &noiseWave; break;
         case WaveForm::TILTED_SAW:
             _waveTable = &tiltedSawWave; break;
         case WaveForm::SAW:
@@ -422,28 +462,42 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
     while (curP < endP) {
         int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
         _waveIndex += _indexDelta;
+        if (_waveIndex >= _maxWaveIndex) {
+            _waveIndex -= _maxWaveIndex;
+        }
+        _indexDelta += _indexDeltaDelta;
+
+        amplifiedSample = sample * (int8_t)(_volume >> 8);
+        _volume += _volumeDelta;
+        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
+    }
+    _blendSample = amplifiedSample;
+}
+
+void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
+    int16_t amplifiedSample = 0;
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        int8_t sample = _waveTable->samples[_waveIndex >> WAVETABLE_SHIFT];
+        _waveIndex += _indexDelta;
         _waveIndex += _indexNoiseDelta;
         if (_waveIndex >= _maxWaveIndex) {
-            if (_note->wav == WaveForm::NOISE) {
-                // Determine new frequency multiplier
-                _indexNoiseDelta = 0;
-                while (1) {
-                    bool bit = (_noiseLfsr ^ (_noiseLfsr >> 1)) & 1;
-                    _noiseLfsr = (_noiseLfsr >> 1) ^ (bit << 14);
-                    if (bit) {
-                        break;
-                    }
-                    _indexNoiseDelta += _indexDelta;
-                };
-                // Update max wave index to end of the waveform quadrant we just entered
-                if (_maxWaveIndex == _maxWaveIndexOrig) {
-                    _waveIndex -= _maxWaveIndex;
-                    _maxWaveIndex = 0;
-                } else {
-                    _maxWaveIndex += (_maxWaveIndexOrig >> 2);
+           // Determine new frequency multiplier
+           _indexNoiseDelta = 0;
+            while (1) {
+                bool bit = (_noiseLfsr ^ (_noiseLfsr >> 1)) & 1;
+                _noiseLfsr = (_noiseLfsr >> 1) ^ (bit << 14);
+                if (bit) {
+                    break;
                 }
-            } else {
+                _indexNoiseDelta += _indexDelta;
+            };
+            // Update max wave index to end of the waveform quadrant we just entered
+            if (_maxWaveIndex == _maxWaveIndexOrig) {
                 _waveIndex -= _maxWaveIndex;
+                _maxWaveIndex = 0;
+            } else {
+                _maxWaveIndex += (_maxWaveIndexOrig >> 2);
             }
         }
         _indexDelta += _indexDeltaDelta;
@@ -521,6 +575,8 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
             int numSamples = std::min(_endMainIndex - _sampleIndex, (int)(maxBufP - bufP));
             if (!_waveTable) {
                 addMainSamplesSilence(bufP, bufP + numSamples);
+            } else if (_note->wav == WaveForm::NOISE) {
+                addMainSamplesNoise(bufP, bufP + numSamples);
             } else if (_note->fx == Effect::VIBRATO) {
                 addMainSamplesVibrato(bufP, bufP + numSamples);
             } else {
