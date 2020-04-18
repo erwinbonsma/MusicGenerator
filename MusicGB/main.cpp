@@ -262,11 +262,12 @@ int main(int argc, const char * argv[]) {
     makeWav("test8.wav", testTune8);
     makeWav("test9.wav", testTune9);
     makeWav("test10.wav", testTune10);
-
-    makeWav("bb-track1.wav", bumbleBotsSong);
     */
     makeWav("test11a.wav", testTune11a);
     makeWav("test11b.wav", testTune11b);
+
+    makeWav("sfx26.wav", sfx26);
+    makeWav("bb-track1.wav", bumbleBotsSong);
 
     return 0;
 }

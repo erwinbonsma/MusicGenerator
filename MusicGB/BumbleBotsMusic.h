@@ -11,6 +11,7 @@
 
 #include "Music.h"
 
+extern const TuneSpec sfx26;
 extern const SongSpec bumbleBotsSong;
 
 #endif /* BumbleBotsMusic_h */
