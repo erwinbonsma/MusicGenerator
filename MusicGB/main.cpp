@@ -265,22 +265,42 @@ const TuneSpec testTune11b = TuneSpec {
     }
 };
 
-int main(int argc, const char * argv[]) {
-    makeWav("test1.wav", testTune1);
-    makeWav("test1b.wav", testTune1b);
-    makeWav("test2.wav", testTune2);
-    makeWav("test3.wav", testTune3);
-    makeWav("test4.wav", testTune4);
-    makeWav("test5a.wav", testTune5a);
-    makeWav("test5b.wav", testTune5b);
-    makeWav("test6.wav", testTune6);
-    makeWav("test7.wav", testTune7);
-    makeWav("test8.wav", testTune8);
-    makeWav("test9.wav", testTune9);
-    makeWav("test10.wav", testTune10);
+// Blend test. It consists of notes with many awkward transitions
+const TuneSpec testTune12 = TuneSpec {
+    .noteDuration = 16,
+    .loopStart = 6,
+    .numNotes = 6,
+    .notes = new NoteSpec[6] {
+        NoteSpec { .note=Note::C, .oct=4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        // Big volume jump
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+        // Transition to square wave is typically big
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+        // As it the transition away from it
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+        // Check transition to silence
+        SILENCE,
+        // And transition away from it
+        NoteSpec { .note=Note::C, .oct=4, .vol=8, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    }
+};
 
-    makeWav("test11a.wav", testTune11a);
-    makeWav("test11b.wav", testTune11b);
+int main(int argc, const char * argv[]) {
+//    makeWav("test1.wav", testTune1);
+//    makeWav("test1b.wav", testTune1b);
+//    makeWav("test2.wav", testTune2);
+//    makeWav("test3.wav", testTune3);
+//    makeWav("test4.wav", testTune4);
+//    makeWav("test5a.wav", testTune5a);
+//    makeWav("test5b.wav", testTune5b);
+//    makeWav("test6.wav", testTune6);
+//    makeWav("test7.wav", testTune7);
+//    makeWav("test8.wav", testTune8);
+//    makeWav("test9.wav", testTune9);
+//    makeWav("test10.wav", testTune10);
+//    makeWav("test11a.wav", testTune11a);
+//    makeWav("test11b.wav", testTune11b);
+    makeWav("test12.wav", testTune12);
 
     makeWav("bb-track1.wav", *bumbleBotsSong);
 

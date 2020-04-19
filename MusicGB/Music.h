@@ -43,6 +43,9 @@
 // Number of samples when sample rate is 11025 Hz
 constexpr uint8_t SAMPLES_PER_TICK = 90;
 
+constexpr uint8_t BLEND_SHIFT = 4;
+constexpr uint8_t NUM_BLEND_SAMPLES = 1 << BLEND_SHIFT;
+
 typedef int16_t Sample;
 
 constexpr int numNotes = 12;
@@ -97,6 +100,9 @@ struct WaveTable {
     const int8_t* samples;
 };
 
+class TuneGenerator;
+typedef void (TuneGenerator::*SampleGeneratorFun)(Sample* &curP, Sample* endP);
+
 class TuneGenerator {
     const TuneSpec* _tuneSpec;
     int16_t _samplesPerNote;
@@ -109,10 +115,14 @@ class TuneGenerator {
     int32_t _indexNoiseDelta, _maxWaveIndexOrig; // Used for NOISE
     int32_t _indexDelta, _indexDeltaDelta;
     int32_t _vibratoDelta, _vibratoDeltaDelta;
-    int16_t _sampleIndex, _endMainIndex;
+    int16_t _sampleIndex;
     int32_t _volume, _volumeDelta;
-    int16_t _blendSample, _blendDelta;
     int16_t _noiseLfsr = 1;
+    SampleGeneratorFun _sampleGeneratorFun;
+
+// Blending
+    Sample _blendBufOut[NUM_BLEND_SAMPLES], _blendBufIn[NUM_BLEND_SAMPLES];
+    uint8_t _numBlendSamples;
 
     void inline setSamplesPerNote() {
         _samplesPerNote = (_tuneSpec->noteDuration * SAMPLES_PER_TICK) << SAMPLERATE_SHIFT;
@@ -131,6 +141,9 @@ class TuneGenerator {
     const NoteSpec* peekNextNote() const;
     void moveToNextNote();
 
+    void createOutgoingBlendSamplesIfNeeded();
+    void createIncomingBlendSamplesIfNeeded();
+
     void addMainSamples(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesNoise(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesSilence(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
@@ -138,7 +151,7 @@ class TuneGenerator {
     void addBlendSamples(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
 
 public:
-    void setTuneSpec(const TuneSpec* tuneSpec);
+    void setTuneSpec(const TuneSpec* tuneSpec, bool isFirst = true);
     void stop() { _note = nullptr; }
     bool isDone() { return _note == nullptr; }
 
@@ -168,7 +181,7 @@ class PatternGenerator {
     TuneGenerator _tuneGens[MAX_TUNES_IN_PATTERN];
 
 public:
-    void setPatternSpec(const PatternSpec* patternSpec);
+    void setPatternSpec(const PatternSpec* patternSpec, bool isFirst = true);
 
     // Adds samples for the pattern to the given buffer. Note, it does not overwrite existing values
     // in the buffer, but adds to the existing value so that multiple generators can contribute to
@@ -193,7 +206,7 @@ class SongGenerator {
     const PatternSpec** _pattern;
     bool _loop;
 
-    void startPattern();
+    void startPattern(bool isFirst);
     void moveToNextPattern();
 
 public:
