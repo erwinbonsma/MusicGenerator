@@ -569,3 +569,45 @@ const TuneSpec* pattern30Tunes[2] = { &sfx17, &sfx21 };
 const PatternSpec pattern30 = PatternSpec {
     .numTunes = 2, .tunes = pattern30Tunes
 };
+
+const PatternSpec* song0Patterns[25] = {
+    &pattern0,
+    &pattern1,
+    &pattern2,
+    &pattern3,
+    &pattern4,
+    &pattern5,
+    &pattern6,
+    &pattern7,
+    &pattern8,
+    &pattern9,
+    &pattern10,
+    &pattern11,
+    &pattern12,
+    &pattern13,
+    &pattern14,
+    &pattern15,
+    &pattern16,
+    &pattern17,
+    &pattern18,
+    &pattern19,
+    &pattern20,
+    &pattern21,
+    &pattern22,
+    &pattern23,
+    &pattern24,
+};
+const SongSpec song0 = SongSpec {
+    .loopStart = 9, .numPatterns = 25, .patterns = song0Patterns
+};
+const PatternSpec* song25Patterns[6] = {
+    &pattern25,
+    &pattern26,
+    &pattern27,
+    &pattern28,
+    &pattern29,
+    &pattern30,
+};
+const SongSpec song25 = SongSpec {
+    .loopStart = 2, .numPatterns = 6, .patterns = song25Patterns
+};

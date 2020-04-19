@@ -281,11 +281,10 @@ int main(int argc, const char * argv[]) {
     makeWav("test11a.wav", testTune11a);
     makeWav("test11b.wav", testTune11b);
 
-    makeWav("sfx26.wav", sfx26);
-    makeWav("bb-track1.wav", bumbleBotsSong);
+    makeWav("bb-track1.wav", *bumbleBotsSong);
 
     MusicHandler musicHandler;
-    musicHandler.play(&bumbleBotsSong, false);
+    musicHandler.play(bumbleBotsSong, false);
     makeWav("bb-track1b.wav", musicHandler);
 
     return 0;
