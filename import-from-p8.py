@@ -9,7 +9,11 @@ parser = ArgumentParser()
 parser.add_argument(
     "filename", help="PICO-8 source file"
 )
+parser.add_argument(
+    "--postfix", default=""
+)
 args = parser.parse_args()
+postfix = args.postfix
 
 def numval(line, pos, num_chars):
     return int(line[pos:pos+num_chars], 16)
@@ -62,14 +66,14 @@ class Sfx:
         pass
 
     def print(self):
-        print("const NoteSpec sfx%dNotes[%d] = {" % (self.index, self.num_notes))
+        print("const NoteSpec sfx%dNotes%s[%d] = {" % (self.index, postfix, self.num_notes))
         for note in self.notes:
             note.print()
         print("};")
 
-        print("const TuneSpec sfx%d = TuneSpec {" % (self.index))
-        print("%s.noteDuration = %d, .loopStart = %d, .numNotes = %d, .notes = sfx%dNotes" %
-            (tab, self.speed, self.loop_start, self.loop_end, self.index)
+        print("const TuneSpec sfx%d%s = TuneSpec {" % (self.index, postfix))
+        print("%s.noteDuration = %d, .loopStart = %d, .numNotes = %d, .notes = sfx%dNotes%s" %
+            (tab, self.speed, self.loop_start, self.loop_end, self.index, postfix)
         )
         print("};")
 
@@ -109,12 +113,14 @@ class Pattern:
         if self.is_empty():
             return
 
-        print("const TuneSpec* pattern%dTunes[%d] = { %s };" %
-            (self.index, len(self.sfx_ids), ", ".join(["&sfx%d" % (id) for id in self.sfx_ids]))
+        print("const TuneSpec* pattern%dTunes%s[%d] = { %s };" %
+            (self.index, postfix, len(self.sfx_ids), ", ".join(
+                ["&sfx%d%s" % (id, postfix) for id in self.sfx_ids]
+            ))
         )
 
-        print("const PatternSpec pattern%d = PatternSpec {" % (self.index))
-        print("%s.numTunes = %d, .tunes = pattern%dTunes" % (tab, len(self.sfx_ids), self.index))
+        print("const PatternSpec pattern%d%s = PatternSpec {" % (self.index, postfix))
+        print("%s.numTunes = %d, .tunes = pattern%dTunes%s" % (tab, len(self.sfx_ids), self.index, postfix))
         print("};")
 
 class Song:
@@ -135,14 +141,14 @@ class Song:
             ))
 
     def print(self):
-        print("const PatternSpec* song%dPatterns[%d] = {" % (self.start_idx, len(self.pattern_ids)))
+        print("const PatternSpec* song%dPatterns%s[%d] = {" % (self.start_idx, postfix, len(self.pattern_ids)))
         for id in self.pattern_ids:
-            print("%s&pattern%d," % (tab, id))
+            print("%s&pattern%d%s," % (tab, id, postfix))
         print("};")
 
-        print("const SongSpec song%d = SongSpec {" % (self.start_idx))
-        print("%s.loopStart = %d, .numPatterns = %d, .patterns = song%dPatterns" %
-            (tab, self.loop_idx, len(self.pattern_ids), self.start_idx)
+        print("const SongSpec song%d%s = SongSpec {" % (self.start_idx, postfix))
+        print("%s.loopStart = %d, .numPatterns = %d, .patterns = song%dPatterns%s" %
+            (tab, self.loop_idx, len(self.pattern_ids), self.start_idx, postfix)
         )
         print("};")
 
