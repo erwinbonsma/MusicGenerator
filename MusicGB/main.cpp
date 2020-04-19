@@ -13,6 +13,7 @@
 #include "WavGeneration.h"
 
 #include "BumbleBotsMusic.h"
+#include "TheLairMusic.h"
 
 // One octave in C-Major. TRIANGLE waves.
 const TuneSpec testTune1 = TuneSpec {
@@ -283,9 +284,12 @@ int main(int argc, const char * argv[]) {
 
     makeWav("bb-track1.wav", *bumbleBotsSong);
 
-    MusicHandler musicHandler;
-    musicHandler.play(bumbleBotsSong, false);
-    makeWav("bb-track1b.wav", musicHandler);
+    makeWav("the-lair-sfx6.wav", *theLairSfx6);
+    makeWav("the-lair1.wav", *theLairSong1);
+
+//    MusicHandler musicHandler;
+//    musicHandler.play(bumbleBotsSong, false);
+//    makeWav("bb-track1b.wav", musicHandler);
 
     return 0;
 }

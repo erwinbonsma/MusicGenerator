@@ -12,6 +12,7 @@
 		AA21A1C4243917C8004DD190 /* wav.c in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C2243917C8004DD190 /* wav.c */; };
 		AA21A1CE244232A5004DD190 /* BumbleBotsMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */; };
 		AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D124424970004DD190 /* WavGeneration.cpp */; };
+		AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +39,9 @@
 		AA21A1CF24423E1C004DD190 /* BumbleBotsMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "BumbleBotsMusic-Generated.cpp"; sourceTree = "<group>"; };
 		AA21A1D124424970004DD190 /* WavGeneration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavGeneration.cpp; sourceTree = "<group>"; };
 		AA21A1D224424970004DD190 /* WavGeneration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavGeneration.h; sourceTree = "<group>"; };
+		AA21A1D4244C7452004DD190 /* TheLairMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "TheLairMusic-Generated.cpp"; path = "Songs/TheLairMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TheLairMusic.cpp; path = Songs/TheLairMusic.cpp; sourceTree = "<group>"; };
+		AA21A1D8244C74C2004DD190 /* TheLairMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TheLairMusic.h; path = Songs/TheLairMusic.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,18 +74,29 @@
 		AA21A1B72438A752004DD190 /* MusicGB */ = {
 			isa = PBXGroup;
 			children = (
+				AA21A1D6244C7490004DD190 /* Songs */,
 				AA21A1C2243917C8004DD190 /* wav.c */,
 				AA21A1C3243917C8004DD190 /* wav.h */,
 				AA21A1B82438A752004DD190 /* main.cpp */,
 				AA21A1BF2438A837004DD190 /* Music.cpp */,
 				AA21A1C02438A837004DD190 /* Music.h */,
-				AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */,
-				AA21A1CF24423E1C004DD190 /* BumbleBotsMusic-Generated.cpp */,
-				AA21A1CD24420FA9004DD190 /* BumbleBotsMusic.h */,
 				AA21A1D124424970004DD190 /* WavGeneration.cpp */,
 				AA21A1D224424970004DD190 /* WavGeneration.h */,
 			);
 			path = MusicGB;
+			sourceTree = "<group>";
+		};
+		AA21A1D6244C7490004DD190 /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				AA21A1D4244C7452004DD190 /* TheLairMusic-Generated.cpp */,
+				AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */,
+				AA21A1D8244C74C2004DD190 /* TheLairMusic.h */,
+				AA21A1C824420907004DD190 /* BumbleBotsMusic.cpp */,
+				AA21A1CF24423E1C004DD190 /* BumbleBotsMusic-Generated.cpp */,
+				AA21A1CD24420FA9004DD190 /* BumbleBotsMusic.h */,
+			);
+			name = Songs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +159,7 @@
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
 				AA21A1CE244232A5004DD190 /* BumbleBotsMusic.cpp in Sources */,
 				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
+				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
 				AA21A1C12438A837004DD190 /* Music.cpp in Sources */,
 				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,
 			);
@@ -279,6 +295,7 @@
 				AA21A1BE2438A752004DD190 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
