@@ -27,8 +27,15 @@ class Note:
         noderank = numval(spec, 0, 2)
         self.note = notes[noderank % 12]
         self.octave = 2 + int(noderank / 12)
-        self.wave = waves[numval(spec, 2, 1)]
+        wave_num = numval(spec, 2, 1)
+        if wave_num < 8:
+            self.wave = waves[wave_num]
+        else:
+            self.wave = "CUSTOM{0}".format(wave_num - 8)
         self.effect = effects[numval(spec, 4, 1)]
+
+    def custom_wave(self):
+        return self.wave.startswith("CUSTOM")
 
     def print(self):
         if self.volume == 0:
@@ -63,7 +70,12 @@ class Sfx:
         return self.num_notes * self.speed
 
     def check(self):
-        pass
+        for note in self.notes:
+            if note.custom_wave():
+                warning("One or more notes in SFX {0} use a custom instrument, which needs replacing".format(
+                    self.index
+                ))
+                break
 
     def print(self):
         print("const NoteSpec sfx%dNotes%s[%d] = {" % (self.index, postfix, self.num_notes))
@@ -106,8 +118,10 @@ class Pattern:
             warning("All sound effects in pattern {0} loop!".format(self.index))
         elif sfxs[0].loops():
             warning("First sound effect in pattern {0} loops".format(self.index))
-        elif len(sfxs) > 1 and sfxs[0].len() > min([sfx.len() for sfx in sfxs[1:] if not sfx.loops()]):
-            warning("First sound effect in pattern {0} is not the shortest".format(self.index))
+        elif len(sfxs) > 1:
+            other_lens = [sfx.len() for sfx in sfxs[1:] if not sfx.loops()]
+            if len(other_lens) > 0 and sfxs[0].len() > min(other_lens):
+                warning("First sound effect in pattern {0} is not the shortest".format(self.index))
 
     def print(self):
         if self.is_empty():
