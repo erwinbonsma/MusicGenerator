@@ -13,6 +13,7 @@
 #include "WavGeneration.h"
 
 #include "BumbleBotsMusic.h"
+#include "NeonMusic.h"
 #include "PatShooterMusic.h"
 #include "TheLairMusic.h"
 
@@ -303,14 +304,16 @@ int main(int argc, const char * argv[]) {
 //    makeWav("test11b.wav", testTune11b);
     makeWav("test12.wav", testTune12);
 
-    makeWav("bb-track1.wav", *bumbleBotsSong);
+//    makeWav("bb-track1.wav", *bumbleBotsSong);
+
+    makeWav("neon.wav", *neonSong);
 
 //    makeWav("the-lair1.wav", *theLairSong1);
 //    makeWav("the-lair2.wav", *theLairSong2);
 //    makeWav("the-lair3.wav", *theLairSong3);
 
-    makeWav("pat-shooter1.wav", *patShooterSong1);
-    makeWav("pat-shooter2.wav", *patShooterSong2);
+//    makeWav("pat-shooter1.wav", *patShooterSong1);
+//    makeWav("pat-shooter2.wav", *patShooterSong2);
 
 
 //    MusicHandler musicHandler;

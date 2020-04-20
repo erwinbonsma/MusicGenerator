@@ -14,6 +14,7 @@
 		AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */; };
 		AA21A1DE244CD23F004DD190 /* BumbleBotsMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1DB244CD23F004DD190 /* BumbleBotsMusic.cpp */; };
 		AA21A1E3244E2336004DD190 /* PatShooterMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */; };
+		AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,9 @@
 		AA21A1DF244E230C004DD190 /* PatShooterMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "PatShooterMusic-Generated.cpp"; path = "Songs/PatShooterMusic-Generated.cpp"; sourceTree = "<group>"; };
 		AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PatShooterMusic.cpp; path = Songs/PatShooterMusic.cpp; sourceTree = "<group>"; };
 		AA21A1E2244E2336004DD190 /* PatShooterMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatShooterMusic.h; path = Songs/PatShooterMusic.h; sourceTree = "<group>"; };
+		AA21A1E4244E2954004DD190 /* NeonMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "NeonMusic-Generated.cpp"; path = "Songs/NeonMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NeonMusic.cpp; path = Songs/NeonMusic.cpp; sourceTree = "<group>"; };
+		AA21A1E7244E2A5F004DD190 /* NeonMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NeonMusic.h; path = Songs/NeonMusic.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,9 @@
 				AA21A1DA244CD23F004DD190 /* BumbleBotsMusic-Generated.cpp */,
 				AA21A1DB244CD23F004DD190 /* BumbleBotsMusic.cpp */,
 				AA21A1DC244CD23F004DD190 /* BumbleBotsMusic.h */,
+				AA21A1E4244E2954004DD190 /* NeonMusic-Generated.cpp */,
+				AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */,
+				AA21A1E7244E2A5F004DD190 /* NeonMusic.h */,
 				AA21A1DF244E230C004DD190 /* PatShooterMusic-Generated.cpp */,
 				AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */,
 				AA21A1E2244E2336004DD190 /* PatShooterMusic.h */,
@@ -170,6 +177,7 @@
 				AA21A1E3244E2336004DD190 /* PatShooterMusic.cpp in Sources */,
 				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,
 				AA21A1DE244CD23F004DD190 /* BumbleBotsMusic.cpp in Sources */,
+				AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
