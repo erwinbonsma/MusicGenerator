@@ -40,9 +40,14 @@ class Note:
     def custom_wave(self):
         return self.wave.startswith("CUSTOM")
 
-    def print(self):
+    def print(self, part_of_arpeggio):
         if self.volume == 0:
-            print("%sSILENCE," % (tab))
+            if part_of_arpeggio:
+                print("%sNoteSpec { .note=Note::%s, .oct=%d, .vol=0, .wav=WaveForm::NONE, .fx=Effect::NONE }," %
+                    (tab, self.note, self.octave)
+                )
+            else:
+                print("%sSILENCE," % (tab))
             return
         # Note: Adding one to volume to handle range mismatch: PICO-8 range is [0, 7], Gamebuino
         # range is [0, 8]. This means that volume 1 will never be used. This could be re-introduced
@@ -77,6 +82,14 @@ class Sfx:
     def max_volume(self):
         return max([note.volume for note in self.notes])
 
+    # Returns True if a specified note range contains one or more gaps
+    def _part_of_arpeggio(self, note_idx):
+        min_idx = int(note_idx / 4) * 4
+        for note in self.notes[min_idx : min_idx + 4]:
+            if note.effect == "ARPEGGIO" or note.effect == "ARPEGGIO_FAST":
+                return True
+        return False
+
     def check(self):
         for note in self.notes:
             if note.custom_wave():
@@ -87,8 +100,8 @@ class Sfx:
 
     def print(self):
         print("const NoteSpec sfx%dNotes%s[%d] = {" % (self.index, postfix, self.num_notes))
-        for note in self.notes:
-            note.print()
+        for i, note in enumerate(self.notes):
+            note.print(self._part_of_arpeggio(i))
         print("};")
 
         if args.comments:
