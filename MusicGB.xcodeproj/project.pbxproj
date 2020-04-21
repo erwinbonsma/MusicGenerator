@@ -15,6 +15,7 @@
 		AA21A1DE244CD23F004DD190 /* BumbleBotsMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1DB244CD23F004DD190 /* BumbleBotsMusic.cpp */; };
 		AA21A1E3244E2336004DD190 /* PatShooterMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */; };
 		AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */; };
+		AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,6 +52,8 @@
 		AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NeonMusic.cpp; path = Songs/NeonMusic.cpp; sourceTree = "<group>"; };
 		AA21A1E7244E2A5F004DD190 /* NeonMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NeonMusic.h; path = Songs/NeonMusic.h; sourceTree = "<group>"; };
 		AA21A1E9244F7160004DD190 /* ZeptonMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "ZeptonMusic-Generated.cpp"; path = "Songs/ZeptonMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZeptonMusic.cpp; path = Songs/ZeptonMusic.cpp; sourceTree = "<group>"; };
+		AA21A1EC244F77AD004DD190 /* ZeptonMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZeptonMusic.h; path = Songs/ZeptonMusic.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */,
 				AA21A1D8244C74C2004DD190 /* TheLairMusic.h */,
 				AA21A1E9244F7160004DD190 /* ZeptonMusic-Generated.cpp */,
+				AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */,
+				AA21A1EC244F77AD004DD190 /* ZeptonMusic.h */,
 			);
 			name = Songs;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
 				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
 				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
+				AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */,
 				AA21A1C12438A837004DD190 /* Music.cpp in Sources */,
 				AA21A1E3244E2336004DD190 /* PatShooterMusic.cpp in Sources */,
 				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,

@@ -16,6 +16,7 @@
 #include "NeonMusic.h"
 #include "PatShooterMusic.h"
 #include "TheLairMusic.h"
+#include "ZeptonMusic.h"
 
 // One octave in C-Major. TRIANGLE waves.
 const TuneSpec testTune1 = TuneSpec {
@@ -306,7 +307,7 @@ int main(int argc, const char * argv[]) {
 
 //    makeWav("bb-track1.wav", *bumbleBotsSong);
 
-    makeWav("neon.wav", *neonSong);
+//    makeWav("neon.wav", *neonSong);
 
 //    makeWav("the-lair1.wav", *theLairSong1);
 //    makeWav("the-lair2.wav", *theLairSong2);
@@ -315,6 +316,8 @@ int main(int argc, const char * argv[]) {
 //    makeWav("pat-shooter1.wav", *patShooterSong1);
 //    makeWav("pat-shooter2.wav", *patShooterSong2);
 
+    makeWav("zepton1.wav", *zeptonSong1);
+    makeWav("zepton2.wav", *zeptonSong2);
 
 //    MusicHandler musicHandler;
 //    musicHandler.play(bumbleBotsSong, false);
