@@ -50,6 +50,7 @@
 		AA21A1E4244E2954004DD190 /* NeonMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "NeonMusic-Generated.cpp"; path = "Songs/NeonMusic-Generated.cpp"; sourceTree = "<group>"; };
 		AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NeonMusic.cpp; path = Songs/NeonMusic.cpp; sourceTree = "<group>"; };
 		AA21A1E7244E2A5F004DD190 /* NeonMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NeonMusic.h; path = Songs/NeonMusic.h; sourceTree = "<group>"; };
+		AA21A1E9244F7160004DD190 /* ZeptonMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "ZeptonMusic-Generated.cpp"; path = "Songs/ZeptonMusic-Generated.cpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +110,7 @@
 				AA21A1D4244C7452004DD190 /* TheLairMusic-Generated.cpp */,
 				AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */,
 				AA21A1D8244C74C2004DD190 /* TheLairMusic.h */,
+				AA21A1E9244F7160004DD190 /* ZeptonMusic-Generated.cpp */,
 			);
 			name = Songs;
 			sourceTree = "<group>";
