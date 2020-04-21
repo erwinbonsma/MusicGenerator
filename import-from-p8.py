@@ -224,7 +224,7 @@ class MusicData:
                     start_idx = pattern.index
                 if i == 0 or pattern.is_loop_start():
                     loop_start_idx = i
-                if pattern.terminates():
+                if pattern.terminates() or (i == len(self.patterns) - 1 and not pattern.rewinds()):
                     self.songs.append(Song(self, start_idx, i))
                     start_idx = None
                 elif pattern.rewinds():
