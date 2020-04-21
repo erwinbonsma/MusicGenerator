@@ -59,10 +59,12 @@ class Sfx:
         self.speed = numval(line, 2, 2)
         self.loop_start = numval(line, 4, 2)
         self.loop_end = numval(line, 6, 2)
-        self.num_notes = 32
         if self.loop_end == 0:
+            self.num_notes = 32
             self.loop_end = self.num_notes
             self.loop_start = self.loop_end
+        else:
+            self.num_notes = self.loop_end
         self.notes = [Note(line[8+i*5:13+i*5]) for i in range(self.num_notes)]
 
     def loops(self):
