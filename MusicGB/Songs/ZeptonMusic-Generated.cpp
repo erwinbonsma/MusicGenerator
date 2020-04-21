@@ -235,7 +235,7 @@ const NoteSpec sfx14NotesZepton[32] = {
 const TuneSpec sfx14Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 32, .notes = sfx14NotesZepton
 };
-const NoteSpec sfx16NotesZepton[32] = {
+const NoteSpec sfx16NotesZepton[16] = {
     NoteSpec { .note=Note::C, .oct=4, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Ds, .oct=5, .vol=2, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Ds, .oct=4, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
@@ -252,27 +252,11 @@ const NoteSpec sfx16NotesZepton[32] = {
     NoteSpec { .note=Note::D, .oct=5, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Ds, .oct=5, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::G, .oct=4, .vol=2, .wav=WaveForm::SAW, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx16Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 16, .notes = sfx16NotesZepton
 };
-const NoteSpec sfx18NotesZepton[32] = {
+const NoteSpec sfx18NotesZepton[16] = {
     NoteSpec { .note=Note::D, .oct=4, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::F, .oct=5, .vol=2, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
@@ -289,27 +273,11 @@ const NoteSpec sfx18NotesZepton[32] = {
     NoteSpec { .note=Note::D, .oct=5, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::F, .oct=5, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::A, .oct=4, .vol=2, .wav=WaveForm::SAW, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx18Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 16, .notes = sfx18NotesZepton
 };
-const NoteSpec sfx19NotesZepton[32] = {
+const NoteSpec sfx19NotesZepton[16] = {
     NoteSpec { .note=Note::C, .oct=4, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=5, .vol=2, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
@@ -326,27 +294,11 @@ const NoteSpec sfx19NotesZepton[32] = {
     NoteSpec { .note=Note::D, .oct=5, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=5, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::G, .oct=4, .vol=2, .wav=WaveForm::SAW, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx19Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 16, .notes = sfx19NotesZepton
 };
-const NoteSpec sfx20NotesZepton[32] = {
+const NoteSpec sfx20NotesZepton[8] = {
     NoteSpec { .note=Note::D, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     NoteSpec { .note=Note::D, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::D, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
@@ -355,35 +307,11 @@ const NoteSpec sfx20NotesZepton[32] = {
     NoteSpec { .note=Note::D, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::D, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     NoteSpec { .note=Note::D, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx20Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx20NotesZepton
 };
-const NoteSpec sfx21NotesZepton[32] = {
+const NoteSpec sfx21NotesZepton[8] = {
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
@@ -392,35 +320,11 @@ const NoteSpec sfx21NotesZepton[32] = {
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx21Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx21NotesZepton
 };
-const NoteSpec sfx22NotesZepton[32] = {
+const NoteSpec sfx22NotesZepton[8] = {
     NoteSpec { .note=Note::D, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::A, .oct=3, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -429,35 +333,11 @@ const NoteSpec sfx22NotesZepton[32] = {
     NoteSpec { .note=Note::F, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::D, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx22Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx22NotesZepton
 };
-const NoteSpec sfx23NotesZepton[32] = {
+const NoteSpec sfx23NotesZepton[8] = {
     NoteSpec { .note=Note::C, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::G, .oct=3, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -466,35 +346,11 @@ const NoteSpec sfx23NotesZepton[32] = {
     NoteSpec { .note=Note::E, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=3, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx23Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx23NotesZepton
 };
-const NoteSpec sfx24NotesZepton[32] = {
+const NoteSpec sfx24NotesZepton[8] = {
     NoteSpec { .note=Note::As, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::As, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::As, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -503,35 +359,11 @@ const NoteSpec sfx24NotesZepton[32] = {
     NoteSpec { .note=Note::As, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::As, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::As, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx24Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx24NotesZepton
 };
-const NoteSpec sfx25NotesZepton[32] = {
+const NoteSpec sfx25NotesZepton[8] = {
     NoteSpec { .note=Note::Gs, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Gs, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Gs, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -540,30 +372,6 @@ const NoteSpec sfx25NotesZepton[32] = {
     NoteSpec { .note=Note::Gs, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Gs, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Gs, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx25Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx25NotesZepton
@@ -605,7 +413,7 @@ const NoteSpec sfx26NotesZepton[32] = {
 const TuneSpec sfx26Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 32, .numNotes = 32, .notes = sfx26NotesZepton
 };
-const NoteSpec sfx27NotesZepton[32] = {
+const NoteSpec sfx27NotesZepton[8] = {
     NoteSpec { .note=Note::C, .oct=3, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=3, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=3, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -614,35 +422,11 @@ const NoteSpec sfx27NotesZepton[32] = {
     NoteSpec { .note=Note::C, .oct=3, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=3, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=3, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx27Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx27NotesZepton
 };
-const NoteSpec sfx28NotesZepton[32] = {
+const NoteSpec sfx28NotesZepton[8] = {
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -651,35 +435,11 @@ const NoteSpec sfx28NotesZepton[32] = {
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=2, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx28Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx28NotesZepton
 };
-const NoteSpec sfx30NotesZepton[32] = {
+const NoteSpec sfx30NotesZepton[8] = {
     NoteSpec { .note=Note::F, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::D, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -688,35 +448,11 @@ const NoteSpec sfx30NotesZepton[32] = {
     NoteSpec { .note=Note::E, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::F, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::A, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx30Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx30NotesZepton
 };
-const NoteSpec sfx31NotesZepton[32] = {
+const NoteSpec sfx31NotesZepton[8] = {
     NoteSpec { .note=Note::E, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
@@ -725,30 +461,6 @@ const NoteSpec sfx31NotesZepton[32] = {
     NoteSpec { .note=Note::C, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::E, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::G, .oct=4, .vol=2, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
 };
 const TuneSpec sfx31Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx31NotesZepton
