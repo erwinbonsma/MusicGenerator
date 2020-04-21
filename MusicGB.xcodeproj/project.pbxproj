@@ -16,7 +16,6 @@
 		AA21A1E3244E2336004DD190 /* PatShooterMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */; };
 		AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */; };
 		AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */; };
-		AA21A1EF244F7F60004DD190 /* AlexKiddMusic-Generated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1EE244F7F60004DD190 /* AlexKiddMusic-Generated.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -181,7 +180,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
-				AA21A1EF244F7F60004DD190 /* AlexKiddMusic-Generated.cpp in Sources */,
 				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
 				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
 				AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */,
