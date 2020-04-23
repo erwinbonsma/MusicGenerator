@@ -612,20 +612,49 @@ void TuneGenerator::addBlendSamples(Sample* &curP, Sample* endP) {
 }
 
 void TuneGenerator::createOutgoingBlendSamplesIfNeeded() {
-    const NoteSpec* nxtNote = peekNextNote();
-    if (
-        nxtNote != nullptr && nxtNote->wav == _note->wav && nxtNote->vol == _note->vol &&
-        (nxtNote->fx == Effect::NONE || nxtNote->fx == Effect::SLIDE) &&
-        (_note->fx == Effect::NONE || _note->fx == Effect::SLIDE)
-    ) {
-        // No blend required. Transition is smooth by itself
-        return;
+    const NoteSpec* nxt;
+    const NoteSpec* cur;
+
+    if (_arpeggioNote != nullptr) {
+        if (_pendingArpeggioSamples) {
+            // No blending required during Arpeggio transitions. All notes are the same volume and
+            // wave, without effects.
+            return;
+        }
+
+        nxt = _arpeggioNote + 1;
+        if (nxt == _tuneSpec->notes + _tuneSpec->numNotes) {
+            nxt = nullptr;
+        }
+        cur = _arpeggioNote;
+    } else {
+        nxt = peekNextNote();
+        cur = _note;
+    }
+
+    if (nxt != nullptr && nxt->wav == cur->wav) {
+        if (
+            nxt->vol == cur->vol &&
+            (nxt->fx == Effect::NONE || nxt->fx == Effect::SLIDE || nxt->fx == Effect::FADE_OUT) &&
+            (cur->fx == Effect::NONE || cur->fx == Effect::SLIDE || cur->fx == Effect::FADE_IN)
+        ) {
+            // No blend required. Transition is smooth by itself
+            return;
+        }
+        if (
+            nxt->fx == Effect::SLIDE &&
+            (cur->fx == Effect::NONE || cur->fx == Effect::SLIDE || cur->fx == Effect::FADE_IN)
+        ) {
+            return;
+        }
     }
 
     Sample* buf = _blendBufOut;
     clearBuffer(buf, NUM_BLEND_SAMPLES);
+    int32_t origWaveIndex = _waveIndex;
     CALL_MEMBER_FN(*this, _sampleGeneratorFun)(buf, buf + NUM_BLEND_SAMPLES);
     _numBlendSamples = NUM_BLEND_SAMPLES;
+    _waveIndex = origWaveIndex; // Restore (this avoids artifacts when wave remains unchanged)
 }
 
 void TuneGenerator::createIncomingBlendSamplesIfNeeded() {
