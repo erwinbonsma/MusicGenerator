@@ -11,8 +11,10 @@
 #ifdef STANDALONE
   #include <cstdlib>
   #include <stdio.h>
+  #include <assert.h>
   #define min(x,y) ((x)<(y)?(x):(y))
 #else
+  #define assert(condition)
   namespace Gamebuino_Meta {
 #endif
 #ifdef UNDEFINED
@@ -282,6 +284,18 @@ const WaveTable noiseWave = WaveTable {
     .samples = noiseWaveSamples
 };
 
+const WaveTable* waveTableLookup[9] = {
+    &triangleWave,
+    &tiltedSawWave,
+    &sawWave,
+    &squareWave,
+    &pulseWave,
+    &organWave,
+    &noiseWave,
+    &organWave, // Also use organ for unsupported PHASER
+    nullptr
+};
+
 #define CALL_MEMBER_FN(object, ptrToMember)  ((object).*(ptrToMember))
 
 inline void clearBuffer(int16_t* buf, int num) {
@@ -308,48 +322,17 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec, bool isFirst) {
     }
 }
 
-bool TuneGenerator::isFirstArpeggioNote() const {
-    // Assumes we are in Arpeggio mode (i.e. _arpeggioNote is not null)
-    int numNotes = 1 << arpeggioFactor(_arpeggioNote);
-    const NoteSpec* firstArpNote =
-        _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % numNotes;
-
-    return _note == firstArpNote;
-}
-
-bool TuneGenerator::isLastArpeggioNote() const {
-    // Assumes we are in Arpeggio mode (i.e. _arpeggioNote is not null)
-    int numNotes = 1 << arpeggioFactor(_arpeggioNote);
-    const NoteSpec* lastArpNote =
-        _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % numNotes + numNotes - 1;
-
-    return _note == lastArpNote;
-}
-
 const NoteSpec* TuneGenerator::peekPrevNote() const {
-    if (_note == _tuneSpec->notes) {
-        return nullptr;
-    }
+    assert(_arpeggioNote == nullptr);
 
-    if (_arpeggioNote != nullptr && isFirstArpeggioNote()) {
-        if (_arpeggioNote == _tuneSpec->notes) {
-            return nullptr;
-        } else {
-            return _arpeggioNote - 1;
-        }
-    } else {
-        return _note - 1;
-    }
-
+    return (_note == _tuneSpec->notes) ? nullptr : _note - 1;
 }
 
 const NoteSpec* TuneGenerator::peekNextNote() const {
+    assert(_arpeggioNote == nullptr);
+
     const NoteSpec* nextNote = _note + 1;
     const NoteSpec* lastNote = _tuneSpec->notes + _tuneSpec->numNotes;
-
-    if (_arpeggioNote != nullptr && isLastArpeggioNote()) {
-        nextNote = _arpeggioNote + 1;
-    }
 
     if (nextNote == lastNote) {
         const NoteSpec* resumeNote = _tuneSpec->notes + _tuneSpec->loopStart;
@@ -364,72 +347,105 @@ const NoteSpec* TuneGenerator::peekNextNote() const {
 }
 
 void TuneGenerator::moveToNextNote() {
-    if (_arpeggioNote != nullptr && isLastArpeggioNote()) {
-        // Exit Arpeggio mode
-        _note = _arpeggioNote;
-        _arpeggioNote = nullptr;
-        setSamplesPerNote();
+    if (_arpeggioNote != nullptr) {
+        if (_pendingArpeggioSamples > 0) {
+            if (_note == lastArpeggioNote()) {
+                _note = firstArpeggioNote();
+                return;
+            } else {
+                _note++;
+                return;
+            }
+        } else {
+            exitArpeggio();
+        }
     }
 
     _note = peekNextNote();
 }
 
-void TuneGenerator::startNote() {
-    if (
-        (_note->fx == Effect::ARPEGGIO || _note->fx == Effect::ARPEGGIO_FAST) &&
-        _arpeggioNote == nullptr
-    ) {
-        // Enter Arpeggio mode
-        _arpeggioNote = _note;
-        int factor = arpeggioFactor(_arpeggioNote);
-        _note -= (_note - _tuneSpec->notes) % (1 << factor);
-        _samplesPerNote >>= factor;
-    }
+void TuneGenerator::startArpeggio() {
+    // Enter Arpeggio mode
+    _arpeggioNote = _note;
 
-    _sampleIndex = 0;
+    _note -= (_note - _tuneSpec->notes) % 4;
+    _pendingArpeggioSamples = _samplesPerNote;
 
-    const WaveTable* prevWaveTable = _waveTable;
-    switch (_note->wav) {
-        case WaveForm::TRIANGLE:
-            _waveTable = &triangleWave; break;
-        case WaveForm::NOISE:
-            _waveTable = &noiseWave; break;
-        case WaveForm::TILTED_SAW:
-            _waveTable = &tiltedSawWave; break;
-        case WaveForm::SAW:
-            _waveTable = &sawWave; break;
-        case WaveForm::SQUARE:
-            _waveTable = &squareWave; break;
-        case WaveForm::PULSE:
-            _waveTable = &pulseWave; break;
-        case WaveForm::PHASER: // Unsupported. Use ORGAN instead
-        case WaveForm::ORGAN:
-            _waveTable = &organWave; break;
-        case WaveForm::NONE:
-            _sampleGeneratorFun = &TuneGenerator::addMainSamplesSilence;
-            _waveTable = nullptr;
-            return; // Remainder can be skipped
+    int noteDuration = _arpeggioNote->fx == Effect::ARPEGGIO ? 8 : 4;
+    if (_tuneSpec->noteDuration < 8) {
+        noteDuration >>= 1;
     }
-    if (_waveTable != prevWaveTable) {
-        _waveIndex = 0;
-    }
+    _samplesPerNote = (noteDuration * SAMPLES_PER_TICK) << SAMPLERATE_SHIFT;
+
+    _waveTable = waveTableLookup[(int)_arpeggioNote->wav];
     _maxWaveIndex = _waveTable->numSamples << _waveTable->shift;
 
-    int period = ((int)notePeriod[(int)_note->note]) << (MAX_OCTAVE - _note->oct);
+    if (_arpeggioNote->wav == WaveForm::NOISE) {
+        _sampleGeneratorFun = &TuneGenerator::addMainSamplesNoise;
+    } else {
+        _sampleGeneratorFun = &TuneGenerator::addMainSamples;
+    }
 
+    _volume = _arpeggioNote->vol << VOLUME_SHIFT;
+    _volumeDelta = 0;
+}
+
+void TuneGenerator::exitArpeggio() {
+    assert(_arpeggioNote != nullptr);
+    assert(_pendingArpeggioSamples == 0);
+
+    // Exit Arpeggio mode
+    _note = _arpeggioNote;
+    _arpeggioNote = nullptr;
+    setSamplesPerNote();
+}
+
+void TuneGenerator::startNote() {
+    _sampleIndex = 0;
+
+    if (_arpeggioNote == nullptr) {
+        if (_note->fx == Effect::ARPEGGIO || _note->fx == Effect::ARPEGGIO_FAST) {
+            startArpeggio();
+        } else {
+            // Set wave
+            const WaveTable* prevWaveTable = _waveTable;
+            _waveTable = waveTableLookup[(int)_note->wav];
+            if (_waveTable == nullptr) {
+                _sampleGeneratorFun = &TuneGenerator::addMainSamplesSilence;
+                return;
+            }
+
+            if (_waveTable != prevWaveTable) {
+                _waveIndex = 0;
+            }
+            _maxWaveIndex = _waveTable->numSamples << _waveTable->shift;
+
+            _indexNoiseDelta = 0;
+            if (_note->wav == WaveForm::NOISE) {
+                _maxWaveIndexOrig = _maxWaveIndex;
+                _maxWaveIndex >>= 2;
+            }
+
+            // Set volume
+            _volume = _note->vol << VOLUME_SHIFT;
+            _volumeDelta = 0;
+        }
+    }
+
+    // Ensure note plays at desired frequency
+    int period = ((int)notePeriod[(int)_note->note]) << (MAX_OCTAVE - _note->oct);
     _indexDelta = (
         (_waveTable->numSamples << _waveTable->shift) / period
     ) << (PERIOD_SHIFT - SAMPLERATE_SHIFT);
     _indexDeltaDelta = 0;
 
-    _indexNoiseDelta = 0;
-    if (_note->wav == WaveForm::NOISE) {
-        _maxWaveIndexOrig = _maxWaveIndex;
-        _maxWaveIndex >>= 2;
-    }
+    if (_arpeggioNote != nullptr) {
+        _samplesPerNote = min(_samplesPerNote, _pendingArpeggioSamples);
+        _pendingArpeggioSamples -= _samplesPerNote; // Update beforehand
 
-    _volume = _note->vol << VOLUME_SHIFT;
-    _volumeDelta = 0;
+        // Nothing more needs doing. Effects don't apply.
+        return;
+    }
 
     switch (_note->fx) {
         case Effect::FADE_IN:
@@ -459,7 +475,7 @@ void TuneGenerator::startNote() {
             break;
         case Effect::ARPEGGIO:
         case Effect::ARPEGGIO_FAST:
-            // Ignore (as we are already playing note at Arpeggio speed when we reach this point)
+            assert(false);
             break;
 
         case Effect::DROP: {

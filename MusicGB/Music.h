@@ -109,13 +109,13 @@ class TuneGenerator {
 
 // Current note
     const NoteSpec* _note;
-    const WaveTable* _waveTable;
     const NoteSpec* _arpeggioNote;
+    const WaveTable* _waveTable;
     int32_t _waveIndex, _maxWaveIndex;
     int32_t _indexNoiseDelta, _maxWaveIndexOrig; // Used for NOISE
     int32_t _indexDelta, _indexDeltaDelta;
     int32_t _vibratoDelta, _vibratoDeltaDelta;
-    int16_t _sampleIndex;
+    int16_t _sampleIndex, _pendingArpeggioSamples;
     int32_t _volume, _volumeDelta;
     int16_t _noiseLfsr = 1;
     SampleGeneratorFun _sampleGeneratorFun;
@@ -128,12 +128,17 @@ class TuneGenerator {
         _samplesPerNote = (_tuneSpec->noteDuration * SAMPLES_PER_TICK) << SAMPLERATE_SHIFT;
     }
 
-    int inline arpeggioFactor(const NoteSpec* note) const {
-        // Assumes effect is ARPEGGIO or ARPEGGIO_FAST
-        return (note->fx == Effect::ARPEGGIO_FAST ? 3 : 2) - (_tuneSpec->noteDuration <= 8 ? 1 : 0);
+    const NoteSpec* firstArpeggioNote() const {
+        return _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % 4;
     }
-    bool isFirstArpeggioNote() const;
-    bool isLastArpeggioNote() const;
+    const NoteSpec* lastArpeggioNote() const {
+        return _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % 4 + 3;
+    }
+
+    const WaveTable* waveTableForWaveForm(WaveForm waveForm) const;
+
+    void startArpeggio();
+    void exitArpeggio();
 
     void startNote();
 
