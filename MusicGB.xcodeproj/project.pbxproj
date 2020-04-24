@@ -17,6 +17,7 @@
 		AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */; };
 		AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */; };
 		AA358D782453517100985177 /* AlexKiddMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D762453517100985177 /* AlexKiddMusic.cpp */; };
+		AA358D7D2453797900985177 /* RockForMetalMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D7B2453797900985177 /* RockForMetalMusic.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +59,9 @@
 		AA21A1EE244F7F60004DD190 /* AlexKiddMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AlexKiddMusic-Generated.cpp"; path = "Songs/AlexKiddMusic-Generated.cpp"; sourceTree = "<group>"; };
 		AA358D762453517100985177 /* AlexKiddMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlexKiddMusic.cpp; path = Songs/AlexKiddMusic.cpp; sourceTree = "<group>"; };
 		AA358D772453517100985177 /* AlexKiddMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlexKiddMusic.h; path = Songs/AlexKiddMusic.h; sourceTree = "<group>"; };
+		AA358D792453794000985177 /* RockForMetalMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "RockForMetalMusic-Generated.cpp"; path = "Songs/RockForMetalMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA358D7B2453797900985177 /* RockForMetalMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RockForMetalMusic.cpp; path = Songs/RockForMetalMusic.cpp; sourceTree = "<group>"; };
+		AA358D7C2453797900985177 /* RockForMetalMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RockForMetalMusic.h; path = Songs/RockForMetalMusic.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,9 @@
 				AA21A1DF244E230C004DD190 /* PatShooterMusic-Generated.cpp */,
 				AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */,
 				AA21A1E2244E2336004DD190 /* PatShooterMusic.h */,
+				AA358D792453794000985177 /* RockForMetalMusic-Generated.cpp */,
+				AA358D7B2453797900985177 /* RockForMetalMusic.cpp */,
+				AA358D7C2453797900985177 /* RockForMetalMusic.h */,
 				AA21A1D4244C7452004DD190 /* TheLairMusic-Generated.cpp */,
 				AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */,
 				AA21A1D8244C74C2004DD190 /* TheLairMusic.h */,
@@ -184,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA358D7D2453797900985177 /* RockForMetalMusic.cpp in Sources */,
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
 				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
 				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
