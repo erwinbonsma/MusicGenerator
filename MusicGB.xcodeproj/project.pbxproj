@@ -16,6 +16,7 @@
 		AA21A1E3244E2336004DD190 /* PatShooterMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */; };
 		AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1E6244E2A5F004DD190 /* NeonMusic.cpp */; };
 		AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */; };
+		AA358D782453517100985177 /* AlexKiddMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D762453517100985177 /* AlexKiddMusic.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +56,8 @@
 		AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZeptonMusic.cpp; path = Songs/ZeptonMusic.cpp; sourceTree = "<group>"; };
 		AA21A1EC244F77AD004DD190 /* ZeptonMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZeptonMusic.h; path = Songs/ZeptonMusic.h; sourceTree = "<group>"; };
 		AA21A1EE244F7F60004DD190 /* AlexKiddMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "AlexKiddMusic-Generated.cpp"; path = "Songs/AlexKiddMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA358D762453517100985177 /* AlexKiddMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlexKiddMusic.cpp; path = Songs/AlexKiddMusic.cpp; sourceTree = "<group>"; };
+		AA358D772453517100985177 /* AlexKiddMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlexKiddMusic.h; path = Songs/AlexKiddMusic.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				AA21A1EE244F7F60004DD190 /* AlexKiddMusic-Generated.cpp */,
+				AA358D762453517100985177 /* AlexKiddMusic.cpp */,
+				AA358D772453517100985177 /* AlexKiddMusic.h */,
 				AA21A1DA244CD23F004DD190 /* BumbleBotsMusic-Generated.cpp */,
 				AA21A1DB244CD23F004DD190 /* BumbleBotsMusic.cpp */,
 				AA21A1DC244CD23F004DD190 /* BumbleBotsMusic.h */,
@@ -188,6 +193,7 @@
 				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,
 				AA21A1DE244CD23F004DD190 /* BumbleBotsMusic.cpp in Sources */,
 				AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */,
+				AA358D782453517100985177 /* AlexKiddMusic.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
