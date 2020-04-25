@@ -388,7 +388,7 @@ const NoteSpec sfx10NotesRockForMetal[64] = {
 const TuneSpec sfx10RockForMetal = TuneSpec {
     .noteDuration = 8, .loopStart = 64, .numNotes = 64, .notes = sfx10NotesRockForMetal
 };
-const NoteSpec sfx11NotesRockForMetal[32] = {
+const NoteSpec sfx11NotesRockForMetal[64] = {
     // Notes 1 - 8
     NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
     NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
@@ -424,10 +424,46 @@ const NoteSpec sfx11NotesRockForMetal[32] = {
     NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
     NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
     NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
+
+    // Notes 17 - 24
+    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
+
+    // Notes 25 - 32
+    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
 };
-// Loop, as SFX repeats itself once
+// Even though SFX repeats itself once, do not loop (to ensure patterns do not loop)
 const TuneSpec sfx11RockForMetal = TuneSpec {
-    .noteDuration = 8, .loopStart = 0, .numNotes = 32, .notes = sfx11NotesRockForMetal
+    .noteDuration = 8, .loopStart = 64, .numNotes = 64, .notes = sfx11NotesRockForMetal
 };
 const NoteSpec sfx12NotesRockForMetal[32] = {
     // Notes 1 - 4
@@ -591,42 +627,81 @@ const NoteSpec sfx15NotesRockForMetal[4] = {
 const TuneSpec sfx15RockForMetal = TuneSpec {
     .noteDuration = 8, .loopStart = 0, .numNotes = 4, .notes = sfx15NotesRockForMetal
 };
-const NoteSpec sfx16NotesRockForMetal[32] = {
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+const NoteSpec sfx16NotesRockForMetal[64] = {
+    // Notes 1 - 8
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+
+    // Notes 9 - 16
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+
+    // Notes 17 - 24
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+
+    // Notes 25 - 32
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
 };
 const TuneSpec sfx16RockForMetal = TuneSpec {
-    .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx16NotesRockForMetal
+    .noteDuration = 8, .loopStart = 64, .numNotes = 64, .notes = sfx16NotesRockForMetal
 };
 const NoteSpec sfx17NotesRockForMetal[32] = {
     NoteSpec { .note=Note::A5, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
@@ -703,78 +778,121 @@ const TuneSpec sfx18RockForMetal = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx18NotesRockForMetal
 };
 const NoteSpec sfx19NotesRockForMetal[32] = {
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::F4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::DROP },
-    NoteSpec { .note=Note::F4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    // Notes 1 - 8
+    NoteSpec { .note=Note::E2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+
+    // Notes 9 - 16
+    NoteSpec { .note=Note::E2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::F2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::F2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=6, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
 };
+// Loop, as SFX repeats itself once
 const TuneSpec sfx19RockForMetal = TuneSpec {
-    .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx19NotesRockForMetal
+    .noteDuration = 8, .loopStart = 0, .numNotes = 32, .notes = sfx19NotesRockForMetal
 };
-const NoteSpec sfx20NotesRockForMetal[32] = {
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::D4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::D4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::VIBRATO },
-    NoteSpec { .note=Note::D4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::D4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::VIBRATO },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::VIBRATO },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::VIBRATO },
+const NoteSpec sfx20NotesRockForMetal[64] = {
+    // Notes 1 - 8
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+
+    // Notes 9 - 16
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=1, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=1, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::D4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::D4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+
+    // Notes 17 - 24
+    NoteSpec { .note=Note::E4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=1, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=1, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=1, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=1, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+
+    // Notes 25 - 32
+    NoteSpec { .note=Note::E4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::E4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::D4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::C4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::C4, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::B3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::B3, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::VIBRATO },
 };
 const TuneSpec sfx20RockForMetal = TuneSpec {
-    .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx20NotesRockForMetal
+    .noteDuration = 8, .loopStart = 64, .numNotes = 64, .notes = sfx20NotesRockForMetal
 };
 const NoteSpec sfx21NotesRockForMetal[32] = {
     NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
@@ -1516,116 +1634,410 @@ const NoteSpec sfx40NotesRockForMetal[32] = {
 const TuneSpec sfx40RockForMetal = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx40NotesRockForMetal
 };
-const NoteSpec sfx41NotesRockForMetal[32] = {
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+const NoteSpec sfx41NotesRockForMetal[256] = {
+    // Notes 1 - 8
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
     SILENCE,
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    // Notes 9 - 16
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    // Notes 17 - 24
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    // Notes 25 - 32
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
     SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
     SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    SILENCE,
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
 };
 const TuneSpec sfx41RockForMetal = TuneSpec {
-    .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx41NotesRockForMetal
+    .noteDuration = 2, .loopStart = 256, .numNotes = 256, .notes = sfx41NotesRockForMetal
 };
-const NoteSpec sfx42NotesRockForMetal[32] = {
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+const NoteSpec sfx42NotesRockForMetal[256] = {
+    // Notes 1 - 8
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    // Notes 9 - 16
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
     SILENCE,
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
     SILENCE,
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    // Notes 17 - 24
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    // Notes 25 - 32
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
     SILENCE,
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
-    SILENCE,
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    SILENCE,
-    SILENCE,
-    SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
     SILENCE,
-    SILENCE,
-    SILENCE,
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    SILENCE,
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
 };
 const TuneSpec sfx42RockForMetal = TuneSpec {
-    .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx42NotesRockForMetal
+    .noteDuration = 2, .loopStart = 256, .numNotes = 256, .notes = sfx42NotesRockForMetal
 };
-const NoteSpec sfx43NotesRockForMetal[32] = {
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
+const NoteSpec sfx43NotesRockForMetal[256] = {
+    // Notes 1 - 8
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
     SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
     SILENCE,
     SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
     SILENCE,
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::DROP },
-    NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    // Notes 9 - 16
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    // Notes 17 - 24
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    // Notes 25 - 32
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+    SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE, SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::G3, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+
+    NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G4, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
 };
 const TuneSpec sfx43RockForMetal = TuneSpec {
-    .noteDuration = 16, .loopStart = 0, .numNotes = 32, .notes = sfx43NotesRockForMetal
+    .noteDuration = 2, .loopStart = 256, .numNotes = 256, .notes = sfx43NotesRockForMetal
 };
 const NoteSpec sfx44NotesRockForMetal[32] = {
     NoteSpec { .note=Note::A3, .vol=8, .wav=WaveForm::SAW, .fx=Effect::DROP },
@@ -2166,15 +2578,15 @@ const TuneSpec* pattern7TunesRockForMetal[4] = { &sfx36RockForMetal, &sfx40RockF
 const PatternSpec pattern7RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern7TunesRockForMetal
 };
-const TuneSpec* pattern10TunesRockForMetal[2] = { &sfx15RockForMetal, &sfx11RockForMetal };
+const TuneSpec* pattern10TunesRockForMetal[2] = { &sfx11RockForMetal, &sfx15RockForMetal };
 const PatternSpec pattern10RockForMetal = PatternSpec {
     .numTunes = 2, .tunes = pattern10TunesRockForMetal
 };
-const TuneSpec* pattern11TunesRockForMetal[3] = { &sfx15RockForMetal, &sfx11RockForMetal, &sfx12RockForMetal };
+const TuneSpec* pattern11TunesRockForMetal[3] = { &sfx11RockForMetal, &sfx15RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern11RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern11TunesRockForMetal
 };
-const TuneSpec* pattern12TunesRockForMetal[3] = { &sfx15RockForMetal, &sfx11RockForMetal, &sfx47RockForMetal };
+const TuneSpec* pattern12TunesRockForMetal[3] = { &sfx11RockForMetal, &sfx15RockForMetal, &sfx47RockForMetal };
 const PatternSpec pattern12RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern12TunesRockForMetal
 };
@@ -2319,5 +2731,5 @@ const PatternSpec* song0PatternsRockForMetal[49] = {
     &pattern48RockForMetal,
 };
 const SongSpec song0RockForMetal = SongSpec {
-    .loopStart = 48, .numPatterns = 49, .patterns = song0PatternsRockForMetal
+    .loopStart = 12, .numPatterns = 12, .patterns = song0PatternsRockForMetal
 };
