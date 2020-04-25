@@ -43,7 +43,7 @@ class Note:
     def print(self, part_of_arpeggio):
         if self.volume == 0:
             if part_of_arpeggio:
-                print("%sNoteSpec { .note=Note::%s, .oct=%d, .vol=0, .wav=WaveForm::NONE, .fx=Effect::NONE }," %
+                print("%sNoteSpec { .note=Note::%s%d, .vol=0, .wav=WaveForm::NONE, .fx=Effect::NONE }," %
                     (tab, self.note, self.octave)
                 )
             else:

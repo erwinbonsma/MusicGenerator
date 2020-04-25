@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA21A1B92438A752004DD190 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1B82438A752004DD190 /* main.cpp */; };
 		AA21A1C12438A837004DD190 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1BF2438A837004DD190 /* Music.cpp */; };
 		AA21A1C4243917C8004DD190 /* wav.c in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C2243917C8004DD190 /* wav.c */; };
 		AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D124424970004DD190 /* WavGeneration.cpp */; };
@@ -18,6 +17,7 @@
 		AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1EB244F77AD004DD190 /* ZeptonMusic.cpp */; };
 		AA358D782453517100985177 /* AlexKiddMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D762453517100985177 /* AlexKiddMusic.cpp */; };
 		AA358D7D2453797900985177 /* RockForMetalMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D7B2453797900985177 /* RockForMetalMusic.cpp */; };
+		AA358D7F24543F4100985177 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D7E24543F4100985177 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,7 +34,6 @@
 
 /* Begin PBXFileReference section */
 		AA21A1B52438A752004DD190 /* MusicGB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MusicGB; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA21A1B82438A752004DD190 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AA21A1BF2438A837004DD190 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
 		AA21A1C02438A837004DD190 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
 		AA21A1C2243917C8004DD190 /* wav.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wav.c; sourceTree = "<group>"; };
@@ -62,6 +61,7 @@
 		AA358D792453794000985177 /* RockForMetalMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "RockForMetalMusic-Generated.cpp"; path = "Songs/RockForMetalMusic-Generated.cpp"; sourceTree = "<group>"; };
 		AA358D7B2453797900985177 /* RockForMetalMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RockForMetalMusic.cpp; path = Songs/RockForMetalMusic.cpp; sourceTree = "<group>"; };
 		AA358D7C2453797900985177 /* RockForMetalMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RockForMetalMusic.h; path = Songs/RockForMetalMusic.h; sourceTree = "<group>"; };
+		AA358D7E24543F4100985177 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +97,7 @@
 				AA21A1D6244C7490004DD190 /* Songs */,
 				AA21A1C2243917C8004DD190 /* wav.c */,
 				AA21A1C3243917C8004DD190 /* wav.h */,
-				AA21A1B82438A752004DD190 /* main.cpp */,
+				AA358D7E24543F4100985177 /* main.cpp */,
 				AA21A1BF2438A837004DD190 /* Music.cpp */,
 				AA21A1C02438A837004DD190 /* Music.h */,
 				AA21A1D124424970004DD190 /* WavGeneration.cpp */,
@@ -193,9 +193,9 @@
 			files = (
 				AA358D7D2453797900985177 /* RockForMetalMusic.cpp in Sources */,
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
-				AA21A1B92438A752004DD190 /* main.cpp in Sources */,
 				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
 				AA21A1ED244F77AE004DD190 /* ZeptonMusic.cpp in Sources */,
+				AA358D7F24543F4100985177 /* main.cpp in Sources */,
 				AA21A1C12438A837004DD190 /* Music.cpp in Sources */,
 				AA21A1E3244E2336004DD190 /* PatShooterMusic.cpp in Sources */,
 				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,

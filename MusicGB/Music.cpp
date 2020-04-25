@@ -23,7 +23,7 @@
 
 // Periods in samples for Octave = 0 and Sample rate = 11025, and shifted SPEC_PERIOD_SHIFT bits
 // (for maximum accuracy).
-const int16_t notePeriod[numNotes] = {
+const int16_t notePeriodLookup[numNotes] = {
     21576, 20365, 19222, 18143, 17125, 16164, 15256, 14400, 13592, 12829, 12109, 11429
 };
 constexpr uint8_t SPEC_PERIOD_SHIFT = 5;
@@ -306,6 +306,10 @@ inline void clearBuffer(int16_t* buf, int num) {
     } while (++buf != endP);
 }
 
+inline int notePeriod(const NoteSpec* note) {
+    return ((int)notePeriodLookup[(int)note->note & 0x0f]) << (MAX_OCTAVE - ((int)note->note >> 4));
+}
+
 void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec, bool isFirst) {
     _tuneSpec = tuneSpec;
 
@@ -433,9 +437,8 @@ void TuneGenerator::startNote() {
     }
 
     // Ensure note plays at desired frequency
-    int period = ((int)notePeriod[(int)_note->note]) << (MAX_OCTAVE - _note->oct);
     _indexDelta = (
-        (_waveTable->numSamples << _waveTable->shift) / period
+        (_waveTable->numSamples << _waveTable->shift) / notePeriod(_note)
     ) << (PERIOD_SHIFT - SAMPLERATE_SHIFT);
     _indexDeltaDelta = 0;
 
@@ -464,9 +467,8 @@ void TuneGenerator::startNote() {
                     _volume = prvVolume;
 
                     // Slide from previous frequency to own
-                    int prvPeriod = notePeriod[(int)prvNote->note] << (MAX_OCTAVE - prvNote->oct);
                     int prvIndexDelta = (
-                        (_waveTable->numSamples << _waveTable->shift) / prvPeriod
+                        (_waveTable->numSamples << _waveTable->shift) / notePeriod(prvNote)
                     ) << (PERIOD_SHIFT - SAMPLERATE_SHIFT);
                     _indexDeltaDelta = (_indexDelta - prvIndexDelta) / _samplesPerNote;
                     _indexDelta = prvIndexDelta;
