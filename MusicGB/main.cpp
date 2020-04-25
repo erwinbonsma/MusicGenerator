@@ -298,23 +298,23 @@ const TuneSpec testTune12 = TuneSpec {
 };
 
 int main(int argc, const char * argv[]) {
-    makeWav("test1.wav", testTune1);
-    makeWav("test2.wav", testTune2);
-    makeWav("test3.wav", testTune3);
-    makeWav("test4.wav", testTune4);
-    makeWav("test5a.wav", testTune5a);
-    makeWav("test5b.wav", testTune5b);
-    makeWav("test6a.wav", testTune6a);
-    makeWav("test6b.wav", testTune6b);
-    makeWav("test7.wav", testTune7);
-    makeWav("test8.wav", testTune8);
-    makeWav("test9.wav", testTune9);
-    makeWav("test10.wav", testTune10);
-    makeWav("test11a.wav", testTune11a);
-    makeWav("test11b.wav", testTune11b);
-    makeWav("test12.wav", testTune12);
-
-    makeWav("bb-track1.wav", *bumbleBotsSong);
+//    makeWav("test1.wav", testTune1);
+//    makeWav("test2.wav", testTune2);
+//    makeWav("test3.wav", testTune3);
+//    makeWav("test4.wav", testTune4);
+//    makeWav("test5a.wav", testTune5a);
+//    makeWav("test5b.wav", testTune5b);
+//    makeWav("test6a.wav", testTune6a);
+//    makeWav("test6b.wav", testTune6b);
+//    makeWav("test7.wav", testTune7);
+//    makeWav("test8.wav", testTune8);
+//    makeWav("test9.wav", testTune9);
+//    makeWav("test10.wav", testTune10);
+//    makeWav("test11a.wav", testTune11a);
+//    makeWav("test11b.wav", testTune11b);
+//    makeWav("test12.wav", testTune12);
+//
+//    makeWav("bb-track1.wav", *bumbleBotsSong);
 
 //    makeWav("alex-kidd1.wav", *alexKiddSong1);
 //    makeWav("alex-kidd2.wav", *alexKiddSong2);
@@ -330,13 +330,14 @@ int main(int argc, const char * argv[]) {
 //    makeWav("pat-shooter2.wav", *patShooterSong2);
 
 //    makeWav("rock-for-metal.wav", *rockForMetalSong);
+    makeWav("rock-for-metal-sfx8.wav", *rockForMetalSfx);
 
 //    makeWav("zepton1.wav", *zeptonSong1);
 //    makeWav("zepton2.wav", *zeptonSong2);
 
-    MusicHandler musicHandler;
-    musicHandler.play(bumbleBotsSong, false);
-    makeWav("bb-track1b.wav", musicHandler, true);
+//    MusicHandler musicHandler;
+//    musicHandler.play(bumbleBotsSong, false);
+//    makeWav("bb-track1b.wav", musicHandler, true);
 
     return 0;
 }

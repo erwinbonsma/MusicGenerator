@@ -8,3 +8,5 @@
 #import "RockForMetalMusic-Generated.cpp"
 
 const SongSpec* rockForMetalSong = &song0RockForMetal;
+
+const TuneSpec* rockForMetalSfx = &sfx8RockForMetal;
