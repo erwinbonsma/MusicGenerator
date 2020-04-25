@@ -16,6 +16,7 @@
 #include "BumbleBotsMusic.h"
 #include "NeonMusic.h"
 #include "PatShooterMusic.h"
+#include "RockForMetalMusic.h"
 #include "TheLairMusic.h"
 #include "ZeptonMusic.h"
 
@@ -315,9 +316,9 @@ int main(int argc, const char * argv[]) {
 //
 //    makeWav("bb-track1.wav", *bumbleBotsSong);
 
-    makeWav("alex-kidd1.wav", *alexKiddSong1);
-    makeWav("alex-kidd2.wav", *alexKiddSong2);
-    makeWav("alex-kidd3.wav", *alexKiddSong3);
+//    makeWav("alex-kidd1.wav", *alexKiddSong1);
+//    makeWav("alex-kidd2.wav", *alexKiddSong2);
+//    makeWav("alex-kidd3.wav", *alexKiddSong3);
 
 //    makeWav("neon.wav", *neonSong);
 
@@ -327,6 +328,8 @@ int main(int argc, const char * argv[]) {
 
 //    makeWav("pat-shooter1.wav", *patShooterSong1);
 //    makeWav("pat-shooter2.wav", *patShooterSong2);
+
+    makeWav("rock-for-metal.wav", *rockForMetalSong);
 
 //    makeWav("zepton1.wav", *zeptonSong1);
 //    makeWav("zepton2.wav", *zeptonSong2);
