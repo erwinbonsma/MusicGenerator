@@ -174,6 +174,8 @@ public:
     void stop() { _note = nullptr; }
     bool isDone() { return _note == nullptr; }
 
+    int intensity();
+
     // Adds samples for the tune to the given buffer. Note, it does not overwrite existing values
     // in the buffer, but adds to the existing value so that multiple generators can contribute to
     // the same buffer. This relies on an overarching orchestrator to clear the buffer values at
@@ -201,6 +203,8 @@ class PatternGenerator {
 
 public:
     void setPatternSpec(const PatternSpec* patternSpec, bool isFirst = true);
+
+    int intensity();
 
     // Adds samples for the pattern to the given buffer. Note, it does not overwrite existing values
     // in the buffer, but adds to the existing value so that multiple generators can contribute to
@@ -232,6 +236,8 @@ public:
     void setSongSpec(const SongSpec* songSpec, bool loop);
     void stop() { _pattern = nullptr; };
     bool isDone() { return _pattern == nullptr; }
+
+    int intensity();
 
     // Adds samples for the tune to the given buffer. Note, it does not overwrite existing values
     // in the buffer, but adds to the existing value so that multiple generators can contribute to
@@ -269,6 +275,8 @@ public:
 
     void stopTune() { _tuneGenerator.stop(); }
     void stopSong() { _songGenerator.stop(); }
+
+    int intensity();
 
     void update();
 

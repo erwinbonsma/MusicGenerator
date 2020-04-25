@@ -334,9 +334,9 @@ int main(int argc, const char * argv[]) {
 //    makeWav("zepton1.wav", *zeptonSong1);
 //    makeWav("zepton2.wav", *zeptonSong2);
 
-//    MusicHandler musicHandler;
-//    musicHandler.play(bumbleBotsSong, false);
-//    makeWav("bb-track1b.wav", musicHandler);
+    MusicHandler musicHandler;
+    musicHandler.play(bumbleBotsSong, false);
+    makeWav("bb-track1b.wav", musicHandler, true);
 
     return 0;
 }

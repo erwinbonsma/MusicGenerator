@@ -672,6 +672,22 @@ void TuneGenerator::createIncomingBlendSamplesIfNeeded() {
     CALL_MEMBER_FN(*this, _sampleGeneratorFun)(buf, buf + NUM_BLEND_SAMPLES);
 }
 
+// The intensity is double the volume for normal notes (for maximum accuracy)
+int TuneGenerator::intensity() {
+    if (_note == nullptr) {
+        return 0;
+    }
+    if (_note->fx == Effect::SLIDE && _note != _tuneSpec->notes) {
+        // Average over both volumes
+        return (_note - 1)->vol + _note->vol;
+    }
+    if (_note->fx == Effect::FADE_IN || _note->fx == Effect::FADE_OUT) {
+        // Half the volume
+        return _note->vol;
+    }
+    return _note->vol << 1;
+}
+
 int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
     Sample* bufP = buf;
     Sample* maxBufP = bufP + maxSamples;
@@ -719,6 +735,16 @@ void PatternGenerator::setPatternSpec(const PatternSpec* patternSpec, bool isFir
     }
 }
 
+int PatternGenerator::intensity() {
+    int sum = 0;
+
+    for (int i = _patternSpec->numTunes; --i >= 0; ) {
+        sum += _tuneGens[i].intensity();
+    }
+
+    return sum;
+}
+
 int PatternGenerator::addSamples(Sample* buf, int maxSamples) {
     // The first tune detemines the length of the pattern. It should therefore not loop.
     int numSamples = _tuneGens[0].addSamples(buf, maxSamples);
@@ -753,6 +779,10 @@ void SongGenerator::setSongSpec(const SongSpec* songSpec, bool loop) {
     _pattern = _songSpec->patterns;
     _loop = loop;
     startPattern(true);
+}
+
+int SongGenerator::intensity() {
+    return _pattern == nullptr ? 0 : _patternGenerator.intensity();
 }
 
 int SongGenerator::addSamples(Sample* buf, int maxSamples) {
@@ -795,6 +825,10 @@ void MusicHandler::play(const TuneSpec* tuneSpec) {
 void MusicHandler::play(const SongSpec* songSpec, bool loop) {
     _songGenerator.setSongSpec(songSpec, loop);
     _zeroP = nullptr;
+}
+
+int MusicHandler::intensity() {
+    return _tuneGenerator.intensity() + _songGenerator.intensity();
 }
 
 void MusicHandler::update() {
