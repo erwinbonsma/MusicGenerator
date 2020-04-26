@@ -24,36 +24,54 @@ def numval(line, pos, num_chars):
 def warning(msg):
     print("// WARNING: %s" % (msg))
 
+def note_from_spec(spec):
+    # Note: Adding one to volume to handle range mismatch: PICO-8 range is [0, 7], Gamebuino
+    # range is [0, 8]. This means that volume 1 will never be used. This could be re-introduced
+    # via manual post-processing.
+    volume = numval(spec, 3, 1) + 1
+    pitch = numval(spec, 0, 2) + 24
+    wave_num = numval(spec, 2, 1)
+    if wave_num < 8:
+        wave = waves[wave_num]
+    else:
+        wave = "CUSTOM{0}".format(wave_num - 8)
+    effect = effects[numval(spec, 4, 1)]
+    return Note(pitch, volume, wave, effect)
+
+def adapt_custom_note(source_note, modifier_note):
+    """
+    Adapts a note from a custom instrument for use in another SFX. source_note is the note as specified in
+    the custom SFX, and modifier_note is the note in target SFX where the custom note should be played.
+    """
+    pitch = source_note.pitch + (modifier_note.pitch - 48)
+
+    volume = int(source_note.volume * modifier_note.volume / 8)
+    return Note(pitch, volume, source_note.wave, source_note.effect)
+
 class Note:
-    def __init__(self, spec):
-        self.volume = numval(spec, 3, 1)
-        noderank = numval(spec, 0, 2)
-        self.note = notes[noderank % 12]
-        self.octave = 2 + int(noderank / 12)
-        wave_num = numval(spec, 2, 1)
-        if wave_num < 8:
-            self.wave = waves[wave_num]
-        else:
-            self.wave = "CUSTOM{0}".format(wave_num - 8)
-        self.effect = effects[numval(spec, 4, 1)]
+    def __init__(self, pitch, volume, wave, effect):
+        self.pitch = pitch
+        self.volume = volume
+        self.wave = wave
+        self.effect = effect
 
     def custom_wave(self):
         return self.wave.startswith("CUSTOM")
+
+    def custom_sfx_id(self):
+        return int(self.wave[6:])
 
     def print(self, part_of_arpeggio):
         if self.volume == 0:
             if part_of_arpeggio:
                 print("%sNoteSpec { .note=Note::%s%d, .vol=0, .wav=WaveForm::NONE, .fx=Effect::NONE }," %
-                    (tab, self.note, self.octave)
+                    (tab, notes[self.pitch % 12], int(self.pitch / 12))
                 )
             else:
                 print("%sSILENCE," % (tab))
             return
-        # Note: Adding one to volume to handle range mismatch: PICO-8 range is [0, 7], Gamebuino
-        # range is [0, 8]. This means that volume 1 will never be used. This could be re-introduced
-        # via manual post-processing.
-        print("%sNoteSpec { .note=Note::%s, .oct=%d, .vol=%d, .wav=WaveForm::%s, .fx=Effect::%s }," %
-            (tab, self.note, self.octave, self.volume + 1, self.wave, self.effect)
+        print("%sNoteSpec { .note=Note::%s%d, .vol=%d, .wav=WaveForm::%s, .fx=Effect::%s }," %
+            (tab, notes[self.pitch % 12], int(self.pitch / 12), self.volume, self.wave, self.effect)
         )
 
 class Sfx:
@@ -65,19 +83,26 @@ class Sfx:
         self.loop_start = numval(line, 4, 2)
         self.loop_end = numval(line, 6, 2)
         if self.loop_end == 0:
-            self.num_notes = 32
-            self.loop_end = self.num_notes
+            num_notes = 32
+            self.loop_end = num_notes
             self.loop_start = self.loop_end
         else:
-            self.num_notes = self.loop_end
-        self.notes = [Note(line[8+i*5:13+i*5]) for i in range(self.num_notes)]
+            num_notes = self.loop_end
+        self.notes = [note_from_spec(line[8+i*5:13+i*5]) for i in range(num_notes)]
+
+        self.custom = False
+        for note in self.notes:
+            if note.custom_wave():
+                self.custom = True
+                self.custom_inserted = False
+                break
 
     def loops(self):
         return self.loop_end != self.loop_start
 
     def len(self):
         assert not self.loops()
-        return self.num_notes * self.speed
+        return len(self.notes) * self.speed
 
     def max_volume(self):
         return max([note.volume for note in self.notes])
@@ -91,15 +116,71 @@ class Sfx:
         return False
 
     def check(self):
+        if self.custom:
+            warning("SFX {0} use custom instruments, which may not be rendered correctly".format(
+                self.index
+            ))
+            self.insert_custom_notes()
+            for msg in self.custom_conversion_warnings:
+                warning(msg)
+
+    def insert_custom_notes(self):
+        if self.custom_inserted:
+            return
+
+        self.custom_conversion_warnings = set()
+        custom_speed = self.speed
         for note in self.notes:
             if note.custom_wave():
-                warning("One or more notes in SFX {0} use a custom instrument, which needs replacing".format(
-                    self.index
-                ))
-                break
+                custom_sfx = self.data.sfxs[note.custom_sfx_id()]
+                custom_speed = min(custom_speed, custom_sfx.speed)
+                if (self.speed // custom_sfx.speed) * custom_sfx.speed != self.speed:
+                    self.custom_conversion_warings.add(
+                        "Custom speeds in SFX {0} not compatible with speed of SFX".format(self.index)
+                    )
+
+        custom_notes = []
+        prev_note = None
+        for note in self.notes:
+            if note.custom_wave():
+                if (
+                    note.effect == "DROP" or
+                    prev_note is None or prev_note.wave != note.wave or prev_note.pitch != note.pitch
+                ):
+                    custom_idx = 0
+                else:
+                    print("// NOTE: Continuing custom note in SFX", self.index)
+                custom_sfx = self.data.sfxs[note.custom_sfx_id()]
+                num_notes = self.speed // custom_sfx.speed
+                for i in range(num_notes):
+                    custom_notes.append(adapt_custom_note(custom_sfx.notes[custom_idx], note))
+                    custom_idx += 1
+                    if custom_idx >= custom_sfx.loop_end:
+                        if custom_sfx.loop_start < custom_sfx.loop_end:
+                            custom_idx = custom_sfx.loop_start
+                        else:
+                            custom_idx = 0
+            else:
+                # Repeat the source note multiple times.
+                if note.effect != "NONE":
+                    self.custom_conversion_warnings.add(
+                        "Replicated one or more notes in SFX {0} with an effect".format(self.index)
+                    )
+                custom_notes.extend([note] * (self.speed // custom_speed))
+            prev_note = note
+
+        self.notes = custom_notes
+        self.loop_end *= (self.speed // custom_speed)
+        self.loop_start *= (self.speed // custom_speed)
+        self.speed = custom_speed
+
+        self.custom_inserted = True
 
     def print(self):
-        print("const NoteSpec sfx%dNotes%s[%d] = {" % (self.index, postfix, self.num_notes))
+        if self.custom and not self.custom_inserted:
+            self.insert_custom_notes()
+
+        print("const NoteSpec sfx%dNotes%s[%d] = {" % (self.index, postfix, len(self.notes)))
         for i, note in enumerate(self.notes):
             note.print(self._part_of_arpeggio(i))
         print("};")
