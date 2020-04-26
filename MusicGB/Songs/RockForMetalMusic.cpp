@@ -9,4 +9,4 @@
 
 const SongSpec* rockForMetalSong = &song0RockForMetal;
 
-const TuneSpec* rockForMetalSfx = &sfx43RockForMetal;
+const TuneSpec* rockForMetalSfx = &sfx23RockForMetal;
