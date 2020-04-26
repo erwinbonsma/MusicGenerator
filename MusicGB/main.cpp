@@ -330,7 +330,7 @@ int main(int argc, const char * argv[]) {
 //    makeWav("pat-shooter2.wav", *patShooterSong2);
 
     makeWav("rock-for-metal.wav", *rockForMetalSong);
-    makeWav("rock-for-metal-sfx31.wav", *rockForMetalSfx);
+    makeWav("rock-for-metal-sfx7.wav", *rockForMetalSfx);
 
 //    makeWav("zepton1.wav", *zeptonSong1);
 //    makeWav("zepton2.wav", *zeptonSong2);
