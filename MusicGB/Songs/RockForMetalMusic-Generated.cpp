@@ -3,6 +3,10 @@
 // - Remove duplicate patterns
 // - Replace custom instruments
 
+const TuneSpec silentTuneRockForMetal = TuneSpec {
+    .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = nullptr
+};
+
 const NoteSpec sfx4NotesRockForMetal[64] = {
     // Notes 1 - 8
     NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
@@ -488,46 +492,10 @@ const NoteSpec sfx11NotesRockForMetal[64] = {
     NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
     NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
     NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
-
-    // Notes 17 - 24
-    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
-
-    // Notes 25 - 32
-    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=2, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A2, .vol=3, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=3, .wav=WaveForm::SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A5, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
 };
-// Even though SFX repeats itself once, do not loop (to ensure patterns do not loop)
+// Loop, as SFX repeats itself once
 const TuneSpec sfx11RockForMetal = TuneSpec {
-    .noteDuration = 8, .loopStart = 64, .numNotes = 64, .notes = sfx11NotesRockForMetal
+    .noteDuration = 8, .loopStart = 0, .numNotes = 32, .notes = sfx11NotesRockForMetal
 };
 const NoteSpec sfx12NotesRockForMetal[32] = {
     // Notes 1 - 4
@@ -3284,15 +3252,15 @@ const TuneSpec* pattern7TunesRockForMetal[4] = { &sfx36RockForMetal, &sfx40RockF
 const PatternSpec pattern7RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern7TunesRockForMetal
 };
-const TuneSpec* pattern10TunesRockForMetal[2] = { &sfx11RockForMetal, &sfx15RockForMetal };
+const TuneSpec* pattern10TunesRockForMetal[3] = { &silentTuneRockForMetal, &sfx11RockForMetal, &sfx15RockForMetal };
 const PatternSpec pattern10RockForMetal = PatternSpec {
-    .numTunes = 2, .tunes = pattern10TunesRockForMetal
+    .numTunes = 3, .tunes = pattern10TunesRockForMetal
 };
-const TuneSpec* pattern11TunesRockForMetal[3] = { &sfx11RockForMetal, &sfx15RockForMetal, &sfx12RockForMetal };
+const TuneSpec* pattern11TunesRockForMetal[4] = { &silentTuneRockForMetal, &sfx11RockForMetal, &sfx15RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern11RockForMetal = PatternSpec {
-    .numTunes = 3, .tunes = pattern11TunesRockForMetal
+    .numTunes = 4, .tunes = pattern11TunesRockForMetal
 };
-const TuneSpec* pattern12TunesRockForMetal[3] = { &sfx11RockForMetal, &sfx15RockForMetal, &sfx47RockForMetal };
+const TuneSpec* pattern12TunesRockForMetal[3] = { &sfx47RockForMetal, &sfx11RockForMetal, &sfx15RockForMetal };
 const PatternSpec pattern12RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern12TunesRockForMetal
 };

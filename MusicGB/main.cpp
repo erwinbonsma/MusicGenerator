@@ -321,7 +321,7 @@ int main(int argc, const char * argv[]) {
 //    makeWav("test11a.wav", testTune11a);
 //    makeWav("test11b.wav", testTune11b);
 //    makeWav("test12.wav", testTune12);
-    makeWav("test13.wav", testTune13);
+//    makeWav("test13.wav", testTune13);
 //
 //    makeWav("bb-track1.wav", *bumbleBotsSong);
 
@@ -338,8 +338,8 @@ int main(int argc, const char * argv[]) {
 //    makeWav("pat-shooter1.wav", *patShooterSong1);
 //    makeWav("pat-shooter2.wav", *patShooterSong2);
 
-//    makeWav("rock-for-metal.wav", *rockForMetalSong);
-//    makeWav("rock-for-metal-sfx7.wav", *rockForMetalSfx);
+    makeWav("rock-for-metal.wav", *rockForMetalSong);
+    makeWav("rock-for-metal-sfx7.wav", *rockForMetalSfx);
 
 //    makeWav("zepton1.wav", *zeptonSong1);
 //    makeWav("zepton2.wav", *zeptonSong2);
