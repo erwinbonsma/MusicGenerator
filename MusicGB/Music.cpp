@@ -313,10 +313,18 @@ inline int notePeriod(const NoteSpec* note) {
 void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec, bool isFirst) {
     _tuneSpec = tuneSpec;
 
-    _note = _tuneSpec->notes;
-    _arpeggioNote = nullptr;
     setSamplesPerNote();
 
+    if (_tuneSpec->notes == nullptr) {
+        // The tune is a silent tune. It can be used to control the length of a pattern, when all
+        // the other tunes are looping.
+        _noteIndex = 0;
+        _note = &SILENCE; // Make it non-null, as it's used to signal tune termination
+    } else {
+        _note = _tuneSpec->notes;
+    }
+
+    _arpeggioNote = nullptr;
     _waveTable = nullptr;
     startNote();
     if (isFirst) {
@@ -329,11 +337,19 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec, bool isFirst) {
 const NoteSpec* TuneGenerator::peekPrevNote() const {
     assert(_arpeggioNote == nullptr);
 
+    if (_tuneSpec->notes == nullptr) {
+        return (_noteIndex > 0) ? _note :  nullptr;
+    }
+
     return (_note == _tuneSpec->notes) ? nullptr : _note - 1;
 }
 
 const NoteSpec* TuneGenerator::peekNextNote() const {
     assert(_arpeggioNote == nullptr);
+
+    if (_tuneSpec->notes == nullptr) {
+        return ((_noteIndex + 1) < _tuneSpec->numNotes) ? _note : nullptr;
+    }
 
     const NoteSpec* nextNote = _note + 1;
     const NoteSpec* lastNote = _tuneSpec->notes + _tuneSpec->numNotes;
@@ -351,6 +367,10 @@ const NoteSpec* TuneGenerator::peekNextNote() const {
 }
 
 void TuneGenerator::moveToNextNote() {
+    if (_tuneSpec->notes == nullptr) {
+        ++_noteIndex;
+    }
+
     if (_arpeggioNote != nullptr) {
         if (_pendingArpeggioSamples > 0) {
             if (_note == lastArpeggioNote()) {

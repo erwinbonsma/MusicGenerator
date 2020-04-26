@@ -129,9 +129,14 @@ class TuneGenerator {
     int32_t _indexNoiseDelta, _maxWaveIndexOrig; // Used for NOISE
     int32_t _indexDelta, _indexDeltaDelta;
     int32_t _vibratoDelta, _vibratoDeltaDelta;
-    int16_t _sampleIndex, _pendingArpeggioSamples;
+    int16_t _sampleIndex;
+union {
+    int16_t _pendingArpeggioSamples;
+    int16_t _noteIndex; // Used when tune contains only SILENCE
+};
     int32_t _volume, _volumeDelta;
     int16_t _noiseLfsr = 1;
+
     SampleGeneratorFun _sampleGeneratorFun;
 
 // Blending
