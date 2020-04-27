@@ -1790,7 +1790,7 @@ const NoteSpec sfx36NotesRockForMetal[32] = {
     NoteSpec { .note=Note::G3, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
     NoteSpec { .note=Note::G3, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
     NoteSpec { .note=Note::G3, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
-    NoteSpec { .note=Note::A4, .vol=4, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A4, .vol=4, .wav=WaveForm::PULSE, .fx=Effect::NONE },
     NoteSpec { .note=Note::A3, .vol=4, .wav=WaveForm::SQUARE, .fx=Effect::NONE },
     NoteSpec { .note=Note::A3, .vol=2, .wav=WaveForm::SAW, .fx=Effect::NONE },
     NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::TILTED_SAW, .fx=Effect::NONE },
@@ -4320,5 +4320,5 @@ const PatternSpec* song0PatternsRockForMetal[49] = {
     &pattern48RockForMetal,
 };
 const SongSpec song0RockForMetal = SongSpec {
-    .loopStart = 48, .numPatterns = 48, .patterns = song0PatternsRockForMetal
+    .loopStart = 49, .numPatterns = 49, .patterns = song0PatternsRockForMetal
 };
