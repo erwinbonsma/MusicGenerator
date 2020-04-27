@@ -1601,10 +1601,6 @@ const TuneSpec* pattern1TunesTheLair[2] = { &sfx6TheLair, &sfx7TheLair };
 const PatternSpec pattern1TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern1TunesTheLair
 };
-const TuneSpec* pattern2TunesTheLair[2] = { &sfx6TheLair, &sfx7TheLair };
-const PatternSpec pattern2TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern2TunesTheLair
-};
 const TuneSpec* pattern3TunesTheLair[2] = { &sfx8TheLair, &sfx9TheLair };
 const PatternSpec pattern3TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern3TunesTheLair
@@ -1613,29 +1609,9 @@ const TuneSpec* pattern4TunesTheLair[2] = { &sfx11TheLair, &sfx10TheLair };
 const PatternSpec pattern4TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern4TunesTheLair
 };
-const TuneSpec* pattern5TunesTheLair[2] = { &sfx8TheLair, &sfx9TheLair };
-const PatternSpec pattern5TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern5TunesTheLair
-};
 const TuneSpec* pattern6TunesTheLair[2] = { &sfx11TheLair, &sfx12TheLair };
 const PatternSpec pattern6TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern6TunesTheLair
-};
-const TuneSpec* pattern7TunesTheLair[2] = { &sfx8TheLair, &sfx9TheLair };
-const PatternSpec pattern7TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern7TunesTheLair
-};
-const TuneSpec* pattern8TunesTheLair[2] = { &sfx11TheLair, &sfx10TheLair };
-const PatternSpec pattern8TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern8TunesTheLair
-};
-const TuneSpec* pattern9TunesTheLair[2] = { &sfx8TheLair, &sfx9TheLair };
-const PatternSpec pattern9TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern9TunesTheLair
-};
-const TuneSpec* pattern10TunesTheLair[2] = { &sfx11TheLair, &sfx12TheLair };
-const PatternSpec pattern10TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern10TunesTheLair
 };
 const TuneSpec* pattern11TunesTheLair[2] = { &sfx14TheLair, &sfx13TheLair };
 const PatternSpec pattern11TheLair = PatternSpec {
@@ -1657,25 +1633,9 @@ const TuneSpec* pattern15TunesTheLair[2] = { &sfx20TheLair, &sfx21TheLair };
 const PatternSpec pattern15TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern15TunesTheLair
 };
-const TuneSpec* pattern16TunesTheLair[2] = { &sfx20TheLair, &sfx21TheLair };
-const PatternSpec pattern16TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern16TunesTheLair
-};
-const TuneSpec* pattern17TunesTheLair[2] = { &sfx20TheLair, &sfx21TheLair };
-const PatternSpec pattern17TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern17TunesTheLair
-};
-const TuneSpec* pattern18TunesTheLair[2] = { &sfx20TheLair, &sfx21TheLair };
-const PatternSpec pattern18TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern18TunesTheLair
-};
 const TuneSpec* pattern19TunesTheLair[2] = { &sfx22TheLair, &sfx23TheLair };
 const PatternSpec pattern19TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern19TunesTheLair
-};
-const TuneSpec* pattern20TunesTheLair[2] = { &sfx22TheLair, &sfx23TheLair };
-const PatternSpec pattern20TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern20TunesTheLair
 };
 const TuneSpec* pattern21TunesTheLair[2] = { &sfx24TheLair, &sfx25TheLair };
 const PatternSpec pattern21TheLair = PatternSpec {
@@ -1693,25 +1653,13 @@ const TuneSpec* pattern24TunesTheLair[2] = { &sfx35TheLair, &sfx37TheLair };
 const PatternSpec pattern24TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern24TunesTheLair
 };
-const TuneSpec* pattern25TunesTheLair[2] = { &sfx35TheLair, &sfx37TheLair };
-const PatternSpec pattern25TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern25TunesTheLair
-};
 const TuneSpec* pattern26TunesTheLair[2] = { &sfx35TheLair, &sfx36TheLair };
 const PatternSpec pattern26TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern26TunesTheLair
 };
-const TuneSpec* pattern27TunesTheLair[2] = { &sfx35TheLair, &sfx36TheLair };
-const PatternSpec pattern27TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern27TunesTheLair
-};
 const TuneSpec* pattern28TunesTheLair[2] = { &sfx41TheLair, &sfx38TheLair };
 const PatternSpec pattern28TheLair = PatternSpec {
     .numTunes = 2, .tunes = pattern28TunesTheLair
-};
-const TuneSpec* pattern29TunesTheLair[2] = { &sfx35TheLair, &sfx36TheLair };
-const PatternSpec pattern29TheLair = PatternSpec {
-    .numTunes = 2, .tunes = pattern29TunesTheLair
 };
 const TuneSpec* pattern30TunesTheLair[2] = { &sfx42TheLair, &sfx43TheLair };
 const PatternSpec pattern30TheLair = PatternSpec {
@@ -1746,15 +1694,15 @@ const SongSpec song0TheLair = SongSpec {
 };
 const PatternSpec* song1PatternsTheLair[14] = {
     &pattern1TheLair,
-    &pattern2TheLair,
+    &pattern1TheLair,
     &pattern3TheLair,
     &pattern4TheLair,
-    &pattern5TheLair,
+    &pattern3TheLair,
     &pattern6TheLair,
-    &pattern7TheLair,
-    &pattern8TheLair,
-    &pattern9TheLair,
-    &pattern10TheLair,
+    &pattern3TheLair,
+    &pattern4TheLair,
+    &pattern3TheLair,
+    &pattern6TheLair,
     &pattern11TheLair,
     &pattern12TheLair,
     &pattern13TheLair,
@@ -1765,11 +1713,11 @@ const SongSpec song1TheLair = SongSpec {
 };
 const PatternSpec* song15PatternsTheLair[8] = {
     &pattern15TheLair,
-    &pattern16TheLair,
-    &pattern17TheLair,
-    &pattern18TheLair,
+    &pattern15TheLair,
+    &pattern15TheLair,
+    &pattern15TheLair,
     &pattern19TheLair,
-    &pattern20TheLair,
+    &pattern19TheLair,
     &pattern21TheLair,
     &pattern22TheLair,
 };
@@ -1779,11 +1727,11 @@ const SongSpec song15TheLair = SongSpec {
 const PatternSpec* song23PatternsTheLair[8] = {
     &pattern23TheLair,
     &pattern24TheLair,
-    &pattern25TheLair,
+    &pattern24TheLair,
     &pattern26TheLair,
-    &pattern27TheLair,
+    &pattern26TheLair,
     &pattern28TheLair,
-    &pattern29TheLair,
+    &pattern26TheLair,
     &pattern30TheLair,
 };
 const SongSpec song23TheLair = SongSpec {

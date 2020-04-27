@@ -10,6 +10,4 @@
 
 extern const SongSpec* rockForMetalSong;
 
-extern const TuneSpec* rockForMetalSfx;
-
 #endif /* RockForMetalMusic_h */

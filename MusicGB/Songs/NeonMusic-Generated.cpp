@@ -866,10 +866,6 @@ const TuneSpec* pattern2TunesNeon[4] = { &sfx9Neon, &sfx10Neon, &sfx13Neon, &sfx
 const PatternSpec pattern2Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern2TunesNeon
 };
-const TuneSpec* pattern3TunesNeon[4] = { &sfx8Neon, &sfx10Neon, &sfx13Neon, &sfx15Neon };
-const PatternSpec pattern3Neon = PatternSpec {
-    .numTunes = 4, .tunes = pattern3TunesNeon
-};
 const TuneSpec* pattern4TunesNeon[4] = { &sfx14Neon, &sfx21Neon, &sfx13Neon, &sfx16Neon };
 const PatternSpec pattern4Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern4TunesNeon
@@ -898,10 +894,6 @@ const TuneSpec* pattern10TunesNeon[4] = { &sfx9Neon, &sfx10Neon, &sfx13Neon, &sf
 const PatternSpec pattern10Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern10TunesNeon
 };
-const TuneSpec* pattern11TunesNeon[4] = { &sfx8Neon, &sfx10Neon, &sfx13Neon, &sfx17Neon };
-const PatternSpec pattern11Neon = PatternSpec {
-    .numTunes = 4, .tunes = pattern11TunesNeon
-};
 const TuneSpec* pattern12TunesNeon[4] = { &sfx28Neon, &sfx21Neon, &sfx26Neon, &sfx18Neon };
 const PatternSpec pattern12Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern12TunesNeon
@@ -927,7 +919,7 @@ const PatternSpec* song0PatternsNeon[17] = {
     &pattern0Neon,
     &pattern1Neon,
     &pattern2Neon,
-    &pattern3Neon,
+    &pattern1Neon,
     &pattern4Neon,
     &pattern5Neon,
     &pattern6Neon,
@@ -935,7 +927,7 @@ const PatternSpec* song0PatternsNeon[17] = {
     &pattern8Neon,
     &pattern9Neon,
     &pattern10Neon,
-    &pattern11Neon,
+    &pattern9Neon,
     &pattern12Neon,
     &pattern13Neon,
     &pattern14Neon,

@@ -474,37 +474,17 @@ const TuneSpec* pattern3TunesZepton[4] = { &sfx11Zepton, &sfx16Zepton, &sfx14Zep
 const PatternSpec pattern3Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern3TunesZepton
 };
-const TuneSpec* pattern4TunesZepton[4] = { &sfx10Zepton, &sfx16Zepton, &sfx14Zepton, &sfx25Zepton };
-const PatternSpec pattern4Zepton = PatternSpec {
-    .numTunes = 4, .tunes = pattern4TunesZepton
-};
-const TuneSpec* pattern5TunesZepton[4] = { &sfx9Zepton, &sfx16Zepton, &sfx14Zepton, &sfx24Zepton };
-const PatternSpec pattern5Zepton = PatternSpec {
-    .numTunes = 4, .tunes = pattern5TunesZepton
-};
 const TuneSpec* pattern6TunesZepton[4] = { &sfx12Zepton, &sfx16Zepton, &sfx14Zepton, &sfx27Zepton };
 const PatternSpec pattern6Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern6TunesZepton
-};
-const TuneSpec* pattern7TunesZepton[4] = { &sfx8Zepton, &sfx16Zepton, &sfx14Zepton, &sfx28Zepton };
-const PatternSpec pattern7Zepton = PatternSpec {
-    .numTunes = 4, .tunes = pattern7TunesZepton
 };
 const TuneSpec* pattern8TunesZepton[4] = { &sfx18Zepton, &sfx20Zepton, &sfx22Zepton, &sfx30Zepton };
 const PatternSpec pattern8Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern8TunesZepton
 };
-const TuneSpec* pattern9TunesZepton[4] = { &sfx18Zepton, &sfx20Zepton, &sfx22Zepton, &sfx30Zepton };
-const PatternSpec pattern9Zepton = PatternSpec {
-    .numTunes = 4, .tunes = pattern9TunesZepton
-};
 const TuneSpec* pattern10TunesZepton[4] = { &sfx19Zepton, &sfx21Zepton, &sfx23Zepton, &sfx31Zepton };
 const PatternSpec pattern10Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern10TunesZepton
-};
-const TuneSpec* pattern11TunesZepton[4] = { &sfx19Zepton, &sfx21Zepton, &sfx23Zepton, &sfx31Zepton };
-const PatternSpec pattern11Zepton = PatternSpec {
-    .numTunes = 4, .tunes = pattern11TunesZepton
 };
 
 const PatternSpec* song0PatternsZepton[8] = {
@@ -512,19 +492,19 @@ const PatternSpec* song0PatternsZepton[8] = {
     &pattern1Zepton,
     &pattern2Zepton,
     &pattern3Zepton,
-    &pattern4Zepton,
-    &pattern5Zepton,
+    &pattern2Zepton,
+    &pattern1Zepton,
     &pattern6Zepton,
-    &pattern7Zepton,
+    &pattern0Zepton,
 };
 const SongSpec song0Zepton = SongSpec {
     .loopStart = 0, .numPatterns = 8, .patterns = song0PatternsZepton
 };
 const PatternSpec* song8PatternsZepton[4] = {
     &pattern8Zepton,
-    &pattern9Zepton,
+    &pattern8Zepton,
     &pattern10Zepton,
-    &pattern11Zepton,
+    &pattern10Zepton,
 };
 const SongSpec song8Zepton = SongSpec {
     .loopStart = 0, .numPatterns = 4, .patterns = song8PatternsZepton
