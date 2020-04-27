@@ -25,10 +25,12 @@ def warning(msg):
     print("// WARNING: %s" % (msg))
 
 def note_from_spec(spec):
-    # Note: Adding one to volume to handle range mismatch: PICO-8 range is [0, 7], Gamebuino
-    # range is [0, 8]. This means that volume 1 will never be used. This could be re-introduced
-    # via manual post-processing.
-    volume = numval(spec, 3, 1) + 1
+    volume = numval(spec, 3, 1)
+    if volume > 0:
+        # Note: Adding one to volume to handle range mismatch: PICO-8 range is [0, 7], Gamebuino
+        # range is [0, 8]. This means that volume 1 will never be used. This could be re-introduced
+        # via manual post-processing.
+        volume += 1
     pitch = numval(spec, 0, 2) + 24
     wave_num = numval(spec, 2, 1)
     if wave_num < 8:
@@ -46,6 +48,9 @@ def adapt_custom_note(source_note, modifier_note):
     pitch = source_note.pitch + (modifier_note.pitch - 48)
 
     volume = int(source_note.volume * modifier_note.volume / 8)
+    if source_note.volume * modifier_note.volume > 0:
+        # Ensure that notes with volume never become fully silent
+        volume = max(1, volume)
     return Note(pitch, volume, source_note.wave, source_note.effect)
 
 class Note:
@@ -72,6 +77,11 @@ class Note:
             return
         print("%sNoteSpec { .note=Note::%s%d, .vol=%d, .wav=WaveForm::%s, .fx=Effect::%s }," %
             (tab, notes[self.pitch % 12], int(self.pitch / 12), self.volume, self.wave, self.effect)
+        )
+
+    def __str__(self):
+        return "note={0}{1}, vol={2}, wav={3}, effect={4}".format(
+            notes[self.pitch % 12], int(self.pitch / 12), self.volume, self.wave, self.effect
         )
 
 class Sfx:
@@ -141,18 +151,16 @@ class Sfx:
 
         custom_notes = []
         prev_note = None
-        for note in self.notes:
+        for i, note in enumerate(self.notes):
             if note.custom_wave():
                 if (
                     note.effect == "DROP" or
                     prev_note is None or prev_note.wave != note.wave or prev_note.pitch != note.pitch
                 ):
                     custom_idx = 0
-                else:
-                    print("// NOTE: Continuing custom note in SFX", self.index)
                 custom_sfx = self.data.sfxs[note.custom_sfx_id()]
                 num_notes = self.speed // custom_sfx.speed
-                for i in range(num_notes):
+                for _ in range(num_notes):
                     custom_notes.append(adapt_custom_note(custom_sfx.notes[custom_idx], note))
                     custom_idx += 1
                     if custom_idx >= custom_sfx.loop_end:
