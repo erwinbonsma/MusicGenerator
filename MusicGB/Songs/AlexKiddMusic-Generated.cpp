@@ -38,7 +38,6 @@ const NoteSpec sfx2NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Ds3, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX2 len=512
 const TuneSpec sfx2AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx2NotesAlexKidd
 };
@@ -76,7 +75,6 @@ const NoteSpec sfx3NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Ds4, .vol=5, .wav=WaveForm::SQUARE, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX3 len=512
 const TuneSpec sfx3AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx3NotesAlexKidd
 };
@@ -114,7 +112,6 @@ const NoteSpec sfx4NotesAlexKidd[32] = {
     NoteSpec { .note=Note::G3, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX4 len=512
 const TuneSpec sfx4AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx4NotesAlexKidd
 };
@@ -152,7 +149,6 @@ const NoteSpec sfx5NotesAlexKidd[32] = {
     NoteSpec { .note=Note::G4, .vol=0, .wav=WaveForm::NONE, .fx=Effect::NONE },
     NoteSpec { .note=Note::Ds4, .vol=0, .wav=WaveForm::NONE, .fx=Effect::NONE },
 };
-// SFX5 len=512
 const TuneSpec sfx5AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx5NotesAlexKidd
 };
@@ -190,7 +186,6 @@ const NoteSpec sfx6NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX6 len=512
 const TuneSpec sfx6AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx6NotesAlexKidd
 };
@@ -228,7 +223,6 @@ const NoteSpec sfx7NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX7 len=512
 const TuneSpec sfx7AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx7NotesAlexKidd
 };
@@ -266,7 +260,6 @@ const NoteSpec sfx8NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Gs3, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX8 len=512
 const TuneSpec sfx8AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx8NotesAlexKidd
 };
@@ -304,7 +297,6 @@ const NoteSpec sfx9NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX9 len=512
 const TuneSpec sfx9AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx9NotesAlexKidd
 };
@@ -342,7 +334,6 @@ const NoteSpec sfx10NotesAlexKidd[32] = {
     NoteSpec { .note=Note::As3, .vol=5, .wav=WaveForm::TILTED_SAW, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX10 len=512
 const TuneSpec sfx10AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx10NotesAlexKidd
 };
@@ -380,7 +371,6 @@ const NoteSpec sfx11NotesAlexKidd[32] = {
     NoteSpec { .note=Note::D5, .vol=5, .wav=WaveForm::SQUARE, .fx=Effect::ARPEGGIO },
     NoteSpec { .note=Note::As4, .vol=5, .wav=WaveForm::SQUARE, .fx=Effect::ARPEGGIO },
 };
-// SFX11 len=512
 const TuneSpec sfx11AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx11NotesAlexKidd
 };
@@ -418,7 +408,6 @@ const NoteSpec sfx12NotesAlexKidd[32] = {
     NoteSpec { .note=Note::B5, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX12 len=512
 const TuneSpec sfx12AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx12NotesAlexKidd
 };
@@ -456,7 +445,6 @@ const NoteSpec sfx13NotesAlexKidd[32] = {
     NoteSpec { .note=Note::B5, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::NONE },
     NoteSpec { .note=Note::B5, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
 };
-// SFX13 len=512
 const TuneSpec sfx13AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx13NotesAlexKidd
 };
@@ -494,7 +482,6 @@ const NoteSpec sfx14NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX14 len=512
 const TuneSpec sfx14AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx14NotesAlexKidd
 };
@@ -532,7 +519,6 @@ const NoteSpec sfx18NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX18 len=512
 const TuneSpec sfx18AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx18NotesAlexKidd
 };
@@ -570,7 +556,6 @@ const NoteSpec sfx19NotesAlexKidd[32] = {
     NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX19 len=1024
 const TuneSpec sfx19AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx19NotesAlexKidd
 };
@@ -608,7 +593,6 @@ const NoteSpec sfx20NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX20 len=1024
 const TuneSpec sfx20AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx20NotesAlexKidd
 };
@@ -646,7 +630,6 @@ const NoteSpec sfx22NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX22 len=448
 const TuneSpec sfx22AlexKidd = TuneSpec {
     .noteDuration = 14, .loopStart = 32, .numNotes = 32, .notes = sfx22NotesAlexKidd
 };
@@ -684,7 +667,6 @@ const NoteSpec sfx23NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX23 len=448
 const TuneSpec sfx23AlexKidd = TuneSpec {
     .noteDuration = 14, .loopStart = 32, .numNotes = 32, .notes = sfx23NotesAlexKidd
 };
@@ -722,7 +704,6 @@ const NoteSpec sfx29NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Ds3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
 };
-// SFX29 len=512
 const TuneSpec sfx29AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx29NotesAlexKidd
 };
@@ -760,7 +741,6 @@ const NoteSpec sfx30NotesAlexKidd[32] = {
     NoteSpec { .note=Note::As2, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
 };
-// SFX30 len=512
 const TuneSpec sfx30AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx30NotesAlexKidd
 };
@@ -798,7 +778,6 @@ const NoteSpec sfx31NotesAlexKidd[32] = {
     NoteSpec { .note=Note::D3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
 };
-// SFX31 len=512
 const TuneSpec sfx31AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx31NotesAlexKidd
 };
@@ -836,7 +815,6 @@ const NoteSpec sfx32NotesAlexKidd[32] = {
     NoteSpec { .note=Note::G2, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     SILENCE,
 };
-// SFX32 len=512
 const TuneSpec sfx32AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx32NotesAlexKidd
 };
@@ -874,7 +852,6 @@ const NoteSpec sfx33NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Ds5, .vol=5, .wav=WaveForm::PULSE, .fx=Effect::NONE },
     SILENCE,
 };
-// SFX33 len=512
 const TuneSpec sfx33AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx33NotesAlexKidd
 };
@@ -912,7 +889,6 @@ const NoteSpec sfx34NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX34 len=512
 const TuneSpec sfx34AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx34NotesAlexKidd
 };
@@ -950,7 +926,6 @@ const NoteSpec sfx35NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX35 len=1024
 const TuneSpec sfx35AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx35NotesAlexKidd
 };
@@ -988,7 +963,6 @@ const NoteSpec sfx36NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX36 len=1024
 const TuneSpec sfx36AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx36NotesAlexKidd
 };
@@ -1026,7 +1000,6 @@ const NoteSpec sfx37NotesAlexKidd[32] = {
     NoteSpec { .note=Note::F5, .vol=5, .wav=WaveForm::PULSE, .fx=Effect::NONE },
     SILENCE,
 };
-// SFX37 len=512
 const TuneSpec sfx37AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx37NotesAlexKidd
 };
@@ -1064,7 +1037,6 @@ const NoteSpec sfx38NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX38 len=512
 const TuneSpec sfx38AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx38NotesAlexKidd
 };
@@ -1102,7 +1074,6 @@ const NoteSpec sfx39NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX39 len=1024
 const TuneSpec sfx39AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx39NotesAlexKidd
 };
@@ -1140,7 +1111,6 @@ const NoteSpec sfx40NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Fs3, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
     SILENCE,
 };
-// SFX40 len=1024
 const TuneSpec sfx40AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx40NotesAlexKidd
 };
@@ -1178,7 +1148,6 @@ const NoteSpec sfx41NotesAlexKidd[32] = {
     NoteSpec { .note=Note::D5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     NoteSpec { .note=Note::D5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
 };
-// SFX41 len=512
 const TuneSpec sfx41AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx41NotesAlexKidd
 };
@@ -1216,7 +1185,6 @@ const NoteSpec sfx42NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Ds5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     NoteSpec { .note=Note::Ds5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
 };
-// SFX42 len=512
 const TuneSpec sfx42AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx42NotesAlexKidd
 };
@@ -1254,7 +1222,6 @@ const NoteSpec sfx43NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX43 len=512
 const TuneSpec sfx43AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx43NotesAlexKidd
 };
@@ -1292,7 +1259,6 @@ const NoteSpec sfx44NotesAlexKidd[32] = {
     NoteSpec { .note=Note::F5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     SILENCE,
 };
-// SFX44 len=512
 const TuneSpec sfx44AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx44NotesAlexKidd
 };
@@ -1330,7 +1296,6 @@ const NoteSpec sfx45NotesAlexKidd[32] = {
     NoteSpec { .note=Note::D5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
     NoteSpec { .note=Note::D5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
 };
-// SFX45 len=512
 const TuneSpec sfx45AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx45NotesAlexKidd
 };
@@ -1368,7 +1333,6 @@ const NoteSpec sfx46NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX46 len=512
 const TuneSpec sfx46AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx46NotesAlexKidd
 };
@@ -1406,7 +1370,6 @@ const NoteSpec sfx48NotesAlexKidd[32] = {
     NoteSpec { .note=Note::C3, .vol=4, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX48 len=512
 const TuneSpec sfx48AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx48NotesAlexKidd
 };
@@ -1444,7 +1407,6 @@ const NoteSpec sfx49NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX49 len=512
 const TuneSpec sfx49AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx49NotesAlexKidd
 };
@@ -1482,7 +1444,6 @@ const NoteSpec sfx50NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX50 len=512
 const TuneSpec sfx50AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx50NotesAlexKidd
 };
@@ -1520,7 +1481,6 @@ const NoteSpec sfx51NotesAlexKidd[32] = {
     NoteSpec { .note=Note::Cs4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
     NoteSpec { .note=Note::Cs4, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_IN },
 };
-// SFX51 len=1024
 const TuneSpec sfx51AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx51NotesAlexKidd
 };
@@ -1558,7 +1518,6 @@ const NoteSpec sfx52NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX52 len=512
 const TuneSpec sfx52AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx52NotesAlexKidd
 };
@@ -1596,7 +1555,6 @@ const NoteSpec sfx53NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX53 len=320
 const TuneSpec sfx53AlexKidd = TuneSpec {
     .noteDuration = 10, .loopStart = 32, .numNotes = 32, .notes = sfx53NotesAlexKidd
 };
@@ -1634,7 +1592,6 @@ const NoteSpec sfx54NotesAlexKidd[32] = {
     NoteSpec { .note=Note::E3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
     SILENCE,
 };
-// SFX54 len=512
 const TuneSpec sfx54AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx54NotesAlexKidd
 };
@@ -1672,7 +1629,6 @@ const NoteSpec sfx55NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX55 len=512
 const TuneSpec sfx55AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx55NotesAlexKidd
 };
@@ -1710,7 +1666,6 @@ const NoteSpec sfx56NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX56 len=320
 const TuneSpec sfx56AlexKidd = TuneSpec {
     .noteDuration = 10, .loopStart = 32, .numNotes = 32, .notes = sfx56NotesAlexKidd
 };
@@ -1748,7 +1703,6 @@ const NoteSpec sfx57NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX57 len=512
 const TuneSpec sfx57AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx57NotesAlexKidd
 };
@@ -1786,7 +1740,6 @@ const NoteSpec sfx58NotesAlexKidd[32] = {
     NoteSpec { .note=Note::C6, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::C6, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
 };
-// SFX58 len=512
 const TuneSpec sfx58AlexKidd = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx58NotesAlexKidd
 };
@@ -1824,7 +1777,6 @@ const NoteSpec sfx59NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX59 len=320
 const TuneSpec sfx59AlexKidd = TuneSpec {
     .noteDuration = 10, .loopStart = 32, .numNotes = 32, .notes = sfx59NotesAlexKidd
 };
@@ -1862,7 +1814,6 @@ const NoteSpec sfx60NotesAlexKidd[32] = {
     SILENCE,
     SILENCE,
 };
-// SFX60 len=320
 const TuneSpec sfx60AlexKidd = TuneSpec {
     .noteDuration = 10, .loopStart = 32, .numNotes = 32, .notes = sfx60NotesAlexKidd
 };
@@ -1900,7 +1851,6 @@ const NoteSpec sfx61NotesAlexKidd[32] = {
     NoteSpec { .note=Note::C6, .vol=2, .wav=WaveForm::NOISE, .fx=Effect::NONE },
     NoteSpec { .note=Note::C3, .vol=3, .wav=WaveForm::NOISE, .fx=Effect::FADE_OUT },
 };
-// SFX61 len=1024
 const TuneSpec sfx61AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx61NotesAlexKidd
 };
@@ -1938,7 +1888,6 @@ const NoteSpec sfx62NotesAlexKidd[32] = {
     SILENCE,
     NoteSpec { .note=Note::A5, .vol=8, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
 };
-// SFX62 len=1024
 const TuneSpec sfx62AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx62NotesAlexKidd
 };
@@ -1976,158 +1925,127 @@ const NoteSpec sfx63NotesAlexKidd[32] = {
     NoteSpec { .note=Note::B5, .vol=8, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::B5, .vol=8, .wav=WaveForm::PULSE, .fx=Effect::FADE_OUT },
 };
-// SFX63 len=1024
 const TuneSpec sfx63AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx63NotesAlexKidd
 };
 
 const TuneSpec *const pattern0TunesAlexKidd[3] = { &sfx2AlexKidd, &sfx3AlexKidd, &sfx12AlexKidd };
-// PATTERN0: SFX2 SFX3 SFX12
 const PatternSpec pattern0AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern0TunesAlexKidd
 };
 const TuneSpec *const pattern1TunesAlexKidd[3] = { &sfx4AlexKidd, &sfx5AlexKidd, &sfx13AlexKidd };
-// PATTERN1: SFX4 SFX5 SFX13
 const PatternSpec pattern1AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern1TunesAlexKidd
 };
 const TuneSpec *const pattern2TunesAlexKidd[3] = { &sfx6AlexKidd, &sfx7AlexKidd, &sfx13AlexKidd };
-// PATTERN2: SFX6 SFX7 SFX13
 const PatternSpec pattern2AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern2TunesAlexKidd
 };
 const TuneSpec *const pattern3TunesAlexKidd[3] = { &sfx8AlexKidd, &sfx9AlexKidd, &sfx12AlexKidd };
-// PATTERN3: SFX8 SFX9 SFX12
 const PatternSpec pattern3AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern3TunesAlexKidd
 };
 const TuneSpec *const pattern4TunesAlexKidd[3] = { &sfx10AlexKidd, &sfx11AlexKidd, &sfx12AlexKidd };
-// PATTERN4: SFX10 SFX11 SFX12
 const PatternSpec pattern4AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern4TunesAlexKidd
 };
 const TuneSpec *const pattern5TunesAlexKidd[3] = { &sfx6AlexKidd, &sfx7AlexKidd, &sfx14AlexKidd };
-// PATTERN5: SFX6 SFX7 SFX14
 const PatternSpec pattern5AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern5TunesAlexKidd
 };
 const TuneSpec *const pattern6TunesAlexKidd[2] = { &sfx22AlexKidd, &sfx23AlexKidd };
-// PATTERN6: SFX22 SFX23
 const PatternSpec pattern6AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern6TunesAlexKidd
 };
 const TuneSpec *const pattern7TunesAlexKidd[3] = { &sfx29AlexKidd, &sfx33AlexKidd, &sfx48AlexKidd };
-// PATTERN7: SFX29 SFX33 SFX48
 const PatternSpec pattern7AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern7TunesAlexKidd
 };
 const TuneSpec *const pattern8TunesAlexKidd[3] = { &sfx30AlexKidd, &sfx34AlexKidd, &sfx48AlexKidd };
-// PATTERN8: SFX30 SFX34 SFX48
 const PatternSpec pattern8AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern8TunesAlexKidd
 };
 const TuneSpec *const pattern9TunesAlexKidd[3] = { &sfx31AlexKidd, &sfx37AlexKidd, &sfx48AlexKidd };
-// PATTERN9: SFX31 SFX37 SFX48
 const PatternSpec pattern9AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern9TunesAlexKidd
 };
 const TuneSpec *const pattern10TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx38AlexKidd, &sfx48AlexKidd };
-// PATTERN10: SFX32 SFX38 SFX48
 const PatternSpec pattern10AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern10TunesAlexKidd
 };
 const TuneSpec *const pattern14TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx41AlexKidd, &sfx48AlexKidd };
-// PATTERN14: SFX32 SFX41 SFX48
 const PatternSpec pattern14AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern14TunesAlexKidd
 };
 const TuneSpec *const pattern15TunesAlexKidd[3] = { &sfx29AlexKidd, &sfx42AlexKidd, &sfx48AlexKidd };
-// PATTERN15: SFX29 SFX42 SFX48
 const PatternSpec pattern15AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern15TunesAlexKidd
 };
 const TuneSpec *const pattern16TunesAlexKidd[3] = { &sfx30AlexKidd, &sfx43AlexKidd, &sfx48AlexKidd };
-// PATTERN16: SFX30 SFX43 SFX48
 const PatternSpec pattern16AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern16TunesAlexKidd
 };
 const TuneSpec *const pattern17TunesAlexKidd[3] = { &sfx31AlexKidd, &sfx44AlexKidd, &sfx48AlexKidd };
-// PATTERN17: SFX31 SFX44 SFX48
 const PatternSpec pattern17AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern17TunesAlexKidd
 };
 const TuneSpec *const pattern18TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx45AlexKidd, &sfx48AlexKidd };
-// PATTERN18: SFX32 SFX45 SFX48
 const PatternSpec pattern18AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern18TunesAlexKidd
 };
 const TuneSpec *const pattern22TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx46AlexKidd, &sfx48AlexKidd };
-// PATTERN22: SFX32 SFX46 SFX48
 const PatternSpec pattern22AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern22TunesAlexKidd
 };
 const TuneSpec *const pattern23TunesAlexKidd[3] = { &sfx49AlexKidd, &sfx50AlexKidd, &sfx58AlexKidd };
-// PATTERN23: SFX49 SFX50 SFX58
 const PatternSpec pattern23AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern23TunesAlexKidd
 };
 const TuneSpec *const pattern25TunesAlexKidd[3] = { &sfx52AlexKidd, &sfx54AlexKidd, &sfx58AlexKidd };
-// PATTERN25: SFX52 SFX54 SFX58
 const PatternSpec pattern25AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern25TunesAlexKidd
 };
 const TuneSpec *const pattern26TunesAlexKidd[3] = { &sfx55AlexKidd, &sfx57AlexKidd, &sfx58AlexKidd };
-// PATTERN26: SFX55 SFX57 SFX58
 const PatternSpec pattern26AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern26TunesAlexKidd
 };
 const TuneSpec *const pattern27TunesAlexKidd[2] = { &sfx59AlexKidd, &sfx53AlexKidd };
-// PATTERN27: SFX59 SFX53
 const PatternSpec pattern27AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern27TunesAlexKidd
 };
 const TuneSpec *const pattern28TunesAlexKidd[2] = { &sfx60AlexKidd, &sfx53AlexKidd };
-// PATTERN28: SFX60 SFX53
 const PatternSpec pattern28AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern28TunesAlexKidd
 };
 const TuneSpec *const pattern30TunesAlexKidd[2] = { &sfx56AlexKidd, &sfx53AlexKidd };
-// PATTERN30: SFX56 SFX53
 const PatternSpec pattern30AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern30TunesAlexKidd
 };
 const TuneSpec *const pattern31TunesAlexKidd[2] = { &sfx62AlexKidd, &sfx40AlexKidd };
-// PATTERN31: SFX62 SFX40
 const PatternSpec pattern31AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern31TunesAlexKidd
 };
 const TuneSpec *const pattern32TunesAlexKidd[2] = { &sfx63AlexKidd, &sfx51AlexKidd };
-// PATTERN32: SFX63 SFX51
 const PatternSpec pattern32AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern32TunesAlexKidd
 };
 const TuneSpec *const pattern33TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx19AlexKidd };
-// PATTERN33: SFX61 SFX19
 const PatternSpec pattern33AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern33TunesAlexKidd
 };
 const TuneSpec *const pattern35TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx20AlexKidd };
-// PATTERN35: SFX61 SFX20
 const PatternSpec pattern35AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern35TunesAlexKidd
 };
 const TuneSpec *const pattern36TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx35AlexKidd };
-// PATTERN36: SFX61 SFX35
 const PatternSpec pattern36AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern36TunesAlexKidd
 };
 const TuneSpec *const pattern37TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx36AlexKidd };
-// PATTERN37: SFX61 SFX36
 const PatternSpec pattern37AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern37TunesAlexKidd
 };
 const TuneSpec *const pattern38TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx39AlexKidd };
-// PATTERN38: SFX61 SFX39
 const PatternSpec pattern38AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern38TunesAlexKidd
 };
