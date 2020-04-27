@@ -396,7 +396,7 @@ void TuneGenerator::startArpeggio() {
     _pendingArpeggioSamples = _samplesPerNote;
 
     int noteDuration = _arpeggioNote->fx == Effect::ARPEGGIO ? 8 : 4;
-    if (_tuneSpec->noteDuration < 8) {
+    if (_tuneSpec->noteDuration <= 8) {
         noteDuration >>= 1;
     }
     _samplesPerNote = (noteDuration * SAMPLES_PER_TICK) << SAMPLERATE_SHIFT;
