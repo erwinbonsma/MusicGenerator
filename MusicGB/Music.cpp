@@ -296,6 +296,10 @@ const WaveTable* waveTableLookup[9] = {
     nullptr
 };
 
+const NoteSpec silentNote = NoteSpec {
+    .note = Note::C4, .vol = 0, .wav = WaveForm::NONE, .fx = Effect::NONE
+};
+
 #define CALL_MEMBER_FN(object, ptrToMember)  ((object).*(ptrToMember))
 
 inline void clearBuffer(int16_t* buf, int num) {
@@ -323,7 +327,7 @@ void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec, bool isFirst) {
         // The tune is a silent tune. It can be used to control the length of a pattern, when all
         // the other tunes are looping.
         _noteIndex = 0;
-        _note = &SILENCE; // Make it non-null, as it's used to signal tune termination
+        _note = &silentNote; // Make it non-null, as it's used to signal tune termination
     } else {
         _note = _tuneSpec->notes;
     }
