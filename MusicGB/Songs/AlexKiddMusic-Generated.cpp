@@ -1981,158 +1981,158 @@ const TuneSpec sfx63AlexKidd = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx63NotesAlexKidd
 };
 
-const TuneSpec* pattern0TunesAlexKidd[3] = { &sfx2AlexKidd, &sfx3AlexKidd, &sfx12AlexKidd };
+const TuneSpec *const pattern0TunesAlexKidd[3] = { &sfx2AlexKidd, &sfx3AlexKidd, &sfx12AlexKidd };
 // PATTERN0: SFX2 SFX3 SFX12
 const PatternSpec pattern0AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern0TunesAlexKidd
 };
-const TuneSpec* pattern1TunesAlexKidd[3] = { &sfx4AlexKidd, &sfx5AlexKidd, &sfx13AlexKidd };
+const TuneSpec *const pattern1TunesAlexKidd[3] = { &sfx4AlexKidd, &sfx5AlexKidd, &sfx13AlexKidd };
 // PATTERN1: SFX4 SFX5 SFX13
 const PatternSpec pattern1AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern1TunesAlexKidd
 };
-const TuneSpec* pattern2TunesAlexKidd[3] = { &sfx6AlexKidd, &sfx7AlexKidd, &sfx13AlexKidd };
+const TuneSpec *const pattern2TunesAlexKidd[3] = { &sfx6AlexKidd, &sfx7AlexKidd, &sfx13AlexKidd };
 // PATTERN2: SFX6 SFX7 SFX13
 const PatternSpec pattern2AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern2TunesAlexKidd
 };
-const TuneSpec* pattern3TunesAlexKidd[3] = { &sfx8AlexKidd, &sfx9AlexKidd, &sfx12AlexKidd };
+const TuneSpec *const pattern3TunesAlexKidd[3] = { &sfx8AlexKidd, &sfx9AlexKidd, &sfx12AlexKidd };
 // PATTERN3: SFX8 SFX9 SFX12
 const PatternSpec pattern3AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern3TunesAlexKidd
 };
-const TuneSpec* pattern4TunesAlexKidd[3] = { &sfx10AlexKidd, &sfx11AlexKidd, &sfx12AlexKidd };
+const TuneSpec *const pattern4TunesAlexKidd[3] = { &sfx10AlexKidd, &sfx11AlexKidd, &sfx12AlexKidd };
 // PATTERN4: SFX10 SFX11 SFX12
 const PatternSpec pattern4AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern4TunesAlexKidd
 };
-const TuneSpec* pattern5TunesAlexKidd[3] = { &sfx6AlexKidd, &sfx7AlexKidd, &sfx14AlexKidd };
+const TuneSpec *const pattern5TunesAlexKidd[3] = { &sfx6AlexKidd, &sfx7AlexKidd, &sfx14AlexKidd };
 // PATTERN5: SFX6 SFX7 SFX14
 const PatternSpec pattern5AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern5TunesAlexKidd
 };
-const TuneSpec* pattern6TunesAlexKidd[2] = { &sfx22AlexKidd, &sfx23AlexKidd };
+const TuneSpec *const pattern6TunesAlexKidd[2] = { &sfx22AlexKidd, &sfx23AlexKidd };
 // PATTERN6: SFX22 SFX23
 const PatternSpec pattern6AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern6TunesAlexKidd
 };
-const TuneSpec* pattern7TunesAlexKidd[3] = { &sfx29AlexKidd, &sfx33AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern7TunesAlexKidd[3] = { &sfx29AlexKidd, &sfx33AlexKidd, &sfx48AlexKidd };
 // PATTERN7: SFX29 SFX33 SFX48
 const PatternSpec pattern7AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern7TunesAlexKidd
 };
-const TuneSpec* pattern8TunesAlexKidd[3] = { &sfx30AlexKidd, &sfx34AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern8TunesAlexKidd[3] = { &sfx30AlexKidd, &sfx34AlexKidd, &sfx48AlexKidd };
 // PATTERN8: SFX30 SFX34 SFX48
 const PatternSpec pattern8AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern8TunesAlexKidd
 };
-const TuneSpec* pattern9TunesAlexKidd[3] = { &sfx31AlexKidd, &sfx37AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern9TunesAlexKidd[3] = { &sfx31AlexKidd, &sfx37AlexKidd, &sfx48AlexKidd };
 // PATTERN9: SFX31 SFX37 SFX48
 const PatternSpec pattern9AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern9TunesAlexKidd
 };
-const TuneSpec* pattern10TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx38AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern10TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx38AlexKidd, &sfx48AlexKidd };
 // PATTERN10: SFX32 SFX38 SFX48
 const PatternSpec pattern10AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern10TunesAlexKidd
 };
-const TuneSpec* pattern14TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx41AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern14TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx41AlexKidd, &sfx48AlexKidd };
 // PATTERN14: SFX32 SFX41 SFX48
 const PatternSpec pattern14AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern14TunesAlexKidd
 };
-const TuneSpec* pattern15TunesAlexKidd[3] = { &sfx29AlexKidd, &sfx42AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern15TunesAlexKidd[3] = { &sfx29AlexKidd, &sfx42AlexKidd, &sfx48AlexKidd };
 // PATTERN15: SFX29 SFX42 SFX48
 const PatternSpec pattern15AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern15TunesAlexKidd
 };
-const TuneSpec* pattern16TunesAlexKidd[3] = { &sfx30AlexKidd, &sfx43AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern16TunesAlexKidd[3] = { &sfx30AlexKidd, &sfx43AlexKidd, &sfx48AlexKidd };
 // PATTERN16: SFX30 SFX43 SFX48
 const PatternSpec pattern16AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern16TunesAlexKidd
 };
-const TuneSpec* pattern17TunesAlexKidd[3] = { &sfx31AlexKidd, &sfx44AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern17TunesAlexKidd[3] = { &sfx31AlexKidd, &sfx44AlexKidd, &sfx48AlexKidd };
 // PATTERN17: SFX31 SFX44 SFX48
 const PatternSpec pattern17AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern17TunesAlexKidd
 };
-const TuneSpec* pattern18TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx45AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern18TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx45AlexKidd, &sfx48AlexKidd };
 // PATTERN18: SFX32 SFX45 SFX48
 const PatternSpec pattern18AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern18TunesAlexKidd
 };
-const TuneSpec* pattern22TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx46AlexKidd, &sfx48AlexKidd };
+const TuneSpec *const pattern22TunesAlexKidd[3] = { &sfx32AlexKidd, &sfx46AlexKidd, &sfx48AlexKidd };
 // PATTERN22: SFX32 SFX46 SFX48
 const PatternSpec pattern22AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern22TunesAlexKidd
 };
-const TuneSpec* pattern23TunesAlexKidd[3] = { &sfx49AlexKidd, &sfx50AlexKidd, &sfx58AlexKidd };
+const TuneSpec *const pattern23TunesAlexKidd[3] = { &sfx49AlexKidd, &sfx50AlexKidd, &sfx58AlexKidd };
 // PATTERN23: SFX49 SFX50 SFX58
 const PatternSpec pattern23AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern23TunesAlexKidd
 };
-const TuneSpec* pattern25TunesAlexKidd[3] = { &sfx52AlexKidd, &sfx54AlexKidd, &sfx58AlexKidd };
+const TuneSpec *const pattern25TunesAlexKidd[3] = { &sfx52AlexKidd, &sfx54AlexKidd, &sfx58AlexKidd };
 // PATTERN25: SFX52 SFX54 SFX58
 const PatternSpec pattern25AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern25TunesAlexKidd
 };
-const TuneSpec* pattern26TunesAlexKidd[3] = { &sfx55AlexKidd, &sfx57AlexKidd, &sfx58AlexKidd };
+const TuneSpec *const pattern26TunesAlexKidd[3] = { &sfx55AlexKidd, &sfx57AlexKidd, &sfx58AlexKidd };
 // PATTERN26: SFX55 SFX57 SFX58
 const PatternSpec pattern26AlexKidd = PatternSpec {
     .numTunes = 3, .tunes = pattern26TunesAlexKidd
 };
-const TuneSpec* pattern27TunesAlexKidd[2] = { &sfx59AlexKidd, &sfx53AlexKidd };
+const TuneSpec *const pattern27TunesAlexKidd[2] = { &sfx59AlexKidd, &sfx53AlexKidd };
 // PATTERN27: SFX59 SFX53
 const PatternSpec pattern27AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern27TunesAlexKidd
 };
-const TuneSpec* pattern28TunesAlexKidd[2] = { &sfx60AlexKidd, &sfx53AlexKidd };
+const TuneSpec *const pattern28TunesAlexKidd[2] = { &sfx60AlexKidd, &sfx53AlexKidd };
 // PATTERN28: SFX60 SFX53
 const PatternSpec pattern28AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern28TunesAlexKidd
 };
-const TuneSpec* pattern30TunesAlexKidd[2] = { &sfx56AlexKidd, &sfx53AlexKidd };
+const TuneSpec *const pattern30TunesAlexKidd[2] = { &sfx56AlexKidd, &sfx53AlexKidd };
 // PATTERN30: SFX56 SFX53
 const PatternSpec pattern30AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern30TunesAlexKidd
 };
-const TuneSpec* pattern31TunesAlexKidd[2] = { &sfx62AlexKidd, &sfx40AlexKidd };
+const TuneSpec *const pattern31TunesAlexKidd[2] = { &sfx62AlexKidd, &sfx40AlexKidd };
 // PATTERN31: SFX62 SFX40
 const PatternSpec pattern31AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern31TunesAlexKidd
 };
-const TuneSpec* pattern32TunesAlexKidd[2] = { &sfx63AlexKidd, &sfx51AlexKidd };
+const TuneSpec *const pattern32TunesAlexKidd[2] = { &sfx63AlexKidd, &sfx51AlexKidd };
 // PATTERN32: SFX63 SFX51
 const PatternSpec pattern32AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern32TunesAlexKidd
 };
-const TuneSpec* pattern33TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx19AlexKidd };
+const TuneSpec *const pattern33TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx19AlexKidd };
 // PATTERN33: SFX61 SFX19
 const PatternSpec pattern33AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern33TunesAlexKidd
 };
-const TuneSpec* pattern35TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx20AlexKidd };
+const TuneSpec *const pattern35TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx20AlexKidd };
 // PATTERN35: SFX61 SFX20
 const PatternSpec pattern35AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern35TunesAlexKidd
 };
-const TuneSpec* pattern36TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx35AlexKidd };
+const TuneSpec *const pattern36TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx35AlexKidd };
 // PATTERN36: SFX61 SFX35
 const PatternSpec pattern36AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern36TunesAlexKidd
 };
-const TuneSpec* pattern37TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx36AlexKidd };
+const TuneSpec *const pattern37TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx36AlexKidd };
 // PATTERN37: SFX61 SFX36
 const PatternSpec pattern37AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern37TunesAlexKidd
 };
-const TuneSpec* pattern38TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx39AlexKidd };
+const TuneSpec *const pattern38TunesAlexKidd[2] = { &sfx61AlexKidd, &sfx39AlexKidd };
 // PATTERN38: SFX61 SFX39
 const PatternSpec pattern38AlexKidd = PatternSpec {
     .numTunes = 2, .tunes = pattern38TunesAlexKidd
 };
 
-const PatternSpec* song0PatternsAlexKidd[6] = {
+const PatternSpec *const song0PatternsAlexKidd[6] = {
     &pattern0AlexKidd,
     &pattern1AlexKidd,
     &pattern2AlexKidd,
@@ -2143,13 +2143,13 @@ const PatternSpec* song0PatternsAlexKidd[6] = {
 const SongSpec song0AlexKidd = SongSpec {
     .loopStart = 0, .numPatterns = 6, .patterns = song0PatternsAlexKidd
 };
-const PatternSpec* song6PatternsAlexKidd[1] = {
+const PatternSpec *const song6PatternsAlexKidd[1] = {
     &pattern6AlexKidd,
 };
 const SongSpec song6AlexKidd = SongSpec {
     .loopStart = 0, .numPatterns = 1, .patterns = song6PatternsAlexKidd
 };
-const PatternSpec* song7PatternsAlexKidd[16] = {
+const PatternSpec *const song7PatternsAlexKidd[16] = {
     &pattern7AlexKidd,
     &pattern8AlexKidd,
     &pattern9AlexKidd,
@@ -2170,7 +2170,7 @@ const PatternSpec* song7PatternsAlexKidd[16] = {
 const SongSpec song7AlexKidd = SongSpec {
     .loopStart = 0, .numPatterns = 16, .patterns = song7PatternsAlexKidd
 };
-const PatternSpec* song23PatternsAlexKidd[4] = {
+const PatternSpec *const song23PatternsAlexKidd[4] = {
     &pattern23AlexKidd,
     &pattern23AlexKidd,
     &pattern25AlexKidd,
@@ -2179,7 +2179,7 @@ const PatternSpec* song23PatternsAlexKidd[4] = {
 const SongSpec song23AlexKidd = SongSpec {
     .loopStart = 0, .numPatterns = 4, .patterns = song23PatternsAlexKidd
 };
-const PatternSpec* song27PatternsAlexKidd[4] = {
+const PatternSpec *const song27PatternsAlexKidd[4] = {
     &pattern27AlexKidd,
     &pattern28AlexKidd,
     &pattern27AlexKidd,
@@ -2188,14 +2188,14 @@ const PatternSpec* song27PatternsAlexKidd[4] = {
 const SongSpec song27AlexKidd = SongSpec {
     .loopStart = 3, .numPatterns = 4, .patterns = song27PatternsAlexKidd
 };
-const PatternSpec* song31PatternsAlexKidd[2] = {
+const PatternSpec *const song31PatternsAlexKidd[2] = {
     &pattern31AlexKidd,
     &pattern32AlexKidd,
 };
 const SongSpec song31AlexKidd = SongSpec {
     .loopStart = 0, .numPatterns = 2, .patterns = song31PatternsAlexKidd
 };
-const PatternSpec* song33PatternsAlexKidd[6] = {
+const PatternSpec *const song33PatternsAlexKidd[6] = {
     &pattern33AlexKidd,
     &pattern33AlexKidd,
     &pattern35AlexKidd,

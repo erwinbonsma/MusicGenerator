@@ -4147,128 +4147,128 @@ const TuneSpec sfx61RockForMetal = TuneSpec {
     .noteDuration = 2, .loopStart = 256, .numNotes = 256, .notes = sfx61NotesRockForMetal
 };
 
-const TuneSpec* pattern0TunesRockForMetal[2] = { &sfx37RockForMetal, &sfx41RockForMetal };
+const TuneSpec *const pattern0TunesRockForMetal[2] = { &sfx37RockForMetal, &sfx41RockForMetal };
 const PatternSpec pattern0RockForMetal = PatternSpec {
     .numTunes = 2, .tunes = pattern0TunesRockForMetal
 };
-const TuneSpec* pattern2TunesRockForMetal[3] = { &sfx35RockForMetal, &sfx37RockForMetal, &sfx41RockForMetal };
+const TuneSpec *const pattern2TunesRockForMetal[3] = { &sfx35RockForMetal, &sfx37RockForMetal, &sfx41RockForMetal };
 const PatternSpec pattern2RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern2TunesRockForMetal
 };
-const TuneSpec* pattern3TunesRockForMetal[3] = { &sfx36RockForMetal, &sfx38RockForMetal, &sfx42RockForMetal };
+const TuneSpec *const pattern3TunesRockForMetal[3] = { &sfx36RockForMetal, &sfx38RockForMetal, &sfx42RockForMetal };
 const PatternSpec pattern3RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern3TunesRockForMetal
 };
-const TuneSpec* pattern6TunesRockForMetal[4] = { &sfx35RockForMetal, &sfx39RockForMetal, &sfx37RockForMetal, &sfx41RockForMetal };
+const TuneSpec *const pattern6TunesRockForMetal[4] = { &sfx35RockForMetal, &sfx39RockForMetal, &sfx37RockForMetal, &sfx41RockForMetal };
 const PatternSpec pattern6RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern6TunesRockForMetal
 };
-const TuneSpec* pattern7TunesRockForMetal[4] = { &sfx36RockForMetal, &sfx40RockForMetal, &sfx38RockForMetal, &sfx42RockForMetal };
+const TuneSpec *const pattern7TunesRockForMetal[4] = { &sfx36RockForMetal, &sfx40RockForMetal, &sfx38RockForMetal, &sfx42RockForMetal };
 const PatternSpec pattern7RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern7TunesRockForMetal
 };
-const TuneSpec* pattern10TunesRockForMetal[3] = { &silentTuneRockForMetal, &sfx11RockForMetal, &sfx15RockForMetal };
+const TuneSpec *const pattern10TunesRockForMetal[3] = { &silentTuneRockForMetal, &sfx11RockForMetal, &sfx15RockForMetal };
 const PatternSpec pattern10RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern10TunesRockForMetal
 };
-const TuneSpec* pattern11TunesRockForMetal[4] = { &silentTuneRockForMetal, &sfx11RockForMetal, &sfx15RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern11TunesRockForMetal[4] = { &silentTuneRockForMetal, &sfx11RockForMetal, &sfx15RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern11RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern11TunesRockForMetal
 };
-const TuneSpec* pattern12TunesRockForMetal[3] = { &sfx47RockForMetal, &sfx11RockForMetal, &sfx15RockForMetal };
+const TuneSpec *const pattern12TunesRockForMetal[3] = { &sfx47RockForMetal, &sfx11RockForMetal, &sfx15RockForMetal };
 const PatternSpec pattern12RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern12TunesRockForMetal
 };
-const TuneSpec* pattern13TunesRockForMetal[4] = { &sfx16RockForMetal, &sfx17RockForMetal, &sfx22RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern13TunesRockForMetal[4] = { &sfx16RockForMetal, &sfx17RockForMetal, &sfx22RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern13RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern13TunesRockForMetal
 };
-const TuneSpec* pattern14TunesRockForMetal[4] = { &sfx9RockForMetal, &sfx18RockForMetal, &sfx23RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern14TunesRockForMetal[4] = { &sfx9RockForMetal, &sfx18RockForMetal, &sfx23RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern14RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern14TunesRockForMetal
 };
-const TuneSpec* pattern16TunesRockForMetal[4] = { &sfx9RockForMetal, &sfx18RockForMetal, &sfx23RockForMetal, &sfx48RockForMetal };
+const TuneSpec *const pattern16TunesRockForMetal[4] = { &sfx9RockForMetal, &sfx18RockForMetal, &sfx23RockForMetal, &sfx48RockForMetal };
 const PatternSpec pattern16RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern16TunesRockForMetal
 };
-const TuneSpec* pattern17TunesRockForMetal[4] = { &sfx29RockForMetal, &sfx25RockForMetal, &sfx31RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern17TunesRockForMetal[4] = { &sfx29RockForMetal, &sfx25RockForMetal, &sfx31RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern17RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern17TunesRockForMetal
 };
-const TuneSpec* pattern18TunesRockForMetal[4] = { &sfx29RockForMetal, &sfx27RockForMetal, &sfx31RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern18TunesRockForMetal[4] = { &sfx29RockForMetal, &sfx27RockForMetal, &sfx31RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern18RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern18TunesRockForMetal
 };
-const TuneSpec* pattern19TunesRockForMetal[4] = { &sfx4RockForMetal, &sfx33RockForMetal, &sfx8RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern19TunesRockForMetal[4] = { &sfx4RockForMetal, &sfx33RockForMetal, &sfx8RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern19RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern19TunesRockForMetal
 };
-const TuneSpec* pattern20TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx50RockForMetal, &sfx10RockForMetal, &sfx47RockForMetal };
+const TuneSpec *const pattern20TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx50RockForMetal, &sfx10RockForMetal, &sfx47RockForMetal };
 const PatternSpec pattern20RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern20TunesRockForMetal
 };
-const TuneSpec* pattern21TunesRockForMetal[4] = { &sfx4RockForMetal, &sfx51RockForMetal, &sfx8RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern21TunesRockForMetal[4] = { &sfx4RockForMetal, &sfx51RockForMetal, &sfx8RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern21RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern21TunesRockForMetal
 };
-const TuneSpec* pattern22TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx52RockForMetal, &sfx10RockForMetal, &sfx49RockForMetal };
+const TuneSpec *const pattern22TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx52RockForMetal, &sfx10RockForMetal, &sfx49RockForMetal };
 const PatternSpec pattern22RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern22TunesRockForMetal
 };
-const TuneSpec* pattern30TunesRockForMetal[4] = { &sfx29RockForMetal, &sfx27RockForMetal, &sfx31RockForMetal, &sfx59RockForMetal };
+const TuneSpec *const pattern30TunesRockForMetal[4] = { &sfx29RockForMetal, &sfx27RockForMetal, &sfx31RockForMetal, &sfx59RockForMetal };
 const PatternSpec pattern30RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern30TunesRockForMetal
 };
-const TuneSpec* pattern32TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx50RockForMetal, &sfx10RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern32TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx50RockForMetal, &sfx10RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern32RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern32TunesRockForMetal
 };
-const TuneSpec* pattern34TunesRockForMetal[4] = { &sfx7RockForMetal, &sfx14RockForMetal, &sfx13RockForMetal, &sfx60RockForMetal };
+const TuneSpec *const pattern34TunesRockForMetal[4] = { &sfx7RockForMetal, &sfx14RockForMetal, &sfx13RockForMetal, &sfx60RockForMetal };
 const PatternSpec pattern34RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern34TunesRockForMetal
 };
-const TuneSpec* pattern35TunesRockForMetal[3] = { &sfx20RockForMetal, &sfx19RockForMetal, &sfx61RockForMetal };
+const TuneSpec *const pattern35TunesRockForMetal[3] = { &sfx20RockForMetal, &sfx19RockForMetal, &sfx61RockForMetal };
 const PatternSpec pattern35RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern35TunesRockForMetal
 };
-const TuneSpec* pattern36TunesRockForMetal[3] = { &sfx21RockForMetal, &sfx22RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern36TunesRockForMetal[3] = { &sfx21RockForMetal, &sfx22RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern36RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern36TunesRockForMetal
 };
-const TuneSpec* pattern37TunesRockForMetal[3] = { &sfx24RockForMetal, &sfx23RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern37TunesRockForMetal[3] = { &sfx24RockForMetal, &sfx23RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern37RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern37TunesRockForMetal
 };
-const TuneSpec* pattern38TunesRockForMetal[3] = { &sfx26RockForMetal, &sfx22RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern38TunesRockForMetal[3] = { &sfx26RockForMetal, &sfx22RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern38RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern38TunesRockForMetal
 };
-const TuneSpec* pattern39TunesRockForMetal[3] = { &sfx28RockForMetal, &sfx23RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern39TunesRockForMetal[3] = { &sfx28RockForMetal, &sfx23RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern39RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern39TunesRockForMetal
 };
-const TuneSpec* pattern40TunesRockForMetal[4] = { &silentTuneRockForMetal, &sfx34RockForMetal, &sfx30RockForMetal, &sfx32RockForMetal };
+const TuneSpec *const pattern40TunesRockForMetal[4] = { &silentTuneRockForMetal, &sfx34RockForMetal, &sfx30RockForMetal, &sfx32RockForMetal };
 const PatternSpec pattern40RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern40TunesRockForMetal
 };
-const TuneSpec* pattern41TunesRockForMetal[3] = { &silentTuneRockForMetal, &sfx30RockForMetal, &sfx32RockForMetal };
+const TuneSpec *const pattern41TunesRockForMetal[3] = { &silentTuneRockForMetal, &sfx30RockForMetal, &sfx32RockForMetal };
 const PatternSpec pattern41RockForMetal = PatternSpec {
     .numTunes = 3, .tunes = pattern41TunesRockForMetal
 };
-const TuneSpec* pattern45TunesRockForMetal[4] = { &sfx57RockForMetal, &sfx52RockForMetal, &sfx58RockForMetal, &sfx12RockForMetal };
+const TuneSpec *const pattern45TunesRockForMetal[4] = { &sfx57RockForMetal, &sfx52RockForMetal, &sfx58RockForMetal, &sfx12RockForMetal };
 const PatternSpec pattern45RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern45TunesRockForMetal
 };
-const TuneSpec* pattern47TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx52RockForMetal, &sfx10RockForMetal, &sfx43RockForMetal };
+const TuneSpec *const pattern47TunesRockForMetal[4] = { &sfx6RockForMetal, &sfx52RockForMetal, &sfx10RockForMetal, &sfx43RockForMetal };
 const PatternSpec pattern47RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern47TunesRockForMetal
 };
-const TuneSpec* pattern48TunesRockForMetal[4] = { &silentTuneRockForMetal, &sfx46RockForMetal, &sfx44RockForMetal, &sfx45RockForMetal };
+const TuneSpec *const pattern48TunesRockForMetal[4] = { &silentTuneRockForMetal, &sfx46RockForMetal, &sfx44RockForMetal, &sfx45RockForMetal };
 const PatternSpec pattern48RockForMetal = PatternSpec {
     .numTunes = 4, .tunes = pattern48TunesRockForMetal
 };
 
-const PatternSpec* song0PatternsRockForMetal[49] = {
+const PatternSpec *const song0PatternsRockForMetal[49] = {
     &pattern0RockForMetal,
     &pattern0RockForMetal,
     &pattern2RockForMetal,

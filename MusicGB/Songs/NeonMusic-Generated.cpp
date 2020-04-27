@@ -854,68 +854,68 @@ const TuneSpec sfx40Neon = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx40NotesNeon
 };
 
-const TuneSpec* pattern0TunesNeon[2] = { &sfx12Neon, &sfx10Neon };
+const TuneSpec *const pattern0TunesNeon[2] = { &sfx12Neon, &sfx10Neon };
 const PatternSpec pattern0Neon = PatternSpec {
     .numTunes = 2, .tunes = pattern0TunesNeon
 };
-const TuneSpec* pattern1TunesNeon[4] = { &sfx8Neon, &sfx10Neon, &sfx13Neon, &sfx15Neon };
+const TuneSpec *const pattern1TunesNeon[4] = { &sfx8Neon, &sfx10Neon, &sfx13Neon, &sfx15Neon };
 const PatternSpec pattern1Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern1TunesNeon
 };
-const TuneSpec* pattern2TunesNeon[4] = { &sfx9Neon, &sfx10Neon, &sfx13Neon, &sfx16Neon };
+const TuneSpec *const pattern2TunesNeon[4] = { &sfx9Neon, &sfx10Neon, &sfx13Neon, &sfx16Neon };
 const PatternSpec pattern2Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern2TunesNeon
 };
-const TuneSpec* pattern4TunesNeon[4] = { &sfx14Neon, &sfx21Neon, &sfx13Neon, &sfx16Neon };
+const TuneSpec *const pattern4TunesNeon[4] = { &sfx14Neon, &sfx21Neon, &sfx13Neon, &sfx16Neon };
 const PatternSpec pattern4Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern4TunesNeon
 };
-const TuneSpec* pattern5TunesNeon[4] = { &sfx8Neon, &sfx22Neon, &sfx13Neon, &sfx15Neon };
+const TuneSpec *const pattern5TunesNeon[4] = { &sfx8Neon, &sfx22Neon, &sfx13Neon, &sfx15Neon };
 const PatternSpec pattern5Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern5TunesNeon
 };
-const TuneSpec* pattern6TunesNeon[4] = { &sfx9Neon, &sfx23Neon, &sfx13Neon, &sfx16Neon };
+const TuneSpec *const pattern6TunesNeon[4] = { &sfx9Neon, &sfx23Neon, &sfx13Neon, &sfx16Neon };
 const PatternSpec pattern6Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern6TunesNeon
 };
-const TuneSpec* pattern7TunesNeon[4] = { &sfx8Neon, &sfx24Neon, &sfx13Neon, &sfx15Neon };
+const TuneSpec *const pattern7TunesNeon[4] = { &sfx8Neon, &sfx24Neon, &sfx13Neon, &sfx15Neon };
 const PatternSpec pattern7Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern7TunesNeon
 };
-const TuneSpec* pattern8TunesNeon[4] = { &sfx14Neon, &sfx25Neon, &sfx13Neon, &sfx16Neon };
+const TuneSpec *const pattern8TunesNeon[4] = { &sfx14Neon, &sfx25Neon, &sfx13Neon, &sfx16Neon };
 const PatternSpec pattern8Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern8TunesNeon
 };
-const TuneSpec* pattern9TunesNeon[4] = { &sfx8Neon, &sfx10Neon, &sfx13Neon, &sfx17Neon };
+const TuneSpec *const pattern9TunesNeon[4] = { &sfx8Neon, &sfx10Neon, &sfx13Neon, &sfx17Neon };
 const PatternSpec pattern9Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern9TunesNeon
 };
-const TuneSpec* pattern10TunesNeon[4] = { &sfx9Neon, &sfx10Neon, &sfx13Neon, &sfx18Neon };
+const TuneSpec *const pattern10TunesNeon[4] = { &sfx9Neon, &sfx10Neon, &sfx13Neon, &sfx18Neon };
 const PatternSpec pattern10Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern10TunesNeon
 };
-const TuneSpec* pattern12TunesNeon[4] = { &sfx28Neon, &sfx21Neon, &sfx26Neon, &sfx18Neon };
+const TuneSpec *const pattern12TunesNeon[4] = { &sfx28Neon, &sfx21Neon, &sfx26Neon, &sfx18Neon };
 const PatternSpec pattern12Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern12TunesNeon
 };
-const TuneSpec* pattern13TunesNeon[4] = { &sfx29Neon, &sfx10Neon, &sfx40Neon, &sfx32Neon };
+const TuneSpec *const pattern13TunesNeon[4] = { &sfx29Neon, &sfx10Neon, &sfx40Neon, &sfx32Neon };
 const PatternSpec pattern13Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern13TunesNeon
 };
-const TuneSpec* pattern14TunesNeon[2] = { &sfx35Neon, &sfx10Neon };
+const TuneSpec *const pattern14TunesNeon[2] = { &sfx35Neon, &sfx10Neon };
 const PatternSpec pattern14Neon = PatternSpec {
     .numTunes = 2, .tunes = pattern14TunesNeon
 };
-const TuneSpec* pattern15TunesNeon[2] = { &sfx36Neon, &sfx10Neon };
+const TuneSpec *const pattern15TunesNeon[2] = { &sfx36Neon, &sfx10Neon };
 const PatternSpec pattern15Neon = PatternSpec {
     .numTunes = 2, .tunes = pattern15TunesNeon
 };
-const TuneSpec* pattern16TunesNeon[4] = { &sfx37Neon, &sfx10Neon, &sfx12Neon, &sfx36Neon };
+const TuneSpec *const pattern16TunesNeon[4] = { &sfx37Neon, &sfx10Neon, &sfx12Neon, &sfx36Neon };
 const PatternSpec pattern16Neon = PatternSpec {
     .numTunes = 4, .tunes = pattern16TunesNeon
 };
 
-const PatternSpec* song0PatternsNeon[17] = {
+const PatternSpec *const song0PatternsNeon[17] = {
     &pattern0Neon,
     &pattern1Neon,
     &pattern2Neon,

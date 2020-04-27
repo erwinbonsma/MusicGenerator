@@ -11,6 +11,6 @@
 
 #include "Music.h"
 
-extern const SongSpec* bumbleBotsSong;
+extern const SongSpec *const bumbleBotsSong;
 
 #endif /* BumbleBotsMusic_h */

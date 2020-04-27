@@ -458,36 +458,36 @@ const TuneSpec sfx31Zepton = TuneSpec {
     .noteDuration = 12, .loopStart = 0, .numNotes = 8, .notes = sfx31NotesZepton
 };
 
-const TuneSpec* pattern0TunesZepton[4] = { &sfx8Zepton, &sfx16Zepton, &sfx14Zepton, &sfx28Zepton };
+const TuneSpec *const pattern0TunesZepton[4] = { &sfx8Zepton, &sfx16Zepton, &sfx14Zepton, &sfx28Zepton };
 const PatternSpec pattern0Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern0TunesZepton
 };
-const TuneSpec* pattern1TunesZepton[4] = { &sfx9Zepton, &sfx16Zepton, &sfx14Zepton, &sfx24Zepton };
+const TuneSpec *const pattern1TunesZepton[4] = { &sfx9Zepton, &sfx16Zepton, &sfx14Zepton, &sfx24Zepton };
 const PatternSpec pattern1Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern1TunesZepton
 };
-const TuneSpec* pattern2TunesZepton[4] = { &sfx10Zepton, &sfx16Zepton, &sfx14Zepton, &sfx25Zepton };
+const TuneSpec *const pattern2TunesZepton[4] = { &sfx10Zepton, &sfx16Zepton, &sfx14Zepton, &sfx25Zepton };
 const PatternSpec pattern2Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern2TunesZepton
 };
-const TuneSpec* pattern3TunesZepton[4] = { &sfx11Zepton, &sfx16Zepton, &sfx14Zepton, &sfx26Zepton };
+const TuneSpec *const pattern3TunesZepton[4] = { &sfx11Zepton, &sfx16Zepton, &sfx14Zepton, &sfx26Zepton };
 const PatternSpec pattern3Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern3TunesZepton
 };
-const TuneSpec* pattern6TunesZepton[4] = { &sfx12Zepton, &sfx16Zepton, &sfx14Zepton, &sfx27Zepton };
+const TuneSpec *const pattern6TunesZepton[4] = { &sfx12Zepton, &sfx16Zepton, &sfx14Zepton, &sfx27Zepton };
 const PatternSpec pattern6Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern6TunesZepton
 };
-const TuneSpec* pattern8TunesZepton[4] = { &sfx18Zepton, &sfx20Zepton, &sfx22Zepton, &sfx30Zepton };
+const TuneSpec *const pattern8TunesZepton[4] = { &sfx18Zepton, &sfx20Zepton, &sfx22Zepton, &sfx30Zepton };
 const PatternSpec pattern8Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern8TunesZepton
 };
-const TuneSpec* pattern10TunesZepton[4] = { &sfx19Zepton, &sfx21Zepton, &sfx23Zepton, &sfx31Zepton };
+const TuneSpec *const pattern10TunesZepton[4] = { &sfx19Zepton, &sfx21Zepton, &sfx23Zepton, &sfx31Zepton };
 const PatternSpec pattern10Zepton = PatternSpec {
     .numTunes = 4, .tunes = pattern10TunesZepton
 };
 
-const PatternSpec* song0PatternsZepton[8] = {
+const PatternSpec *const song0PatternsZepton[8] = {
     &pattern0Zepton,
     &pattern1Zepton,
     &pattern2Zepton,
@@ -500,7 +500,7 @@ const PatternSpec* song0PatternsZepton[8] = {
 const SongSpec song0Zepton = SongSpec {
     .loopStart = 0, .numPatterns = 8, .patterns = song0PatternsZepton
 };
-const PatternSpec* song8PatternsZepton[4] = {
+const PatternSpec *const song8PatternsZepton[4] = {
     &pattern8Zepton,
     &pattern8Zepton,
     &pattern10Zepton,

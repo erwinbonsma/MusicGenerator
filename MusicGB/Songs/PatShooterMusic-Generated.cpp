@@ -519,72 +519,72 @@ const TuneSpec sfx24PatShooter = TuneSpec {
     .noteDuration = 16, .loopStart = 32, .numNotes = 32, .notes = sfx24NotesPatShooter
 };
 
-const TuneSpec* pattern0TunesPatShooter[2] = { &sfx10PatShooter, &sfx11PatShooter };
+const TuneSpec *const pattern0TunesPatShooter[2] = { &sfx10PatShooter, &sfx11PatShooter };
 const PatternSpec pattern0PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern0TunesPatShooter
 };
-const TuneSpec* pattern1TunesPatShooter[2] = { &sfx10PatShooter, &sfx11PatShooter };
+const TuneSpec *const pattern1TunesPatShooter[2] = { &sfx10PatShooter, &sfx11PatShooter };
 const PatternSpec pattern1PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern1TunesPatShooter
 };
-const TuneSpec* pattern2TunesPatShooter[2] = { &sfx12PatShooter, &sfx13PatShooter };
+const TuneSpec *const pattern2TunesPatShooter[2] = { &sfx12PatShooter, &sfx13PatShooter };
 const PatternSpec pattern2PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern2TunesPatShooter
 };
-const TuneSpec* pattern3TunesPatShooter[2] = { &sfx12PatShooter, &sfx13PatShooter };
+const TuneSpec *const pattern3TunesPatShooter[2] = { &sfx12PatShooter, &sfx13PatShooter };
 const PatternSpec pattern3PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern3TunesPatShooter
 };
-const TuneSpec* pattern4TunesPatShooter[3] = { &sfx10PatShooter, &sfx11PatShooter, &sfx14PatShooter };
+const TuneSpec *const pattern4TunesPatShooter[3] = { &sfx10PatShooter, &sfx11PatShooter, &sfx14PatShooter };
 const PatternSpec pattern4PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern4TunesPatShooter
 };
-const TuneSpec* pattern5TunesPatShooter[3] = { &sfx10PatShooter, &sfx11PatShooter, &sfx15PatShooter };
+const TuneSpec *const pattern5TunesPatShooter[3] = { &sfx10PatShooter, &sfx11PatShooter, &sfx15PatShooter };
 const PatternSpec pattern5PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern5TunesPatShooter
 };
-const TuneSpec* pattern6TunesPatShooter[3] = { &sfx12PatShooter, &sfx13PatShooter, &sfx16PatShooter };
+const TuneSpec *const pattern6TunesPatShooter[3] = { &sfx12PatShooter, &sfx13PatShooter, &sfx16PatShooter };
 const PatternSpec pattern6PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern6TunesPatShooter
 };
-const TuneSpec* pattern7TunesPatShooter[3] = { &sfx12PatShooter, &sfx13PatShooter, &sfx17PatShooter };
+const TuneSpec *const pattern7TunesPatShooter[3] = { &sfx12PatShooter, &sfx13PatShooter, &sfx17PatShooter };
 const PatternSpec pattern7PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern7TunesPatShooter
 };
-const TuneSpec* pattern8TunesPatShooter[2] = { &sfx18PatShooter, &sfx20PatShooter };
+const TuneSpec *const pattern8TunesPatShooter[2] = { &sfx18PatShooter, &sfx20PatShooter };
 const PatternSpec pattern8PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern8TunesPatShooter
 };
-const TuneSpec* pattern9TunesPatShooter[2] = { &sfx18PatShooter, &sfx20PatShooter };
+const TuneSpec *const pattern9TunesPatShooter[2] = { &sfx18PatShooter, &sfx20PatShooter };
 const PatternSpec pattern9PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern9TunesPatShooter
 };
-const TuneSpec* pattern10TunesPatShooter[2] = { &sfx18PatShooter, &sfx21PatShooter };
+const TuneSpec *const pattern10TunesPatShooter[2] = { &sfx18PatShooter, &sfx21PatShooter };
 const PatternSpec pattern10PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern10TunesPatShooter
 };
-const TuneSpec* pattern11TunesPatShooter[2] = { &sfx18PatShooter, &sfx21PatShooter };
+const TuneSpec *const pattern11TunesPatShooter[2] = { &sfx18PatShooter, &sfx21PatShooter };
 const PatternSpec pattern11PatShooter = PatternSpec {
     .numTunes = 2, .tunes = pattern11TunesPatShooter
 };
-const TuneSpec* pattern12TunesPatShooter[3] = { &sfx18PatShooter, &sfx20PatShooter, &sfx22PatShooter };
+const TuneSpec *const pattern12TunesPatShooter[3] = { &sfx18PatShooter, &sfx20PatShooter, &sfx22PatShooter };
 const PatternSpec pattern12PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern12TunesPatShooter
 };
-const TuneSpec* pattern13TunesPatShooter[3] = { &sfx18PatShooter, &sfx20PatShooter, &sfx22PatShooter };
+const TuneSpec *const pattern13TunesPatShooter[3] = { &sfx18PatShooter, &sfx20PatShooter, &sfx22PatShooter };
 const PatternSpec pattern13PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern13TunesPatShooter
 };
-const TuneSpec* pattern14TunesPatShooter[3] = { &sfx18PatShooter, &sfx21PatShooter, &sfx23PatShooter };
+const TuneSpec *const pattern14TunesPatShooter[3] = { &sfx18PatShooter, &sfx21PatShooter, &sfx23PatShooter };
 const PatternSpec pattern14PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern14TunesPatShooter
 };
-const TuneSpec* pattern15TunesPatShooter[3] = { &sfx18PatShooter, &sfx20PatShooter, &sfx24PatShooter };
+const TuneSpec *const pattern15TunesPatShooter[3] = { &sfx18PatShooter, &sfx20PatShooter, &sfx24PatShooter };
 const PatternSpec pattern15PatShooter = PatternSpec {
     .numTunes = 3, .tunes = pattern15TunesPatShooter
 };
 
-const PatternSpec* song0PatternsPatShooter[8] = {
+const PatternSpec *const song0PatternsPatShooter[8] = {
     &pattern0PatShooter,
     &pattern1PatShooter,
     &pattern2PatShooter,
@@ -597,7 +597,7 @@ const PatternSpec* song0PatternsPatShooter[8] = {
 const SongSpec song0PatShooter = SongSpec {
     .loopStart = 0, .numPatterns = 8, .patterns = song0PatternsPatShooter
 };
-const PatternSpec* song8PatternsPatShooter[8] = {
+const PatternSpec *const song8PatternsPatShooter[8] = {
     &pattern8PatShooter,
     &pattern9PatShooter,
     &pattern10PatShooter,
