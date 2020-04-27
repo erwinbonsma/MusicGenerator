@@ -479,41 +479,50 @@ void TuneGenerator::startNote() {
             _volumeDelta = -(_volume / _samplesPerNote);
             break;
         case Effect::SLIDE: {
-                const NoteSpec* prvNote = peekPrevNote();
-                if (prvNote != nullptr) {
-                    // Slide from previous volume to own
-                    int prvVolume = (prvNote->vol << VOLUME_SHIFT);
-                    _volumeDelta = (_volume - prvVolume) / _samplesPerNote;
-                    _volume = prvVolume;
+            const NoteSpec* prvNote = peekPrevNote();
 
-                    // Slide from previous frequency to own
-                    int prvIndexDelta = (
-                        (_waveTable->numSamples << _waveTable->shift) / notePeriod(prvNote)
-                    ) << (PERIOD_SHIFT - SAMPLERATE_SHIFT);
-                    _indexDeltaDelta = (_indexDelta - prvIndexDelta) / _samplesPerNote;
-                    _indexDelta = prvIndexDelta;
-                }
+            if (prvNote != nullptr) {
+                // Slide from previous volume to own
+                int prvVolume = (prvNote->vol << VOLUME_SHIFT);
+                _volumeDelta = (_volume - prvVolume) / _samplesPerNote;
+                _volume = prvVolume;
+
+                // Slide from previous frequency to own
+                int prvIndexDelta = (
+                    (_waveTable->numSamples << _waveTable->shift) / notePeriod(prvNote)
+                ) << (PERIOD_SHIFT - SAMPLERATE_SHIFT);
+                _indexDeltaDelta = (_indexDelta - prvIndexDelta) / _samplesPerNote;
+                _indexDelta = prvIndexDelta;
             }
+
             break;
+        }
         case Effect::ARPEGGIO:
         case Effect::ARPEGGIO_FAST:
             assert(false);
             break;
 
         case Effect::DROP: {
-                int nxtIndexDelta = _indexDelta >> 1;
-                _indexDeltaDelta = (nxtIndexDelta - _indexDelta) / _samplesPerNote;
-            }
+            int nxtIndexDelta = _indexDelta >> 1;
+            _indexDeltaDelta = (nxtIndexDelta - _indexDelta) / _samplesPerNote;
+
             break;
+        }
         case Effect::VIBRATO: {
             const NoteSpec* prevNote = peekPrevNote();
-            if (prevNote == nullptr || prevNote->fx != Effect::VIBRATO) {
+            if (
+                (prevNote == nullptr || prevNote->fx != Effect::VIBRATO) &&
+                // Vibrato is not applied on NOISE and should not overwrite shared Noise values
+                _note->wav != WaveForm::NOISE
+            ) {
                 _vibratoDelta = 0;
                 // Note: The order of operations matters to avoid overflows during calculation
                 _vibratoDeltaDelta = _indexDelta / (
                     VIBRATO_META_PERIOD * (_maxWaveIndex / _indexDelta)
                 );
             }
+
+            break;
         }
         case Effect::NONE:
             break;

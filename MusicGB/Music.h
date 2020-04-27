@@ -126,15 +126,22 @@ class TuneGenerator {
     const NoteSpec* _arpeggioNote;
     const WaveTable* _waveTable;
     int32_t _waveIndex, _maxWaveIndex;
-    int32_t _indexNoiseDelta, _maxWaveIndexOrig; // Used for NOISE
     int32_t _indexDelta, _indexDeltaDelta;
-    int32_t _vibratoDelta, _vibratoDeltaDelta;
+    int32_t _volume, _volumeDelta;
+// Let-Vibrato and Noise related fields share same memory, as they are never used together.
+union {
+    int32_t _vibratoDelta;
+    int32_t _indexNoiseDelta;
+};
+union {
+    int32_t _vibratoDeltaDelta;
+    int32_t _maxWaveIndexOrig; // Used for NOISE
+};
     int16_t _sampleIndex;
 union {
     int16_t _pendingArpeggioSamples;
     int16_t _noteIndex; // Used when tune contains only SILENCE
 };
-    int32_t _volume, _volumeDelta;
     int16_t _noiseLfsr = 1;
 
     SampleGeneratorFun _sampleGeneratorFun;
