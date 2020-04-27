@@ -305,48 +305,55 @@ const TuneSpec testTune13 = TuneSpec {
     .notes = nullptr
 };
 
-int main(int argc, const char * argv[]) {
-//    makeWav("test1.wav", testTune1);
-//    makeWav("test2.wav", testTune2);
-//    makeWav("test3.wav", testTune3);
-//    makeWav("test4.wav", testTune4);
-//    makeWav("test5a.wav", testTune5a);
-//    makeWav("test5b.wav", testTune5b);
-//    makeWav("test6a.wav", testTune6a);
-//    makeWav("test6b.wav", testTune6b);
-//    makeWav("test7.wav", testTune7);
-//    makeWav("test8.wav", testTune8);
-//    makeWav("test9.wav", testTune9);
-//    makeWav("test10.wav", testTune10);
-//    makeWav("test11a.wav", testTune11a);
-//    makeWav("test11b.wav", testTune11b);
-//    makeWav("test12.wav", testTune12);
-//    makeWav("test13.wav", testTune13);
-//
-//    makeWav("bb-track1.wav", *bumbleBotsSong);
+void makeSong(const char* filename, const SongSpec* song) {
+    std::cout << "Generating " << filename << ", len = " << song->lengthInSeconds() << "s\n";
+    makeWav(filename, *song);
+}
 
-//    makeWav("alex-kidd1.wav", *alexKiddSong1);
-//    makeWav("alex-kidd2.wav", *alexKiddSong2);
-//    makeWav("alex-kidd3.wav", *alexKiddSong3);
+void makeTestTunes() {
+    makeWav("test1.wav", testTune1);
+    makeWav("test2.wav", testTune2);
+    makeWav("test3.wav", testTune3);
+    makeWav("test4.wav", testTune4);
+    makeWav("test5a.wav", testTune5a);
+    makeWav("test5b.wav", testTune5b);
+    makeWav("test6a.wav", testTune6a);
+    makeWav("test6b.wav", testTune6b);
+    makeWav("test7.wav", testTune7);
+    makeWav("test8.wav", testTune8);
+    makeWav("test9.wav", testTune9);
+    makeWav("test10.wav", testTune10);
+    makeWav("test11a.wav", testTune11a);
+    makeWav("test11b.wav", testTune11b);
+    makeWav("test12.wav", testTune12);
+    makeWav("test13.wav", testTune13);
+}
 
-//    makeWav("neon.wav", *neonSong);
+void makeSongs() {
+    makeSong("alex-kidd1.wav", alexKiddSong1);
+    makeSong("alex-kidd2.wav", alexKiddSong2);
+    makeSong("alex-kidd3.wav", alexKiddSong3);
 
-//    makeWav("the-lair1.wav", *theLairSong1);
-//    makeWav("the-lair2.wav", *theLairSong2);
-//    makeWav("the-lair3.wav", *theLairSong3);
-
-//    makeWav("pat-shooter1.wav", *patShooterSong1);
-//    makeWav("pat-shooter2.wav", *patShooterSong2);
-
-    makeWav("rock-for-metal.wav", *rockForMetalSong);
-    makeWav("rock-for-metal-sfx36.wav", *rockForMetalSfx, SAMPLES_PER_TICK * 16 * 32);
-
-//    makeWav("zepton1.wav", *zeptonSong1);
-//    makeWav("zepton2.wav", *zeptonSong2);
-
+    makeSong("bb-track1.wav", bumbleBotsSong);
 //    MusicHandler musicHandler;
 //    musicHandler.play(bumbleBotsSong, false);
 //    makeWav("bb-track1b.wav", musicHandler, true);
+
+    makeSong("neon.wav", neonSong);
+
+    makeSong("the-lair1.wav", theLairSong1);
+    makeSong("the-lair2.wav", theLairSong2);
+    makeSong("the-lair3.wav", theLairSong3);
+
+    makeSong("rock-for-metal.wav", rockForMetalSong);
+
+    makeSong("zepton1.wav", zeptonSong1);
+    makeSong("zepton2.wav", zeptonSong2);
+}
+
+int main(int argc, const char * argv[]) {
+//    makeTestTunes();
+    makeSongs();
 
     return 0;
 }

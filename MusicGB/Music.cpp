@@ -310,6 +310,10 @@ inline int notePeriod(const NoteSpec* note) {
     return ((int)notePeriodLookup[(int)note->note & 0x0f]) << (MAX_OCTAVE - ((int)note->note >> 4));
 }
 
+int TuneSpec::lengthInTicks() const {
+    return numNotes * noteDuration;
+}
+
 void TuneGenerator::setTuneSpec(const TuneSpec* tuneSpec, bool isFirst) {
     _tuneSpec = tuneSpec;
 
@@ -367,10 +371,6 @@ const NoteSpec* TuneGenerator::peekNextNote() const {
 }
 
 void TuneGenerator::moveToNextNote() {
-    if (_tuneSpec->notes == nullptr) {
-        ++_noteIndex;
-    }
-
     if (_arpeggioNote != nullptr) {
         if (_pendingArpeggioSamples > 0) {
             if (_note == lastArpeggioNote()) {
@@ -386,6 +386,10 @@ void TuneGenerator::moveToNextNote() {
     }
 
     _note = peekNextNote();
+
+    if (_tuneSpec->notes == nullptr) {
+        ++_noteIndex;
+    }
 }
 
 void TuneGenerator::startArpeggio() {
@@ -718,6 +722,11 @@ int TuneGenerator::intensity() {
 }
 
 int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
+    if (_note == nullptr) {
+        // End of tune
+        return 0;
+    }
+
     Sample* bufP = buf;
     Sample* maxBufP = bufP + maxSamples;
 
@@ -733,11 +742,6 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
         }
 
         if (_sampleIndex >= _samplesPerNote) {
-            if (_note == nullptr) {
-                // End of tune
-                break;
-            }
-
             createOutgoingBlendSamplesIfNeeded();
             moveToNextNote();
 
@@ -756,6 +760,10 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
 
 //--------------------------------------------------------------------------------------------------
 // Pattern Generation
+
+int PatternSpec::lengthInTicks() const {
+    return tunes[0]->lengthInTicks();
+}
 
 void PatternGenerator::setPatternSpec(const PatternSpec* patternSpec, bool isFirst) {
     _patternSpec = patternSpec;
@@ -788,6 +796,20 @@ int PatternGenerator::addSamples(Sample* buf, int maxSamples) {
 //--------------------------------------------------------------------------------------------------
 // Song Generation
 
+int SongSpec::lengthInTicks() const {
+    int len = 0;
+    for (int i = numPatterns; --i >= 0; ) {
+        len += patterns[i]->lengthInTicks();
+    }
+
+    return len;
+}
+
+int SongSpec::lengthInSeconds() const {
+    // Adding "SAMPLERATE - 1" to round up.
+    return (lengthInTicks() * SAMPLES_PER_TICK + SAMPLERATE - 1) / SAMPLERATE;
+}
+
 void SongGenerator::startPattern(bool isFirst) {
     _patternGenerator.setPatternSpec(*_pattern);
 }
@@ -817,13 +839,14 @@ int SongGenerator::intensity() {
 int SongGenerator::addSamples(Sample* buf, int maxSamples) {
     int totalAdded = 0;
 
+    if (_pattern == nullptr) {
+        // We're done
+        return totalAdded;
+    }
+
     do {
         totalAdded += _patternGenerator.addSamples(buf + totalAdded, maxSamples - totalAdded);
         if (totalAdded < maxSamples) {
-            if (_pattern == nullptr) {
-                // We're done
-                return totalAdded;
-            }
             moveToNextPattern();
             if (_pattern == nullptr) {
                 // We're done

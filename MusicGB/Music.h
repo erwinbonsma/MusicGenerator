@@ -106,6 +106,8 @@ struct TuneSpec {
     uint8_t noteDuration;        // in "ticks". [1..64]
     uint16_t loopStart, numNotes;
     const NoteSpec* notes;
+
+    int lengthInTicks() const;
 };
 
 struct WaveTable {
@@ -205,6 +207,8 @@ public:
 struct PatternSpec {
     uint8_t numTunes;
     const TuneSpec** tunes;
+
+    int lengthInTicks() const;
 };
 
 constexpr int MAX_TUNES_IN_PATTERN = 4;
@@ -233,6 +237,9 @@ public:
 struct SongSpec {
     uint8_t loopStart, numPatterns;
     const PatternSpec** patterns;
+
+    int lengthInSeconds() const;
+    int lengthInTicks() const;
 };
 
 class SongGenerator {
