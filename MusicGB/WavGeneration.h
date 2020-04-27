@@ -11,7 +11,9 @@
 
 #include "Music.h"
 
-void makeWav(const char* filename, const TuneSpec& tune);
+#include <climits>
+
+void makeWav(const char* filename, const TuneSpec& tune, int maxSamples = INT_MAX);
 void makeWav(const char* filename, const PatternSpec& pattern);
 void makeWav(const char* filename, const SongSpec& song);
 

@@ -11,6 +11,7 @@
 #include "wav.h"
 #include <stdint.h>
 #include <iostream>
+#include <algorithm>
 
 constexpr int BUFSIZE = 512;
 
@@ -39,7 +40,7 @@ WavFile* openWavFile(const char* filename) {
     return wavFile;
 }
 
-void makeWav(const char* filename, const TuneSpec& tune) {
+void makeWav(const char* filename, const TuneSpec& tune, int maxSamples) {
     TuneGenerator tuneGen;
 
     tuneGen.setTuneSpec(&tune);
@@ -50,7 +51,8 @@ void makeWav(const char* filename, const TuneSpec& tune) {
     int samplesAdded;
     do {
         clearBuffer(buf);
-        samplesAdded = tuneGen.addSamples(buf, BUFSIZE);
+        samplesAdded = tuneGen.addSamples(buf, std::min(BUFSIZE, maxSamples));
+        maxSamples -= samplesAdded;
         amplifyBuffer(buf, 8);
         wav_write(wavFile, (const void* const*)buffers, samplesAdded);
     } while (samplesAdded == BUFSIZE);
