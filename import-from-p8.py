@@ -246,7 +246,7 @@ class Pattern:
         if self.is_empty():
             return
 
-        print("const TuneSpec* pattern%dTunes%s[%d] = { %s };" %
+        print("const TuneSpec *const pattern%dTunes%s[%d] = { %s };" %
             (self.index, postfix, len(self.sfx_ids), ", ".join(
                 ["&sfx%d%s" % (id, postfix) for id in self.sfx_ids]
             ))
@@ -277,7 +277,7 @@ class Song:
             ))
 
     def print(self):
-        print("const PatternSpec* song%dPatterns%s[%d] = {" % (self.start_idx, postfix, len(self.pattern_ids)))
+        print("const PatternSpec *const song%dPatterns%s[%d] = {" % (self.start_idx, postfix, len(self.pattern_ids)))
         for id in self.pattern_ids:
             print("%s&pattern%d%s," % (tab, id, postfix))
         print("};")
