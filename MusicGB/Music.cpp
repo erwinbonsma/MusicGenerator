@@ -433,7 +433,20 @@ void TuneGenerator::exitArpeggio() {
 }
 
 int TuneGenerator::ticksPlayed() {
-    int notesPlayed = (int)((_arpeggioNote != nullptr ? _arpeggioNote : _note) - _tuneSpec->notes);
+    if (_tuneSpec == nullptr) {
+        return 0;
+    }
+    if (_note == nullptr) {
+        return _tuneSpec->lengthInTicks();
+    }
+
+    int notesPlayed;
+    if (_tuneSpec->notes == nullptr) {
+        notesPlayed = _noteIndex;
+    } else {
+        notesPlayed = (int)((_arpeggioNote != nullptr ? _arpeggioNote : _note) - _tuneSpec->notes);
+    }
+
     int ticksPlayedInCurrentNote = (_sampleIndex >> SAMPLERATE_SHIFT) / SAMPLES_PER_TICK;
 
     return notesPlayed * _tuneSpec->noteDuration + ticksPlayedInCurrentNote;
@@ -860,9 +873,13 @@ void SongGenerator::setSongSpec(const SongSpec* songSpec, bool loop) {
 
 
 int SongGenerator::progressInSeconds() {
-    if (_pattern == nullptr) {
+    if (_songSpec == nullptr) {
         return 0;
     }
+    if (_pattern == nullptr) {
+        return _songSpec->lengthInSeconds();
+    }
+
     int totalTicks = _ticksPlayedInEarlierPatterns + _patternGenerator.ticksPlayed();
 
     return totalTicks * SAMPLES_PER_TICK / SAMPLERATE;
