@@ -432,6 +432,13 @@ void TuneGenerator::exitArpeggio() {
     setSamplesPerNote();
 }
 
+int TuneGenerator::ticksPlayed() {
+    int notesPlayed = (int)((_arpeggioNote != nullptr ? _arpeggioNote : _note) - _tuneSpec->notes);
+    int ticksPlayedInCurrentNote = (_sampleIndex >> SAMPLERATE_SHIFT) / SAMPLES_PER_TICK;
+
+    return notesPlayed * _tuneSpec->noteDuration + ticksPlayedInCurrentNote;
+}
+
 void TuneGenerator::startNote() {
     _sampleIndex = 0;
 
@@ -776,6 +783,10 @@ void PatternGenerator::setPatternSpec(const PatternSpec* patternSpec, bool isFir
     }
 }
 
+int PatternGenerator::ticksPlayed() {
+    return _tuneGens[0].ticksPlayed();
+}
+
 int PatternGenerator::intensity() {
     int sum = 0;
 
@@ -819,10 +830,20 @@ void SongGenerator::startPattern(bool isFirst) {
 }
 
 void SongGenerator::moveToNextPattern() {
+    _ticksPlayedInEarlierPatterns += (*_pattern)->lengthInTicks();
+
     _pattern++;
+
     if (_pattern == _songSpec->patterns + _songSpec->numPatterns) {
         if (_loop && _songSpec->loopStart < _songSpec->numPatterns) {
-            _pattern = _songSpec->patterns + _songSpec->loopStart;
+            const PatternSpec *const * loopStart = _songSpec->patterns + _songSpec->loopStart;
+            _pattern = _songSpec->patterns;
+            _ticksPlayedInEarlierPatterns = 0;
+
+            while (_pattern != loopStart) {
+                _ticksPlayedInEarlierPatterns += (*_pattern)->lengthInTicks();
+                ++_pattern;
+            }
         } else {
             _pattern = nullptr;
         }
@@ -833,7 +854,18 @@ void SongGenerator::setSongSpec(const SongSpec* songSpec, bool loop) {
     _songSpec = songSpec;
     _pattern = _songSpec->patterns;
     _loop = loop;
+    _ticksPlayedInEarlierPatterns = 0;
     startPattern(true);
+}
+
+
+int SongGenerator::progressInSeconds() {
+    if (_pattern == nullptr) {
+        return 0;
+    }
+    int totalTicks = _ticksPlayedInEarlierPatterns + _patternGenerator.ticksPlayed();
+
+    return totalTicks * SAMPLES_PER_TICK / SAMPLERATE;
 }
 
 int SongGenerator::intensity() {
@@ -846,6 +878,11 @@ int SongGenerator::addSamples(Sample* buf, int maxSamples) {
     if (_pattern == nullptr) {
         // We're done
         return totalAdded;
+    }
+
+    if (_paused) {
+        // Don't actually add any samples but signal that buffer is fully filled (with silence)
+        return maxSamples;
     }
 
     do {

@@ -193,6 +193,7 @@ public:
     void stop() { _note = nullptr; }
     bool isDone() { return _note == nullptr; }
 
+    int ticksPlayed();
     int intensity();
 
     // Adds samples for the tune to the given buffer. Note, it does not overwrite existing values
@@ -225,6 +226,7 @@ class PatternGenerator {
 public:
     void setPatternSpec(const PatternSpec* patternSpec, bool isFirst = true);
 
+    int ticksPlayed();
     int intensity();
 
     // Adds samples for the pattern to the given buffer. Note, it does not overwrite existing values
@@ -251,7 +253,9 @@ class SongGenerator {
     const SongSpec* _songSpec;
     PatternGenerator _patternGenerator;
     const PatternSpec *const * _pattern;
+    int _ticksPlayedInEarlierPatterns;
     bool _loop;
+    bool _paused;
 
     void startPattern(bool isFirst);
     void moveToNextPattern();
@@ -259,6 +263,13 @@ class SongGenerator {
 public:
     void setSongSpec(const SongSpec* songSpec, bool loop);
     void stop() { _pattern = nullptr; };
+
+    void setLoop(bool flag) { _loop = flag; }
+    void setPause(bool flag) { _paused = flag; }
+
+    bool isLooping() { return _loop; }
+    bool isPaused() { return _paused; }
+    int progressInSeconds();
     bool isDone() { return _pattern == nullptr; }
 
     int intensity();
@@ -299,6 +310,10 @@ public:
 
     void stopTune() { _tuneGenerator.stop(); }
     void stopSong() { _songGenerator.stop(); }
+
+    void loopSong(bool flag) { _songGenerator.setLoop(flag); }
+    void pauseSong(bool flag) { _songGenerator.setPause(flag); }
+    int songProgressInSeconds() { return _songGenerator.progressInSeconds(); }
 
     int intensity();
 
