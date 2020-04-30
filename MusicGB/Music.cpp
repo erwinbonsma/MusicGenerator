@@ -886,7 +886,7 @@ int SongGenerator::progressInSeconds() {
 }
 
 int SongGenerator::outputLevel() {
-    return _pattern == nullptr ? 0 : _patternGenerator.outputLevel();
+    return (_pattern == nullptr || _paused) ? 0 : _patternGenerator.outputLevel();
 }
 
 int SongGenerator::addSamples(Sample* buf, int maxSamples) {
