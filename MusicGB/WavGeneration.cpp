@@ -98,15 +98,15 @@ void makeWav(const char* filename, const SongSpec& song) {
     wav_close(wavFile);
 }
 
-void makeWav(const char* filename, MusicHandler& musicHandler, bool outputIntensity) {
+void makeWav(const char* filename, MusicHandler& musicHandler, bool outputLevel) {
     Sample buf[BUFSIZE];
     Sample* buffers[1] = { buf };
 
     WavFile* wavFile = openWavFile(filename);
     do {
         musicHandler.update();
-        if (outputIntensity) {
-            std::cout << std::string(musicHandler.intensity(), '#') << std::endl;
+        if (outputLevel) {
+            std::cout << std::string(musicHandler.outputLevel(), '#') << std::endl;
         }
         for (int i = 0; i < BUFSIZE; i++) {
             buf[i] = musicHandler.nextSample() << 6;

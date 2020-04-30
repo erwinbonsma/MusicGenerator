@@ -729,8 +729,8 @@ void TuneGenerator::createIncomingBlendSamplesIfNeeded() {
     CALL_MEMBER_FN(*this, _sampleGeneratorFun)(buf, buf + NUM_BLEND_SAMPLES);
 }
 
-// The intensity is double the volume for normal notes (for maximum accuracy)
-int TuneGenerator::intensity() {
+// The output level is double the volume for normal notes (for maximum accuracy)
+int TuneGenerator::outputLevel() {
     if (_note == nullptr) {
         return 0;
     }
@@ -800,11 +800,11 @@ int PatternGenerator::ticksPlayed() {
     return _tuneGens[0].ticksPlayed();
 }
 
-int PatternGenerator::intensity() {
+int PatternGenerator::outputLevel() {
     int sum = 0;
 
     for (int i = _patternSpec->numTunes; --i >= 0; ) {
-        sum += _tuneGens[i].intensity();
+        sum += _tuneGens[i].outputLevel();
     }
 
     return sum;
@@ -885,8 +885,8 @@ int SongGenerator::progressInSeconds() {
     return totalTicks * SAMPLES_PER_TICK / SAMPLERATE;
 }
 
-int SongGenerator::intensity() {
-    return _pattern == nullptr ? 0 : _patternGenerator.intensity();
+int SongGenerator::outputLevel() {
+    return _pattern == nullptr ? 0 : _patternGenerator.outputLevel();
 }
 
 int SongGenerator::addSamples(Sample* buf, int maxSamples) {
@@ -937,8 +937,8 @@ void MusicHandler::play(const SongSpec* songSpec, bool loop) {
     _zeroP = nullptr;
 }
 
-int MusicHandler::intensity() {
-    return _tuneGenerator.intensity() + _songGenerator.intensity();
+int MusicHandler::outputLevel() {
+    return _tuneGenerator.outputLevel() + _songGenerator.outputLevel();
 }
 
 void MusicHandler::update() {

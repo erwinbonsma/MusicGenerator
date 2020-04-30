@@ -17,6 +17,6 @@ void makeWav(const char* filename, const TuneSpec& tune, int maxSamples = INT_MA
 void makeWav(const char* filename, const PatternSpec& pattern);
 void makeWav(const char* filename, const SongSpec& song);
 
-void makeWav(const char* filename, MusicHandler& musicHandler, bool outputIntensity = false);
+void makeWav(const char* filename, MusicHandler& musicHandler, bool outputLevel = false);
 
 #endif /* WavGeneration_h */
