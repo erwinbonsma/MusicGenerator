@@ -4320,5 +4320,5 @@ const PatternSpec *const song0PatternsRockForMetal[49] = {
     &pattern48RockForMetal,
 };
 const SongSpec song0RockForMetal = SongSpec {
-    .loopStart = 49, .numPatterns = 49, .patterns = song0PatternsRockForMetal
+    .loopStart = 0, .numPatterns = 49, .patterns = song0PatternsRockForMetal
 };
