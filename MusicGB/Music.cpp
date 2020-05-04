@@ -595,26 +595,26 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 }
 
 void TuneGenerator::addMainSamplesPhaser(Sample* &curP, Sample* endP) {
-    int p = (_phaserCount < 128) ? (_phaserCount << 1) : 255 - ((_phaserCount - 128) << 1);
-    int m = p + ((256 - p) >> 1);
+    int p = ((_phaserCount < 128) ? _phaserCount : 255 - _phaserCount) << 9;
+    int m = p + (((0x1 << 16) - p) >> 1);
     int hm = (m + 1) >> 1;
 
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int t = (_waveIndex >> phaserShift) & 0xff; // Throw away most significant bit
+        int t = (_waveIndex >> (phaserShift - 8)) & 0xffff; // Throw away most significant bit
         int s = (t < p) ? t : p + ((t - p) >> 1);
         if (_waveIndex & (0x1 << (phaserShift + 8))) { // Check most significant bit
-            s = hm - s;
+            s = (hm - s) >> 8;
         } else {
-            s = s - hm;
+            s = (s - hm) >> 8;
         }
 
         _waveIndex += _indexDelta;
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
             _phaserCount += 2;
-            p = (_phaserCount < 128) ? (_phaserCount << 1) : 255 - ((_phaserCount - 128) << 1);
-            m =  p + ((256 - p) >> 1);
+            p = ((_phaserCount < 128) ? _phaserCount : 255 - _phaserCount) << 9;
+            m =  p + (((0x1 << 16) - p) >> 1);
             hm = (m + 1) >> 1;
         }
         _indexDelta += _indexDeltaDelta;
