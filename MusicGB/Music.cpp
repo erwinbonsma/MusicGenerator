@@ -95,6 +95,7 @@ const int8_t triangleWaveSamples[510] = {
 };
 const WaveTable triangleWave = WaveTable {
     .numSamples = 510,
+    .initialWaveIndex = 0,
     .shift = 6 + 15,
     .samples = triangleWaveSamples
 };
@@ -124,6 +125,7 @@ const int8_t tiltedSawWaveSamples[298] = {
 };
 const WaveTable tiltedSawWave = WaveTable {
     .numSamples = 298,
+    .initialWaveIndex = 0,
     .shift = 6 + 15,
     .samples = tiltedSawWaveSamples
 };
@@ -149,6 +151,7 @@ const int8_t sawWaveSamples[256] = {
 };
 const WaveTable sawWave = WaveTable {
     .numSamples = 256,
+    .initialWaveIndex = 0,
     .shift = 6 + 15,
     .samples = sawWaveSamples
 };
@@ -156,6 +159,7 @@ const WaveTable sawWave = WaveTable {
 const int8_t squareWaveSamples[2] = { 127, -128 };
 const WaveTable squareWave = WaveTable {
     .numSamples = 2,
+    .initialWaveIndex = 0,
     .shift = 13 + 15,
     .samples = squareWaveSamples
 };
@@ -163,6 +167,7 @@ const WaveTable squareWave = WaveTable {
 const int8_t pulseWaveSamples[3] = { 127, -128, -128 };
 const WaveTable pulseWave = WaveTable {
     .numSamples = 3,
+    .initialWaveIndex = 0,
     .shift = 13 + 15,
     .samples = pulseWaveSamples
 };
@@ -239,6 +244,7 @@ const int8_t organWaveSamples[1020] = {
 };
 const WaveTable organWave = WaveTable {
     .numSamples = 1020,
+    .initialWaveIndex = 0,
     .shift = 5 + 15,
     .samples = organWaveSamples
 };
@@ -282,12 +288,14 @@ constexpr int numNoiseSamples = 510;
 constexpr int noiseShift = 6 + 15;
 const WaveTable noiseWave = WaveTable {
     .numSamples = numNoiseSamples,
+    .initialWaveIndex = 0,
     .shift = noiseShift,
     .samples = noiseWaveSamples
 };
 constexpr int phaserShift = 21;
 const WaveTable phaserWave = WaveTable {
     .numSamples = 512,
+    .initialWaveIndex = 128,
     .shift = phaserShift,
     .samples = nullptr // Not used. Samples are calculated for this instrument
 };
@@ -420,9 +428,11 @@ void TuneGenerator::startArpeggio() {
     _waveTable = waveTableLookup[(int)_arpeggioNote->wav];
     _maxWaveIndex = _waveTable->numSamples << _waveTable->shift;
 
-    if (_arpeggioNote->wav == WaveForm::NOISE) {
+    if (_arpeggioNote->wav == WaveForm::PHASER) {
+        _sampleGeneratorFun = &TuneGenerator::addMainSamplesPhaser;
+    } else if (_arpeggioNote->wav == WaveForm::NOISE) {
         _sampleGeneratorFun = &TuneGenerator::addMainSamplesNoise;
-    } else {
+    } else{
         _sampleGeneratorFun = &TuneGenerator::addMainSamples;
     }
 
@@ -476,7 +486,7 @@ void TuneGenerator::startNote() {
             }
 
             if (_waveTable != prevWaveTable) {
-                _waveIndex = 0;
+                _waveIndex = _waveTable->initialWaveIndex << _waveTable->shift;
             }
             _maxWaveIndex = _waveTable->numSamples << _waveTable->shift;
 
