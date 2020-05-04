@@ -131,6 +131,7 @@ typedef void (TuneGenerator::*SampleGeneratorFun)(Sample* &curP, Sample* endP);
 class TuneGenerator {
     const TuneSpec* _tuneSpec;
     int16_t _samplesPerNote;
+    int16_t _noiseLfsr = 1;
 
 // Current note
     const NoteSpec* _note;
@@ -139,18 +140,11 @@ class TuneGenerator {
     int32_t _waveIndex, _maxWaveIndex;
     int32_t _indexDelta, _indexDeltaDelta;
     int32_t _volume, _volumeDelta;
-// Let-Vibrato and Noise related fields share same memory, as they are never used together.
-union {
-    int32_t _vibratoDelta;
+    int32_t _vibratoDelta, _vibratoDeltaDelta;
     int32_t _indexNoiseDelta;
-};
-    int32_t _vibratoDeltaDelta;
     int16_t _sampleIndex;
-union {
     int16_t _pendingArpeggioSamples;
     int16_t _noteIndex; // Used when tune contains only SILENCE
-};
-    int16_t _noiseLfsr = 1;
     uint8_t _phaserCount;
 
     SampleGeneratorFun _sampleGeneratorFun;
@@ -163,14 +157,15 @@ union {
         _samplesPerNote = (_tuneSpec->noteDuration * SAMPLES_PER_TICK) << SAMPLERATE_SHIFT;
     }
 
-    const NoteSpec* firstArpeggioNote() const {
+    const inline NoteSpec* firstArpeggioNote() const {
         return _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % 4;
     }
-    const NoteSpec* lastArpeggioNote() const {
+    const inline NoteSpec* lastArpeggioNote() const {
         return _arpeggioNote - (_arpeggioNote - _tuneSpec->notes) % 4 + 3;
     }
 
-    const WaveTable* waveTableForWaveForm(WaveForm waveForm) const;
+    // Returns true when an actual wave has been set. False when the wave form was NONE.
+    bool setWaveTable(WaveForm waveForm);
 
     void startArpeggio();
     void exitArpeggio();
