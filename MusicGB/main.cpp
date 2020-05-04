@@ -352,7 +352,7 @@ void makeSongs() {
 }
 
 int main(int argc, const char * argv[]) {
-//    makeTestTunes();
+    makeTestTunes();
     makeSongs();
 
     return 0;

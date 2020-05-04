@@ -140,10 +140,7 @@ union {
     int32_t _vibratoDelta;
     int32_t _indexNoiseDelta;
 };
-union {
     int32_t _vibratoDeltaDelta;
-    int32_t _maxWaveIndexOrig; // Used for NOISE
-};
     int16_t _sampleIndex;
 union {
     int16_t _pendingArpeggioSamples;

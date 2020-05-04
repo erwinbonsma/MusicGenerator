@@ -278,9 +278,11 @@ const int8_t noiseWaveSamples[510] = {
      -22,  -21,  -20,  -19,  -17,  -14,  -13,  -10,   -7,   -5,   -2,   -1,    0,    3,    6,    9,
       12,   11,   11,   11,   11,   11,   12,   12,   13,   11,   10,    8,    7,    7,    6,    6
 };
+constexpr int numNoiseSamples = 510;
+constexpr int noiseShift = 6 + 15;
 const WaveTable noiseWave = WaveTable {
-    .numSamples = 510,
-    .shift = 6 + 15,
+    .numSamples = numNoiseSamples,
+    .shift = noiseShift,
     .samples = noiseWaveSamples
 };
 
@@ -474,7 +476,6 @@ void TuneGenerator::startNote() {
 
             _indexNoiseDelta = 0;
             if (_note->wav == WaveForm::NOISE) {
-                _maxWaveIndexOrig = _maxWaveIndex;
                 _maxWaveIndex >>= 2;
             }
 
@@ -586,12 +587,12 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 }
 
 void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
-    int shift = _waveTable->shift;
+    constexpr int maxWaveIndexFullRange = numNoiseSamples << noiseShift;
     const int8_t* samples = _waveTable->samples;
 
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int8_t sample = samples[_waveIndex >> shift];
+        int8_t sample = samples[_waveIndex >> noiseShift];
         _waveIndex += _indexDelta;
         _waveIndex += _indexNoiseDelta;
         if (_waveIndex >= _maxWaveIndex) {
@@ -606,11 +607,11 @@ void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
                 _indexNoiseDelta += _indexDelta;
             };
             // Update max wave index to end of the waveform quadrant we just entered
-            if (_maxWaveIndex == _maxWaveIndexOrig) {
-                _waveIndex -= _maxWaveIndex;
+            if (_maxWaveIndex == maxWaveIndexFullRange) {
+                _waveIndex -= maxWaveIndexFullRange;
                 _maxWaveIndex = 0;
             } else {
-                _maxWaveIndex += (_maxWaveIndexOrig >> 2);
+                _maxWaveIndex += (maxWaveIndexFullRange >> 2);
             }
         }
         _indexDelta += _indexDeltaDelta;
