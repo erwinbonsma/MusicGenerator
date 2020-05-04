@@ -307,7 +307,7 @@ const TuneSpec testTune13 = TuneSpec {
 
 // Test PHASER
 const TuneSpec testTune14 = TuneSpec {
-    .noteDuration = 8,
+    .noteDuration = 32,
     .loopStart = 8,
     .numNotes = 8,
     .notes = new NoteSpec[8] {

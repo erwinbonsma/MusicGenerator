@@ -595,28 +595,31 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 }
 
 void TuneGenerator::addMainSamplesPhaser(Sample* &curP, Sample* endP) {
-    int p = _phaserCount;
+    int p = (_phaserCount < 128) ? (_phaserCount << 1) : 255 - ((_phaserCount - 128) << 1);
     int m = p + ((256 - p) >> 1);
+    int hm = (m + 1) >> 1;
 
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
         int t = (_waveIndex >> phaserShift) & 0xff; // Throw away most significant bit
         int s = (t < p) ? t : p + ((t - p) >> 1);
         if (_waveIndex & (0x1 << (phaserShift + 8))) { // Check most significant bit
-            s = m - s;
+            s = hm - s;
+        } else {
+            s = s - hm;
         }
 
-        //        int8_t sample = samples[_waveIndex >> shift];
         _waveIndex += _indexDelta;
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
-            _phaserCount += 8;
-            p = _phaserCount;
+            _phaserCount += 2;
+            p = (_phaserCount < 128) ? (_phaserCount << 1) : 255 - ((_phaserCount - 128) << 1);
             m =  p + ((256 - p) >> 1);
+            hm = (m + 1) >> 1;
         }
         _indexDelta += _indexDeltaDelta;
 
-        int16_t amplifiedSample = (s - 128) * (int8_t)(_volume >> 24);
+        int16_t amplifiedSample = s * (int8_t)(_volume >> 24);
         //printf("idx=%d %d\n", _waveIndex >> shift, amplifiedSample >> POST_AMP_SHIFT);
         _volume += _volumeDelta;
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
