@@ -147,6 +147,7 @@ union {
     int16_t _noteIndex; // Used when tune contains only SILENCE
 };
     int16_t _noiseLfsr = 1;
+    uint8_t _phaserCount;
 
     SampleGeneratorFun _sampleGeneratorFun;
 
@@ -180,6 +181,7 @@ union {
     void createIncomingBlendSamplesIfNeeded();
 
     void addMainSamples(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
+    void addMainSamplesPhaser(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesNoise(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesSilence(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesVibrato(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;

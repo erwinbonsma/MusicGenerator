@@ -305,28 +305,46 @@ const TuneSpec testTune13 = TuneSpec {
     .notes = nullptr
 };
 
+// Test PHASER
+const TuneSpec testTune14 = TuneSpec {
+    .noteDuration = 8,
+    .loopStart = 8,
+    .numNotes = 8,
+    .notes = new NoteSpec[8] {
+        NoteSpec { .note=Note::C4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::D4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::E4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::F4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::A4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::B4, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::C5, .vol=8, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+    }
+};
+
 void makeSong(const char* filename, const SongSpec* song) {
     std::cout << "Generating " << filename << ", len = " << song->lengthInSeconds() << "s\n";
     makeWav(filename, *song);
 }
 
 void makeTestTunes() {
-    makeWav("test1.wav", testTune1);
-    makeWav("test2.wav", testTune2);
-    makeWav("test3.wav", testTune3);
-    makeWav("test4.wav", testTune4);
-    makeWav("test5a.wav", testTune5a);
-    makeWav("test5b.wav", testTune5b);
-    makeWav("test6a.wav", testTune6a);
-    makeWav("test6b.wav", testTune6b);
-    makeWav("test7.wav", testTune7);
-    makeWav("test8.wav", testTune8);
-    makeWav("test9.wav", testTune9);
-    makeWav("test10.wav", testTune10);
-    makeWav("test11a.wav", testTune11a);
-    makeWav("test11b.wav", testTune11b);
-    makeWav("test12.wav", testTune12);
-    makeWav("test13.wav", testTune13);
+//    makeWav("test1.wav", testTune1);
+//    makeWav("test2.wav", testTune2);
+//    makeWav("test3.wav", testTune3);
+//    makeWav("test4.wav", testTune4);
+//    makeWav("test5a.wav", testTune5a);
+//    makeWav("test5b.wav", testTune5b);
+//    makeWav("test6a.wav", testTune6a);
+//    makeWav("test6b.wav", testTune6b);
+//    makeWav("test7.wav", testTune7);
+//    makeWav("test8.wav", testTune8);
+//    makeWav("test9.wav", testTune9);
+//    makeWav("test10.wav", testTune10);
+//    makeWav("test11a.wav", testTune11a);
+//    makeWav("test11b.wav", testTune11b);
+//    makeWav("test12.wav", testTune12);
+//    makeWav("test13.wav", testTune13);
+    makeWav("test14.wav", testTune14);
 }
 
 void makeSongs() {
@@ -353,7 +371,7 @@ void makeSongs() {
 
 int main(int argc, const char * argv[]) {
     makeTestTunes();
-    makeSongs();
+//    makeSongs();
 
     return 0;
 }

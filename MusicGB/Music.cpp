@@ -285,6 +285,12 @@ const WaveTable noiseWave = WaveTable {
     .shift = noiseShift,
     .samples = noiseWaveSamples
 };
+constexpr int phaserShift = 21;
+const WaveTable phaserWave = WaveTable {
+    .numSamples = 512,
+    .shift = phaserShift,
+    .samples = nullptr // Not used. Samples are calculated for this instrument
+};
 
 const WaveTable* waveTableLookup[9] = {
     &triangleWave,
@@ -294,7 +300,7 @@ const WaveTable* waveTableLookup[9] = {
     &pulseWave,
     &organWave,
     &noiseWave,
-    &organWave, // Also use organ for unsupported PHASER
+    &phaserWave,
     nullptr
 };
 
@@ -557,7 +563,9 @@ void TuneGenerator::startNote() {
             break;
     }
 
-    if (_note->wav == WaveForm::NOISE) {
+    if (_note->wav == WaveForm::PHASER) {
+        _sampleGeneratorFun = &TuneGenerator::addMainSamplesPhaser;
+    } else if (_note->wav == WaveForm::NOISE) {
         _sampleGeneratorFun = &TuneGenerator::addMainSamplesNoise;
     } else if (_note->fx == Effect::VIBRATO) {
         _sampleGeneratorFun = &TuneGenerator::addMainSamplesVibrato;
@@ -580,6 +588,35 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
         _indexDelta += _indexDeltaDelta;
 
         int16_t amplifiedSample = sample * (int8_t)(_volume >> 24);
+        //printf("idx=%d %d\n", _waveIndex >> shift, amplifiedSample >> POST_AMP_SHIFT);
+        _volume += _volumeDelta;
+        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
+    }
+}
+
+void TuneGenerator::addMainSamplesPhaser(Sample* &curP, Sample* endP) {
+    int p = _phaserCount;
+    int m = p + ((256 - p) >> 1);
+
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        int t = (_waveIndex >> phaserShift) & 0xff; // Throw away most significant bit
+        int s = (t < p) ? t : p + ((t - p) >> 1);
+        if (_waveIndex & (0x1 << (phaserShift + 8))) { // Check most significant bit
+            s = m - s;
+        }
+
+        //        int8_t sample = samples[_waveIndex >> shift];
+        _waveIndex += _indexDelta;
+        if (_waveIndex >= _maxWaveIndex) {
+            _waveIndex -= _maxWaveIndex;
+            _phaserCount += 8;
+            p = _phaserCount;
+            m =  p + ((256 - p) >> 1);
+        }
+        _indexDelta += _indexDeltaDelta;
+
+        int16_t amplifiedSample = (s - 128) * (int8_t)(_volume >> 24);
         //printf("idx=%d %d\n", _waveIndex >> shift, amplifiedSample >> POST_AMP_SHIFT);
         _volume += _volumeDelta;
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
