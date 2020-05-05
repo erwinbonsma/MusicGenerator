@@ -1398,24 +1398,24 @@ const PatternSpec pattern16Porklike = PatternSpec {
     .numTunes = 2, .tunes = pattern16TunesPorklike
 };
 
-const PatternSpec *const song1PatternsPorklike[1] = {
-//    &pattern1Porklike,
-//    &pattern2Porklike,
-//    &pattern3Porklike,
-//    &pattern4Porklike,
-//    &pattern5Porklike,
-//    &pattern6Porklike,
+const PatternSpec *const song1PatternsPorklike[16] = {
+    &pattern1Porklike,
+    &pattern2Porklike,
+    &pattern3Porklike,
+    &pattern4Porklike,
+    &pattern5Porklike,
+    &pattern6Porklike,
     &pattern7Porklike,
-//    &pattern8Porklike,
-//    &pattern9Porklike,
-//    &pattern10Porklike,
-//    &pattern11Porklike,
-//    &pattern12Porklike,
-//    &pattern13Porklike,
-//    &pattern14Porklike,
-//    &pattern15Porklike,
-//    &pattern16Porklike,
+    &pattern8Porklike,
+    &pattern9Porklike,
+    &pattern10Porklike,
+    &pattern11Porklike,
+    &pattern12Porklike,
+    &pattern13Porklike,
+    &pattern14Porklike,
+    &pattern15Porklike,
+    &pattern16Porklike,
 };
 const SongSpec song1Porklike = SongSpec {
-    .loopStart = 0, .numPatterns = 1, .patterns = song1PatternsPorklike
+    .loopStart = 0, .numPatterns = 16, .patterns = song1PatternsPorklike
 };
