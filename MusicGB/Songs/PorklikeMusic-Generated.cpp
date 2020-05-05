@@ -41,19 +41,19 @@ const NoteSpec sfx27NotesPorklike[32] = {
     SILENCE,
     SILENCE,
     SILENCE,
+    SILENCE,
     NoteSpec { .note=Note::A3, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
-    NoteSpec { .note=Note::A3, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    SILENCE,
     NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
-    NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    SILENCE,
     NoteSpec { .note=Note::F4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
-    NoteSpec { .note=Note::F4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    SILENCE,
     NoteSpec { .note=Note::As4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
-    NoteSpec { .note=Note::As4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    SILENCE,
     NoteSpec { .note=Note::A4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
-    NoteSpec { .note=Note::A4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
-    NoteSpec { .note=Note::F4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    SILENCE,
     NoteSpec { .note=Note::D4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
-    NoteSpec { .note=Note::D5, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    SILENCE,
     NoteSpec { .note=Note::D5, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
     NoteSpec { .note=Note::Cs5, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     NoteSpec { .note=Note::Cs4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
@@ -628,6 +628,43 @@ const NoteSpec sfx41NotesPorklike[32] = {
 };
 const TuneSpec sfx41Porklike = TuneSpec {
     .noteDuration = 22, .loopStart = 32, .numNotes = 32, .notes = sfx41NotesPorklike
+};
+const NoteSpec sfx41bNotesPorklike[32] = {
+    SILENCE,
+    SILENCE,
+    NoteSpec { .note=Note::A3, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::A3, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::D4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::D4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::F4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::F4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::As4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::As4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::A4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::A4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::F4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::F4, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::D5, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::D5, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::Cs5, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::Cs5, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
+    NoteSpec { .note=Note::Cs5, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    NoteSpec { .note=Note::Cs5, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::FADE_OUT },
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    SILENCE,
+    NoteSpec { .note=Note::Cs3, .vol=3, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::F3, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::Gs3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A3, .vol=6, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::Gs3, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::Cs4, .vol=4, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+    NoteSpec { .note=Note::F4, .vol=2, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
+};
+const TuneSpec sfx41bPorklike = TuneSpec {
+    .noteDuration = 22, .loopStart = 32, .numNotes = 32, .notes = sfx41bNotesPorklike
 };
 const NoteSpec sfx42NotesPorklike[32] = {
     NoteSpec { .note=Note::G2, .vol=8, .wav=WaveForm::TILTED_SAW, .fx=Effect::FADE_OUT },
@@ -1222,15 +1259,11 @@ const TuneSpec sfx57Porklike = TuneSpec {
     .noteDuration = 22, .loopStart = 32, .numNotes = 32, .notes = sfx57NotesPorklike
 };
 
-const TuneSpec *const pattern0TunesPorklike[1] = { &sfx34Porklike };
-const PatternSpec pattern0Porklike = PatternSpec {
-    .numTunes = 1, .tunes = pattern0TunesPorklike
-};
-const TuneSpec *const pattern1TunesPorklike[3] = { &sfx34Porklike, &sfx37Porklike, &sfx26Porklike };
+const TuneSpec *const pattern1TunesPorklike[3] = { &sfx34Porklike, &sfx37bPorklike, &sfx26Porklike };
 const PatternSpec pattern1Porklike = PatternSpec {
     .numTunes = 3, .tunes = pattern1TunesPorklike
 };
-const TuneSpec *const pattern2TunesPorklike[3] = { &sfx38Porklike, &sfx41Porklike, &sfx27Porklike };
+const TuneSpec *const pattern2TunesPorklike[3] = { &sfx38Porklike, &sfx41bPorklike, &sfx27Porklike };
 const PatternSpec pattern2Porklike = PatternSpec {
     .numTunes = 3, .tunes = pattern2TunesPorklike
 };
@@ -1291,15 +1324,9 @@ const PatternSpec pattern16Porklike = PatternSpec {
     .numTunes = 2, .tunes = pattern16TunesPorklike
 };
 
-const PatternSpec *const song0PatternsPorklike[1] = {
-    &pattern0Porklike,
-};
-const SongSpec song0Porklike = SongSpec {
-    .loopStart = 0, .numPatterns = 1, .patterns = song0PatternsPorklike
-};
 const PatternSpec *const song1PatternsPorklike[1] = {
-    &pattern1Porklike,
-//    &pattern2Porklike,
+//    &pattern1Porklike,
+    &pattern2Porklike,
 //    &pattern3Porklike,
 //    &pattern4Porklike,
 //    &pattern5Porklike,
