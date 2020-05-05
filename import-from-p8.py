@@ -66,13 +66,6 @@ class Note:
     def custom_sfx_id(self):
         return int(self.wave[6:])
 
-    def check(self):
-        if self.effect ==  "VIBRATO":
-            if self.wave == "NOISE":
-                warning("VIBRATO effect is not supported for NOISE instrument")
-            elif self.wave == "PHASER":
-                warning("VIBRATO effect is not supported for PHASER instrument")
-
     def print(self, part_of_arpeggio):
         if self.volume == 0:
             if part_of_arpeggio:
@@ -141,7 +134,15 @@ class Sfx:
             for msg in self.custom_conversion_warnings:
                 warning(msg)
         for note in self.notes:
-            note.check()
+            if note.effect ==  "VIBRATO":
+                if note.wave == "NOISE":
+                    warning("VIBRATO effect is not supported for NOISE instrument in SFX {0}".format(
+                        self.index
+                    ))
+                elif note.wave == "PHASER":
+                    warning("VIBRATO effect is not supported for PHASER instrument in SFX{0}".format(
+                        self.index
+                    ))
 
     def insert_custom_notes(self):
         if self.custom_inserted:
