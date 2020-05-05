@@ -19,6 +19,7 @@
 #include "PorklikeMusic.h"
 #include "RockForMetalMusic.h"
 #include "TheLairMusic.h"
+#include "WintergolfMusic.h"
 #include "ZeptonMusic.h"
 
 // One octave in C-Major. TRIANGLE waves.
@@ -368,6 +369,8 @@ void makeSongs() {
 
     makeSong("rock-for-metal.wav", rockForMetalSong);
 
+    makeSong("wintergolf.wav", wintergolfSong);
+
     makeSong("zepton1.wav", zeptonSong1);
     makeSong("zepton2.wav", zeptonSong2);
 }
@@ -376,7 +379,7 @@ int main(int argc, const char * argv[]) {
 //    makeTestTunes();
 //    makeSongs();
 
-    makeSong("porklike.wav", porklikeSong); // TMP
+    makeSong("wintergolf.wav", wintergolfSong); // TMP
 
     return 0;
 }
