@@ -898,7 +898,7 @@ int SongSpec::lengthInSeconds() const {
 }
 
 void SongGenerator::startPattern(bool isFirst) {
-    _patternGenerator.setPatternSpec(*_pattern);
+    _patternGenerator.setPatternSpec(*_pattern, isFirst);
 }
 
 void SongGenerator::moveToNextPattern() {
