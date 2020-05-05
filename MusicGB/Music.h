@@ -117,9 +117,9 @@ struct TuneSpec {
 
 struct WaveTable {
     const uint16_t numSamples;
-    // Used tp let waves at zero (where possible). It is (currently) only needed for PHASER, as
-    // this waveform is dynamically calculated, and in the most efficient implementation the waves
-    // do not have zero amplitude when the wave index is zero.
+    // Used to let waves start at zero (where possible). It is (currently) only needed for PHASER,
+    // as this waveform is dynamically calculated, and in the most efficient implementation the
+    // waves do not have zero amplitude when the wave index is zero.
     const uint16_t initialWaveIndex;
     const uint8_t shift;
     const int8_t *const samples;
