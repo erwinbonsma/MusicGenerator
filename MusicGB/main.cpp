@@ -16,6 +16,7 @@
 #include "BumbleBotsMusic.h"
 #include "NeonMusic.h"
 #include "PatShooterMusic.h"
+#include "PorklikeMusic.h"
 #include "RockForMetalMusic.h"
 #include "TheLairMusic.h"
 #include "ZeptonMusic.h"
@@ -328,22 +329,22 @@ void makeSong(const char* filename, const SongSpec* song) {
 }
 
 void makeTestTunes() {
-//    makeWav("test1.wav", testTune1);
-//    makeWav("test2.wav", testTune2);
-//    makeWav("test3.wav", testTune3);
-//    makeWav("test4.wav", testTune4);
-//    makeWav("test5a.wav", testTune5a);
-//    makeWav("test5b.wav", testTune5b);
-//    makeWav("test6a.wav", testTune6a);
-//    makeWav("test6b.wav", testTune6b);
-//    makeWav("test7.wav", testTune7);
-//    makeWav("test8.wav", testTune8);
-//    makeWav("test9.wav", testTune9);
-//    makeWav("test10.wav", testTune10);
-//    makeWav("test11a.wav", testTune11a);
-//    makeWav("test11b.wav", testTune11b);
-//    makeWav("test12.wav", testTune12);
-//    makeWav("test13.wav", testTune13);
+    makeWav("test1.wav", testTune1);
+    makeWav("test2.wav", testTune2);
+    makeWav("test3.wav", testTune3);
+    makeWav("test4.wav", testTune4);
+    makeWav("test5a.wav", testTune5a);
+    makeWav("test5b.wav", testTune5b);
+    makeWav("test6a.wav", testTune6a);
+    makeWav("test6b.wav", testTune6b);
+    makeWav("test7.wav", testTune7);
+    makeWav("test8.wav", testTune8);
+    makeWav("test9.wav", testTune9);
+    makeWav("test10.wav", testTune10);
+    makeWav("test11a.wav", testTune11a);
+    makeWav("test11b.wav", testTune11b);
+    makeWav("test12.wav", testTune12);
+    makeWav("test13.wav", testTune13);
     makeWav("test14.wav", testTune14);
 }
 
@@ -353,15 +354,17 @@ void makeSongs() {
     makeSong("alex-kidd3.wav", alexKiddSong3);
 
     makeSong("bb-track1.wav", bumbleBotsSong);
-//    MusicHandler musicHandler;
-//    musicHandler.play(bumbleBotsSong, false);
-//    makeWav("bb-track1b.wav", musicHandler, true);
+    MusicHandler musicHandler;
+    musicHandler.play(bumbleBotsSong, false);
+    makeWav("bb-track1b.wav", musicHandler, true);
 
     makeSong("neon.wav", neonSong);
 
     makeSong("the-lair1.wav", theLairSong1);
     makeSong("the-lair2.wav", theLairSong2);
     makeSong("the-lair3.wav", theLairSong3);
+
+    makeSong("porklike.wav", porklikeSong);
 
     makeSong("rock-for-metal.wav", rockForMetalSong);
 
@@ -370,8 +373,10 @@ void makeSongs() {
 }
 
 int main(int argc, const char * argv[]) {
-    makeTestTunes();
+//    makeTestTunes();
 //    makeSongs();
+
+    makeSong("porklike.wav", porklikeSong); // TMP
 
     return 0;
 }

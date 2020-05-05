@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA1E100C24615A65002BAD29 /* PorklikeMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E100A24615A65002BAD29 /* PorklikeMusic.cpp */; };
 		AA21A1C12438A837004DD190 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1BF2438A837004DD190 /* Music.cpp */; };
 		AA21A1C4243917C8004DD190 /* wav.c in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C2243917C8004DD190 /* wav.c */; };
 		AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D124424970004DD190 /* WavGeneration.cpp */; };
@@ -33,6 +34,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AA1E100824615A20002BAD29 /* PorklikeMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "PorklikeMusic-Generated.cpp"; path = "Songs/PorklikeMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA1E100A24615A65002BAD29 /* PorklikeMusic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PorklikeMusic.cpp; path = Songs/PorklikeMusic.cpp; sourceTree = "<group>"; };
+		AA1E100B24615A65002BAD29 /* PorklikeMusic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PorklikeMusic.h; path = Songs/PorklikeMusic.h; sourceTree = "<group>"; };
 		AA21A1B52438A752004DD190 /* MusicGB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MusicGB; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA21A1BF2438A837004DD190 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
 		AA21A1C02438A837004DD190 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
@@ -121,6 +125,9 @@
 				AA21A1DF244E230C004DD190 /* PatShooterMusic-Generated.cpp */,
 				AA21A1E1244E2336004DD190 /* PatShooterMusic.cpp */,
 				AA21A1E2244E2336004DD190 /* PatShooterMusic.h */,
+				AA1E100824615A20002BAD29 /* PorklikeMusic-Generated.cpp */,
+				AA1E100A24615A65002BAD29 /* PorklikeMusic.cpp */,
+				AA1E100B24615A65002BAD29 /* PorklikeMusic.h */,
 				AA358D792453794000985177 /* RockForMetalMusic-Generated.cpp */,
 				AA358D7B2453797900985177 /* RockForMetalMusic.cpp */,
 				AA358D7C2453797900985177 /* RockForMetalMusic.h */,
@@ -192,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA1E100C24615A65002BAD29 /* PorklikeMusic.cpp in Sources */,
 				AA358D7D2453797900985177 /* RockForMetalMusic.cpp in Sources */,
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
 				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
