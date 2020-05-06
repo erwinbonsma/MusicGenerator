@@ -354,9 +354,11 @@ void makeSongs() {
     makeSong("alex-kidd2.wav", alexKiddSong2);
     makeSong("alex-kidd3.wav", alexKiddSong3);
 
-    makeSong("bb-track1.wav", bumbleBotsSong);
+    makeSong("bb-track1.wav", bumbleBotsSong1);
+    makeSong("bb-track2.wav", bumbleBotsSong2);
+    makeSong("bb-track3.wav", bumbleBotsSong3);
     MusicHandler musicHandler;
-    musicHandler.play(bumbleBotsSong, false);
+    musicHandler.play(bumbleBotsSong1, false);
     makeWav("bb-track1b.wav", musicHandler, true);
 
     makeSong("neon.wav", neonSong);
@@ -379,7 +381,9 @@ int main(int argc, const char * argv[]) {
 //    makeTestTunes();
 //    makeSongs();
 
-    makeSong("wintergolf.wav", wintergolfSong); // TMP
+    makeSong("bb-track1.wav", bumbleBotsSong1);
+    makeSong("bb-track2.wav", bumbleBotsSong2);
+    makeSong("bb-track3.wav", bumbleBotsSong3);
 
     return 0;
 }

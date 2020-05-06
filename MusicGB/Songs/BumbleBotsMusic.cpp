@@ -10,4 +10,6 @@
 
 #import "BumbleBotsMusic-Generated.cpp"
 
-const SongSpec *const bumbleBotsSong = &song0;
+const SongSpec *const bumbleBotsSong1 = &song0bumbleBots;
+const SongSpec *const bumbleBotsSong2 = &song31bumbleBots;
+const SongSpec *const bumbleBotsSong3 = &song43bumbleBots;
