@@ -1355,24 +1355,7 @@ const PatternSpec *const song0PatternsbumbleBots[25] = {
 const SongSpec song0bumbleBots = SongSpec {
     .loopStart = 9, .numPatterns = 25, .patterns = song0PatternsbumbleBots
 };
-const PatternSpec *const song31PatternsbumbleBots[12] = {
-    &pattern31bumbleBots,
-    &pattern32bumbleBots,
-    &pattern33bumbleBots,
-    &pattern34bumbleBots,
-    &pattern35bumbleBots,
-    &pattern36bumbleBots,
-    &pattern37bumbleBots,
-    &pattern38bumbleBots,
-    &pattern39bumbleBots,
-    &pattern40bumbleBots,
-    &pattern37bumbleBots,
-    &pattern38bumbleBots,
-};
-const SongSpec song31bumbleBots = SongSpec {
-    .loopStart = 0, .numPatterns = 12, .patterns = song31PatternsbumbleBots
-};
-const PatternSpec *const song43PatternsbumbleBots[14] = {
+const PatternSpec *const song43PatternsbumbleBots[26] = {
     &pattern43bumbleBots,
     &pattern44bumbleBots,
     &pattern45bumbleBots,
@@ -1387,7 +1370,19 @@ const PatternSpec *const song43PatternsbumbleBots[14] = {
     &pattern54bumbleBots,
     &pattern55bumbleBots,
     &pattern55bumbleBots,
+    &pattern45bumbleBots,
+    &pattern46bumbleBots,
+    &pattern33bumbleBots,
+    &pattern34bumbleBots,
+    &pattern35bumbleBots,
+    &pattern36bumbleBots,
+    &pattern37bumbleBots,
+    &pattern38bumbleBots,
+    &pattern39bumbleBots,
+    &pattern40bumbleBots,
+    &pattern37bumbleBots,
+    &pattern38bumbleBots,
 };
 const SongSpec song43bumbleBots = SongSpec {
-    .loopStart = 2, .numPatterns = 14, .patterns = song43PatternsbumbleBots
+    .loopStart = 0, .numPatterns = 26, .patterns = song43PatternsbumbleBots
 };

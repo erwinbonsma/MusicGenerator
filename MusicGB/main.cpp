@@ -356,7 +356,6 @@ void makeSongs() {
 
     makeSong("bb-track1.wav", bumbleBotsSong1);
     makeSong("bb-track2.wav", bumbleBotsSong2);
-    makeSong("bb-track3.wav", bumbleBotsSong3);
     MusicHandler musicHandler;
     musicHandler.play(bumbleBotsSong1, false);
     makeWav("bb-track1b.wav", musicHandler, true);
@@ -383,7 +382,6 @@ int main(int argc, const char * argv[]) {
 
     makeSong("bb-track1.wav", bumbleBotsSong1);
     makeSong("bb-track2.wav", bumbleBotsSong2);
-    makeSong("bb-track3.wav", bumbleBotsSong3);
 
     return 0;
 }
