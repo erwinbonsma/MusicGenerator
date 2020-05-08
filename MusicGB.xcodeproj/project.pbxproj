@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA1E100C24615A65002BAD29 /* PorklikeMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E100A24615A65002BAD29 /* PorklikeMusic.cpp */; };
 		AA1E10112461BA14002BAD29 /* WintergolfMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E100F2461BA14002BAD29 /* WintergolfMusic.cpp */; };
+		AA1E10152465E787002BAD29 /* BubbleBobbleMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E10132465E787002BAD29 /* BubbleBobbleMusic.cpp */; };
 		AA21A1C12438A837004DD190 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1BF2438A837004DD190 /* Music.cpp */; };
 		AA21A1C4243917C8004DD190 /* wav.c in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C2243917C8004DD190 /* wav.c */; };
 		AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D124424970004DD190 /* WavGeneration.cpp */; };
@@ -41,6 +42,9 @@
 		AA1E100D2461B99E002BAD29 /* WintergolfMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "WintergolfMusic-Generated.cpp"; path = "Songs/WintergolfMusic-Generated.cpp"; sourceTree = "<group>"; };
 		AA1E100F2461BA14002BAD29 /* WintergolfMusic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = WintergolfMusic.cpp; path = Songs/WintergolfMusic.cpp; sourceTree = "<group>"; };
 		AA1E10102461BA14002BAD29 /* WintergolfMusic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WintergolfMusic.h; path = Songs/WintergolfMusic.h; sourceTree = "<group>"; };
+		AA1E10122465E754002BAD29 /* BubbleBobbleMusic-Generated.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "BubbleBobbleMusic-Generated.cpp"; path = "Songs/BubbleBobbleMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA1E10132465E787002BAD29 /* BubbleBobbleMusic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BubbleBobbleMusic.cpp; path = Songs/BubbleBobbleMusic.cpp; sourceTree = "<group>"; };
+		AA1E10142465E787002BAD29 /* BubbleBobbleMusic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BubbleBobbleMusic.h; path = Songs/BubbleBobbleMusic.h; sourceTree = "<group>"; };
 		AA21A1B52438A752004DD190 /* MusicGB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MusicGB; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA21A1BF2438A837004DD190 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
 		AA21A1C02438A837004DD190 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
@@ -120,6 +124,9 @@
 				AA21A1EE244F7F60004DD190 /* AlexKiddMusic-Generated.cpp */,
 				AA358D762453517100985177 /* AlexKiddMusic.cpp */,
 				AA358D772453517100985177 /* AlexKiddMusic.h */,
+				AA1E10122465E754002BAD29 /* BubbleBobbleMusic-Generated.cpp */,
+				AA1E10132465E787002BAD29 /* BubbleBobbleMusic.cpp */,
+				AA1E10142465E787002BAD29 /* BubbleBobbleMusic.h */,
 				AA21A1DA244CD23F004DD190 /* BumbleBotsMusic-Generated.cpp */,
 				AA21A1DB244CD23F004DD190 /* BumbleBotsMusic.cpp */,
 				AA21A1DC244CD23F004DD190 /* BumbleBotsMusic.h */,
@@ -219,6 +226,7 @@
 				AA1E10112461BA14002BAD29 /* WintergolfMusic.cpp in Sources */,
 				AA21A1E8244E2A5F004DD190 /* NeonMusic.cpp in Sources */,
 				AA358D782453517100985177 /* AlexKiddMusic.cpp in Sources */,
+				AA1E10152465E787002BAD29 /* BubbleBobbleMusic.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

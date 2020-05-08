@@ -13,6 +13,7 @@
 #include "WavGeneration.h"
 
 #include "AlexKiddMusic.h"
+#include "BubbleBobbleMusic.h"
 #include "BumbleBotsMusic.h"
 #include "NeonMusic.h"
 #include "PatShooterMusic.h"
@@ -360,6 +361,9 @@ void makeSongs() {
     musicHandler.play(bumbleBotsSong1, false);
     makeWav("bb-track1b.wav", musicHandler, true);
 
+    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
+    makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
+
     makeSong("neon.wav", neonSong);
 
     makeSong("the-lair1.wav", theLairSong1);
@@ -380,8 +384,8 @@ int main(int argc, const char * argv[]) {
 //    makeTestTunes();
 //    makeSongs();
 
-    makeSong("bb-track1.wav", bumbleBotsSong1);
-    makeSong("bb-track2.wav", bumbleBotsSong2);
+    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
+    makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
 
     return 0;
 }
