@@ -11,5 +11,5 @@
 
 const SongSpec* technoUtopianEdictSong = &song0TuEdict;
 
-const TuneSpec* tuEdictSfx = &sfx26TuEdict;
-const PatternSpec* tuEdictPattern = &pattern3TuEdict;
+const TuneSpec* tuEdictSfx = &sfx18TuEdict;
+const PatternSpec* tuEdictPattern = &pattern7TuEdict;
