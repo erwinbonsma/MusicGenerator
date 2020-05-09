@@ -421,10 +421,10 @@ int main(int argc, const char * argv[]) {
 //    makeTestTunes();
 //    makeSongs();
 
-    makeWav("tu-edict-sfx20.wav", *tuEdictSfx);
-    makeWav("tu-edict-pat3.wav", *tuEdictPattern);
+//    makeWav("tu-edict-sfx26.wav", *tuEdictSfx, 32 * 16 * SAMPLES_PER_TICK);
+//    makeWav("tu-edict-pat3.wav", *tuEdictPattern);
 
-//    makeSong("tu-edict.wav", technoUtopianEdictSong);
+    makeSong("tu-edict.wav", technoUtopianEdictSong);
 
     return 0;
 }
