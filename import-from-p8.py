@@ -139,10 +139,6 @@ class Sfx:
                     warning("VIBRATO effect is not supported for NOISE instrument in SFX {0}".format(
                         self.index
                     ))
-                elif note.wave == "PHASER":
-                    warning("VIBRATO effect is not supported for PHASER instrument in SFX{0}".format(
-                        self.index
-                    ))
 
     def insert_custom_notes(self):
         if self.custom_inserted:
