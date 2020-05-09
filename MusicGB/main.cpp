@@ -384,8 +384,11 @@ int main(int argc, const char * argv[]) {
 //    makeTestTunes();
 //    makeSongs();
 
-    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
-    makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
+//    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
+//    makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
+
+    makeWav("sfx30.wav", *bumbleBotsSfx);
+    makeSong("bb-track2.wav", bumbleBotsSong2);
 
     return 0;
 }

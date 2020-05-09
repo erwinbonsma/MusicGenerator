@@ -15,4 +15,6 @@ extern const SongSpec *const bumbleBotsSong1;
 extern const SongSpec *const bumbleBotsSong2;
 extern const SongSpec *const bumbleBotsSong3;
 
+extern const TuneSpec* bumbleBotsSfx;
+
 #endif /* BumbleBotsMusic_h */

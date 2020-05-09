@@ -12,3 +12,5 @@
 
 const SongSpec *const bumbleBotsSong1 = &song0BumbleBots;
 const SongSpec *const bumbleBotsSong2 = &song43BumbleBots;
+
+const TuneSpec* bumbleBotsSfx = &sfx30BumbleBots;
