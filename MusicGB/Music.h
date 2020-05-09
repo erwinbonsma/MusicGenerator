@@ -112,6 +112,15 @@ struct TuneSpec {
     uint16_t loopStart, numNotes;
     const NoteSpec *const notes;
 
+    // Optionally double the volume of a tune (from eight bits to nine bits). It effectively plays
+    // the same tune twice but is better for two reasons. One, it does not double the CPU load. Two,
+    // it ensures that both tunes are fully in phase and really amplify each other. This is not the
+    // case otherwise. At worst, two equal tunes (or notes) cancel each other out fully. This
+    // happens when they are exactly out of phase.
+    //
+    // Note: Care should be taken to avoid overflowing the ten-bit audio range for Gamebuino.
+    bool boostVolume;
+
     int lengthInTicks() const;
 };
 

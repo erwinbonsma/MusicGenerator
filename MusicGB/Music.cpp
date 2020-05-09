@@ -598,12 +598,13 @@ void TuneGenerator::startNote() {
 }
 
 void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
-    int shift = _waveTable->shift;
-    const int8_t* samples = _waveTable->samples;
+    const int8_t waveIndexshift = _waveTable->shift;
+    const int8_t *const samples = _waveTable->samples;
+    const int8_t postAmpShift = (POST_AMP_SHIFT - _tuneSpec->boostVolume);
 
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int8_t sample = samples[_waveIndex >> shift];
+        int8_t sample = samples[_waveIndex >> waveIndexshift];
         _waveIndex += _indexDelta;
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
@@ -612,11 +613,12 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
 
         int16_t amplifiedSample = sample * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         _volume += _volumeDelta;
-        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
+        *curP++ += amplifiedSample >> postAmpShift;
     }
 }
 
 void TuneGenerator::addMainSamplesPhaser(Sample* &curP, Sample* endP) {
+    const int8_t postAmpShift = (POST_AMP_SHIFT - _tuneSpec->boostVolume);
     int p = ((_phaserCount < 128) ? _phaserCount : 255 - _phaserCount) << 9;
     int m = p + (((0x1 << 16) - p) >> 1);
     int hm = (m + 1) >> 1;
@@ -643,13 +645,14 @@ void TuneGenerator::addMainSamplesPhaser(Sample* &curP, Sample* endP) {
 
         int16_t amplifiedSample = s * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         _volume += _volumeDelta;
-        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
+        *curP++ += amplifiedSample >> postAmpShift;
     }
 }
 
 void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
     constexpr int maxWaveIndexFullRange = numNoiseSamples << noiseShift;
-    const int8_t* samples = _waveTable->samples;
+    const int8_t *const samples = _waveTable->samples;
+    const int8_t postAmpShift = (POST_AMP_SHIFT - _tuneSpec->boostVolume);
 
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
@@ -679,7 +682,7 @@ void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
 
         int16_t amplifiedSample = sample * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         _volume += _volumeDelta;
-        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
+        *curP++ += amplifiedSample >> postAmpShift;
     }
 }
 
@@ -692,12 +695,13 @@ void TuneGenerator::addMainSamplesSilence(Sample* &curP, Sample* endP) {
 // are Vibrato-specific, and when Vibrato is applied, there are no changes of volume or other
 // frequency shifts.
 void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
-    int shift = _waveTable->shift;
-    const int8_t* samples = _waveTable->samples;
+    const int8_t waveIndexshift = _waveTable->shift;
+    const int8_t *const samples = _waveTable->samples;
+    const int8_t postAmpShift = (POST_AMP_SHIFT - _tuneSpec->boostVolume);
 
     _sampleIndex += endP - curP; // Update beforehand
     while (curP < endP) {
-        int8_t sample = samples[_waveIndex >> shift];
+        int8_t sample = samples[_waveIndex >> waveIndexshift];
         _waveIndex += _indexDelta;
         _waveIndex += _vibratoDelta >> VIBRATO_MAGNITUDE_SHIFT;
         if (_waveIndex >= _maxWaveIndex) {
@@ -712,7 +716,7 @@ void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
         }
 
         int16_t amplifiedSample = sample * (int8_t)(_volume >> POST_VOLUME_SHIFT);
-        *curP++ += amplifiedSample >> POST_AMP_SHIFT;
+        *curP++ += amplifiedSample >> postAmpShift;
     }
 }
 
@@ -798,13 +802,13 @@ int TuneGenerator::outputLevel() {
     }
     if (_note->fx == Effect::SLIDE && _note != _tuneSpec->notes) {
         // Average over both volumes
-        return (_note - 1)->vol + _note->vol;
+        return ((_note - 1)->vol + _note->vol) << _tuneSpec->boostVolume;
     }
     if (_note->fx == Effect::FADE_IN || _note->fx == Effect::FADE_OUT) {
         // Half the volume
-        return _note->vol;
+        return _note->vol << _tuneSpec->boostVolume;
     }
-    return _note->vol << 1;
+    return _note->vol << (1 + _tuneSpec->boostVolume);
 }
 
 int TuneGenerator::addSamples(Sample* buf, int maxSamples) {

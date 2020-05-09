@@ -555,6 +555,10 @@ const NoteSpec sfx30NotesBumbleBots[32] = {
 const TuneSpec sfx30BumbleBots = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx30NotesBumbleBots
 };
+const TuneSpec sfx30bBumbleBots = TuneSpec {
+    .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx30NotesBumbleBots,
+    .boostVolume = true
+};
 const NoteSpec sfx31NotesBumbleBots[32] = {
     NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
     NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE },
@@ -1036,6 +1040,10 @@ const NoteSpec sfx43NotesBumbleBots[32] = {
 const TuneSpec sfx43BumbleBots = TuneSpec {
     .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx43NotesBumbleBots
 };
+const TuneSpec sfx43bBumbleBots = TuneSpec {
+    .noteDuration = 32, .loopStart = 32, .numNotes = 32, .notes = sfx43NotesBumbleBots,
+    .boostVolume = true
+};
 const NoteSpec sfx44NotesBumbleBots[32] = {
     NoteSpec { .note=Note::Fs4, .vol=2, .wav=WaveForm::PULSE, .fx=Effect::FADE_IN },
     NoteSpec { .note=Note::Fs4, .vol=3, .wav=WaveForm::PULSE, .fx=Effect::SLIDE },
@@ -1280,7 +1288,7 @@ const TuneSpec *const pattern40TunesBumbleBots[3] = { &sfx30BumbleBots, &sfx40Bu
 const PatternSpec pattern40BumbleBots = PatternSpec {
     .numTunes = 3, .tunes = pattern40TunesBumbleBots
 };
-const TuneSpec *const pattern43TunesBumbleBots[1] = { &sfx30BumbleBots };
+const TuneSpec *const pattern43TunesBumbleBots[1] = { &sfx30bBumbleBots };
 const PatternSpec pattern43BumbleBots = PatternSpec {
     .numTunes = 1, .tunes = pattern43TunesBumbleBots
 };
@@ -1292,7 +1300,7 @@ const TuneSpec *const pattern45TunesBumbleBots[3] = { &sfx30BumbleBots, &sfx41Bu
 const PatternSpec pattern45BumbleBots = PatternSpec {
     .numTunes = 3, .tunes = pattern45TunesBumbleBots
 };
-const TuneSpec *const pattern46TunesBumbleBots[1] = { &sfx43BumbleBots };
+const TuneSpec *const pattern46TunesBumbleBots[1] = { &sfx43bBumbleBots };
 const PatternSpec pattern46BumbleBots = PatternSpec {
     .numTunes = 1, .tunes = pattern46TunesBumbleBots
 };
