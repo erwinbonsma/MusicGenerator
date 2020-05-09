@@ -20,6 +20,7 @@
 #include "PorklikeMusic.h"
 #include "RockForMetalMusic.h"
 #include "SweetBunsMusic.h"
+#include "TuEdictMusic.h"
 #include "TheLairMusic.h"
 #include "WintergolfMusic.h"
 #include "ZeptonMusic.h"
@@ -406,6 +407,8 @@ void makeSongs() {
 
     totalTime += makeSong("rock-for-metal.wav", rockForMetalSong);
 
+    totalTime += makeSong("tu-edict.wav", technoUtopianEdictSong);
+
     totalTime += makeSong("wintergolf.wav", wintergolfSong);
 
 //    totalTime += makeSong("zepton1.wav", zeptonSong1);
@@ -418,13 +421,10 @@ int main(int argc, const char * argv[]) {
 //    makeTestTunes();
 //    makeSongs();
 
-    makeSong("sweet-buns1.wav", sweetBunsSong1);
-    makeSong("sweet-buns2.wav", sweetBunsSong2);
-    makeWav("sweet-buns-pat.wav", *sweetBunsPattern);
-    makeWav("sweet-buns-sfx.wav", *sweetBunsSfx);
-
 //    makeWav("sfx30.wav", *bumbleBotsSfx);
 //    makeSong("bb-track2.wav", bumbleBotsSong2);
+
+    makeSong("tu-edict.wav", technoUtopianEdictSong);
 
     return 0;
 }
