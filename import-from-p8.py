@@ -151,7 +151,7 @@ class Sfx:
                 custom_sfx = self.data.sfxs[note.custom_sfx_id()]
                 custom_speed = min(custom_speed, custom_sfx.speed)
                 if (self.speed // custom_sfx.speed) * custom_sfx.speed != self.speed:
-                    self.custom_conversion_warings.add(
+                    self.custom_conversion_warnings.add(
                         "Custom speeds in SFX {0} not compatible with speed of SFX".format(self.index)
                     )
 
