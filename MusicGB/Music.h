@@ -190,6 +190,7 @@ class TuneGenerator {
 
     void addMainSamples(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesPhaser(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
+    void addMainSamplesPhaserVibrato(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesNoise(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesSilence(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;
     void addMainSamplesVibrato(Sample* &curP, Sample* endP) OPTIMIZE_ATTRIBUTE;

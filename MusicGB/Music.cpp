@@ -32,7 +32,7 @@ constexpr uint8_t MAX_OCTAVE = 7;
 constexpr uint8_t PERIOD_SHIFT = MAX_OCTAVE + SPEC_PERIOD_SHIFT;
 
 // Controls the amount of frequency change.
-constexpr uint8_t VIBRATO_MAGNITUDE_SHIFT = 7;
+constexpr uint8_t VIBRATO_MAGNITUDE_SHIFT = 6;
 
 // The amount of wave periods spanned by a single period of the Vibrato effect.
 constexpr uint8_t VIBRATO_META_PERIOD = 24;
@@ -428,7 +428,8 @@ bool TuneGenerator::setWaveTable(WaveForm waveForm) {
 
     if (
         _waveTable != prevWaveTable ||
-        _sampleGeneratorFun == &TuneGenerator::addMainSamplesVibrato
+        _sampleGeneratorFun == &TuneGenerator::addMainSamplesVibrato ||
+        _sampleGeneratorFun == &TuneGenerator::addMainSamplesPhaserVibrato
     ) {
         switch (waveForm) {
             case WaveForm::NOISE:
@@ -577,11 +578,17 @@ void TuneGenerator::startNote() {
 
             break;
         }
-        case Effect::VIBRATO:
+        case Effect::VIBRATO: {
+            bool init = false;
             if (_sampleGeneratorFun == &TuneGenerator::addMainSamples) {
-                // Currently only support Vibrato for simple instruments (not NOISE and PHASER)
                 _sampleGeneratorFun = &TuneGenerator::addMainSamplesVibrato;
+                init = true;
+            } else if (_sampleGeneratorFun == &TuneGenerator::addMainSamplesPhaser) {
+                _sampleGeneratorFun = &TuneGenerator::addMainSamplesPhaserVibrato;
+                init = true;
+            }
 
+            if (init) {
                 const NoteSpec* prevNote = peekPrevNote();
                 if (prevNote == nullptr || prevNote->fx != Effect::VIBRATO) {
                     _vibratoDelta = 0;
@@ -592,6 +599,7 @@ void TuneGenerator::startNote() {
                 }
             }
             break;
+        }
         case Effect::NONE:
             break;
     }
@@ -642,6 +650,43 @@ void TuneGenerator::addMainSamplesPhaser(Sample* &curP, Sample* endP) {
             hm = (m + 1) >> 1;
         }
         _indexDelta += _indexDeltaDelta;
+
+        int16_t amplifiedSample = s * (int8_t)(_volume >> POST_VOLUME_SHIFT);
+        _volume += _volumeDelta;
+        *curP++ += amplifiedSample >> postAmpShift;
+    }
+}
+
+void TuneGenerator::addMainSamplesPhaserVibrato(Sample* &curP, Sample* endP) {
+    const int8_t postAmpShift = (POST_AMP_SHIFT - _tuneSpec->boostVolume);
+    int p = ((_phaserCount < 128) ? _phaserCount : 255 - _phaserCount) << 9;
+    int m = p + (((0x1 << 16) - p) >> 1);
+    int hm = (m + 1) >> 1;
+
+    _sampleIndex += endP - curP; // Update beforehand
+    while (curP < endP) {
+        int t = (_waveIndex >> (phaserShift - 8)) & 0xffff; // Throw away most significant bit
+        int s = (t < p) ? t : p + ((t - p) >> 1);
+        if (_waveIndex & (0x1 << (phaserShift + 8))) { // Check most significant bit
+            s = (hm - s) >> 8;
+        } else {
+            s = (s - hm) >> 8;
+        }
+
+        _waveIndex += _indexDelta;
+        _waveIndex += _vibratoDelta >> VIBRATO_MAGNITUDE_SHIFT;
+        if (_waveIndex >= _maxWaveIndex) {
+            _waveIndex -= _maxWaveIndex;
+            _phaserCount += 2;
+            p = ((_phaserCount < 128) ? _phaserCount : 255 - _phaserCount) << 9;
+            m =  p + (((0x1 << 16) - p) >> 1);
+            hm = (m + 1) >> 1;
+        }
+        _indexDelta += _indexDeltaDelta;
+        _vibratoDelta += _vibratoDeltaDelta;
+        if (abs(_vibratoDelta) > _indexDelta) {
+            _vibratoDeltaDelta = -_vibratoDeltaDelta;
+        }
 
         int16_t amplifiedSample = s * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         _volume += _volumeDelta;
@@ -706,9 +751,8 @@ void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
         _waveIndex += _vibratoDelta >> VIBRATO_MAGNITUDE_SHIFT;
         if (_waveIndex >= _maxWaveIndex) {
             _waveIndex -= _maxWaveIndex;
-        } else if (_waveIndex < 0) {
-            _waveIndex += _maxWaveIndex;
         }
+        assert(_waveIndex >= 0);
 
         _vibratoDelta += _vibratoDeltaDelta;
         if (abs(_vibratoDelta) > _indexDelta) {

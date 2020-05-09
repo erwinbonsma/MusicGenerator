@@ -209,6 +209,29 @@ const TuneSpec testTune8 = TuneSpec {
         NoteSpec { .note=Note::Ds5, .vol=5, .wav=WaveForm::TRIANGLE, .fx=Effect::VIBRATO },
     }
 };
+const TuneSpec testTune8b = TuneSpec {
+    .noteDuration = 32,
+    .loopStart = 16,
+    .numNotes = 16,
+    .notes = new NoteSpec[16] {
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::Gs5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::G5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+        NoteSpec { .note=Note::Ds5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::NONE },
+        NoteSpec { .note=Note::Ds5, .vol=5, .wav=WaveForm::PHASER, .fx=Effect::VIBRATO },
+    }
+};
 
 // Noise test
 const TuneSpec testTune9 = TuneSpec {
@@ -343,6 +366,7 @@ void makeTestTunes() {
     makeWav("test6b.wav", testTune6b);
     makeWav("test7.wav", testTune7);
     makeWav("test8.wav", testTune8);
+    makeWav("test8b.wav", testTune8b);
     makeWav("test9.wav", testTune9);
     makeWav("test10.wav", testTune10);
     makeWav("test11a.wav", testTune11a);
@@ -387,7 +411,7 @@ void makeSongs() {
 }
 
 int main(int argc, const char * argv[]) {
-//    makeTestTunes();
+    makeTestTunes();
     makeSongs();
 
 //    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
