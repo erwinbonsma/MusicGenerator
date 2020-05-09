@@ -47,9 +47,12 @@ constexpr uint8_t VOLUME_BITS = 4;
 // most-significant byte can be safely cast to (signed) int8_t value.
 constexpr uint8_t VOLUME_SHIFT = 32 - VOLUME_BITS - 1;
 
+// Shift such that volume is in range [0..64]
+constexpr uint8_t POST_VOLUME_SHIFT = 24;
+
 // Number of bits to shift amplified sample so that it is in range [-128..127] again.
-///  Inputs: - sample with range [-128..127]
-//           - volume with range [   0.. 64] (the range of the most-significant byte)
+//   Inputs: - sample with range [-128..127]
+//           - volume with range [   0.. 64] (64 is highest power of two that fits in int8_t)
 constexpr uint8_t POST_AMP_SHIFT = 6;
 
 // Notes:
@@ -607,7 +610,7 @@ void TuneGenerator::addMainSamples(Sample* &curP, Sample* endP) {
         }
         _indexDelta += _indexDeltaDelta;
 
-        int16_t amplifiedSample = sample * (int8_t)(_volume >> 24);
+        int16_t amplifiedSample = sample * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         _volume += _volumeDelta;
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
@@ -638,7 +641,7 @@ void TuneGenerator::addMainSamplesPhaser(Sample* &curP, Sample* endP) {
         }
         _indexDelta += _indexDeltaDelta;
 
-        int16_t amplifiedSample = s * (int8_t)(_volume >> 24);
+        int16_t amplifiedSample = s * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         _volume += _volumeDelta;
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
@@ -674,7 +677,7 @@ void TuneGenerator::addMainSamplesNoise(Sample* &curP, Sample* endP) {
         }
         _indexDelta += _indexDeltaDelta;
 
-        int16_t amplifiedSample = sample * (int8_t)(_volume >> 24);
+        int16_t amplifiedSample = sample * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         _volume += _volumeDelta;
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
@@ -708,7 +711,7 @@ void TuneGenerator::addMainSamplesVibrato(Sample* &curP, Sample* endP) {
             _vibratoDeltaDelta = -_vibratoDeltaDelta;
         }
 
-        int16_t amplifiedSample = sample * (int8_t)(_volume >> 24);
+        int16_t amplifiedSample = sample * (int8_t)(_volume >> POST_VOLUME_SHIFT);
         *curP++ += amplifiedSample >> POST_AMP_SHIFT;
     }
 }
