@@ -10,3 +10,6 @@
 #include "TuEdictMusic-Generated.cpp"
 
 const SongSpec* technoUtopianEdictSong = &song0TuEdict;
+
+const TuneSpec* tuEdictSfx = &sfx20TuEdict;
+const PatternSpec* tuEdictPattern = &pattern3TuEdict;

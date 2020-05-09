@@ -421,10 +421,10 @@ int main(int argc, const char * argv[]) {
 //    makeTestTunes();
 //    makeSongs();
 
-//    makeWav("sfx30.wav", *bumbleBotsSfx);
-//    makeSong("bb-track2.wav", bumbleBotsSong2);
+    makeWav("tu-edict-sfx20.wav", *tuEdictSfx);
+    makeWav("tu-edict-pat3.wav", *tuEdictPattern);
 
-    makeSong("tu-edict.wav", technoUtopianEdictSong);
+//    makeSong("tu-edict.wav", technoUtopianEdictSong);
 
     return 0;
 }

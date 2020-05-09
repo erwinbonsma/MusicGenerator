@@ -10,4 +10,7 @@
 
 extern const SongSpec* technoUtopianEdictSong;
 
+extern const TuneSpec* tuEdictSfx;
+extern const PatternSpec* tuEdictPattern;
+
 #endif /* TuEdictMusic_h */
