@@ -41,7 +41,7 @@ WavFile* openWavFile(const char* filename) {
 }
 
 void makeWav(const char* filename, const TuneSpec& tune, int maxSamples) {
-    TuneGenerator tuneGen;
+    TuneGenerator tuneGen = TuneGenerator();
 
     tuneGen.setTuneSpec(&tune);
     Sample buf[BUFSIZE];
@@ -61,7 +61,7 @@ void makeWav(const char* filename, const TuneSpec& tune, int maxSamples) {
 }
 
 void makeWav(const char* filename, const PatternSpec& pattern) {
-    PatternGenerator patternGen;
+    PatternGenerator patternGen = PatternGenerator();
 
     patternGen.setPatternSpec(&pattern);
     Sample buf[BUFSIZE];
@@ -80,7 +80,7 @@ void makeWav(const char* filename, const PatternSpec& pattern) {
 }
 
 void makeWav(const char* filename, const SongSpec& song) {
-    SongGenerator songGenerator;
+    SongGenerator songGenerator = SongGenerator();
 
     songGenerator.setSongSpec(&song, false);
     Sample buf[BUFSIZE];
