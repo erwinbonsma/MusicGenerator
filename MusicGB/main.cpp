@@ -325,9 +325,11 @@ const TuneSpec testTune14 = TuneSpec {
     }
 };
 
-void makeSong(const char* filename, const SongSpec* song) {
-    std::cout << "Generating " << filename << ", len = " << song->lengthInSeconds() << "s\n";
+int makeSong(const char* filename, const SongSpec* song) {
+    int len = song->lengthInSeconds();
+    std::cout << "Generating " << filename << ", len = " << len << "s\n";
     makeWav(filename, *song);
+    return len;
 }
 
 void makeTestTunes() {
@@ -351,44 +353,48 @@ void makeTestTunes() {
 }
 
 void makeSongs() {
-    makeSong("alex-kidd1.wav", alexKiddSong1);
-    makeSong("alex-kidd2.wav", alexKiddSong2);
-    makeSong("alex-kidd3.wav", alexKiddSong3);
+    int totalTime = 0;
 
-    makeSong("bb-track1.wav", bumbleBotsSong1);
-    makeSong("bb-track2.wav", bumbleBotsSong2);
-    MusicHandler musicHandler;
-    musicHandler.play(bumbleBotsSong1, false);
-    makeWav("bb-track1b.wav", musicHandler, true);
+    totalTime += makeSong("alex-kidd1.wav", alexKiddSong1);
+    totalTime += makeSong("alex-kidd2.wav", alexKiddSong2);
+    totalTime += makeSong("alex-kidd3.wav", alexKiddSong3);
 
-    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
-    makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
+    totalTime += makeSong("bb-track1.wav", bumbleBotsSong1);
+    totalTime += makeSong("bb-track2.wav", bumbleBotsSong2);
+//    MusicHandler musicHandler = MusicHandler();
+//    musicHandler.play(bumbleBotsSong1, false);
+//    makeWav("bb-track1b.wav", musicHandler, true);
 
-    makeSong("neon.wav", neonSong);
+    totalTime += makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
+    totalTime += makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
 
-    makeSong("the-lair1.wav", theLairSong1);
-    makeSong("the-lair2.wav", theLairSong2);
-    makeSong("the-lair3.wav", theLairSong3);
+    totalTime += makeSong("neon.wav", neonSong);
 
-    makeSong("porklike.wav", porklikeSong);
+    totalTime += makeSong("the-lair1.wav", theLairSong1);
+    totalTime += makeSong("the-lair2.wav", theLairSong2);
+    totalTime += makeSong("the-lair3.wav", theLairSong3);
 
-    makeSong("rock-for-metal.wav", rockForMetalSong);
+    totalTime += makeSong("porklike.wav", porklikeSong);
 
-    makeSong("wintergolf.wav", wintergolfSong);
+    totalTime += makeSong("rock-for-metal.wav", rockForMetalSong);
 
-    makeSong("zepton1.wav", zeptonSong1);
-    makeSong("zepton2.wav", zeptonSong2);
+    totalTime += makeSong("wintergolf.wav", wintergolfSong);
+
+//    totalTime += makeSong("zepton1.wav", zeptonSong1);
+//    totalTime += makeSong("zepton2.wav", zeptonSong2);
+
+    std::cout << "Total time = " << totalTime << "s\n";
 }
 
 int main(int argc, const char * argv[]) {
 //    makeTestTunes();
-//    makeSongs();
+    makeSongs();
 
 //    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
 //    makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
 
-    makeWav("sfx30.wav", *bumbleBotsSfx);
-    makeSong("bb-track2.wav", bumbleBotsSong2);
+//    makeWav("sfx30.wav", *bumbleBotsSfx);
+//    makeSong("bb-track2.wav", bumbleBotsSong2);
 
     return 0;
 }
