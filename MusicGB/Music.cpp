@@ -590,7 +590,11 @@ void TuneGenerator::startNote() {
 
             if (init) {
                 const NoteSpec* prevNote = peekPrevNote();
-                if (prevNote == nullptr || prevNote->fx != Effect::VIBRATO) {
+                if (
+                    prevNote == nullptr ||
+                    prevNote->fx != Effect::VIBRATO ||
+                    prevNote->note != _note->note
+                ) {
                     _vibratoDelta = 0;
                     // Note: The order of operations matters to avoid overflows during calculation
                     _vibratoDeltaDelta = _indexDelta / (
@@ -804,8 +808,10 @@ void TuneGenerator::createOutgoingBlendSamplesIfNeeded() {
     if (nxt != nullptr && nxt->wav == cur->wav) {
         if (
             nxt->vol == cur->vol &&
-            (nxt->fx == Effect::NONE || nxt->fx == Effect::SLIDE || nxt->fx == Effect::FADE_OUT) &&
-            (cur->fx == Effect::NONE || cur->fx == Effect::SLIDE || cur->fx == Effect::FADE_IN)
+            (nxt->fx == Effect::NONE || nxt->fx == Effect::SLIDE || nxt->fx == Effect::FADE_OUT
+             || nxt->fx == Effect::VIBRATO) &&
+            (cur->fx == Effect::NONE || cur->fx == Effect::SLIDE || cur->fx == Effect::FADE_IN
+             || cur->fx == Effect::VIBRATO)
         ) {
             // No blend required. Transition is smooth by itself
             return;
@@ -814,6 +820,11 @@ void TuneGenerator::createOutgoingBlendSamplesIfNeeded() {
             nxt->fx == Effect::SLIDE &&
             (cur->fx == Effect::NONE || cur->fx == Effect::SLIDE || cur->fx == Effect::FADE_IN)
         ) {
+            return;
+        }
+        if (nxt->wav == WaveForm::SQUARE || cur->wav == WaveForm::SQUARE) {
+            // No blend required. These transitions are abrupt anyway and blending these waves
+            // during transitions may actually introduce high frequency noise due to toggling.
             return;
         }
     }

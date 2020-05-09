@@ -11,4 +11,7 @@
 extern const SongSpec* sweetBunsSong1;
 extern const SongSpec* sweetBunsSong2;
 
+extern const TuneSpec* sweetBunsSfx;
+extern const PatternSpec* sweetBunsPattern;
+
 #endif /* SweetBunsMusic_h */
