@@ -33,7 +33,10 @@ def note_from_spec(spec):
         volume += 1
     pitch = numval(spec, 0, 2) + 24
     wave_num = numval(spec, 2, 1)
-    if wave_num < 8:
+    if volume == 0:
+        # Avoids problems if wave would otherwise be custom
+        wave = "NONE"
+    elif wave_num < 8:
         wave = waves[wave_num]
     else:
         wave = "CUSTOM{0}".format(wave_num - 8)
@@ -154,7 +157,6 @@ class Sfx:
                     self.custom_conversion_warnings.add(
                         "Custom speeds in SFX {0} not compatible with speed of SFX".format(self.index)
                     )
-
         custom_notes = []
         prev_note = None
         for i, note in enumerate(self.notes):
@@ -167,7 +169,8 @@ class Sfx:
                 custom_sfx = self.data.sfxs[note.custom_sfx_id()]
                 num_notes = self.speed // custom_sfx.speed
                 for _ in range(num_notes):
-                    custom_notes.append(adapt_custom_note(custom_sfx.notes[custom_idx], note))
+                    custom_note = adapt_custom_note(custom_sfx.notes[custom_idx], note)
+                    custom_notes.extend([custom_note] * (custom_sfx.speed // custom_speed))
                     custom_idx += 1
                     if custom_idx >= custom_sfx.loop_end:
                         if custom_sfx.loop_start < custom_sfx.loop_end:
