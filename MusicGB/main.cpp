@@ -19,6 +19,7 @@
 #include "PatShooterMusic.h"
 #include "PorklikeMusic.h"
 #include "RockForMetalMusic.h"
+#include "SweetBunsMusic.h"
 #include "TheLairMusic.h"
 #include "WintergolfMusic.h"
 #include "ZeptonMusic.h"
@@ -394,6 +395,9 @@ void makeSongs() {
 
     totalTime += makeSong("neon.wav", neonSong);
 
+    totalTime += makeSong("sweet-buns1.wav", sweetBunsSong1);
+    totalTime += makeSong("sweet-buns2.wav", sweetBunsSong2);
+
     totalTime += makeSong("the-lair1.wav", theLairSong1);
     totalTime += makeSong("the-lair2.wav", theLairSong2);
     totalTime += makeSong("the-lair3.wav", theLairSong3);
@@ -411,11 +415,11 @@ void makeSongs() {
 }
 
 int main(int argc, const char * argv[]) {
-    makeTestTunes();
-    makeSongs();
+//    makeTestTunes();
+//    makeSongs();
 
-//    makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
-//    makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
+    makeSong("sweet-buns1.wav", sweetBunsSong1);
+    makeSong("sweet-buns2.wav", sweetBunsSong2);
 
 //    makeWav("sfx30.wav", *bumbleBotsSfx);
 //    makeSong("bb-track2.wav", bumbleBotsSong2);

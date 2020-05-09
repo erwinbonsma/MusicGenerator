@@ -10,6 +10,7 @@
 		AA1E100C24615A65002BAD29 /* PorklikeMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E100A24615A65002BAD29 /* PorklikeMusic.cpp */; };
 		AA1E10112461BA14002BAD29 /* WintergolfMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E100F2461BA14002BAD29 /* WintergolfMusic.cpp */; };
 		AA1E10152465E787002BAD29 /* BubbleBobbleMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E10132465E787002BAD29 /* BubbleBobbleMusic.cpp */; };
+		AA1E101A2466EDF2002BAD29 /* SweetBunsMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA1E10182466EDF2002BAD29 /* SweetBunsMusic.cpp */; };
 		AA21A1C12438A837004DD190 /* Music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1BF2438A837004DD190 /* Music.cpp */; };
 		AA21A1C4243917C8004DD190 /* wav.c in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1C2243917C8004DD190 /* wav.c */; };
 		AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA21A1D124424970004DD190 /* WavGeneration.cpp */; };
@@ -45,6 +46,9 @@
 		AA1E10122465E754002BAD29 /* BubbleBobbleMusic-Generated.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "BubbleBobbleMusic-Generated.cpp"; path = "Songs/BubbleBobbleMusic-Generated.cpp"; sourceTree = "<group>"; };
 		AA1E10132465E787002BAD29 /* BubbleBobbleMusic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BubbleBobbleMusic.cpp; path = Songs/BubbleBobbleMusic.cpp; sourceTree = "<group>"; };
 		AA1E10142465E787002BAD29 /* BubbleBobbleMusic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BubbleBobbleMusic.h; path = Songs/BubbleBobbleMusic.h; sourceTree = "<group>"; };
+		AA1E10162466EDC8002BAD29 /* SweetBunsMusic-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "SweetBunsMusic-Generated.cpp"; path = "Songs/SweetBunsMusic-Generated.cpp"; sourceTree = "<group>"; };
+		AA1E10182466EDF2002BAD29 /* SweetBunsMusic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SweetBunsMusic.cpp; path = Songs/SweetBunsMusic.cpp; sourceTree = "<group>"; };
+		AA1E10192466EDF2002BAD29 /* SweetBunsMusic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SweetBunsMusic.h; path = Songs/SweetBunsMusic.h; sourceTree = "<group>"; };
 		AA21A1B52438A752004DD190 /* MusicGB */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MusicGB; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA21A1BF2438A837004DD190 /* Music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Music.cpp; sourceTree = "<group>"; };
 		AA21A1C02438A837004DD190 /* Music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Music.h; sourceTree = "<group>"; };
@@ -142,6 +146,9 @@
 				AA358D792453794000985177 /* RockForMetalMusic-Generated.cpp */,
 				AA358D7B2453797900985177 /* RockForMetalMusic.cpp */,
 				AA358D7C2453797900985177 /* RockForMetalMusic.h */,
+				AA1E10162466EDC8002BAD29 /* SweetBunsMusic-Generated.cpp */,
+				AA1E10182466EDF2002BAD29 /* SweetBunsMusic.cpp */,
+				AA1E10192466EDF2002BAD29 /* SweetBunsMusic.h */,
 				AA21A1D4244C7452004DD190 /* TheLairMusic-Generated.cpp */,
 				AA21A1D7244C74C2004DD190 /* TheLairMusic.cpp */,
 				AA21A1D8244C74C2004DD190 /* TheLairMusic.h */,
@@ -214,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA1E100C24615A65002BAD29 /* PorklikeMusic.cpp in Sources */,
+				AA1E101A2466EDF2002BAD29 /* SweetBunsMusic.cpp in Sources */,
 				AA358D7D2453797900985177 /* RockForMetalMusic.cpp in Sources */,
 				AA21A1C4243917C8004DD190 /* wav.c in Sources */,
 				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
