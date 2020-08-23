@@ -16,14 +16,12 @@
 #include "BubbleBobbleMusic.h"
 #include "BumbleBotsMusic.h"
 #include "NeonMusic.h"
-#include "PatShooterMusic.h"
 #include "PorklikeMusic.h"
 #include "RockForMetalMusic.h"
 #include "SweetBunsMusic.h"
 #include "TuEdictMusic.h"
 #include "TheLairMusic.h"
 #include "WintergolfMusic.h"
-#include "ZeptonMusic.h"
 
 // One octave in C-Major. TRIANGLE waves.
 const TuneSpec testTune1 = TuneSpec {
@@ -387,9 +385,6 @@ void makeSongs() {
 
     totalTime += makeSong("bb-track1.wav", bumbleBotsSong1);
     totalTime += makeSong("bb-track2.wav", bumbleBotsSong2);
-//    MusicHandler musicHandler = MusicHandler();
-//    musicHandler.play(bumbleBotsSong1, false);
-//    makeWav("bb-track1b.wav", musicHandler, true);
 
     totalTime += makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
     totalTime += makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
@@ -411,20 +406,12 @@ void makeSongs() {
 
     totalTime += makeSong("wintergolf.wav", wintergolfSong);
 
-//    totalTime += makeSong("zepton1.wav", zeptonSong1);
-//    totalTime += makeSong("zepton2.wav", zeptonSong2);
-
     std::cout << "Total time = " << totalTime << "s\n";
 }
 
 int main(int argc, const char * argv[]) {
-//    makeTestTunes();
+    makeTestTunes();
     makeSongs();
-
-//    makeWav("tu-edict-sfx18.wav", *tuEdictSfx, 32 * 16 * SAMPLES_PER_TICK);
-//    makeWav("tu-edict-pat7.wav", *tuEdictPattern);
-
-//    makeSong("tu-edict.wav", technoUtopianEdictSong);
 
     return 0;
 }
