@@ -37,11 +37,11 @@ The next sections provides more details about each.
 ### Notes
 
 A note is defined by a `NoteSpec` struct and consists of a frequency, volume, wave form and
-optional effect. The frequency specified via the `note` field of type `Note`. This is an enum
+optional effect. The frequency is specified via the `note` field of type `Note`. This is an enum
 specifies a note on the chromatic scale and an octave.
 
-A volume is specified via the integer `vol` field. This should be a value in the range from 0 to 8.
-A zero volume represents silence. Eight is the maximum volume of a note. The volume scale is
+The volume is specified via the integer `vol` field. This should be a value in the range from 0
+to 8. A zero volume represents silence. Eight is the maximum volume of a note. The volume scale is
 linear.
 
 The wave form of the note is specified via the `wav` enum field of type `WaveForm`. The following
@@ -90,6 +90,39 @@ Finally, you can optionally apply an effect. This is specified via the `fx` enum
   used.
 * `ARPEGGIO_FAST` as `ARPEGGIO` but faster. It plays the same four notes, but plays each note
   twice (and twice as quickly).
+
+Example:
+```cpp
+const NoteSpec note = NoteSpec {
+    .note=Note::A4, .vol=8, .wav=WaveForm::TRIANGLE, .fx=Effect::NONE
+};
+```
+
+### Tunes
+
+A tune is a sequence of notes. All notes in a tune have the same duration. However, you can
+create longer notes by repeating the same note. When subsequent notes have the same frequency,
+volume and wave form they blend together into a single note, without any pause or other audible
+transition.
+
+A tune is specified via a `TuneSpec` struct. The duration of notes is specified in 'ticks' by the
+integer `noteDuration` field. A tick is defined to contain ninety samples when sampling at 11025
+Hz, and therefore lasts 8.16 ms.
+
+The number of notes in a tune is specified by the `numNotes` field. The actual notes should be
+specified by the `notes` field, which should point to an array of notes. The number of notes
+should in practice always match the length of the array, and at the very least, never exceed the
+length of the array.
+
+A tune can optionally loop. When looping is enabled, after the end of the tune is reached, it
+continues at the note where the loop starts, indicated by the `loopStart` field. This can have
+any integer value between zero (the entire tune loops) up until `numNotes` (the tune does not
+loop). How often a tune loops is implicitly determined by the other tunes in the pattern, as
+detailed in the next section.
+
+Optionally, the volume of a tune can be boosted. This can be done by setting the `boostVolume`
+field to `true`. Volume is then doubled. Care should be taken not to overflow the ten-bit audio
+range this way.
 
 
 [Gamebuino]: https://gamebuino.com
