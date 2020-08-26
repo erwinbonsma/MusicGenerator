@@ -15,12 +15,11 @@ but that is not the case yet.
 You can use this tracker to play songs and sound effects on your Gamebuino. To do so, you need to
 know the following:
 
-1. How to specify songs and tunes, including capabilities and limitations of the tracker
-2. How to test
+1. How to specify songs and tunes
+2. How to play music on the Gamebuino
 3. How to import songs from PICO-8 (optional)
-4. How to integrate it to the Gamebuino
 
-## Notes, Tunes, Patterns and Songs
+## Notes, tunes, patterns and songs
 
 Songs are specified using a hierarchy classes:
 
@@ -232,6 +231,34 @@ Example:
 
 makeWav("song.wav", song);
 ```
+
+## Playings songs and tunes on Gamebuino
+
+Topics:
+* Using the patched Gamebuino library
+* API (namespace, how to play songs, how to play tunes)
+* Recommended settings (sample rate, etc)
+
+TO DO
+
+## Importing songs from PICO-8
+
+Topics:
+* Automatic import
+* Limitations and differences compared to PICO-8
+    * Custom instruments
+    * Mismatch in volumes
+    * VIBRATO not supported for NOISE
+* Post-processing
+    * Remove duplicate patterns
+    * Use looping for repetitive tunes
+    * Remove unused tunes and patterns
+    * Ensure pattern does not loop
+    * Fix tunes with custom instruments
+    * Tweaks to remove noise artifacts
+    * Avoid note cancellation
+
+TO DO
 
 [Gamebuino]: https://gamebuino.com
 [PICO-8]: https://www.lexaloffle.com/pico-8.php
