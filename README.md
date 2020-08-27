@@ -130,10 +130,10 @@ Example:
 #include "Music.h"
 
 const NoteSpec notes[4] = {
-    NoteSpec { .note=Note::A, .vol=3, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::B, .vol=4, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::C, .vol=5, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
-    NoteSpec { .note=Note::D, .vol=5, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::A4, .vol=3, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::B4, .vol=4, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::C4, .vol=5, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
+    NoteSpec { .note=Note::D4, .vol=5, .wav=WaveForm::ORGAN, .fx=Effect::NONE },
 };
 const TuneSpec tune = TuneSpec {
     .noteDuration = 12, .loopStart = 4, .numNotes = 4, .notes = notes
@@ -234,12 +234,153 @@ makeWav("song.wav", song);
 
 ## Playings songs and tunes on Gamebuino
 
-Topics:
-* Using the patched Gamebuino library
-* API (namespace, how to play songs, how to play tunes)
-* Recommended settings (sample rate, etc)
+### Patch your Gamebuino library to include the tracker
 
-TO DO
+The official Gamebuino library does not (yet?) include the tracker required to play the multi-track
+music as described in the previous section. To be able to do this, you need to patch you library.
+The changes that are required are localized to a few files, so the steps below describe how to
+patch the library manually.
+
+1. Obtain a copy of my forked git repository of the Gamebuino library with tracker support added.
+   Clone the repository:<br>
+   `git clone https://github.com/erwinbonsma/Gamebuino-META.git GB-Fork-Tracker`<br>
+   Change to the branch with the tracker changes:<br>
+   `cd GB-Fork-Tracker`<br>
+   `git branch music-gen`
+
+2. Find out the location where the Gamebuino library is installed on your system.
+   If you are using Arduino, you can enable the verbose compiler settings in the Preferences.
+   When you then compile a Gamebuino project, it will output where the library is located.
+   E.g.
+   `Using library Gamebuino_META at version 1.3.3 in folder: /Users/erwin/Documents/Arduino/libraries/Gamebuino_META`
+
+3. Copy the files that are modified and changed from the fork to the installed library location.
+   You could recursively copy all files, but as only few files contain the changes, it's
+   recommended to copy the needed files. Furthermore, you can back up the original files, and via
+   a diff do a sanity check on the files that you replace.
+
+   Only three files are modified:
+   * `src/config/config-default.h` adds default settings for two new constants,
+     `SOUND_ENABLE_MUSIC` and `SOUND_MUSIC_BUFFERSIZE`.
+   * `src/utility/Sound/Sound.h` and
+   * `src/utility/Sound/Sound.cpp` extend the Sound API to play songs and tunes.
+
+   Two new files are added:
+   * `src/utility/Sound/Music.h` and
+   * `src/utility/Sound/Music.cpp` define and implement the structures to specify notes,
+     tunes, patterns, and songs, as well as the generators to convert these into samples.
+
+4. Verify that everything works as expected. To do so, I recommend you try to build my Music Demo
+   Gamebuino project. This is not only a good test, but its source code is also a good
+   demonstration of how to use the new API.
+
+   You can clone the repository from `https://github.com/erwinbonsma/MusicDemoGB.git`. Once you
+   have the project, compile the source code as you do normally. Compilation should succeed. 
+
+### Namespace recommendation
+
+All tracker-related types are defined in the Gamebuino_Meta namespace. When you define songs, it
+is awkward to add this prefix in front of all types. So I recommend that in your implementation
+you define the specs inside this namespace, and then expose the `SongSpec` and `TuneSpec` pointers
+that you need in your game in your own namespace (or the default namespace, if you do not use a
+namespace).
+
+Example:
+```cpp
+// MySong.h
+#include <Gamebuino-Meta.h>
+
+// Expose the song in the default namespace
+extern const Gamebuino_Meta::SongSpec* mySong;
+
+// MySong.cpp
+#include "MySong.h"
+
+// Construct the song in the Gamebuino_Meta namespace
+namespace Gamebuino_Meta {
+    const NoteSpec notesTune1[32] = { /* omitted */ };
+    const TuneSpec tune1 = TuneSpec { /* omitted */ };
+    /* omitted */
+    const NoteSpec notesTune64[32] = { /* omitted */ };
+    const TuneSpec tune64 = TuneSpec { /* omitted */ };
+
+    const TuneSpec *const tunesPattern1[4] = { /* omitted */ };
+    const PatternSpec pattern1 = PatternSpec { /* omitted */ };
+    /* omitted */
+    const TuneSpec *const tunesPattern8[4] = { /* omitted */ };
+    const PatternSpec pattern8 = PatternSpec { /* omitted */ };
+
+    const PatternSpec *const patternsSong1[8] = { /* omitted */ };
+    const SongSpec song1 = SongSpec { /* omitted */ };
+}
+
+// Expose only the top-level song in the default namespace
+const Gamebuino_Meta::SongSpec* mySong = &Gamebuino_Meta::song1;
+```
+### Using the API
+
+The extensions to the Sound API should be largely self-explanatory. Nevertheless, the API is
+briefly described below.
+
+```cpp
+fx(const TuneSpec* tune)
+```
+Plays a sound effect using the new tracker. If another sound effect was already playing, it will be
+aborted. As the new tracker supports more instruments and more effects it is recommended to use this
+new API instead of the old fx functions that take a `Sound_FX` as input parameter.
+
+```cpp
+void playSong(const SongSpec* song, bool loop = false)
+```
+Starts playing a song. If a song was playing already, it will be aborted. If you set `loop` to
+`true` the song will loop as long as the song itself has a loop defined.
+
+```cpp
+void stopSong()
+```
+Aborts playing the current song (if any).
+
+```cpp
+bool loopSong(bool flag)
+```
+Can be used to change the loop status while a song is playing.
+
+```cpp
+bool pauseSong(bool flag)
+```
+Can be used to pause and resume a song.
+
+```cpp
+bool isSongPlaying()
+```
+Indicates if a song is currently playing. It returns `false` when the song finished or when it is
+paused.
+
+```cpp
+bool isSongPaused()
+```
+Indicates if a song is paused.
+
+```cpp
+bool isSongLooping()
+```
+Indicates if a song is looping.
+
+```cpp
+int songProgressInSeconds()
+```
+Returns (in seconds) how far the song has progressed. Note, when the song loops, the progress will
+reset to the point where the loop starts.
+
+```cpp
+int getLevel()
+```
+Returns the output level the represents the intensity of the current sound output. It sums the 
+contribution of the song and sound effect together. It considers the volumes of the notes that are
+currently being played as well as relevant effects that are applied. For example, a note with
+`FADE_IN` applied will have a lower output level than a note of the same volume without any effect.
+For increased  granularity, the level associated with a normal note it twice its value. So a four
+track song will at most have an output level of 4 * 8 * 2 = 64.
 
 ## Importing songs from PICO-8
 
