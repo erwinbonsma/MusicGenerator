@@ -275,7 +275,7 @@ patch the library manually.
    demonstration of how to use the new API.
 
    You can clone the repository from `https://github.com/erwinbonsma/MusicDemoGB.git`. Once you
-   have the project, compile the source code as you do normally. Compilation should succeed. 
+   have the project, compile the source code as you do normally. Compilation should succeed.
 
 ### Namespace recommendation
 
@@ -375,7 +375,7 @@ reset to the point where the loop starts.
 ```cpp
 int getLevel()
 ```
-Returns the output level the represents the intensity of the current sound output. It sums the 
+Returns the output level the represents the intensity of the current sound output. It sums the
 contribution of the song and sound effect together. It considers the volumes of the notes that are
 currently being played as well as relevant effects that are applied. For example, a note with
 `FADE_IN` applied will have a lower output level than a note of the same volume without any effect.
@@ -384,23 +384,94 @@ track song will at most have an output level of 4 * 8 * 2 = 64.
 
 ## Importing songs from PICO-8
 
-Topics:
-* Automatic import
-* Limitations and differences compared to PICO-8
-    * Custom instruments
-    * Mismatch in volumes
-    * VIBRATO not supported for NOISE
-* Post-processing
-    * Remove duplicate patterns
-    * Use looping for repetitive tunes
-    * Remove unused tunes and patterns
-    * Ensure pattern does not loop
-    * Fix tunes with custom instruments
-    * Tweaks to remove noise artifacts
-    * Avoid note cancellation
+My music tracker is heavily inspired by the one from [PICO-8]. In fact, I tried to replicate its
+functionality as much as possible considering the constraints imposed by the Gamebuino console.
+This means that you can compose songs using the tracker that is built into the PICO-8 and convert
+these into source code that can be used to play your compositions on the Gamebuino.
 
-TO DO
+### Import script
+
+To import songs and/or sound effects from PICO-8 you need to run the Python script
+`import-from-p8.py` that is available in this git repository. It recognizes the following optional arguments:
+
+* `--postfix {POSTFIX}`: Add the specified postfix to all the constants it generates. You can use
+  this to avoid clashes when you want to import tracks from multiple PICO-8 files.
+* `--comments`: Add some comments to the generated source code.
+* `--all-sfx`: Import all sound effects. By default, only sound effects that are used in one or
+  more patterns/songs are imported.
+
+The script takes one mandatory argument, and that's the path to the PICO-8 file to process. It
+outputs source to stdout. You can first verify that it looks okay, and if so, redirect it to file.
+
+Example invocation:
+```sh
+python3 import-from-p8.py --post-fix Digger ~/carts/digger.p8 > ~/src/digger/DiggerSong.cpp
+```
+
+### Limitations and differences
+
+My music generator is not as powerful as the one from PICO-8. There are some limitations that you
+should be aware of.
+
+First, the volume range in PICO-8 goes from zero to seven, whereas in my generator it goes from zero
+to eight. The reason for this is a technical one and ensures that the full 10-bit output range is
+fully used. To indeed use the full range, all non-zero PICO-8 volumes are increased by one in the
+generated code. This means that volume one is never used.
+
+Second, the VIBRATO sound effect is not supported for the NOISE instrument. The reason is that both
+are already computationally more expensive than other sound effects and instruments, and the
+combination would be even more so. Furthermore, the combination also does not seem very useful in
+practise.
+
+Third, PICO-8 supports custom instruments. This is a way that sound effects can be layered. A note
+in the custom instrument track can have a sound effect applied, and when the custom instrument is
+used on a note in another track, this note can have a sound effect applied as well. This is not
+supported in my Gamebuino tracker. Recreating this logic would be too computationally intensive and
+also require additional memory.
+
+Nevertheless, when custom instruments are used the import script attempts to recreate the sound as
+much as possible. It does this by at time of import, inserting the notes from the custom instrument
+in all locations where a note with a custom instrument is used. For this to work, it requires that
+the note lengths of the track where the custom node is used is a multiple of the note lengths in
+the custom track. It will then adapt the note length of the former track to match that of the
+(fastest) custom instrument. If the track also contains notes with non-custom instruments, these
+are replaced by multiple copies of this note, to ensure that length remains the same. This works
+okay in most instances, but has a few limitations. A SLIDE effect applied to a single long note
+creates a different result then when this effect is applied to multiple short, identical notes.
+
+In short, be careful in your use of custom instruments and be aware of how these are treated by
+the import script when composing songs in PICO-8 for the Gamebuino. Having said that, you can use
+them. My Gamebuino [Music demo] contains several songs that made extensive use of custom
+instruments, and with some manual post-processing, the resulting tracks are amongst the best in
+humble opinion.
+
+### Post-processing
+
+The import script does a decent job at preparing PICO-8 songs for the Gamebuino. However, you may
+still want to post-process the results.
+
+To minimize the size of your program, you can remove all tunes, patterns and songs that you do not
+intend to use. You can also remove duplicate patterns. The importer will warn when a pattern is a
+duplicate. In this case, replace all references to the duplicate by a reference to the first
+instance of this pattern and then remove the duplicate. Also, if some tunes are repetitive, you
+can shorten them and use looping to achieve the same effect.
+
+You should also ensure that patterns do not loop. This requires for each pattern that its first
+tune does not loop. If it does, the importer will warn you, and you should change the order of
+tunes.
+
+Tunes that use custom instruments may also require tweaking. For this, you should have a good
+understanding of how PICO-8 renders custom instruments, what the limitations are of the Gamebuino
+tracker, and how the importer handles custom instruments.
+
+Finally, sometimes there are audible noise artifacts. These are often caused by the limited
+resolution of the output volume range. It can be particularly noticable at low volumes. In this
+case, you may want to bump the volume. Another cause can be patterns where in different tunes at
+the same time a note with the same frequency is played. Their phases can differ, as it depends on
+what notes preceded it. When notes are exactly out of phase, they may fully cancel each other out.
+This happens rarely, but if it does and is noticable, you may want to tweak the tunes to avoid it.
 
 [Gamebuino]: https://gamebuino.com
 [PICO-8]: https://www.lexaloffle.com/pico-8.php
 [music-gen branch of my fork]: https://github.com/erwinbonsma/Gamebuino-META/tree/music-gen
+[Music demo]: https://github.com/erwinbonsma/MusicDemoGB
