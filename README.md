@@ -317,6 +317,33 @@ namespace Gamebuino_Meta {
 // Expose only the top-level song in the default namespace
 const Gamebuino_Meta::SongSpec* mySong = &Gamebuino_Meta::song1;
 ```
+
+### Configuration settings
+
+To enable the music generator and configure it, you need to define a few constants in the file
+`config-gamebuino.h`. The recommended settings are:
+
+```cpp
+// This minimum frequency is typically good enough. Other values that are supported are 22050 and
+// 44100. These, however, require proportionally more CPU and only offer minimum quality
+// improvements. Sound artifacts are typically caused by the limited volume range (10-bits),
+// which is a restriction of the Gamebuino hardware.
+#define SOUND_FREQ 11025
+
+// Disable original sound effects. These are not needed and unless disabled, the corresponding
+// buffers only consume valuable memory.
+#define SOUND_CHANNELS 0
+
+// Enable the music generator. It ensures that the required buffers are allocated. So, in games
+// where you do not use any audio, you can disable it to decrease the memory footprint.
+#define SOUND_ENABLE_MUSIC 1
+
+// The buffer size. It should be big enough that it is never exhausted in between updates, but it
+// should not be too large either, as this increases the memory footprint and adds extra delay
+// before sound effects are audible after they are started.
+#define SOUND_MUSIC_BUFFERSIZE 1024
+```
+
 ### Using the API
 
 The extensions to the Sound API should be largely self-explanatory. Nevertheless, the API is
