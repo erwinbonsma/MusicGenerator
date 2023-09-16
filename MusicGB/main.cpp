@@ -15,6 +15,7 @@
 #include "AlexKiddMusic.h"
 #include "BubbleBobbleMusic.h"
 #include "BumbleBotsMusic.h"
+#include "GardenOfLife.h"
 #include "NeonMusic.h"
 #include "PorklikeMusic.h"
 #include "RockForMetalMusic.h"
@@ -388,6 +389,8 @@ void makeSongs() {
 
     totalTime += makeSong("bubble-bobble1.wav", bubbleBobbleSong1);
     totalTime += makeSong("bubble-bobble2.wav", bubbleBobbleSong2);
+
+    totalTime += makeSong("garden-of-life.wav", gardenOfLifeSong);
 
     totalTime += makeSong("neon.wav", neonSong);
 

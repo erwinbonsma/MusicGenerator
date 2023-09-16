@@ -21,6 +21,7 @@
 		AA358D782453517100985177 /* AlexKiddMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D762453517100985177 /* AlexKiddMusic.cpp */; };
 		AA358D7D2453797900985177 /* RockForMetalMusic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D7B2453797900985177 /* RockForMetalMusic.cpp */; };
 		AA358D7F24543F4100985177 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA358D7E24543F4100985177 /* main.cpp */; };
+		AA7A2DDF2AB62DB700C35C07 /* GardenOfLife.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA7A2DDE2AB62DB700C35C07 /* GardenOfLife.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +75,9 @@
 		AA358D7B2453797900985177 /* RockForMetalMusic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RockForMetalMusic.cpp; path = Songs/RockForMetalMusic.cpp; sourceTree = "<group>"; };
 		AA358D7C2453797900985177 /* RockForMetalMusic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RockForMetalMusic.h; path = Songs/RockForMetalMusic.h; sourceTree = "<group>"; };
 		AA358D7E24543F4100985177 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		AA7A2DDB2AB62D4E00C35C07 /* GardenOfLife.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GardenOfLife.h; path = Songs/GardenOfLife.h; sourceTree = "<group>"; };
+		AA7A2DDC2AB62D4E00C35C07 /* GardenOfLife-Generated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = "GardenOfLife-Generated.cpp"; path = "Songs/GardenOfLife-Generated.cpp"; sourceTree = "<group>"; };
+		AA7A2DDE2AB62DB700C35C07 /* GardenOfLife.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GardenOfLife.cpp; path = Songs/GardenOfLife.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,9 @@
 		AA21A1D6244C7490004DD190 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
+				AA7A2DDC2AB62D4E00C35C07 /* GardenOfLife-Generated.cpp */,
+				AA7A2DDE2AB62DB700C35C07 /* GardenOfLife.cpp */,
+				AA7A2DDB2AB62D4E00C35C07 /* GardenOfLife.h */,
 				AA21A1EE244F7F60004DD190 /* AlexKiddMusic-Generated.cpp */,
 				AA358D762453517100985177 /* AlexKiddMusic.cpp */,
 				AA358D772453517100985177 /* AlexKiddMusic.h */,
@@ -220,6 +227,7 @@
 				AA1E101F24672A19002BAD29 /* TuEdictMusic.cpp in Sources */,
 				AA21A1D9244C74C2004DD190 /* TheLairMusic.cpp in Sources */,
 				AA358D7F24543F4100985177 /* main.cpp in Sources */,
+				AA7A2DDF2AB62DB700C35C07 /* GardenOfLife.cpp in Sources */,
 				AA21A1C12438A837004DD190 /* Music.cpp in Sources */,
 				AA21A1D324424970004DD190 /* WavGeneration.cpp in Sources */,
 				AA21A1DE244CD23F004DD190 /* BumbleBotsMusic.cpp in Sources */,
