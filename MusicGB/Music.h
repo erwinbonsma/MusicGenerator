@@ -213,8 +213,9 @@ public:
     //
     // Note: it should only be invoked when isDone() returns false.
     //
-    // Returns the number of samples added. It can less than the maximum when the tune ends.
-    int addSamples(Sample* buf, int maxSamples);
+    // Returns the position in the buffer to where it added samples. This is typically endP, but
+    // can be before that when the tune ended.
+    Sample* addSamples(Sample* startP, Sample* endP);
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -244,8 +245,9 @@ public:
     // the same buffer. This relies on an overarching orchestrator to clear the buffer values at
     // right moment.
     //
-    // Returns the number of samples added. It can less than the maximum when the pattern ends.
-    int addSamples(Sample* buf, int maxSamples);
+    // Returns the position in the buffer to where it added samples. This is typically endP, but
+    // can be before that when the pattern ended.
+    Sample* addSamples(Sample* startP, Sample* endP);
 };
 
 //--------------------------------------------------------------------------------------------------
@@ -272,7 +274,7 @@ class SongGenerator {
 
 public:
     void setSongSpec(const SongSpec* songSpec, bool loop);
-    void stop() { _pattern = nullptr; };
+    void stop() { _pattern = nullptr; _paused = false; };
 
     void setLoop(bool flag) { _loop = flag; }
     void setPause(bool flag) { _paused = flag; }
@@ -291,8 +293,9 @@ public:
     //
     // Note: it should only be invoked when isDone() returns false.
     //
-    // Returns the number of samples added. It can less than the maximum when the song ends.
-    int addSamples(Sample* buf, int maxSamples);
+    // Returns the position in the buffer to where it added samples. This is typically endP, but
+    // can be before that when the song ended.
+    Sample* addSamples(Sample* startP, Sample* endP);
 };
 
 //--------------------------------------------------------------------------------------------------

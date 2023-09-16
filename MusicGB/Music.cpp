@@ -323,12 +323,11 @@ const NoteSpec silentNote = NoteSpec {
 
 #define CALL_MEMBER_FN(object, ptrToMember)  ((object).*(ptrToMember))
 
-inline void clearBuffer(int16_t* buf, int num) {
-    // Note: implementation assumes that num > 0
-    int16_t* endP = buf + num;
-    do {
-        *buf = 0;
-    } while (++buf != endP);
+inline void clearBuffer(Sample* startP, Sample* endP) {
+    Sample* buf = startP;
+    while (buf < endP) {
+        *buf++ = 0;
+    }
 }
 
 inline int notePeriod(const NoteSpec* note) {
@@ -829,10 +828,11 @@ void TuneGenerator::createOutgoingBlendSamplesIfNeeded() {
         }
     }
 
-    Sample* buf = _blendBufOut;
-    clearBuffer(buf, NUM_BLEND_SAMPLES);
+    Sample* startP = _blendBufOut;
+    Sample* endP = startP + NUM_BLEND_SAMPLES;
+    clearBuffer(startP, endP);
     int32_t origWaveIndex = _waveIndex;
-    CALL_MEMBER_FN(*this, _sampleGeneratorFun)(buf, buf + NUM_BLEND_SAMPLES);
+    CALL_MEMBER_FN(*this, _sampleGeneratorFun)(startP, endP);
     _numBlendSamples = NUM_BLEND_SAMPLES;
     _waveIndex = origWaveIndex; // Restore (this avoids artifacts when wave remains unchanged)
 }
@@ -845,9 +845,10 @@ void TuneGenerator::createIncomingBlendSamplesIfNeeded() {
     // There are blend samples from the previous note. Fill own buffer so we need to start with
     // blending.
 
-    Sample* buf = _blendBufIn;
-    clearBuffer(buf, NUM_BLEND_SAMPLES);
-    CALL_MEMBER_FN(*this, _sampleGeneratorFun)(buf, buf + NUM_BLEND_SAMPLES);
+    Sample* startP = _blendBufIn;
+    Sample* endP = startP + NUM_BLEND_SAMPLES;
+    clearBuffer(startP, endP);
+    CALL_MEMBER_FN(*this, _sampleGeneratorFun)(startP, endP);
 }
 
 // The output level is double the volume for normal notes (for maximum accuracy)
@@ -866,23 +867,22 @@ int TuneGenerator::outputLevel() {
     return _note->vol << (1 + _tuneSpec->boostVolume);
 }
 
-int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
+Sample* TuneGenerator::addSamples(Sample* startP, Sample* endP) {
+    Sample* bufP = startP;
+
     if (_note == nullptr) {
         // End of tune
-        return 0;
+        return bufP;
     }
 
-    Sample* bufP = buf;
-    Sample* maxBufP = bufP + maxSamples;
-
-    while (bufP < maxBufP) {
+    while (bufP < endP) {
         if (_numBlendSamples > 0) {
             // Add blend samples until they are exhausted or buffer is full
-            int numSamples = min(_numBlendSamples, (int)(maxBufP - bufP));
+            int numSamples = min(_numBlendSamples, (int)(endP - bufP));
             addBlendSamples(bufP, bufP + numSamples);
         } else if (_sampleIndex < _samplesPerNote) {
             // Add main samples until end of main phase or buffer is full
-            int numSamples = min(_samplesPerNote - _sampleIndex, (int)(maxBufP - bufP));
+            int numSamples = min(_samplesPerNote - _sampleIndex, (int)(endP - bufP));
             CALL_MEMBER_FN(*this, _sampleGeneratorFun)(bufP, bufP + numSamples);
         }
 
@@ -900,7 +900,7 @@ int TuneGenerator::addSamples(Sample* buf, int maxSamples) {
         }
     }
 
-    return (int)(bufP - buf);
+    return bufP;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -931,15 +931,15 @@ int PatternGenerator::outputLevel() {
     return sum;
 }
 
-int PatternGenerator::addSamples(Sample* buf, int maxSamples) {
-    // The first tune detemines the length of the pattern. It should therefore not loop.
-    int numSamples = _tuneGens[0].addSamples(buf, maxSamples);
+Sample* PatternGenerator::addSamples(Sample* startP, Sample* endP) {
+    // The first tune determines the length of the pattern. It should therefore not loop.
+    Sample* endPatternP = _tuneGens[0].addSamples(startP, endP);
 
     for (int i = 1; i < _patternSpec->numTunes; i++) {
-        _tuneGens[i].addSamples(buf, numSamples);
+        _tuneGens[i].addSamples(startP, endPatternP);
     }
 
-    return numSamples;
+    return endPatternP;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1010,32 +1010,32 @@ int SongGenerator::outputLevel() {
     return (_pattern == nullptr || _paused) ? 0 : _patternGenerator.outputLevel();
 }
 
-int SongGenerator::addSamples(Sample* buf, int maxSamples) {
-    int totalAdded = 0;
+Sample* SongGenerator::addSamples(Sample* startP, Sample* endP) {
+    Sample* bufP = startP;
 
     if (_pattern == nullptr) {
         // We're done
-        return totalAdded;
+        return bufP;
     }
 
     if (_paused) {
         // Don't actually add any samples but signal that buffer is fully filled (with silence)
-        return maxSamples;
+        return endP;
     }
 
     do {
-        totalAdded += _patternGenerator.addSamples(buf + totalAdded, maxSamples - totalAdded);
-        if (totalAdded < maxSamples) {
+        bufP = _patternGenerator.addSamples(bufP, endP);
+        if (bufP < endP) {
             moveToNextPattern();
             if (_pattern == nullptr) {
                 // We're done
-                return totalAdded;
+                return bufP;
             }
             startPattern(false);
         }
-    } while (totalAdded < maxSamples);
+    } while (bufP < endP);
 
-    return totalAdded;
+    return bufP;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1066,21 +1066,21 @@ void MusicHandler::update() {
     int16_t* targetHeadP = _readP; // Copy as its continuously changing
 
     while (_headP != targetHeadP) {
-        // The maximum number of samples that can be added without wrapping
-        int maxSamples = (int)((_headP < targetHeadP) ? targetHeadP - _headP : _endP - _headP);
+        // Add as many samples as possible without wrapping
+        Sample* endP = (_headP < targetHeadP) ? targetHeadP : _endP;
         bool addedZeros = false;
 
         if (!_tuneGenerator.isDone()) {
-            clearBuffer(_headP, maxSamples);
+            clearBuffer(_headP, endP);
             addedZeros = true;
-            _tuneGenerator.addSamples(_headP, maxSamples);
+            _tuneGenerator.addSamples(_headP, endP);
         }
         if (!_songGenerator.isDone()) {
             if (!addedZeros) {
-                clearBuffer(_headP, maxSamples);
+                clearBuffer(_headP, endP);
                 addedZeros = true;
             }
-            _songGenerator.addSamples(_headP, maxSamples);
+            _songGenerator.addSamples(_headP, endP);
         }
         if (!addedZeros) {
             if (_zeroP == nullptr) {
@@ -1088,16 +1088,16 @@ void MusicHandler::update() {
             } else if (_zeroP == _headP) {
                 // Buffer contains only zeroes. No need to set any.
                 addedZeros = true;
-                _zeroP += maxSamples; // Move it headP
-            } else if (_zeroP > _headP) {
+                _zeroP = endP; // Move it along with headP
+            } else if (_zeroP > _headP && _zeroP < endP) {
                 // Stop once buffer contains only zeroes
-                maxSamples = min(maxSamples, (int)(_zeroP - _headP));
+                endP = _zeroP;
             }
             if (!addedZeros) {
-                clearBuffer(_headP, maxSamples);
+                clearBuffer(_headP, endP);
             }
         }
-        _headP += maxSamples;
+        _headP = endP;
 
         if (_headP == _endP) {
             // Reached end of cyclic buffer. Continue at the beginning.

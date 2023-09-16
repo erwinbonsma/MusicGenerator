@@ -48,10 +48,11 @@ void makeWav(const char* filename, const TuneSpec& tune, int maxSamples) {
     Sample* buffers[1] = { buf };
 
     WavFile* wavFile = openWavFile(filename);
-    int samplesAdded;
+    size_t samplesAdded;
     do {
         clearBuffer(buf);
-        samplesAdded = tuneGen.addSamples(buf, std::min(BUFSIZE, maxSamples));
+        Sample* maxP = buf + std::min(BUFSIZE, maxSamples);
+        samplesAdded = tuneGen.addSamples(buf, maxP) - buf;
         maxSamples -= samplesAdded;
         amplifyBuffer(buf, 8);
         wav_write(wavFile, (const void* const*)buffers, samplesAdded);
@@ -68,10 +69,10 @@ void makeWav(const char* filename, const PatternSpec& pattern) {
     Sample* buffers[1] = { buf };
 
     WavFile* wavFile = openWavFile(filename);
-    int samplesAdded;
+    size_t samplesAdded;
     do {
         clearBuffer(buf);
-        samplesAdded = patternGen.addSamples(buf, BUFSIZE);
+        samplesAdded = patternGen.addSamples(buf, buf + BUFSIZE) - buf;
         amplifyBuffer(buf, 6);
         wav_write(wavFile, (const void* const*)buffers, samplesAdded);
     } while (samplesAdded == BUFSIZE);
@@ -87,10 +88,10 @@ void makeWav(const char* filename, const SongSpec& song) {
     Sample* buffers[1] = { buf };
 
     WavFile* wavFile = openWavFile(filename);
-    int samplesAdded;
+    size_t samplesAdded;
     do {
         clearBuffer(buf);
-        samplesAdded = songGenerator.addSamples(buf, BUFSIZE);
+        samplesAdded = songGenerator.addSamples(buf, buf + BUFSIZE) - buf;
         amplifyBuffer(buf, 6);
         wav_write(wavFile, (const void* const*)buffers, samplesAdded);
     } while (samplesAdded == BUFSIZE);
