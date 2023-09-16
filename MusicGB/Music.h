@@ -284,6 +284,15 @@ public:
     int progressInSeconds();
     bool isDone() { return _pattern == nullptr; }
 
+    // The index of the pattern that is currently being played
+    int patternIndex() {
+        return _pattern ? (int)(_pattern - _songSpec->patterns) : _songSpec->numPatterns;
+    }
+    // The number of ticks into the current pattern
+    int ticksPlayedInPattern() {
+        return _pattern ? _patternGenerator.ticksPlayed() : 0;
+    }
+
     int outputLevel();
 
     // Adds samples for the tune to the given buffer. Note, it does not overwrite existing values
@@ -331,6 +340,9 @@ public:
     void loopSong(bool flag) { _songGenerator.setLoop(flag); }
     void pauseSong(bool flag) { _songGenerator.setPause(flag); }
     int songProgressInSeconds() { return _songGenerator.progressInSeconds(); }
+
+    int songPatternIndex() { return _songGenerator.patternIndex(); }
+    int ticksPlayedInSongPattern() { return _songGenerator.ticksPlayedInPattern(); }
 
     int outputLevel();
 
