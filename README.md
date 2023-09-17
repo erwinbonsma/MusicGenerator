@@ -441,14 +441,13 @@ My music generator is not as powerful as the one from PICO-8. There are some lim
 should be aware of.
 
 First, the volume range in PICO-8 goes from zero to seven, whereas in my generator it goes from zero
-to eight. The reason for this is a technical one and ensures that the full 10-bit output range is
-fully used. To indeed use the full range, all non-zero PICO-8 volumes are increased by one in the
+to eight. The reason for this is a technical one and ensures that the 10-bit output range is
+fully used. To use the full range, all non-zero PICO-8 volumes are increased by one in the
 generated code. This means that volume one is never used.
 
 Second, the VIBRATO sound effect is not supported for the NOISE instrument. The reason is that both
 are already computationally more expensive than other sound effects and instruments, and the
-combination would be even more so. Furthermore, the combination also does not seem very useful in
-practise.
+combination would be even more so. Furthermore, the combination does not seem useful in practise.
 
 Third, PICO-8 supports custom instruments. This is a way that sound effects can be layered. A note
 in the custom instrument track can have a sound effect applied, and when the custom instrument is
@@ -469,8 +468,7 @@ creates a different result then when this effect is applied to multiple short, i
 In short, be careful in your use of custom instruments and be aware of how these are treated by
 the import script when composing songs in PICO-8 for the Gamebuino. Having said that, you can use
 them. My Gamebuino [Music demo] contains several songs that made extensive use of custom
-instruments, and with some manual post-processing, the resulting tracks are amongst the best in
-humble opinion.
+instruments, and with some manual post-processing, the resulting tracks are amongst the best.
 
 ### Post-processing
 
